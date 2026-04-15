@@ -1,0 +1,280 @@
+.resume-root {
+  width: 210mm;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: 0 auto;
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--resume-font-family, Inter, Roboto, "Helvetica Neue", Arial, sans-serif);
+  box-sizing: border-box;
+}
+
+.template-modern {
+  --resume-heading-color: #111827;
+  --resume-muted-color: #475569;
+  --resume-border-color: #e5e7eb;
+  --resume-accent-color: #1d4ed8;
+}
+
+.template-minimal {
+  --resume-heading-color: #111111;
+  --resume-muted-color: #4b5563;
+  --resume-border-color: #e5e5e5;
+  --resume-accent-color: #0f172a;
+}
+
+.template-harvard {
+  --resume-heading-color: #0f172a;
+  --resume-muted-color: #334155;
+  --resume-border-color: #d7dce2;
+  --resume-accent-color: #111111;
+}
+
+.profile-classic-pro .name {
+  letter-spacing: 0.01em;
+}
+
+.profile-classic-pro .section-title {
+  border-bottom-color: #cbd5e1;
+}
+
+.profile-executive-lite .page {
+  padding: 18mm 18mm 20mm;
+}
+
+.profile-executive-lite .name {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.profile-executive-lite .section-title {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.profile-minimal-clean .section-title {
+  text-transform: none;
+  letter-spacing: 0;
+  border-bottom-width: 1px;
+}
+
+.profile-minimal-clean .job-title {
+  font-weight: 600;
+}
+
+.profile-creative-grid .page {
+  padding: 19mm;
+}
+
+.profile-creative-grid .section-title {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 6px;
+  color: #1f2937;
+}
+
+.profile-creative-grid .section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 8px;
+}
+
+.profile-simple-professional .page {
+  border: 1px solid #e5e7eb;
+}
+
+.profile-simple-professional .name {
+  font-size: 24px;
+}
+
+.profile-modern-edge .name,
+.profile-tech-focus .name,
+.profile-modern-isabel .name {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.profile-modern-edge .section-title {
+  border-bottom-color: #cbd5e1;
+}
+
+.profile-tech-focus .section-title {
+  border-bottom-color: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.profile-modern-isabel .section-title {
+  border-bottom-color: #facc15;
+  color: #1f2937;
+}
+
+.resume-header {
+  margin-bottom: 16px;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--resume-heading-color);
+  margin: 0;
+}
+
+.headline {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--resume-muted-color);
+  margin-top: 3px;
+}
+
+.meta-line {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--resume-muted-color);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.section {
+  margin-top: 18px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--resume-border-color);
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  color: var(--resume-heading-color);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.summary-text {
+  font-size: 11px;
+  line-height: 1.55;
+  color: #111111;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.job {
+  margin-top: 10px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.job-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--resume-heading-color);
+  margin: 0;
+}
+
+.job-company {
+  font-weight: 500;
+}
+
+.job-meta {
+  font-size: 10px;
+  color: var(--resume-muted-color);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.job-location {
+  font-size: 10px;
+  color: var(--resume-muted-color);
+  margin: 3px 0 0;
+}
+
+.resume-list {
+  margin: 5px 0 0;
+  padding-left: 16px;
+}
+
+.resume-list li {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 3px;
+  color: #111111;
+}
+
+.skills-list {
+  margin: 0;
+  padding-left: 16px;
+  columns: 2;
+  column-gap: 20px;
+}
+
+.skills-list li {
+  break-inside: avoid;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 3px;
+  color: #111111;
+}
+
+.education-entry {
+  margin-top: 10px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.education-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--resume-heading-color);
+}
+
+.education-meta {
+  font-size: 10px;
+  color: var(--resume-muted-color);
+  margin: 2px 0 0;
+}
+
+.project-entry {
+  margin-top: 10px;
+}
+
+.project-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--resume-heading-color);
+}
+
+.project-description {
+  margin: 4px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media print {
+  .resume-root {
+    width: 210mm;
+    margin: 0;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    box-shadow: none;
+  }
+}

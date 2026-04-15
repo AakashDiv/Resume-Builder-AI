@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Build output
+dist/
+build/
+frontend/dist/
+
+# Environment files
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env
+
+# Logs and runtime files
+*.log
+backend/tmp/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated exports and archives
+*.xlsx
+*.zip

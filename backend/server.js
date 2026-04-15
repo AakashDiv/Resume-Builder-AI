@@ -1,0 +1,15 @@
+import app from "./config/app.js";
+import connectDB from "./config/db.js";
+import { env } from "./config/env.js";
+
+async function startServer() {
+  await connectDB();
+  app.listen(env.port, () => {
+    console.log(`Backend running on http://localhost:${env.port}`);
+  });
+}
+
+startServer().catch((error) => {
+  console.error("Server startup failed:", error);
+  process.exit(1);
+});
