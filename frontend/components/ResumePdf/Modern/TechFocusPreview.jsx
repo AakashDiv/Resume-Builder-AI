@@ -32,9 +32,13 @@ export default function TechFocusPreview({
   
 
   return (
-    <article data-resume-padding="true" className="h-full w-full overflow-hidden bg-white" style={{ fontFamily: "'DM Sans', Arial, sans-serif", color: primaryTextColor }}>
-      <div className="grid h-full w-full grid-cols-[32%,68%]">
-        <aside className="relative flex h-full flex-col gap-7 px-6 py-8" style={{ background: sidebarBgColor, color: inverseTextColor }}>
+    <article
+      data-resume-padding="true"
+      className="w-full overflow-hidden bg-white"
+      style={{ fontFamily: "'DM Sans', Arial, sans-serif", color: primaryTextColor, minHeight: "297mm" }}
+    >
+      <div className="grid w-full grid-cols-[32%,68%]" style={{ minHeight: "inherit" }}>
+        <aside className="relative flex h-full flex-col justify-between gap-7 px-6 py-8" style={{ background: sidebarBgColor, color: inverseTextColor }}>
           <div className="mx-auto h-[120px] w-[120px] rounded-full p-[4px]" style={{ background: `linear-gradient(135deg, ${accentColor}, #e8c88a, ${accentColor})` }}>
             <div className="h-full w-full overflow-hidden rounded-full bg-slate-200">
               {data.header.photo ? (
@@ -75,7 +79,7 @@ export default function TechFocusPreview({
           </div>
         </aside>
 
-        <main className="flex h-full flex-col gap-7 px-8 py-9" style={{ background: mainBgColor }}>
+        <main className="flex h-full flex-col justify-between gap-7 px-8 py-9" style={{ background: mainBgColor }}>
           <div>
             <p className="font-serif text-[35px] font-black uppercase leading-none" style={{ color: primaryTextColor }}>{firstName} {lastName}</p>
             {/* <p className="mt-1 font-serif text-[30px] font-bold uppercase tracking-[0.06em]" style={{ color: mutedTextColor }}>{lastName}</p> */}

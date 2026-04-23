@@ -9,6 +9,8 @@ const LIMITS = {
   maxBulletsPerEducation: 4,
   maxBulletChars: 180
 };
+const PAGE_HEIGHT_TOLERANCE_PX = 6;
+const PAGE_HEIGHT_TOLERANCE_PT = 6;
 
 function stripHtml(value) {
   return String(value || "").replace(/<[^>]*>/g, " ");
@@ -287,6 +289,50 @@ export function buildProfessionalQualityReport({ rawData, normalizedData, estima
   };
 }
 
+export function measureResumeContentHeight(targetNode) {
+  if (!targetNode) return 0;
+
+  const rootRect = targetNode.getBoundingClientRect();
+  let maxBottom = rootRect.height || 0;
+  const nodes = [targetNode, ...targetNode.querySelectorAll("*")];
+
+  nodes.forEach((node) => {
+    const rect = node.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const style = window.getComputedStyle(node);
+    if (style.display === "none" || style.visibility === "hidden" || style.position === "fixed") return;
+
+    const bottom = (rect.bottom - rootRect.top) + targetNode.scrollTop;
+    if (Number.isFinite(bottom)) {
+      maxBottom = Math.max(maxBottom, bottom);
+    }
+  });
+
+  return Math.ceil(maxBottom);
+}
+
+export function resolveResumeCanvasHeight(targetNode, pageHeightPx) {
+  if (!targetNode) return pageHeightPx;
+
+  const scrollHeight = Math.ceil(targetNode.scrollHeight || pageHeightPx || 0);
+  const contentHeight = Math.ceil(measureResumeContentHeight(targetNode) + 2);
+  const effectiveHeight = Math.max(pageHeightPx || 0, Math.min(scrollHeight, contentHeight));
+
+  if (effectiveHeight <= (pageHeightPx || 0) + PAGE_HEIGHT_TOLERANCE_PX) {
+    return pageHeightPx;
+  }
+
+  return effectiveHeight;
+}
+
+export function estimateResumePageCount(targetNode, pageHeightPx) {
+  if (!targetNode || !pageHeightPx) return 1;
+
+  const effectiveHeight = resolveResumeCanvasHeight(targetNode, pageHeightPx);
+  return Math.max(1, Math.ceil((effectiveHeight - PAGE_HEIGHT_TOLERANCE_PX) / pageHeightPx));
+}
+
 export function computeSmartPageOffsets({
   targetNode,
   imageHeightPt,
@@ -294,7 +340,7 @@ export function computeSmartPageOffsets({
   pageWidthPt,
   canvasWidthPx
 }) {
-  if (!targetNode || imageHeightPt <= pageHeightPt) return [0];
+  if (!targetNode || imageHeightPt <= pageHeightPt + PAGE_HEIGHT_TOLERANCE_PT) return [0];
 
   const sectionNodes = Array.from(
     targetNode.querySelectorAll("section, [data-resume-section='true'], h3")
@@ -324,6 +370,7 @@ export function computeSmartPageOffsets({
 
     const next = candidate && candidate > current + minChunk ? candidate : ideal;
     if (next <= current + 2) break;
+    if (imageHeightPt - next <= PAGE_HEIGHT_TOLERANCE_PT) break;
 
     offsets.push(next);
     current = next;

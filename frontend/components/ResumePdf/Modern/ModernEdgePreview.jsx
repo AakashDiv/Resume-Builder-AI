@@ -24,8 +24,12 @@ export default function ModernEdgePreview({
     : [{ name: "Reference Name", role: "Company / Role", phone: "+123-456-7890", email: "hello@reallygreatsite.com" }];
 
   return (
-    <article data-resume-padding="true" className="h-full w-full overflow-hidden bg-white" style={{ fontFamily: "Barlow, Arial, sans-serif", color: primaryTextColor }}>
-      <div className="grid h-full grid-rows-[auto,1fr]">
+    <article
+      data-resume-padding="true"
+      className="w-full overflow-hidden bg-white"
+      style={{ fontFamily: "Barlow, Arial, sans-serif", color: primaryTextColor, minHeight: "297mm" }}
+    >
+      <div className="grid grid-rows-[auto,1fr]" style={{ minHeight: "inherit" }}>
         <header className="grid grid-cols-[240px,1fr]" style={{ background: headerBgColor }}>
           <div className="flex items-end px-6 pb-4 pt-7">
             <div className="h-[128px] w-[128px] overflow-hidden rounded-full border-4 border-white/20 bg-slate-300 shadow-lg">
@@ -38,8 +42,8 @@ export default function ModernEdgePreview({
           </div>
         </header>
 
-        <div className="grid grid-cols-[240px,1fr]">
-          <aside className="flex flex-col gap-6 border-r px-5 py-7" style={{ background: sidebarBgColor, borderColor: `${mutedTextColor}40` }}>
+        <div className="grid grid-cols-[240px,1fr]" style={{ minHeight: "inherit" }}>
+          <aside className="flex flex-col justify-between gap-6 border-r px-5 py-7" style={{ background: sidebarBgColor, borderColor: `${mutedTextColor}40` }}>
             <div>
               <p className="border-b-2 pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[12px] font-bold uppercase tracking-[0.2em]" style={{ color: primaryTextColor, borderColor: primaryTextColor }}>Contact</p>
               <div className="mt-3 space-y-2 text-[11px] leading-relaxed" style={{ color: primaryTextColor }}>
@@ -74,44 +78,46 @@ export default function ModernEdgePreview({
           </aside>
 
           <main className="px-8 py-7" style={{ background: mainBgColor }}>
-            <section className="relative flex gap-4 pb-6">
-              <div className="z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold" style={{ background: primaryTextColor, color: inverseTextColor }}><FaUserTie size={12} /></div>
-              <div className="flex-1">
-                <p className="mb-3 border-b pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[14px] font-bold uppercase tracking-[0.12em]" style={{ color: primaryTextColor, borderColor: `${mutedTextColor}40` }}>Profile</p>
-                {hasHtmlMarkup(data.summary.text) ? <div className="text-[11px] leading-[1.7] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4" style={{ color: mutedTextColor }} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }} /> : <p className="text-[11px] leading-[1.7]" style={{ color: mutedTextColor }}>{data.summary.text || "Add your profile summary highlighting strengths, experience, and career focus."}</p>}
-              </div>
-            </section>
-
-            <section className="relative flex gap-4 pb-6">
-              <div className="z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold" style={{ background: primaryTextColor, color: inverseTextColor }}><FaBriefcase size={12} /></div>
-              <div className="flex-1">
-                <p className="mb-3 border-b pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[14px] font-bold uppercase tracking-[0.12em]" style={{ color: primaryTextColor, borderColor: `${mutedTextColor}40` }}>Work Experience</p>
-                <div className="space-y-4">
-                  {(data.experience.length ? data.experience : [{ employer: "Borcelle Studio", jobTitle: "Marketing Manager & Specialist", startDate: "2030", currentlyWorking: true, bullets: "Develop and execute comprehensive strategies.\nLead and mentor the marketing team." }]).slice(0, 3).map((exp, index) => (
-                    <div key={`${exp.jobTitle}-${index}`} className="border-l-2 border-transparent pl-3">
-                      <div className="flex items-baseline justify-between gap-3"><p className="text-[12px] font-bold" style={{ color: primaryTextColor }}>{exp.employer || "Company Name"}</p><p className="shrink-0 text-[10px] font-semibold tracking-[0.06em]" style={{ color: mutedTextColor }}>{exp.startDate || "Start"} - {exp.currentlyWorking ? "PRESENT" : exp.endDate || "End"}</p></div>
-                      <p className="text-[11px]" style={{ color: mutedTextColor }}>{exp.jobTitle || "Role Title"}</p>
-                      {hasHtmlMarkup(exp.bullets) ? <div className="mt-1 text-[11px] leading-[1.6] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4" style={{ color: mutedTextColor }} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }} /> : <ul className="mt-1 space-y-1 text-[11px] leading-[1.6]" style={{ color: mutedTextColor }}>{(splitBullets(exp.bullets).length ? splitBullets(exp.bullets) : ["Add impact-focused bullet points for this role."]).slice(0, 3).map((bullet, bulletIndex) => <li key={bulletIndex} className="flex gap-2"><span style={{ color: accentColor }}>*</span><span>{bullet}</span></li>)}</ul>}
-                    </div>
-                  ))}
+            <div className="flex h-full flex-col justify-between gap-6">
+              <section className="relative flex gap-4">
+                <div className="z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold" style={{ background: primaryTextColor, color: inverseTextColor }}><FaUserTie size={12} /></div>
+                <div className="flex-1">
+                  <p className="mb-3 border-b pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[14px] font-bold uppercase tracking-[0.12em]" style={{ color: primaryTextColor, borderColor: `${mutedTextColor}40` }}>Profile</p>
+                  {hasHtmlMarkup(data.summary.text) ? <div className="text-[11px] leading-[1.7] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4" style={{ color: mutedTextColor }} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }} /> : <p className="text-[11px] leading-[1.7]" style={{ color: mutedTextColor }}>{data.summary.text || "Add your profile summary highlighting strengths, experience, and career focus."}</p>}
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section className="relative flex gap-4">
-              <div className="z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold" style={{ background: primaryTextColor, color: inverseTextColor }}><FaGraduationCap size={12} /></div>
-              <div className="flex-1">
-                <p className="mb-3 border-b pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[14px] font-bold uppercase tracking-[0.12em]" style={{ color: primaryTextColor, borderColor: `${mutedTextColor}40` }}>Education</p>
-                <div className="space-y-3">
-                  {(data.education.length ? data.education : [{ degree: "Master of Business Management", institution: "Wardiere University", startDate: "2029", endDate: "2031", details: "GPA: 3.8 / 4.0" }]).slice(0, 3).map((edu, index) => (
-                    <div key={`${edu.degree}-${index}`} className="border-l-2 border-transparent pl-3">
-                      <div className="flex items-baseline justify-between gap-3"><p className="text-[12px] font-bold" style={{ color: primaryTextColor }}>{edu.degree || "Degree"}</p><p className="shrink-0 text-[10px] font-semibold" style={{ color: mutedTextColor }}>{edu.startDate || "Start"} - {edu.currentlyStudying ? "PRESENT" : edu.endDate || "End"}</p></div>
-                      <p className="text-[11px]" style={{ color: mutedTextColor }}>{edu.institution || "Institution"}</p>
-                    </div>
-                  ))}
+              <section className="relative flex gap-4">
+                <div className="z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold" style={{ background: primaryTextColor, color: inverseTextColor }}><FaBriefcase size={12} /></div>
+                <div className="flex-1">
+                  <p className="mb-3 border-b pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[14px] font-bold uppercase tracking-[0.12em]" style={{ color: primaryTextColor, borderColor: `${mutedTextColor}40` }}>Work Experience</p>
+                  <div className="space-y-4">
+                    {(data.experience.length ? data.experience : [{ employer: "Borcelle Studio", jobTitle: "Marketing Manager & Specialist", startDate: "2030", currentlyWorking: true, bullets: "Develop and execute comprehensive strategies.\nLead and mentor the marketing team." }]).slice(0, 3).map((exp, index) => (
+                      <div key={`${exp.jobTitle}-${index}`} className="border-l-2 border-transparent pl-3">
+                        <div className="flex items-baseline justify-between gap-3"><p className="text-[12px] font-bold" style={{ color: primaryTextColor }}>{exp.employer || "Company Name"}</p><p className="shrink-0 text-[10px] font-semibold tracking-[0.06em]" style={{ color: mutedTextColor }}>{exp.startDate || "Start"} - {exp.currentlyWorking ? "PRESENT" : exp.endDate || "End"}</p></div>
+                        <p className="text-[11px]" style={{ color: mutedTextColor }}>{exp.jobTitle || "Role Title"}</p>
+                        {hasHtmlMarkup(exp.bullets) ? <div className="mt-1 text-[11px] leading-[1.6] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4" style={{ color: mutedTextColor }} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }} /> : <ul className="mt-1 space-y-1 text-[11px] leading-[1.6]" style={{ color: mutedTextColor }}>{(splitBullets(exp.bullets).length ? splitBullets(exp.bullets) : ["Add impact-focused bullet points for this role."]).slice(0, 3).map((bullet, bulletIndex) => <li key={bulletIndex} className="flex gap-2"><span style={{ color: accentColor }}>*</span><span>{bullet}</span></li>)}</ul>}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
+
+              <section className="relative flex gap-4">
+                <div className="z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold" style={{ background: primaryTextColor, color: inverseTextColor }}><FaGraduationCap size={12} /></div>
+                <div className="flex-1">
+                  <p className="mb-3 border-b pb-2 font-['Barlow_Condensed',Barlow,Arial,sans-serif] text-[14px] font-bold uppercase tracking-[0.12em]" style={{ color: primaryTextColor, borderColor: `${mutedTextColor}40` }}>Education</p>
+                  <div className="space-y-3">
+                    {(data.education.length ? data.education : [{ degree: "Master of Business Management", institution: "Wardiere University", startDate: "2029", endDate: "2031", details: "GPA: 3.8 / 4.0" }]).slice(0, 3).map((edu, index) => (
+                      <div key={`${edu.degree}-${index}`} className="border-l-2 border-transparent pl-3">
+                        <div className="flex items-baseline justify-between gap-3"><p className="text-[12px] font-bold" style={{ color: primaryTextColor }}>{edu.degree || "Degree"}</p><p className="shrink-0 text-[10px] font-semibold" style={{ color: mutedTextColor }}>{edu.startDate || "Start"} - {edu.currentlyStudying ? "PRESENT" : edu.endDate || "End"}</p></div>
+                        <p className="text-[11px]" style={{ color: mutedTextColor }}>{edu.institution || "Institution"}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </div>
           </main>
         </div>
       </div>

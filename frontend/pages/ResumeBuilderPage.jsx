@@ -10,7 +10,9 @@ import { useResumeBuilder } from "../context/ResumeBuilderContext.jsx";
 import {
   buildProfessionalQualityReport,
   computeSmartPageOffsets,
-  normalizeResumeForPdf
+  estimateResumePageCount,
+  normalizeResumeForPdf,
+  resolveResumeCanvasHeight
 } from "../utils/resumePdfQuality.js";
 
 const steps = [
@@ -441,8 +443,7 @@ export default function ResumeBuilderPage() {
 
     let rafId = 0;
     const updatePages = () => {
-      const totalHeight = node.scrollHeight || A4_HEIGHT_PX;
-      const nextPages = Math.max(1, Math.ceil(totalHeight / A4_HEIGHT_PX));
+      const nextPages = estimateResumePageCount(node, A4_HEIGHT_PX);
       setEstimatedPages(nextPages);
     };
 
@@ -477,7 +478,7 @@ export default function ResumeBuilderPage() {
     setDownloading(true);
     try {
       const contentWidth = targetNode.scrollWidth || A4_WIDTH_PX;
-      const contentHeight = targetNode.scrollHeight || A4_HEIGHT_PX;
+      const contentHeight = resolveResumeCanvasHeight(targetNode, A4_HEIGHT_PX);
 
       const canvas = await html2canvas(targetNode, {
         scale: 2,

@@ -16,8 +16,8 @@ export default function CreativePreview({ data }) {
   const firstEducation = data.education[0] || {};
 
   return (
-    <article className="overflow-hidden rounded-[22px] bg-white shadow-lg" style={{ aspectRatio: "1 / 1.23" }}>
-      <div className="grid h-full grid-cols-[34%,66%]">
+    <article data-resume-padding="true" className="w-full overflow-hidden bg-white" style={{ minHeight: "297mm" }}>
+      <div className="grid grid-cols-[34%,66%]" style={{ minHeight: "inherit" }}>
         <aside
           className="text-white"
           style={{

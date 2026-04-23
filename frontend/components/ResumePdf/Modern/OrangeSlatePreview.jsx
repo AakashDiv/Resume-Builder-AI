@@ -27,9 +27,13 @@ export default function OrangeSlatePreview({
   const lastName = restName.join(" ") || "MERCADO";
 
   return (
-    <article data-resume-padding="true" className="h-full w-full overflow-hidden" style={{ fontFamily: "Raleway, Arial, sans-serif", background: mainBgColor, color: primaryTextColor }}>
-      <div className="grid h-full w-full grid-cols-[32%,68%]">
-        <aside className="flex h-full flex-col" style={{ background: sidebarBgColor, color: inverseTextColor }}>
+    <article
+      data-resume-padding="true"
+      className="w-full overflow-hidden"
+      style={{ fontFamily: "Raleway, Arial, sans-serif", background: mainBgColor, color: primaryTextColor, minHeight: "297mm" }}
+    >
+      <div className="grid w-full grid-cols-[32%,68%]" style={{ minHeight: "inherit" }}>
+        <aside className="flex h-full flex-col justify-between" style={{ background: sidebarBgColor, color: inverseTextColor }}>
           <div className="relative px-5 pb-6 pt-8">
             <div className="absolute left-0 right-0 top-[106px] h-10" style={{ background: accentColor }} />
             <div className="relative z-[1] mx-auto h-32 w-32 overflow-hidden rounded-full border-[5px] shadow-lg" style={{ borderColor: `${sidebarBgColor}EE` }}>
@@ -76,7 +80,7 @@ export default function OrangeSlatePreview({
             <p className="mt-2 text-[12px] tracking-[0.08em]" style={{ color: mutedTextColor }}>{data.header.headline || "Marketing Manager"}</p>
           </div>
 
-          <div className="flex flex-1 flex-col gap-7 px-10 py-8">
+          <div className="flex flex-1 flex-col justify-between gap-7 px-10 py-8">
             <MainSection title="About Me" accentColor={accentColor} primaryTextColor={primaryTextColor}>
               {hasHtmlMarkup(data.summary.text) ? (
                 <div className="text-[12px] leading-[1.75] [&_ul]:list-disc [&_ul]:pl-4 [&_ol]:list-decimal [&_ol]:pl-4" style={{ color: mutedTextColor }} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }} />
