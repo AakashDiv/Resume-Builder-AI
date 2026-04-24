@@ -27,3 +27,8 @@ export async function tailorResume(payload) {
   const { data } = await api.post("/resume/tailor", payload);
   return data;
 }
+
+export async function generateCoverLetter(payload) {
+  const { data } = await api.post("/resume/cover-letter", payload);
+  return data;
+}

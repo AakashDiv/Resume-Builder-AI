@@ -35,6 +35,7 @@ function fallbackImprove(parsed) {
   );
 
   return {
+    rawText: parsed.rawText || "",
     comparison: {
       before: {
         summary: beforeSummary,
@@ -123,6 +124,7 @@ export async function improveResumeFromUpload(file) {
     }
 
     return {
+      rawText: text,
       comparison: {
         before: {
           summary: beforeSummary,

@@ -92,6 +92,7 @@ async function downgradeBySubscriptionId(subscriptionId) {
     { stripeSubscriptionId: subscriptionId },
     {
       plan: "free",
+      autoApplyEnabled: false,
       $unset: {
         stripeSubscriptionId: "",
         stripePriceId: ""

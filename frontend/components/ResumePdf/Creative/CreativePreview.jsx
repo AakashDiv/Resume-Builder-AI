@@ -1,4 +1,14 @@
-﻿import { hasHtmlMarkup, sanitizeRichHtml, splitBullets, splitByCommaOrLine } from "../common/previewUtils.js";
+import {
+  formatDateRange,
+  getInitials,
+  getMeaningfulEducation,
+  getMeaningfulExperience,
+  hasHtmlMarkup,
+  hasText,
+  sanitizeRichHtml,
+  splitBullets,
+  splitByCommaOrLine
+} from "../common/previewUtils.js";
 import { FaEnvelope, FaLocationDot, FaPhone } from "react-icons/fa6";
 
 function CreativeBlock({ title, children }) {
@@ -11,13 +21,17 @@ function CreativeBlock({ title, children }) {
 }
 
 export default function CreativePreview({ data }) {
-  const skills = splitByCommaOrLine(data.skills.primarySkills);
-  const firstExperience = data.experience[0] || {};
-  const firstEducation = data.education[0] || {};
+  const skills = splitByCommaOrLine(data.skills?.primarySkills || "");
+  const experience = getMeaningfulExperience(data.experience).slice(0, 1);
+  const education = getMeaningfulEducation(data.education).slice(0, 1);
+  const firstExperience = experience[0];
+  const firstEducation = education[0];
+  const initials = getInitials(data.header?.fullName);
+  const dateRange = firstExperience ? formatDateRange(firstExperience.startDate, firstExperience.endDate, firstExperience.currentlyWorking) : "";
 
   return (
-    <article data-resume-padding="true" className="w-full overflow-hidden bg-white" style={{ minHeight: "297mm" }}>
-      <div className="grid grid-cols-[34%,66%]" style={{ minHeight: "inherit" }}>
+    <article data-resume-padding="true" className="h-full w-full overflow-hidden bg-white">
+      <div className="grid h-full grid-cols-[34%,66%]">
         <aside
           className="text-white"
           style={{
@@ -26,95 +40,102 @@ export default function CreativePreview({ data }) {
           }}
         >
           <div className="px-4 pt-4">
-            <div className="mx-auto h-28 w-24 overflow-hidden rounded-sm border-4 border-white bg-slate-200">
-              {data.header.photo ? (
+            <div className="mx-auto grid h-28 w-24 place-items-center overflow-hidden rounded-sm border-4 border-white bg-slate-200 text-xl font-bold tracking-[0.08em] text-slate-700">
+              {data.header?.photo ? (
                 <img src={data.header.photo} alt="Profile" className="h-full w-full object-cover" />
               ) : (
-                <div className="grid h-full place-items-center text-xs font-semibold text-slate-500">PHOTO</div>
+                initials
               )}
             </div>
           </div>
 
           <div className="px-4 pb-4 pt-5 text-[10px]">
-            <p className="mb-1 font-bold uppercase">Contact</p>
-            <p className="inline-flex items-center gap-1"><FaLocationDot size={9} /> {data.header.location || "City, Country"}</p>
-            <p className="inline-flex items-center gap-1"><FaPhone size={9} /> {data.header.phone || "+1 555 0000"}</p>
-            <p className="inline-flex items-center gap-1"><FaEnvelope size={9} /> {data.header.email || "example@email.com"}</p>
+            {(hasText(data.header?.location) || hasText(data.header?.phone) || hasText(data.header?.email)) ? (
+              <>
+                <p className="mb-1 font-bold uppercase">Contact</p>
+                {hasText(data.header?.location) ? <p className="inline-flex items-center gap-1"><FaLocationDot size={9} /> {data.header.location}</p> : null}
+                {hasText(data.header?.phone) ? <p className="inline-flex items-center gap-1"><FaPhone size={9} /> {data.header.phone}</p> : null}
+                {hasText(data.header?.email) ? <p className="inline-flex items-center gap-1"><FaEnvelope size={9} /> {data.header.email}</p> : null}
+              </>
+            ) : null}
 
-            <hr className="my-3 border-white/30" />
-            <p className="mb-1 font-bold uppercase">Skills</p>
-            <ul className="list-disc space-y-1 pl-4">
-              {(skills.length ? skills : ["Theme development", "Research skills", "Active listening", "Time management"]).slice(0, 7).map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            {skills.length ? (
+              <>
+                <hr className="my-3 border-white/30" />
+                <p className="mb-1 font-bold uppercase">Skills</p>
+                <ul className="list-disc space-y-1 pl-4">
+                  {skills.slice(0, 7).map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
 
-            <hr className="my-3 border-white/30" />
-            <p className="mb-1 font-bold uppercase">Work History</p>
-            <p className="font-semibold">{firstExperience.jobTitle || "Role Title"}</p>
-            <p>{firstExperience.employer || "Company"}</p>
-            <p>
-              {firstExperience.startDate || "Jan 2022"} {firstExperience.currentlyWorking ? "- Present" : firstExperience.endDate ? `- ${firstExperience.endDate}` : ""}
-            </p>
+            {firstExperience ? (
+              <>
+                <hr className="my-3 border-white/30" />
+                <p className="mb-1 font-bold uppercase">Work History</p>
+                {hasText(firstExperience.jobTitle) ? <p className="font-semibold">{firstExperience.jobTitle}</p> : null}
+                {hasText(firstExperience.employer) ? <p>{firstExperience.employer}</p> : null}
+                {dateRange ? <p>{dateRange}</p> : null}
+              </>
+            ) : null}
           </div>
         </aside>
 
         <section className="px-4 pb-4 pt-3">
-          <h1 className="text-4xl font-extrabold leading-none text-amber-600">{data.header.fullName || "Diana Hughes"}</h1>
-          <p className="mt-1 text-xl font-semibold">{data.header.headline || "A dynamic writer and meticulous editor"}</p>
+          <h1 className="text-4xl font-extrabold leading-none text-amber-600">{data.header?.fullName || "Your Name"}</h1>
+          {hasText(data.header?.headline) ? <p className="mt-1 text-xl font-semibold">{data.header.headline}</p> : null}
 
-          <CreativeBlock title="Career Objective">
-            {hasHtmlMarkup(data.summary.text) ? (
-              <div
-                className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
-                dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }}
-              />
-            ) : (
-              <p>{data.summary.text || "A creative writer and editor with internship experience writing in magazines and crafting content for digital platforms."}</p>
-            )}
-          </CreativeBlock>
+          {hasText(data.summary?.text) ? (
+            <CreativeBlock title="Career Objective">
+              {hasHtmlMarkup(data.summary.text) ? (
+                <div
+                  className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }}
+                />
+              ) : (
+                <p>{data.summary.text}</p>
+              )}
+            </CreativeBlock>
+          ) : null}
 
-          <CreativeBlock title="Professional Skills">
-            <p className="font-semibold">{skills[0] || "Content strategy"}</p>
-            {hasHtmlMarkup(firstExperience.bullets) ? (
-              <div
-                className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
-                dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(firstExperience.bullets) }}
-              />
-            ) : (
-              <ul className="list-disc pl-4">
-                {splitBullets(firstExperience.bullets).length ? (
-                  splitBullets(firstExperience.bullets).slice(0, 4).map((bullet, idx) => <li key={idx}>{bullet}</li>)
-                ) : (
-                  <>
-                    <li>Adhered to monthly editorial release timelines.</li>
-                    <li>Produced optimized copy and integrated feedback quickly.</li>
-                    <li>Edited articles for structure and clarity.</li>
-                  </>
-                )}
-              </ul>
-            )}
-          </CreativeBlock>
+          {firstExperience ? (
+            <CreativeBlock title="Professional Experience">
+              {hasText(firstExperience.jobTitle) ? <p className="font-semibold">{firstExperience.jobTitle}</p> : null}
+              {hasText(firstExperience.employer) ? <p>{firstExperience.employer}</p> : null}
+              {hasHtmlMarkup(firstExperience.bullets) ? (
+                <div
+                  className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(firstExperience.bullets) }}
+                />
+              ) : splitBullets(firstExperience.bullets).length ? (
+                <ul className="list-disc pl-4">
+                  {splitBullets(firstExperience.bullets).slice(0, 4).map((bullet, idx) => <li key={idx}>{bullet}</li>)}
+                </ul>
+              ) : null}
+            </CreativeBlock>
+          ) : null}
 
-          <CreativeBlock title="Education">
-            <p className="font-semibold">{firstEducation.endDate || "June 2022"}</p>
-            <p className="font-semibold">{firstEducation.degree || "Bachelor of Arts | English Composition"}</p>
-            <p>{firstEducation.institution || "University / College"}</p>
-            {hasHtmlMarkup(firstEducation.details) ? (
-              <div
-                className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
-                dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(firstEducation.details) }}
-              />
-            ) : splitBullets(firstEducation.details).length ? (
-              <ul className="mt-1 list-disc pl-4">
-                {splitBullets(firstEducation.details).slice(0, 3).map((bullet, idx) => <li key={idx}>{bullet}</li>)}
-              </ul>
-            ) : null}
-          </CreativeBlock>
+          {firstEducation ? (
+            <CreativeBlock title="Education">
+              {hasText(firstEducation.endDate) ? <p className="font-semibold">{firstEducation.endDate}</p> : null}
+              {hasText(firstEducation.degree) ? <p className="font-semibold">{firstEducation.degree}</p> : null}
+              {hasText(firstEducation.institution) ? <p>{firstEducation.institution}</p> : null}
+              {hasHtmlMarkup(firstEducation.details) ? (
+                <div
+                  className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(firstEducation.details) }}
+                />
+              ) : splitBullets(firstEducation.details).length ? (
+                <ul className="mt-1 list-disc pl-4">
+                  {splitBullets(firstEducation.details).slice(0, 3).map((bullet, idx) => <li key={idx}>{bullet}</li>)}
+                </ul>
+              ) : null}
+            </CreativeBlock>
+          ) : null}
         </section>
       </div>
     </article>
   );
 }
-
-

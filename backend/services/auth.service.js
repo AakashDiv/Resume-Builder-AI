@@ -27,6 +27,8 @@ export async function registerUser({ name, email, password }) {
       name: user.name,
       email: user.email,
       plan: user.plan,
+      autoApplyEnabled: user.autoApplyEnabled,
+      autoApplyLimit: user.autoApplyLimit,
       createdAt: user.createdAt
     }
   };
@@ -51,6 +53,8 @@ export async function loginUser({ email, password }) {
       name: user.name,
       email: user.email,
       plan: user.plan,
+      autoApplyEnabled: user.autoApplyEnabled,
+      autoApplyLimit: user.autoApplyLimit,
       createdAt: user.createdAt
     }
   };

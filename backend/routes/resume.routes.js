@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 import { Router } from "express";
-import { generateResume, improveResume, scoreResume, tailorResume } from "../controllers/resume.controller.js";
+import { generateCoverLetter, generateResume, improveResume, scoreResume, tailorResume } from "../controllers/resume.controller.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import requireProPlan from "../middleware/requireProPlan.js";
 import uploadResume from "../middleware/uploadResume.js";
@@ -53,6 +53,19 @@ router.post(
       .withMessage("jobDescriptionText must be 30-50000 characters")
   ],
   tailorResume
+);
+
+router.post(
+  "/cover-letter",
+  authMiddleware,
+  requireProPlan,
+  [
+    body("jobId").optional().isMongoId().withMessage("jobId must be a valid id"),
+    body("role").optional().isString().withMessage("role must be a string"),
+    body("company").optional().isString().withMessage("company must be a string"),
+    body("jobDescriptionText").optional().isString().withMessage("jobDescriptionText must be a string")
+  ],
+  generateCoverLetter
 );
 
 export default router;

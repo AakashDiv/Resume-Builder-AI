@@ -1,6 +1,7 @@
 import argparse
 import importlib.util
 import os
+import sys
 
 
 def parse_args():
@@ -48,7 +49,14 @@ def main():
             f"'{scraper_path}'."
         )
     scraper = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(scraper)
+    # Python 3.13's dataclass processing expects the module to be present in
+    # sys.modules while annotations are evaluated during import.
+    sys.modules[spec.name] = scraper
+    try:
+        spec.loader.exec_module(scraper)
+    except Exception:
+        sys.modules.pop(spec.name, None)
+        raise
 
     selected = normalize_platforms(args.platforms)
     scraper.OUTPUT_FILE = args.output_file

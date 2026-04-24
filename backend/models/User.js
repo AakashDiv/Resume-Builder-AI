@@ -38,6 +38,20 @@ const userSchema = new mongoose.Schema(
     stripePriceId: {
       type: String,
       default: null
+    },
+    autoApplyEnabled: {
+      type: Boolean,
+      default: false
+    },
+    autoApplyLimit: {
+      type: Number,
+      default: 10,
+      min: 1,
+      max: 100
+    },
+    notifyEmail: {
+      type: Boolean,
+      default: true
     }
   },
   {

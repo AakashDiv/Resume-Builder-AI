@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import { runScraper } from "../controllers/scraper.controller.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = Router();
 
 router.post(
   "/run",
+  authMiddleware,
   [
     body("role").optional().isString().withMessage("role must be a string"),
     body("location").optional().isString().withMessage("location must be a string"),

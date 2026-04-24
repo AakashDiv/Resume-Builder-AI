@@ -26,6 +26,7 @@ export default function JobSearchPage() {
   const [filters, setFilters] = useState(initialFilters);
   const [jobs, setJobs] = useState([]);
   const [downloadPath, setDownloadPath] = useState("");
+  const [searchSummary, setSearchSummary] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -82,6 +83,11 @@ export default function JobSearchPage() {
       const normalized = Array.isArray(data.jobs) ? data.jobs.map(normalizeJobRow) : [];
       setJobs(normalized);
       setDownloadPath(data.downloadUrl || "");
+      setSearchSummary({
+        savedJobsCount: data.savedJobsCount || 0,
+        matchedJobsCount: data.matchedJobsCount || 0,
+        autoQueuedCount: data.autoQueuedCount || 0
+      });
       setSuccess(true);
       setPage(1);
       setToast({ type: "success", message: "Job scrape completed successfully." });
@@ -98,6 +104,7 @@ export default function JobSearchPage() {
     setFilters(initialFilters);
     setJobs([]);
     setDownloadPath("");
+    setSearchSummary(null);
     setError("");
     setSuccess(false);
     setPage(1);
@@ -230,7 +237,7 @@ export default function JobSearchPage() {
             </div>
           </div>
 
-          <StatusCard loading={loading} error={error} success={success} count={jobs.length} />
+          <StatusCard loading={loading} error={error} success={success} count={jobs.length} summary={searchSummary} />
 
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             {!jobs.length ? (
@@ -309,7 +316,7 @@ export default function JobSearchPage() {
   );
 }
 
-function StatusCard({ loading, error, success, count }) {
+function StatusCard({ loading, error, success, count, summary }) {
   if (loading) {
     return (
       <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm dark:border-slate-800 dark:bg-slate-900">
@@ -329,7 +336,7 @@ function StatusCard({ loading, error, success, count }) {
   if (success) {
     return (
       <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">
-        Scrape complete. {count} jobs loaded.
+        Scrape complete. {count} jobs loaded. Saved {summary?.savedJobsCount ?? 0} jobs to the dashboard and updated {summary?.matchedJobsCount ?? 0} matches.
       </div>
     );
   }

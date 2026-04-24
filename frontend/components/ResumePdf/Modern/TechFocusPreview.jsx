@@ -1,4 +1,18 @@
-﻿import { hasHtmlMarkup, sanitizeRichHtml, splitBullets, splitByCommaOrLine, getSectionByTitle } from "../common/previewUtils.js";
+import {
+  formatDateRange,
+  getInitials,
+  getMeaningfulEducation,
+  getMeaningfulExperience,
+  getRenderableAdditionalSections,
+  getSectionByTitle,
+  hasHtmlMarkup,
+  hasText,
+  parseReferenceItems,
+  sanitizeRichHtml,
+  splitBullets,
+  splitByCommaOrLine,
+  splitDisplayName
+} from "../common/previewUtils.js";
 import { FaEnvelope, FaLocationDot, FaPhone } from "react-icons/fa6";
 
 export default function TechFocusPreview({
@@ -10,116 +24,213 @@ export default function TechFocusPreview({
   mutedTextColor = "#7a7a7a",
   inverseTextColor = "#ffffff"
 }) {
-  const skills = splitByCommaOrLine(data.skills.primarySkills);
-  const referencesSection = getSectionByTitle(data.additional, "References");
-  const referenceItems = (referencesSection?.items || [])
-    .map((item) => String(item || "").trim())
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((item) => {
-      const [name = "", role = "", phone = "", email = ""] = item.split("|").map((part) => part.trim());
-      return { name, role, phone, email };
-    });
-  const references = referenceItems.length
-    ? referenceItems
-    : [
-        { name: "Reference Name", role: "Company / Role", phone: "+123-456-7890", email: "reference@email.com" },
-        { name: "Reference Name", role: "Company / Role", phone: "+123-456-7890", email: "reference@email.com" }
-      ];
-  const [firstName = "YOUR", ...restName] = String(data.header.fullName || "").trim().split(/\s+/).filter(Boolean);
-  const lastName = restName.join(" ") || "NAME";
-
-  
+  const skills = splitByCommaOrLine(data.skills?.primarySkills || "");
+  const education = getMeaningfulEducation(data.education).slice(0, 3);
+  const experience = getMeaningfulExperience(data.experience).slice(0, 4);
+  const references = parseReferenceItems(data.additional).slice(0, 2);
+  const languagesSection = getSectionByTitle(data.additional, "Languages");
+  const languages = splitByCommaOrLine((languagesSection?.items || []).join("\n") || data.additional?.languages || "");
+  const additionalSections = getRenderableAdditionalSections(data.additional, ["references", "languages"]).slice(0, 2);
+  const name = splitDisplayName(data.header?.fullName);
+  const initials = getInitials(data.header?.fullName);
+  const contactLines = [
+    { key: "phone", icon: <FaPhone size={10} />, value: data.header?.phone },
+    { key: "email", icon: <FaEnvelope size={10} />, value: data.header?.email },
+    { key: "portfolio", icon: null, value: data.additional?.portfolio },
+    { key: "location", icon: <FaLocationDot size={10} />, value: data.header?.location }
+  ].filter((item) => hasText(item.value));
 
   return (
-    <article
-      data-resume-padding="true"
-      className="w-full overflow-hidden bg-white"
-      style={{ fontFamily: "'DM Sans', Arial, sans-serif", color: primaryTextColor, minHeight: "297mm" }}
-    >
-      <div className="grid w-full grid-cols-[32%,68%]" style={{ minHeight: "inherit" }}>
-        <aside className="relative flex h-full flex-col justify-between gap-7 px-6 py-8" style={{ background: sidebarBgColor, color: inverseTextColor }}>
+    <article data-resume-padding="true" className="h-full w-full overflow-hidden bg-white" style={{ fontFamily: "'DM Sans', Arial, sans-serif", color: primaryTextColor }}>
+      <div className="grid h-full w-full grid-cols-[32%,68%]">
+        <aside className="relative flex h-full flex-col gap-7 px-6 py-8" style={{ background: sidebarBgColor, color: inverseTextColor }}>
           <div className="mx-auto h-[120px] w-[120px] rounded-full p-[4px]" style={{ background: `linear-gradient(135deg, ${accentColor}, #e8c88a, ${accentColor})` }}>
-            <div className="h-full w-full overflow-hidden rounded-full bg-slate-200">
-              {data.header.photo ? (
+            <div className="grid h-full w-full place-items-center overflow-hidden rounded-full bg-slate-200 text-2xl font-bold tracking-[0.08em]" style={{ color: primaryTextColor }}>
+              {data.header?.photo ? (
                 <img src={data.header.photo} alt="Profile" className="h-full w-full object-cover" />
               ) : (
-                <div className="grid h-full place-items-center text-xs font-semibold text-slate-500">PHOTO</div>
+                initials
               )}
             </div>
           </div>
 
-          <div>
-            <p className="border-b pb-2 text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: accentColor, borderColor: `${accentColor}55` }}>Contact Me</p>
-            <div className="mt-3 space-y-2 text-[11px] leading-relaxed" style={{ color: `${inverseTextColor}D9` }}>
-              <p className="inline-flex items-center gap-1"><FaPhone size={10} /> {data.header.phone || "+123-456-7890"}</p><p className="inline-flex items-center gap-1"><FaEnvelope size={10} /> {data.header.email || "hello@reallygreatsite.com"}</p><p>{data.additional.portfolio || "www.reallygreatsite.com"}</p><p className="inline-flex items-center gap-1"><FaLocationDot size={10} /> {data.header.location || "123 Anywhere St., Any City"}</p>
-            </div>
-          </div>
+          {contactLines.length ? (
+            <SidebarSection title="Contact Me" accentColor={accentColor}>
+              <div className="space-y-2 text-[11px] leading-relaxed" style={{ color: `${inverseTextColor}D9` }}>
+                {contactLines.map((item) => (
+                  <p key={item.key} className="inline-flex items-center gap-1">
+                    {item.icon}
+                    {item.value}
+                  </p>
+                ))}
+              </div>
+            </SidebarSection>
+          ) : null}
 
-          <div>
-            <p className="border-b pb-2 text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: accentColor, borderColor: `${accentColor}55` }}>Education</p>
-            <div className="mt-3 space-y-3">
-              {(data.education.length ? data.education : [{ degree: "Bachelor Degree", institution: "University", endDate: "2015" }]).slice(0, 3).map((edu, index) => (
-                <div key={`${edu.degree}-${index}`} className="space-y-0.5">
-                  <p className="text-[11px]" style={{ color: `${inverseTextColor}E6` }}>{edu.degree || "Bachelor Degree"}</p>
-                  <p className="text-[10px] font-semibold" style={{ color: accentColor }}>{edu.institution || "University"}</p>
-                  <p className="text-[10px]" style={{ color: `${inverseTextColor}80` }}>{edu.startDate || "Start"} - {edu.currentlyStudying ? "Present" : edu.endDate || "End"}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {education.length ? (
+            <SidebarSection title="Education" accentColor={accentColor}>
+              <div className="space-y-3">
+                {education.map((edu, index) => {
+                  const dateRange = formatDateRange(edu.startDate, edu.endDate, edu.currentlyStudying);
+                  return (
+                    <div key={`${edu.degree || edu.institution || "education"}-${index}`} className="space-y-0.5">
+                      {hasText(edu.degree) ? <p className="text-[11px]" style={{ color: `${inverseTextColor}E6` }}>{edu.degree}</p> : null}
+                      {hasText(edu.institution) ? <p className="text-[10px] font-semibold" style={{ color: accentColor }}>{edu.institution}</p> : null}
+                      {dateRange ? <p className="text-[10px]" style={{ color: `${inverseTextColor}80` }}>{dateRange}</p> : null}
+                    </div>
+                  );
+                })}
+              </div>
+            </SidebarSection>
+          ) : null}
 
-          <div>
-            <p className="border-b pb-2 text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: accentColor, borderColor: `${accentColor}55` }}>Skills</p>
-            <ul className="mt-3 space-y-1.5 text-[11px]" style={{ color: `${inverseTextColor}D9` }}>
-              {(skills.length ? skills : ["Graphic and Web Design", "Visual Design", "Storyboards", "Branding"]).slice(0, 8).map((skill, index) => (
-                <li key={`${skill}-${index}`} className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ background: accentColor }} /><span>{skill}</span></li>
-              ))}
-            </ul>
-          </div>
+          {skills.length ? (
+            <SidebarSection title="Skills" accentColor={accentColor}>
+              <ul className="space-y-1.5 text-[11px]" style={{ color: `${inverseTextColor}D9` }}>
+                {skills.slice(0, 8).map((skill, index) => (
+                  <li key={`${skill}-${index}`} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: accentColor }} />
+                    <span>{skill}</span>
+                  </li>
+                ))}
+              </ul>
+            </SidebarSection>
+          ) : null}
+
+          {languages.length ? (
+            <SidebarSection title="Languages" accentColor={accentColor}>
+              <ul className="space-y-1.5 text-[11px]" style={{ color: `${inverseTextColor}D9` }}>
+                {languages.slice(0, 6).map((language, index) => (
+                  <li key={`${language}-${index}`} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: accentColor }} />
+                    <span>{language}</span>
+                  </li>
+                ))}
+              </ul>
+            </SidebarSection>
+          ) : null}
         </aside>
 
-        <main className="flex h-full flex-col justify-between gap-7 px-8 py-9" style={{ background: mainBgColor }}>
+        <main className="flex h-full flex-col gap-7 px-8 py-9" style={{ background: mainBgColor }}>
           <div>
-            <p className="font-serif text-[35px] font-black uppercase leading-none" style={{ color: primaryTextColor }}>{firstName} {lastName}</p>
-            {/* <p className="mt-1 font-serif text-[30px] font-bold uppercase tracking-[0.06em]" style={{ color: mutedTextColor }}>{lastName}</p> */}
-            <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: accentColor }}>{data.header.headline || "Professional Title"}</p>
+            <p className="font-serif text-[35px] font-black uppercase leading-none" style={{ color: primaryTextColor }}>
+              {name.primary}
+            </p>
+            {name.secondary ? (
+              <p className="mt-1 font-serif text-[30px] font-bold uppercase tracking-[0.06em]" style={{ color: mutedTextColor }}>
+                {name.secondary}
+              </p>
+            ) : null}
+            {hasText(data.header?.headline) ? (
+              <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: accentColor }}>
+                {data.header.headline}
+              </p>
+            ) : null}
           </div>
 
-          <section>
-            <p className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: primaryTextColor }}><span>Work Experience</span><span className="h-px flex-1" style={{ background: `${primaryTextColor}33` }} /></p>
-            <div className="mt-4 space-y-3">
-              {(data.experience.length ? data.experience : [{ jobTitle: "Senior Graphic Designer", employer: "Fauget Studio", startDate: "2019", endDate: "2022", bullets: "Add measurable impact statements." }]).slice(0, 4).map((exp, index) => (
-                <div key={`${exp.jobTitle}-${index}`} className="border-l-2 border-transparent pl-3">
-                  <div className="flex items-baseline justify-between gap-3"><p className="text-[12px] font-semibold" style={{ color: primaryTextColor }}>{exp.jobTitle || "Role Title"}</p><p className="shrink-0 text-[10px] font-medium tracking-[0.04em]" style={{ color: accentColor }}>{exp.startDate || "Start"} - {exp.currentlyWorking ? "Present" : exp.endDate || "End"}</p></div>
-                  <p className="text-[10.5px] font-medium tracking-[0.04em]" style={{ color: mutedTextColor }}>{exp.employer || "Company"} {exp.city || exp.country ? `- ${[exp.city, exp.country].filter(Boolean).join(", ")}` : ""}</p>
-                  {hasHtmlMarkup(exp.bullets) ? (
-                    <div className="mt-1 text-[10.5px] leading-[1.6] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4" style={{ color: mutedTextColor }} dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }} />
-                  ) : (
-                    <p className="mt-1 text-[10.5px] leading-[1.6]" style={{ color: mutedTextColor }}>{splitBullets(exp.bullets).join(" ") || "Add concise role summary and measurable achievements."}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
+          {hasText(data.summary?.text) ? (
+            <MainSection title="Professional Summary" primaryTextColor={primaryTextColor} accentColor={accentColor}>
+              {hasHtmlMarkup(data.summary.text) ? (
+                <div
+                  className="text-[10.8px] leading-[1.7] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                  style={{ color: mutedTextColor }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }}
+                />
+              ) : (
+                <p className="text-[10.8px] leading-[1.7]" style={{ color: mutedTextColor }}>{data.summary.text}</p>
+              )}
+            </MainSection>
+          ) : null}
 
-          <section>
-            <p className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: primaryTextColor }}><span>References</span><span className="h-px flex-1" style={{ background: `${primaryTextColor}33` }} /></p>
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              {references.map((ref, index) => (
-                <div key={`${ref.name}-${index}`} className="rounded-md border bg-white px-3 py-3" style={{ borderColor: `${mutedTextColor}33` }}>
-                  <p className="text-[11px] font-bold" style={{ color: primaryTextColor }}>{ref.name || "Reference Name"}</p>
-                  <p className="mt-0.5 text-[10px]" style={{ color: mutedTextColor }}>{ref.role || "Company / Role"}</p>
-                  <p className="mt-1 text-[10px]" style={{ color: mutedTextColor }}><span className="font-semibold uppercase tracking-[0.06em]" style={{ color: accentColor }}>Phone:</span> {ref.phone || "+123-456-7890"}</p>
-                  <p className="text-[10px]" style={{ color: mutedTextColor }}><span className="font-semibold uppercase tracking-[0.06em]" style={{ color: accentColor }}>Email:</span> {ref.email || "hello@reallygreatsite.com"}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+          {experience.length ? (
+            <MainSection title="Work Experience" primaryTextColor={primaryTextColor} accentColor={accentColor}>
+              <div className="mt-4 space-y-3">
+                {experience.map((exp, index) => {
+                  const bulletItems = splitBullets(exp.bullets);
+                  const dateRange = formatDateRange(exp.startDate, exp.endDate, exp.currentlyWorking);
+                  const employerLine = [exp.employer, [exp.city, exp.country].filter(hasText).join(", ")].filter(Boolean).join(" - ");
+                  return (
+                    <div key={`${exp.jobTitle || exp.employer || "experience"}-${index}`} className="border-l-2 border-transparent pl-3">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <p className="text-[12px] font-semibold" style={{ color: primaryTextColor }}>{exp.jobTitle || exp.employer}</p>
+                        {dateRange ? <p className="shrink-0 text-[10px] font-medium tracking-[0.04em]" style={{ color: accentColor }}>{dateRange}</p> : null}
+                      </div>
+                      {employerLine ? <p className="text-[10.5px] font-medium tracking-[0.04em]" style={{ color: mutedTextColor }}>{employerLine}</p> : null}
+                      {hasHtmlMarkup(exp.bullets) ? (
+                        <div
+                          className="mt-1 text-[10.5px] leading-[1.6] [&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                          style={{ color: mutedTextColor }}
+                          dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }}
+                        />
+                      ) : bulletItems.length ? (
+                        <ul className="mt-1 space-y-1 text-[10.5px] leading-[1.6]" style={{ color: mutedTextColor }}>
+                          {bulletItems.slice(0, 4).map((bullet, bulletIndex) => (
+                            <li key={bulletIndex} className="flex gap-2">
+                              <span style={{ color: accentColor }}>*</span>
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+            </MainSection>
+          ) : null}
+
+          {references.length ? (
+            <MainSection title="References" primaryTextColor={primaryTextColor} accentColor={accentColor}>
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                {references.map((ref, index) => (
+                  <div key={`${ref.name || "reference"}-${index}`} className="rounded-md border bg-white px-3 py-3" style={{ borderColor: `${mutedTextColor}33` }}>
+                    {hasText(ref.name) ? <p className="text-[11px] font-bold" style={{ color: primaryTextColor }}>{ref.name}</p> : null}
+                    {hasText(ref.role) ? <p className="mt-0.5 text-[10px]" style={{ color: mutedTextColor }}>{ref.role}</p> : null}
+                    {hasText(ref.phone) ? <p className="mt-1 text-[10px]" style={{ color: mutedTextColor }}><span className="font-semibold uppercase tracking-[0.06em]" style={{ color: accentColor }}>Phone:</span> {ref.phone}</p> : null}
+                    {hasText(ref.email) ? <p className="text-[10px]" style={{ color: mutedTextColor }}><span className="font-semibold uppercase tracking-[0.06em]" style={{ color: accentColor }}>Email:</span> {ref.email}</p> : null}
+                  </div>
+                ))}
+              </div>
+            </MainSection>
+          ) : null}
+
+          {additionalSections.map((section) => (
+            <MainSection key={section.id || section.title} title={section.title || "Additional"} primaryTextColor={primaryTextColor} accentColor={accentColor}>
+              <ul className="mt-4 space-y-1 text-[10.5px] leading-[1.6]" style={{ color: mutedTextColor }}>
+                {section.items.filter(hasText).slice(0, 5).map((item, index) => (
+                  <li key={`${section.title}-${index}`} className="flex gap-2">
+                    <span style={{ color: accentColor }}>*</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </MainSection>
+          ))}
         </main>
       </div>
     </article>
   );
 }
 
+function SidebarSection({ title, accentColor, children }) {
+  return (
+    <div>
+      <p className="border-b pb-2 text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: accentColor, borderColor: `${accentColor}55` }}>
+        {title}
+      </p>
+      <div className="mt-3">{children}</div>
+    </div>
+  );
+}
 
+function MainSection({ title, primaryTextColor, accentColor, children }) {
+  return (
+    <section>
+      <p className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: primaryTextColor }}>
+        <span>{title}</span>
+        <span className="h-px flex-1" style={{ background: accentColor }} />
+      </p>
+      {children}
+    </section>
+  );
+}

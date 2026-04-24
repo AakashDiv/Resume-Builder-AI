@@ -1,5 +1,6 @@
 ﻿from __future__ import annotations
 
+import os
 import re
 import time
 from dataclasses import asdict, dataclass
@@ -78,10 +79,20 @@ def build_driver(headless: bool = True) -> webdriver.Chrome:
     options = Options()
     if headless:
         options.add_argument("--headless=new")
+    chrome_bin = os.getenv("CHROME_BIN")
+    chromedriver_path = os.getenv("CHROMEDRIVER_PATH")
+    if chrome_bin:
+        options.binary_location = chrome_bin
     options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
     options.add_argument("--lang=en-US")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--remote-debugging-port=9222")
     options.add_argument("--window-size=1920,1080")
     options.add_argument(f"--user-agent={USER_AGENT}")
+    if chromedriver_path and os.path.exists(chromedriver_path):
+        return webdriver.Chrome(service=Service(chromedriver_path), options=options)
     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 

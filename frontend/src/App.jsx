@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage.jsx";
 import TemplatesPage from "../pages/TemplatesPage.jsx";
 import PublicPricingPage from "../pages/PublicPricingPage.jsx";
 import JobSearchPage from "../pages/JobSearchPage.jsx";
+import DashboardPage from "../pages/DashboardPage.jsx";
 import ResumeBuilderPage from "../pages/ResumeBuilderPage.jsx";
 import ImproveResumePage from "../pages/ImproveResumePage.jsx";
 import AtsScorePage from "../pages/AtsScorePage.jsx";
@@ -12,18 +13,21 @@ import TailorResumePage from "../pages/TailorResumePage.jsx";
 import CoverLetterPage from "../pages/CoverLetterPage.jsx";
 import SubscriptionPage from "../pages/SubscriptionPage.jsx";
 import ProfilePage from "../pages/ProfilePage.jsx";
+import ApplicationsPage from "../pages/ApplicationsPage.jsx";
 import ProtectedRoute from "../layout/ProtectedRoute.jsx";
 import PublicRoute from "../layout/PublicRoute.jsx";
 import AppShell from "../layout/AppShell.jsx";
 import MarketingLayout from "../layout/MarketingLayout.jsx";
 
 const appRoutes = [
+  { path: "dashboard", element: <DashboardPage /> },
   { path: "job-search", element: <JobSearchPage /> },
   { path: "resume-builder", element: <ResumeBuilderPage /> },
   { path: "improve-resume", element: <ImproveResumePage /> },
   { path: "ats-score", element: <AtsScorePage /> },
   { path: "tailor-resume", element: <TailorResumePage /> },
   { path: "cover-letter", element: <CoverLetterPage /> },
+  { path: "applications", element: <ApplicationsPage /> },
   { path: "subscription", element: <SubscriptionPage /> },
   { path: "profile", element: <ProfilePage /> }
 ];
@@ -63,12 +67,12 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="job-search" replace />} />
+        <Route index element={<Navigate to="dashboard" replace />} />
         {appRoutes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
       </Route>
-      <Route path="/dashboard" element={<Navigate to="/app/job-search" replace />} />
+      <Route path="/dashboard" element={<Navigate to="/app/dashboard" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

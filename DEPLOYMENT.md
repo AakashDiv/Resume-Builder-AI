@@ -1,46 +1,168 @@
 # Deployment Guide
 
-## 1) Push to GitHub
+## Overview
 
-If this local folder is not initialized:
+This repo now includes:
+
+- [Dockerfile](/e:/Aakash/ResumeBuilder-jobscrapper/JobScraper-main/Dockerfile) for `backend + scraper`
+- [render.yaml](/e:/Aakash/ResumeBuilder-jobscrapper/JobScraper-main/render.yaml) for Render Blueprint deploys
+- [.dockerignore](/e:/Aakash/ResumeBuilder-jobscrapper/JobScraper-main/.dockerignore) to keep Docker builds smaller
+
+Recommended setup:
+
+- Backend + scraper: Render Docker web service
+- Database: MongoDB Atlas free cluster
+- Frontend: Vercel or Render static site
+
+## 1) Push the repo to GitHub
+
+If this folder is not already connected to GitHub:
 
 ```bash
 git init
 git add .
-git commit -m "Prepare deploy"
+git commit -m "Add Render Docker deployment"
 git branch -M main
-git remote add origin https://github.com/Aakashralhan/JobScraper.git
+git remote add origin https://github.com/<your-username>/<your-repo>.git
 git push -u origin main
 ```
 
-If already initialized:
+If the repo already exists:
 
 ```bash
 git add .
-git commit -m "Prepare deploy"
-git remote add origin https://github.com/Aakashralhan/JobScraper.git  # only if remote missing
-git branch -M main
-git push -u origin main
+git commit -m "Add Render Docker deployment"
+git push
 ```
 
-## 2) Deploy on Render (recommended for this stack)
+## 2) Create MongoDB Atlas database
+
+1. Go to https://www.mongodb.com/cloud/atlas/register
+2. Create a free `M0` cluster
+3. Create a database user
+4. In **Network Access**, allow access from anywhere for Render:
+
+```text
+0.0.0.0/0
+```
+
+5. Copy your connection string, for example:
+
+```text
+mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/jobscraper?retryWrites=true&w=majority
+```
+
+Use this as `MONGO_URI` in Render.
+
+## 3) Deploy backend on Render with Docker
+
+### Option A: Blueprint deploy using `render.yaml`
 
 1. Open https://dashboard.render.com
 2. Click **New +** -> **Blueprint**
-3. Select repo `Aakashralhan/JobScraper`
-4. Render will read `render.yaml` and create:
-   - `jobscrapper-backend` (Docker web service)
-   - `jobscrapper-frontend` (static site)
-5. After deploy, open frontend URL and test search.
+3. Connect your GitHub repo
+4. Render will detect [render.yaml](/e:/Aakash/ResumeBuilder-jobscrapper/JobScraper-main/render.yaml)
+5. Fill these required env vars:
 
-## 3) Share URL
+```text
+MONGO_URI
+JWT_SECRET
+CLIENT_ORIGIN
+CLIENT_BASE_URL
+```
 
-Share the frontend URL from Render, for example:
+Optional env vars:
 
-`https://jobscrapper-frontend.onrender.com`
+```text
+OPENAI_API_KEY
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
+STRIPE_PRO_PRICE_ID
+```
+
+6. Click **Apply**
+7. Wait for Docker build and deploy to finish
+
+Your backend URL will look like:
+
+```text
+https://jobscraper-backend.onrender.com
+```
+
+### Option B: Manual Docker web service
+
+1. Open Render dashboard
+2. Click **New +** -> **Web Service**
+3. Select your GitHub repo
+4. Set:
+
+```text
+Runtime: Docker
+Dockerfile Path: ./Dockerfile
+Docker Context: .
+Plan: Free
+Health Check Path: /api/health
+```
+
+5. Add env vars:
+
+```text
+NODE_ENV=production
+PYTHON_BIN=python3
+MONGO_URI=<your atlas uri>
+JWT_SECRET=<long random secret>
+CLIENT_ORIGIN=<your frontend url>
+CLIENT_BASE_URL=<your frontend url>
+OPENAI_API_KEY=<optional>
+OPENAI_MODEL=gpt-4.1-mini
+STRIPE_SECRET_KEY=<optional>
+STRIPE_WEBHOOK_SECRET=<optional>
+STRIPE_PRO_PRICE_ID=<optional>
+```
+
+6. Deploy
+
+## 4) Connect frontend to backend
+
+If your frontend is deployed separately, set:
+
+```text
+VITE_API_BASE_URL=https://your-render-backend-url/api
+```
+
+Examples:
+
+```text
+CLIENT_ORIGIN=https://your-frontend.vercel.app
+CLIENT_BASE_URL=https://your-frontend.vercel.app
+VITE_API_BASE_URL=https://jobscraper-backend.onrender.com/api
+```
+
+## 5) Test after deploy
+
+Open:
+
+```text
+https://your-render-backend.onrender.com/api/health
+```
+
+You should get:
+
+```json
+{ "ok": true, "service": "backend" }
+```
+
+Then test these flows:
+
+- signup / login
+- profile save
+- scraper run
+- dashboard match refresh
 
 ## Notes
 
-- Backend runs Selenium + Chromium inside Docker (`jobscrapper-backend/Dockerfile`).
-- Frontend API base URL is set via `VITE_API_BASE_URL` in `render.yaml`.
-- First backend run can be slow due browser startup.
+- The Docker image installs `Chromium` and `chromedriver` for Selenium.
+- The scraper now supports `CHROME_BIN` and `CHROMEDRIVER_PATH`, which are set inside the Docker image.
+- Render free services sleep after inactivity and can be slow on first request.
+- The scraper can still fail sometimes because LinkedIn and similar sites block automation.
+- OpenAI usage is not free by default. If you want zero AI cost, leave `OPENAI_API_KEY` unset.

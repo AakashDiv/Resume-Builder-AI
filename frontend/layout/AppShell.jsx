@@ -4,12 +4,14 @@ import { clearToken } from "../services/authStorage.js";
 import { fetchCurrentUser } from "../services/authApi.js";
 
 const menuItems = [
+  { key: "dashboard", label: "Dashboard", to: "/app/dashboard" },
   { key: "job-search", label: "Job Search", to: "/app/job-search" },
   { key: "resume-builder", label: "Resume Builder", to: "/app/resume-builder" },
   { key: "improve-resume", label: "Improve Resume", to: "/app/improve-resume" },
   { key: "ats-score", label: "ATS Score", to: "/app/ats-score" },
   { key: "tailor-resume", label: "Tailor Resume", to: "/app/tailor-resume" },
   { key: "cover-letter", label: "Cover Letter", to: "/app/cover-letter" },
+  { key: "applications", label: "Applications", to: "/app/applications" },
   { key: "subscription", label: "Subscription", to: "/app/subscription" },
   { key: "profile", label: "Profile", to: "/app/profile" }
 ];
