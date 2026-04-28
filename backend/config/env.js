@@ -6,14 +6,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const backendRoot = path.resolve(__dirname, "..");
 const projectRoot = path.resolve(backendRoot, "..");
+const externalEnv = { ...process.env };
 
-if (process.env.NODE_ENV === "test") {
+const nodeEnv = process.env.NODE_ENV || "development";
+const envFile = `.env.${nodeEnv}`;
+
+if (nodeEnv === "test") {
   dotenv.config({ path: path.resolve(backendRoot, ".env.test") });
   dotenv.config({ path: path.resolve(projectRoot, ".env.test"), override: false });
 } else {
   dotenv.config({ path: path.resolve(backendRoot, ".env") });
+  dotenv.config({ path: path.resolve(backendRoot, envFile), override: true });
   dotenv.config({ path: path.resolve(projectRoot, ".env"), override: false });
+  dotenv.config({ path: path.resolve(projectRoot, envFile), override: true });
 }
+
+Object.assign(process.env, externalEnv);
 
 const requiredVars = ["MONGO_URI", "JWT_SECRET"];
 for (const key of requiredVars) {
@@ -23,7 +31,7 @@ for (const key of requiredVars) {
 }
 
 export const env = {
-  nodeEnv: process.env.NODE_ENV || "development",
+  nodeEnv,
   port: Number(process.env.PORT || 5000),
   mongoUri: process.env.MONGO_URI,
   jwtSecret: process.env.JWT_SECRET,

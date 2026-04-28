@@ -12,7 +12,7 @@ Recommended setup:
 
 - Backend + scraper: Render Docker web service
 - Database: MongoDB Atlas free cluster
-- Frontend: Vercel or Render static site
+- Frontend: Netlify, Vercel, or Render static site
 
 ## 1) Push the repo to GitHub
 
@@ -122,7 +122,27 @@ STRIPE_PRO_PRICE_ID=<optional>
 
 6. Deploy
 
-## 4) Connect frontend to backend
+## 4) Deploy frontend on Netlify
+
+When importing this repo in Netlify, use:
+
+```text
+Branch to deploy: main
+Base directory: frontend
+Build command: npm run build
+Publish directory: dist
+Functions directory: leave empty
+```
+
+Set this Netlify environment variable:
+
+```text
+VITE_API_BASE_URL=https://your-render-backend-url/api
+```
+
+This repo also includes [netlify.toml](/e:/Aakash/ResumeBuilder-jobscrapper/JobScraper-main/netlify.toml), so Netlify can read these build settings automatically.
+
+## 5) Connect frontend to backend
 
 If your frontend is deployed separately, set:
 
@@ -133,12 +153,14 @@ VITE_API_BASE_URL=https://your-render-backend-url/api
 Examples:
 
 ```text
-CLIENT_ORIGIN=https://your-frontend.vercel.app
-CLIENT_BASE_URL=https://your-frontend.vercel.app
+CLIENT_ORIGIN=https://your-frontend.netlify.app
+CLIENT_BASE_URL=https://your-frontend.netlify.app
 VITE_API_BASE_URL=https://jobscraper-backend.onrender.com/api
 ```
 
-## 5) Test after deploy
+On Render, update `CLIENT_ORIGIN` and `CLIENT_BASE_URL` to your final Netlify URL after Netlify creates it.
+
+## 6) Test after deploy
 
 Open:
 
