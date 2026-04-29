@@ -4,8 +4,8 @@ import { env } from "./config/env.js";
 
 async function startServer() {
   await connectDB();
-  app.listen(env.port, () => {
-    console.log(`Backend running on http://localhost:${env.port}`);
+  app.listen(env.port, "0.0.0.0", () => {
+    console.log(`Backend running on 0.0.0.0:${env.port}`);
   });
 }
 
