@@ -43,13 +43,14 @@ export default function TailorResumePage() {
     <section className="space-y-6">
       <form
         onSubmit={handleSubmit}
-        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+        className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-xl font-bold">Tailor Resume</h3>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Pro Optimization</p>
+            <h3 className="mt-2 text-2xl font-bold">Tailor Resume</h3>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              Premium feature: align your resume to a specific job description.
+              Align your resume to a specific job description before saving or applying.
             </p>
           </div>
           <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800 dark:bg-amber-600/20 dark:text-amber-100">

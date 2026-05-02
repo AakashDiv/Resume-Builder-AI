@@ -96,9 +96,10 @@ export default function CoverLetterPage() {
   return (
     <section className="space-y-6">
       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <h3 className="text-2xl font-bold">Cover Letter Studio</h3>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Application Asset</p>
+        <h3 className="mt-2 text-2xl font-bold">Cover Letter Studio</h3>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          Generate a concise, profile-aware cover letter from a matched job or a pasted job description.
+          Generate a concise, profile-aware cover letter from a matched job before saving or applying.
         </p>
       </div>
 

@@ -233,6 +233,32 @@ export default function DashboardPage() {
         </div>
       ) : null}
 
+      <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Command Center</p>
+            <h3 className="mt-2 text-2xl font-bold">Resume-to-application pipeline</h3>
+            <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-300">
+              Keep your profile ready, fetch fresh jobs, review ranked matches, and control premium automation from one screen.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              to="/app/profile"
+              className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+            >
+              Update Profile
+            </Link>
+            <Link
+              to="/app/job-search"
+              className="rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+            >
+              Search Jobs
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <div className="grid gap-4 xl:grid-cols-[1.5fr,1fr,1fr,1fr]">
         <MetricCard title="Profile Readiness" value={`${completion}%`} subtitle="Resume + target role + skills coverage" />
         <MetricCard title="Matched Jobs" value={matchTotal} subtitle={user?.plan === "pro" ? "All saved matches" : "Top 10 visible on free"} />
@@ -253,8 +279,8 @@ export default function DashboardPage() {
           <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Control Center</p>
-                <h3 className="mt-2 text-2xl font-bold">Your job-matching workspace</h3>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Matching Engine</p>
+                <h3 className="mt-2 text-2xl font-bold">Rank jobs against your profile</h3>
                 <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-300">
                   Save your profile once, search jobs, then refresh matches to rank opportunities against your resume and skills.
                 </p>
@@ -345,10 +371,10 @@ export default function DashboardPage() {
                           </span>
                         </div>
                         <p className="text-sm text-slate-600 dark:text-slate-300">
-                          {item.job.company || "Unknown company"} {item.job.location ? `• ${item.job.location}` : ""}
+                          {item.job.company || "Unknown company"} {item.job.location ? ` - ${item.job.location}` : ""}
                         </p>
                         <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                          {item.job.platform || "Saved job"} {item.job.datePosted ? `• ${new Date(item.job.datePosted).toLocaleDateString()}` : ""}
+                          {item.job.platform || "Saved job"} {item.job.datePosted ? ` - ${new Date(item.job.datePosted).toLocaleDateString()}` : ""}
                         </p>
                       </div>
 

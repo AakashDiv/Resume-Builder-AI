@@ -41,11 +41,12 @@ export default function AtsScorePage() {
     <section className="space-y-6">
       <form
         onSubmit={handleSubmit}
-        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+        className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
       >
-        <h3 className="text-xl font-bold">ATS Score Analyzer</h3>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Resume Diagnostics</p>
+        <h3 className="mt-2 text-2xl font-bold">ATS Score Analyzer</h3>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          Paste your resume and job description to calculate ATS score and high-impact fixes.
+          Paste your resume and a job description to find missing keywords, scoring gaps, and fixes before you apply.
         </p>
 
         <div className="mt-4 grid gap-4 lg:grid-cols-2">

@@ -147,6 +147,8 @@ These defaults avoid OpenAI token usage, avoid real application submission, and 
 ## Environment Variables
 
 Start from [.env.example](./.env.example).
+For local backend-only config you can also copy [backend/.env.example](./backend/.env.example) to `backend/.env`.
+For frontend local config, copy [frontend/.env.example](./frontend/.env.example) to `frontend/.env`.
 
 Core:
 
@@ -218,6 +220,14 @@ SMTP_USER=
 SMTP_PASS=
 EMAIL_FROM=ResumeBuilder AI <no-reply@localhost>
 ```
+
+Local test Pro:
+
+```env
+ALLOW_TEST_PRO_UPGRADE=true
+```
+
+In local development, the Subscription page shows an `Activate Test Pro` button. The backend blocks this route in production.
 
 Frontend:
 

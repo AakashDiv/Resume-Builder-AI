@@ -64,6 +64,7 @@ export const env = {
   smtpUser: process.env.SMTP_USER || "",
   smtpPass: process.env.SMTP_PASS || "",
   emailFrom: process.env.EMAIL_FROM || "ResumeBuilder AI <no-reply@localhost>",
+  allowTestProUpgrade: process.env.ALLOW_TEST_PRO_UPGRADE === "true" || process.env.NODE_ENV === "development",
   stripeSecretKey: process.env.STRIPE_SECRET_KEY || "",
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || "",
   stripeProPriceId: process.env.STRIPE_PRO_PRICE_ID || "",

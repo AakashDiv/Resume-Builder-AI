@@ -86,7 +86,10 @@ export default function JobSearchPage() {
       setSearchSummary({
         savedJobsCount: data.savedJobsCount || 0,
         matchedJobsCount: data.matchedJobsCount || 0,
-        autoQueuedCount: data.autoQueuedCount || 0
+        autoQueuedCount: data.autoQueuedCount || 0,
+        source: data.source || "unknown",
+        fallback: data.fallback,
+        jsearch: data.jsearch
       });
       setSuccess(true);
       setPage(1);
@@ -214,8 +217,8 @@ export default function JobSearchPage() {
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div>
-              <h4 className="text-lg font-bold">Scraped Jobs</h4>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Results from JSearch or Python fallback</p>
+              <h4 className="text-lg font-bold">Job Intake</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300">JSearch is used first; Python scraper fills in only when needed.</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
@@ -253,7 +256,7 @@ export default function JobSearchPage() {
                         {columns.map(([label, key]) => (
                           <th key={key} className="px-3 py-2 text-left font-semibold text-slate-600 dark:text-slate-300">
                             <button className="hover:text-brand-600" onClick={() => onSort(key)}>
-                              {label} {sortBy === key ? (direction === "asc" ? "?" : "?") : ""}
+                              {label} {sortBy === key ? (direction === "asc" ? "↑" : "↓") : ""}
                             </button>
                           </th>
                         ))}
@@ -336,7 +339,8 @@ function StatusCard({ loading, error, success, count, summary }) {
   if (success) {
     return (
       <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">
-        Scrape complete. {count} jobs loaded. Saved {summary?.savedJobsCount ?? 0} jobs to the dashboard and updated {summary?.matchedJobsCount ?? 0} matches.
+        Search complete from {summary?.source || "job source"}. {count} jobs loaded. Saved {summary?.savedJobsCount ?? 0} jobs and updated {summary?.matchedJobsCount ?? 0} matches.
+        {summary?.fallback?.used ? ` Fallback used: ${summary.fallback.reason || "JSearch returned no jobs"}.` : ""}
       </div>
     );
   }

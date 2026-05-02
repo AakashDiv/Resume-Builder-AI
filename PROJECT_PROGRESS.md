@@ -50,6 +50,7 @@ OPENAI_EMBEDDING_PROVIDER=fallback
 AUTO_APPLY_DRY_RUN=true
 EMAIL_ENABLED=false
 SCHEDULER_RUN_ON_START=false
+ALLOW_TEST_PRO_UPGRADE=true
 ```
 
 Live mode can later use:
@@ -409,5 +410,6 @@ EMAIL_FROM=
 - Do not remove Python scraper fallback; it is still useful when JSearch fails.
 - The scheduler is intentionally daily, not hourly, to save tokens/API usage.
 - The dashboard Stop/Start button controls automatic work through Mongo-backed `AutomationSettings`.
+- The Subscription page has a local-only `Activate Test Pro` button guarded by `ALLOW_TEST_PRO_UPGRADE` and disabled in production.
 - `tools/redis/` is local-only and ignored by git.
 - When adding new automation, update this file and add a smoke script.

@@ -3,19 +3,40 @@ import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { clearToken } from "../services/authStorage.js";
 import { fetchCurrentUser } from "../services/authApi.js";
 
-const menuItems = [
-  { key: "dashboard", label: "Dashboard", to: "/app/dashboard" },
-  { key: "job-search", label: "Job Search", to: "/app/job-search" },
-  { key: "resume-builder", label: "Resume Builder", to: "/app/resume-builder" },
-  { key: "improve-resume", label: "Improve Resume", to: "/app/improve-resume" },
-  { key: "ats-score", label: "ATS Score", to: "/app/ats-score" },
-  { key: "tailor-resume", label: "Tailor Resume", to: "/app/tailor-resume" },
-  { key: "cover-letter", label: "Cover Letter", to: "/app/cover-letter" },
-  { key: "applications", label: "Applications", to: "/app/applications" },
-  { key: "subscription", label: "Subscription", to: "/app/subscription" },
-  { key: "profile", label: "Profile", to: "/app/profile" }
+const menuGroups = [
+  {
+    label: "Workspace",
+    items: [
+      { key: "dashboard", label: "Dashboard", to: "/app/dashboard" },
+      { key: "profile", label: "Candidate Profile", to: "/app/profile" }
+    ]
+  },
+  {
+    label: "Jobs",
+    items: [
+      { key: "job-search", label: "Job Search", to: "/app/job-search" },
+      { key: "applications", label: "Applications", to: "/app/applications" }
+    ]
+  },
+  {
+    label: "Resume Tools",
+    items: [
+      { key: "resume-builder", label: "Resume Builder", to: "/app/resume-builder" },
+      { key: "improve-resume", label: "Improve Resume", to: "/app/improve-resume" },
+      { key: "ats-score", label: "ATS Score", to: "/app/ats-score" },
+      { key: "tailor-resume", label: "Tailor Resume", to: "/app/tailor-resume" },
+      { key: "cover-letter", label: "Cover Letter", to: "/app/cover-letter" }
+    ]
+  },
+  {
+    label: "Account",
+    items: [
+      { key: "subscription", label: "Subscription", to: "/app/subscription" }
+    ]
+  }
 ];
 
+const menuItems = menuGroups.flatMap((group) => group.items);
 const titleByPath = Object.fromEntries(menuItems.map((item) => [item.to, item.label]));
 
 export default function AppShell() {
@@ -59,29 +80,43 @@ export default function AppShell() {
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="mb-6">
-            <h1 className="text-xl font-bold">Resume OS</h1>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">AI Resume Builder + ATS Suite</p>
-            <span className="mt-3 inline-flex rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold uppercase text-white">
-              {plan}
-            </span>
+          <div className="mb-6 rounded-2xl bg-slate-50 p-4 dark:bg-slate-950">
+            <h1 className="text-xl font-bold">ResumeBuilder AI</h1>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              Resume, matching, and auto-apply workspace
+            </p>
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <span className="rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold uppercase text-white">
+                {plan}
+              </span>
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Daily matching</span>
+            </div>
           </div>
 
-          <nav className="space-y-1">
-            {menuItems.map((item) => (
-              <NavLink
-                key={item.key}
-                to={item.to}
-                className={({ isActive }) =>
-                  `block rounded-lg px-3 py-2 text-sm font-medium transition ${
-                    isActive
-                      ? "bg-brand-600 text-white"
-                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
+          <nav className="space-y-5">
+            {menuGroups.map((group) => (
+              <div key={group.label}>
+                <p className="mb-2 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                  {group.label}
+                </p>
+                <div className="space-y-1">
+                  {group.items.map((item) => (
+                    <NavLink
+                      key={item.key}
+                      to={item.to}
+                      className={({ isActive }) =>
+                        `block rounded-lg px-3 py-2 text-sm font-medium transition ${
+                          isActive
+                            ? "bg-brand-600 text-white"
+                            : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
             ))}
           </nav>
 
