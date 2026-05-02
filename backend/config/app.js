@@ -16,6 +16,7 @@ import profileRoutes from "../routes/profile.routes.js";
 import matchRoutes from "../routes/match.routes.js";
 import applyRoutes from "../routes/apply.routes.js";
 import applicationsRoutes from "../routes/applications.routes.js";
+import schedulerRoutes from "../routes/scheduler.routes.js";
 import { stripeWebhook } from "../controllers/billing.controller.js";
 import { env } from "./env.js";
 import notFound from "../middleware/notFound.js";
@@ -65,6 +66,7 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/match", matchRoutes);
 app.use("/api/apply", applyRoutes);
 app.use("/api/applications", applicationsRoutes);
+app.use("/api/scheduler", schedulerRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

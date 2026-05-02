@@ -34,8 +34,11 @@ export const runScraper = asyncHandler(async (req, res) => {
     message: "Scraper completed successfully",
     jobs: data.jobs,
     outputPath: data.outputPath,
-    downloadUrl: `/downloads/${data.outputFileName}`,
+    downloadUrl: data.outputFileName ? `/downloads/${data.outputFileName}` : "",
     stdout: data.stdout,
+    source: data.source,
+    jsearch: data.jsearch,
+    fallback: data.fallback,
     savedJobsCount: savedJobs.length,
     matchedJobsCount: matchSummary.matchesComputed,
     autoQueuedCount: matchSummary.autoQueuedCount

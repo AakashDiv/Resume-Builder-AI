@@ -26,3 +26,4 @@ __pycache__/
 # Generated exports and archives
 *.xlsx
 *.zip
+tools/

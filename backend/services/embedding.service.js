@@ -3,6 +3,9 @@ import openaiClient from "./openai.service.js";
 import { env } from "../config/env.js";
 
 const EMBEDDING_MODEL = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
+const EMBEDDING_DIMENSIONS = Number(process.env.OPENAI_EMBEDDING_DIMENSIONS || 0);
+const EMBEDDING_MAX_CHARS = Math.max(200, Number(process.env.OPENAI_EMBEDDING_MAX_CHARS || 6000));
+const FORCE_FALLBACK = process.env.OPENAI_EMBEDDING_PROVIDER === "fallback" || process.env.OPENAI_EMBEDDING_DISABLED === "true";
 const FALLBACK_DIMENSIONS = 128;
 
 function tokenize(text) {
@@ -47,20 +50,41 @@ function createFallbackEmbedding(text) {
   return normalizeVector(vector);
 }
 
+export function buildJobEmbeddingText(job = {}) {
+  return [
+    job.title,
+    job.company,
+    job.location,
+    job.description,
+    Array.isArray(job.keywords) ? job.keywords.join(", ") : ""
+  ]
+    .filter(Boolean)
+    .join("\n")
+    .trim();
+}
+
 export async function getEmbedding(text) {
-  const input = String(text || "").trim();
+  const input = String(text || "").trim().slice(0, EMBEDDING_MAX_CHARS);
   if (!input) {
     return [];
   }
 
-  if (!openaiClient) {
+  if (FORCE_FALLBACK || !openaiClient) {
     return createFallbackEmbedding(input);
   }
 
   try {
-    const response = await openaiClient.embeddings.create({
+    const request = {
       model: EMBEDDING_MODEL,
       input
+    };
+
+    if (EMBEDDING_DIMENSIONS > 0) {
+      request.dimensions = EMBEDDING_DIMENSIONS;
+    }
+
+    const response = await openaiClient.embeddings.create({
+      ...request
     });
 
     const embedding = response.data?.[0]?.embedding;
@@ -104,4 +128,17 @@ export function cosineSimilarity(vectorA = [], vectorB = []) {
 
 export function toPercentageScore(value) {
   return Math.max(0, Math.min(100, Math.round(Number(value || 0) * 100)));
+}
+
+export function hasUsableEmbedding(value) {
+  return Array.isArray(value) && value.some((item) => Number.isFinite(Number(item)) && Number(item) !== 0);
+}
+
+export function getEmbeddingProviderStatus() {
+  return {
+    provider: !FORCE_FALLBACK && openaiClient ? "openai" : "fallback",
+    model: !FORCE_FALLBACK && openaiClient ? EMBEDDING_MODEL : `deterministic-${FALLBACK_DIMENSIONS}d`,
+    dimensions: !FORCE_FALLBACK && openaiClient ? EMBEDDING_DIMENSIONS || "model-default" : FALLBACK_DIMENSIONS,
+    maxChars: EMBEDDING_MAX_CHARS
+  };
 }

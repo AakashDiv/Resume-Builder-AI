@@ -5,6 +5,7 @@ import JobMatch from "../models/JobMatch.js";
 import User from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
 import { queueTopMatchesForAutoApply } from "./match.service.js";
+import { enqueueQueuedApplicationsForUser, getAutoApplyQueueStatus } from "./queueService.js";
 import { tailorResumeToJob } from "./resumeTailor.service.js";
 import { generateCoverLetterForJob } from "./coverLetter.service.js";
 
@@ -47,11 +48,22 @@ export async function setAutoApplyEnabled(userId, enabled) {
     ? await queueTopMatchesForAutoApply(userId)
     : { queuedCount: await Application.countDocuments({ candidateId: userId, status: "queued" }), createdCount: 0 };
 
+  let bullQueuedCount = 0;
+  if (user.autoApplyEnabled) {
+    try {
+      const bullResult = await enqueueQueuedApplicationsForUser(userId);
+      bullQueuedCount = bullResult.queuedCount;
+    } catch (error) {
+      console.warn("[queue] Failed to enqueue existing queued applications:", error.message || error);
+    }
+  }
+
   return {
     autoApplyEnabled: user.autoApplyEnabled,
     autoApplyLimit: user.autoApplyLimit,
     queuedCount: queueResult.queuedCount,
-    createdCount: queueResult.createdCount
+    createdCount: queueResult.createdCount,
+    bullQueuedCount
   };
 }
 
@@ -62,10 +74,16 @@ export async function getQueueStatus(userId) {
   }
 
   const queuedCount = await Application.countDocuments({ candidateId: userId, status: "queued" });
+  const bull = await getAutoApplyQueueStatus().catch((error) => ({
+    enabled: false,
+    error: error.message || "Unable to read queue status"
+  }));
+
   return {
     autoApplyEnabled: user.autoApplyEnabled,
     autoApplyLimit: user.autoApplyLimit,
-    queuedCount
+    queuedCount,
+    bull
   };
 }
 

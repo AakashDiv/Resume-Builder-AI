@@ -130,7 +130,7 @@ export default function JobSearchPage() {
       <div className="grid gap-4 xl:grid-cols-[340px,1fr]">
         <aside className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <h3 className="text-lg font-bold">Smart Job Search</h3>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Run your Python scraper with filters</p>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Search JSearch first, then Python fallback</p>
 
           <div className="mt-4 space-y-3">
             <label className="block">
@@ -215,7 +215,7 @@ export default function JobSearchPage() {
           <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div>
               <h4 className="text-lg font-bold">Scraped Jobs</h4>
-              <p className="text-sm text-slate-600 dark:text-slate-300">Results from your Python scraper</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">Results from JSearch or Python fallback</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
@@ -320,7 +320,7 @@ function StatusCard({ loading, error, success, count, summary }) {
   if (loading) {
     return (
       <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm dark:border-slate-800 dark:bg-slate-900">
-        Running scraper. This can take a few minutes...
+        Searching jobs. API results are quick; Python fallback can take a few minutes...
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { fetchMatchedJobs, runMatchCalculation } from "../services/matchApi.js";
 import { fetchProfile } from "../services/profileApi.js";
 import { fetchApplications } from "../services/applicationsApi.js";
 import { fetchQueueStatus, manualApply, setAutoApplyEnabled } from "../services/applyApi.js";
+import { disableScheduler, enableScheduler, fetchSchedulerStatus } from "../services/schedulerApi.js";
 
 function getProfileCompletion(profile) {
   const extracted = profile?.extractedProfile || {};
@@ -28,6 +29,7 @@ export default function DashboardPage() {
   const [refreshing, setRefreshing] = useState(false);
   const [applyingJobId, setApplyingJobId] = useState("");
   const [togglingAutoApply, setTogglingAutoApply] = useState(false);
+  const [togglingScheduler, setTogglingScheduler] = useState(false);
   const [toast, setToast] = useState(null);
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
@@ -37,6 +39,7 @@ export default function DashboardPage() {
   const [hasProfile, setHasProfile] = useState(false);
   const [queueStatus, setQueueStatus] = useState(null);
   const [applicationSummary, setApplicationSummary] = useState(null);
+  const [schedulerStatus, setSchedulerStatus] = useState(null);
 
   async function loadDashboard(showLoader = true) {
     if (showLoader) {
@@ -55,11 +58,11 @@ export default function DashboardPage() {
       ];
 
       if (userData.user?.plan === "pro") {
-        requests.push(fetchQueueStatus(), fetchApplications());
+        requests.push(fetchQueueStatus(), fetchApplications(), fetchSchedulerStatus());
       }
 
       const results = await Promise.allSettled(requests);
-      const [profileResult, matchesResult, queueResult, applicationsResult] = results;
+      const [profileResult, matchesResult, queueResult, applicationsResult, schedulerResult] = results;
 
       if (profileResult?.status === "fulfilled") {
         setProfile(profileResult.value.profile);
@@ -85,6 +88,12 @@ export default function DashboardPage() {
         setApplicationSummary(applicationsResult.value.summary);
       } else {
         setApplicationSummary(null);
+      }
+
+      if (schedulerResult?.status === "fulfilled") {
+        setSchedulerStatus(schedulerResult.value);
+      } else {
+        setSchedulerStatus(null);
       }
     } catch (err) {
       setError(err?.response?.data?.message || "Unable to load dashboard data.");
@@ -148,6 +157,32 @@ export default function DashboardPage() {
       });
     } finally {
       setTogglingAutoApply(false);
+    }
+  }
+
+  async function handleToggleScheduler() {
+    if (!user || user.plan !== "pro") {
+      return;
+    }
+
+    setTogglingScheduler(true);
+    setToast(null);
+
+    try {
+      const nextEnabled = !schedulerStatus?.automaticWorkEnabled;
+      const result = nextEnabled ? await enableScheduler() : await disableScheduler();
+      setSchedulerStatus(result);
+      setToast({
+        type: "success",
+        message: nextEnabled ? "Automatic daily work enabled." : "Automatic daily work stopped."
+      });
+    } catch (err) {
+      setToast({
+        type: "error",
+        message: err?.response?.data?.message || "Unable to update automatic work."
+      });
+    } finally {
+      setTogglingScheduler(false);
     }
   }
 
@@ -296,7 +331,7 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="mt-5 space-y-4">
-                {matches.slice(0, 8).map((item) => (
+                {matches.map((item) => (
                   <article
                     key={item.job.id}
                     className="rounded-2xl border border-slate-200 p-4 transition hover:border-brand-300 dark:border-slate-800 dark:hover:border-brand-500"
@@ -397,6 +432,31 @@ export default function DashboardPage() {
                 <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-1">
                   <InfoBlock title="Queue Size" value={`${queueStatus?.queuedCount ?? 0} jobs`} />
                   <InfoBlock title="Daily Limit" value={`${queueStatus?.autoApplyLimit ?? user?.autoApplyLimit ?? 10} jobs`} />
+                </div>
+
+                <div className="mt-5 rounded-2xl border border-slate-200 p-4 dark:border-slate-800">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold">Automatic Daily Work</p>
+                      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                        Job fetch, matching, queueing, and digest trigger.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleToggleScheduler}
+                      disabled={togglingScheduler}
+                      className={`rounded-xl px-3 py-2 text-sm font-semibold text-white ${
+                        schedulerStatus?.automaticWorkEnabled ? "bg-rose-600 hover:bg-rose-700" : "bg-emerald-600 hover:bg-emerald-700"
+                      } disabled:opacity-60`}
+                    >
+                      {togglingScheduler
+                        ? "Updating..."
+                        : schedulerStatus?.automaticWorkEnabled
+                          ? "Stop"
+                          : "Start"}
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (

@@ -1,57 +1,97 @@
-# JobScraper + AI Resume Studio
+# JobScraper + AI Resume Automation
 
-Full-stack project that combines:
-- Job scraping and export
-- AI-assisted resume creation/improvement
-- ATS scoring and resume tailoring
-- Auth + subscription (Free/Pro) flow
+Full-stack resume, job matching, and auto-apply platform.
 
-The goal is to help a user find jobs and quickly adapt their resume to a target role in one product.
+This project helps a candidate:
 
-## Project Purpose
+- create or upload a profile/resume,
+- fetch jobs from JSearch with Python scraper fallback,
+- cache job embeddings in MongoDB,
+- score jobs against the candidate profile,
+- view live ranked matches on the dashboard,
+- queue premium auto-apply jobs through Redis + Bull,
+- run Puppeteer-based application automation,
+- run daily scheduled matching,
+- send apply confirmations and daily digest emails.
 
-This project solves three problems in one pipeline:
-- Find relevant jobs from selected platforms and export them.
-- Improve resume quality for ATS/recruiter readability.
-- Tailor resume content to a specific job description, with Pro feature gating.
+For deeper implementation notes, read [PROJECT_PROGRESS.md](./PROJECT_PROGRESS.md).
 
-## High-Level Architecture
+## Current Status
+
+All planned integration modules are implemented locally:
+
+1. Embedding service + job embedding cache
+2. JSearch API as primary job source
+3. Match service + live dashboard data
+4. Redis + Bull queue infrastructure
+5. Puppeteer auto-apply bot
+6. Daily scheduler with stop/start control
+7. Email notifications + daily digest
+
+Latest local verification:
+
+- Backend smoke suite passes.
+- Frontend build passes.
+- OpenAI real embeddings still require account credits.
+- Email is dry-run by default.
+- Auto-apply is dry-run by default.
+
+## Architecture
 
 ```text
 frontend (React + Vite + Tailwind)
-    -> backend API (Node.js + Express + MongoDB)
-        -> Python scraper wrapper (Selenium-based scraper)
-        -> OpenAI (resume generation/improvement/tailoring when key is set)
-        -> Stripe (subscription checkout + webhook plan updates)
+    ->
+backend API (Node.js + Express + MongoDB)
+    ->
+JSearch API (RapidAPI)
+    ->
+Python Selenium scraper fallback
+    ->
+OpenAI embeddings/chat or local fallback embeddings
+    ->
+Redis + Bull auto-apply queue
+    ->
+Puppeteer browser automation
+    ->
+node-cron daily scheduler
+    ->
+Nodemailer email service
 ```
 
 ## Tech Stack
 
 - Frontend: React, Vite, React Router, Axios, TailwindCSS
 - Backend: Node.js, Express, Mongoose, JWT, Express Validator, Multer
-- AI: OpenAI Chat Completions API
-- Billing: Stripe Checkout + Webhooks
-- Scraper: Python, Selenium, BeautifulSoup, OpenPyXL
 - Database: MongoDB
+- Job API: JSearch via RapidAPI
+- Scraper fallback: Python, Selenium, BeautifulSoup, OpenPyXL
+- AI: OpenAI, with deterministic embedding fallback
+- Queue: Redis, Bull, ioredis
+- Automation: Puppeteer
+- Scheduler: node-cron
+- Email: Nodemailer
+- Billing: Stripe Checkout + Stripe webhooks
 
 ## Folder Structure
 
 ```text
 backend/
-  config/        # env, DB, app bootstrap, stripe config
+  config/        # env, DB, app, redis, stripe
   controllers/   # route handlers
   middleware/    # auth, plan guard, upload, errors
-  models/        # Mongoose schemas (User)
-  routes/        # auth, resume, scraper, billing, protected
-  services/      # business logic (AI, scoring, scraper, billing)
-  utils/         # parser, JWT helpers, async wrapper, errors
+  models/        # Mongoose schemas
+  routes/        # Express routes
+  scheduler/     # node-cron jobs
+  scripts/       # smoke tests
+  services/      # business logic
+  utils/         # parser, JWT helpers, errors
 
 frontend/
   src/           # app routes + base styles
-  pages/         # feature screens
+  pages/         # screens
   components/    # reusable UI and resume previews
-  services/      # API client and feature API calls
-  data/          # resume template metadata
+  services/      # API clients
+  data/          # resume templates
   layout/        # route/layout wrappers
 
 scraper/
@@ -60,54 +100,130 @@ scraper/
   requirements.txt
 ```
 
-## Main Features
+## Main Product Flow
 
-- User authentication (register/login) with JWT.
-- Protected app area under `/app/*`.
-- Job search via scraper API with Excel output + downloadable file.
-- Resume generator (`/resume/generate`).
-- Resume improvement from uploaded PDF/DOCX (`/resume/improve`).
-- ATS score against job description (`/resume/score`).
-- Resume tailoring to a job description (`/resume/tailor`, Pro-only).
-- Stripe subscription checkout and webhook-driven plan updates.
+```text
+User creates profile/resume
+        ->
+User searches jobs or daily scheduler runs
+        ->
+JSearch fetches jobs
+        ->
+Python scraper fallback runs if needed
+        ->
+Jobs are deduped and saved
+        ->
+Embeddings are cached
+        ->
+Match scores are saved in JobMatch
+        ->
+Dashboard shows ranked matches
+        ->
+Pro user enables auto-apply
+        ->
+High matches become queued Applications
+        ->
+Bull worker processes queue
+        ->
+Puppeteer fills supported application forms
+        ->
+Email service sends confirmations/digests
+```
 
-## Project Flow
+## Important Local Safety Defaults
 
-1. User signs up or logs in.
-2. Frontend stores JWT and sends it in API Authorization headers.
-3. User searches jobs:
-   - Frontend calls `/api/scraper/run`.
-   - Backend runs Python wrapper (`run_scraper_wrapper.py`).
-   - Scraper creates an `.xlsx` in `backend/tmp`.
-   - API returns parsed jobs + download URL.
-4. User works on resume:
-   - Generate: input form -> AI markdown resume output.
-   - Improve: upload resume file -> text extraction + AI rewrite suggestions.
-   - ATS score: rule-based scoring + missing keywords + top fixes.
-   - Tailor: Pro users only -> AI rewrites summary/top bullets + rescoring.
-5. User upgrades plan:
-   - Frontend calls `/api/billing/create-checkout-session`.
-   - Stripe Checkout completes subscription.
-   - Stripe webhook updates `User.plan` to `pro`.
+Use these while testing locally:
 
-## API Overview
+```env
+OPENAI_EMBEDDING_PROVIDER=fallback
+AUTO_APPLY_DRY_RUN=true
+AUTO_APPLY_HEADLESS=true
+EMAIL_ENABLED=false
+SCHEDULER_RUN_ON_START=false
+```
 
-- Auth
-  - `POST /api/auth/register`
-  - `POST /api/auth/login`
-  - `GET /api/protected/me`
-- Scraper
-  - `POST /api/scraper/run`
-- Resume
-  - `POST /api/resume/generate`
-  - `POST /api/resume/improve` (multipart upload, auth)
-  - `POST /api/resume/score` (auth)
-  - `POST /api/resume/tailor` (auth + Pro)
-- Billing
-  - `POST /api/billing/create-checkout-session` (auth)
-  - `POST /api/billing/webhook` (Stripe)
-- Utility
-  - `GET /api/health`
+These defaults avoid OpenAI token usage, avoid real application submission, and avoid real email sending.
+
+## Environment Variables
+
+Start from [.env.example](./.env.example).
+
+Core:
+
+```env
+NODE_ENV=development
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/ai_resume_builder
+JWT_SECRET=replace-with-a-long-random-secret
+CLIENT_ORIGIN=http://localhost:5173
+CLIENT_BASE_URL=http://localhost:5173
+```
+
+OpenAI:
+
+```env
+OPENAI_API_KEY=
+OPENAI_MODEL=gpt-4.1-mini
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+OPENAI_EMBEDDING_DIMENSIONS=256
+OPENAI_EMBEDDING_MAX_CHARS=2000
+OPENAI_EMBEDDING_PROVIDER=fallback
+```
+
+JSearch:
+
+```env
+RAPIDAPI_KEY=
+JSEARCH_HOST=jsearch.p.rapidapi.com
+JSEARCH_NUM_PAGES=1
+```
+
+Redis and queue:
+
+```env
+REDIS_URL=redis://127.0.0.1:6379
+QUEUE_ENABLED=true
+```
+
+Auto-apply:
+
+```env
+AUTO_APPLY_DRY_RUN=true
+AUTO_APPLY_HEADLESS=true
+AUTO_APPLY_DELAY_MS=30000
+LINKEDIN_EMAIL=
+LINKEDIN_PASSWORD=
+NAUKRI_EMAIL=
+NAUKRI_PASSWORD=
+```
+
+Scheduler:
+
+```env
+SCHEDULER_ENABLED=true
+SCHEDULER_TIMEZONE=Asia/Kolkata
+JOB_MATCHER_CRON=0 9 * * *
+DAILY_DIGEST_CRON=0 9 * * *
+SCHEDULER_RUN_ON_START=false
+```
+
+Email:
+
+```env
+EMAIL_ENABLED=false
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=
+SMTP_PASS=
+EMAIL_FROM=ResumeBuilder AI <no-reply@localhost>
+```
+
+Frontend:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
 
 ## Local Setup
 
@@ -116,63 +232,178 @@ scraper/
 - Node.js 18+
 - Python 3.10+
 - MongoDB running locally
-- Browser/driver support for Selenium scraper
+- Redis on `127.0.0.1:6379`
+- RapidAPI key for JSearch
 
-### 1) Configure environment
-
-Use `.env.example` values and create actual `.env` files as needed.
-
-Required backend keys:
-- `MONGO_URI`
-- `JWT_SECRET`
-
-Optional but recommended:
-- `OPENAI_API_KEY`
-- `STRIPE_SECRET_KEY`
-- `STRIPE_WEBHOOK_SECRET`
-- `STRIPE_PRO_PRICE_ID`
-- `PYTHON_BIN`
-
-Frontend key:
-- `VITE_API_BASE_URL` (default `http://localhost:5000/api`)
-
-### 2) Install dependencies
+### Install Dependencies
 
 ```bash
-cd backend && npm install
-cd ../frontend && npm install
-cd ../scraper && pip install -r requirements.txt
+cd backend
+npm install
+
+cd ../frontend
+npm install
+
+cd ../scraper
+pip install -r requirements.txt
 ```
 
-### 3) Run services
+### Start Redis On Windows
+
+A portable Redis binary is used locally under `tools/redis/`.
+
+```powershell
+cd E:\Aakash\ResumeBuilder-jobscrapper\JobScraper-main
+Start-Process -FilePath ".\tools\redis\redis-server.exe" -ArgumentList "--bind 127.0.0.1 --port 6379" -WindowStyle Hidden
+```
+
+Check Redis:
+
+```powershell
+.\tools\redis\redis-cli.exe -h 127.0.0.1 -p 6379 ping
+```
+
+Expected:
+
+```text
+PONG
+```
+
+### Run App
+
+Backend:
 
 ```bash
-cd backend && npm run dev
-cd ../frontend && npm run dev
+cd backend
+npm run dev
 ```
 
-Frontend: `http://localhost:5173`  
+Frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend: `http://localhost:5173`
+
 Backend: `http://localhost:5000`
 
-## Notes
+## Smoke Tests
 
-- If `OPENAI_API_KEY` is missing, resume services fall back to deterministic non-AI behavior where implemented.
-- Tailor Resume is gated by `requireProPlan` middleware.
-- Scraper output files are served from `/downloads/*` via `backend/tmp`.
+Run from `backend/`:
 
-## Optional: Puppeteer PDF Export Config
-
-If you move resume export to backend Puppeteer, use this page setup for A4 consistency:
-
-```js
-await page.pdf({
-  format: "A4",
-  printBackground: true,
-  margin: {
-    top: "10mm",
-    bottom: "10mm",
-    left: "10mm",
-    right: "10mm"
-  }
-});
+```bash
+npm run smoke:embedding
+npm run smoke:jsearch
+npm run smoke:match
+npm run smoke:queue
+npm run smoke:autoapply
+npm run smoke:scheduler
+npm run smoke:email
 ```
+
+Recommended local command when OpenAI credits are unavailable:
+
+```powershell
+$env:OPENAI_EMBEDDING_PROVIDER='fallback'
+npm run smoke:embedding
+npm run smoke:match
+Remove-Item Env:\OPENAI_EMBEDDING_PROVIDER
+```
+
+Frontend build:
+
+```bash
+cd frontend
+npm run build
+```
+
+## API Overview
+
+Auth:
+
+```http
+POST /api/auth/register
+POST /api/auth/login
+GET /api/protected/me
+```
+
+Scraper:
+
+```http
+POST /api/scraper/run
+```
+
+Matching:
+
+```http
+GET /api/match/jobs
+POST /api/match/run
+GET /api/match/job/:jobId
+```
+
+Auto-apply and applications:
+
+```http
+POST /api/apply/enable
+POST /api/apply/manual/:jobId
+GET /api/apply/queue-status
+GET /api/applications
+PATCH /api/applications/:id/status
+```
+
+Scheduler:
+
+```http
+GET /api/scheduler/status
+POST /api/scheduler/enable
+POST /api/scheduler/disable
+POST /api/scheduler/run-now
+POST /api/scheduler/digest-now
+```
+
+Resume:
+
+```http
+POST /api/resume/generate
+POST /api/resume/improve
+POST /api/resume/score
+POST /api/resume/tailor
+```
+
+Billing:
+
+```http
+POST /api/billing/create-checkout-session
+POST /api/billing/webhook
+```
+
+Health:
+
+```http
+GET /api/health
+```
+
+## What Still Needs Live Validation
+
+The modules are implemented and locally tested. Before production use:
+
+- Add OpenAI credits and test real embeddings.
+- Configure production Redis and SMTP.
+- Test real LinkedIn/Naukri flows with:
+
+```env
+AUTO_APPLY_DRY_RUN=true
+AUTO_APPLY_HEADLESS=false
+```
+
+- Review third-party platform terms before enabling real auto-submit.
+- Enable real auto-submit only after manual dry-run validation:
+
+```env
+AUTO_APPLY_DRY_RUN=false
+```
+
+- Consider adding formal unit/integration tests beyond smoke scripts.
+- Consider splitting frontend bundles; Vite currently reports a chunk-size warning.

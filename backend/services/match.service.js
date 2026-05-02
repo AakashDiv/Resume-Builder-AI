@@ -4,7 +4,8 @@ import Job from "../models/Job.js";
 import JobMatch from "../models/JobMatch.js";
 import User from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
-import { cosineSimilarity, getEmbedding, toPercentageScore } from "./embedding.service.js";
+import { buildJobEmbeddingText, cosineSimilarity, getEmbedding, hasUsableEmbedding, toPercentageScore } from "./embedding.service.js";
+import { enqueueAutoApply } from "./queueService.js";
 
 const MATCH_THRESHOLD = Math.max(0, Math.min(100, Number(process.env.MATCH_THRESHOLD || 72)));
 
@@ -105,10 +106,8 @@ async function upsertSingleJob(row) {
   }
 
   const existing = await Job.findOne({ sourceKey: normalized.sourceKey });
-  const embeddingSource = [normalized.title, normalized.company, normalized.location, normalized.description]
-    .filter(Boolean)
-    .join("\n");
-  const embedding = existing?.description === normalized.description && Array.isArray(existing.embedding) && existing.embedding.length
+  const embeddingSource = buildJobEmbeddingText(normalized);
+  const embedding = existing?.description === normalized.description && hasUsableEmbedding(existing.embedding)
     ? existing.embedding
     : await getEmbedding(embeddingSource);
 
@@ -143,6 +142,20 @@ function getCandidateSkills(profile) {
   return Array.isArray(profile?.extractedProfile?.skills) ? profile.extractedProfile.skills : [];
 }
 
+function buildProfileEmbeddingText(profile = {}) {
+  return [
+    profile.rawResumeText,
+    profile.resumeMarkdown,
+    profile.summary,
+    profile.extractedProfile?.targetRole,
+    getCandidateSkills(profile).join(", "),
+    profile.extractedProfile?.location
+  ]
+    .filter(Boolean)
+    .join("\n")
+    .trim();
+}
+
 function scoreSkillOverlap(candidateSkills, jobKeywords) {
   if (!candidateSkills.length || !jobKeywords.length) {
     return {
@@ -165,22 +178,22 @@ function scoreSkillOverlap(candidateSkills, jobKeywords) {
 }
 
 async function createOrUpdateMatch({ userId, profile, job }) {
-  const profileText = [
-    profile.rawResumeText,
-    profile.resumeMarkdown,
-    profile.summary,
-    profile.extractedProfile?.targetRole,
-    getCandidateSkills(profile).join(", ")
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const candidateEmbedding = Array.isArray(profile.embedding) && profile.embedding.length
+  const profileText = buildProfileEmbeddingText(profile);
+  const candidateEmbedding = hasUsableEmbedding(profile.embedding)
     ? profile.embedding
     : await getEmbedding(profileText);
-  const jobEmbedding = Array.isArray(job.embedding) && job.embedding.length
+
+  if (!hasUsableEmbedding(profile.embedding) && hasUsableEmbedding(candidateEmbedding)) {
+    profile.embedding = candidateEmbedding;
+    await profile.save();
+  }
+  let jobEmbedding = hasUsableEmbedding(job.embedding)
     ? job.embedding
-    : await getEmbedding(`${job.title}\n${job.description}`);
+    : await getEmbedding(buildJobEmbeddingText(job));
+
+  if (!hasUsableEmbedding(job.embedding) && hasUsableEmbedding(jobEmbedding)) {
+    await Job.updateOne({ _id: job._id }, { $set: { embedding: jobEmbedding } });
+  }
 
   const embeddingScore = toPercentageScore(cosineSimilarity(candidateEmbedding, jobEmbedding));
   const jobKeywords = Array.isArray(job.keywords) && job.keywords.length
@@ -253,13 +266,20 @@ export async function queueTopMatchesForAutoApply(userId) {
       continue;
     }
 
-    await Application.create({
+    const application = await Application.create({
       candidateId: userId,
       jobId: match.jobId,
       matchScore: match.matchScore,
       source: "auto",
       status: "queued"
     });
+
+    try {
+      await enqueueAutoApply(application);
+    } catch (error) {
+      console.warn("[queue] Failed to enqueue auto-apply application:", error.message || error);
+    }
+
     createdCount += 1;
   }
 
@@ -274,8 +294,12 @@ export async function runMatchCalculationForUser(userId, options = {}) {
   }
 
   const profile = await CandidateProfile.findOne({ userId });
-  if (!profile || !profile.embedding?.length) {
+  if (!profile) {
     throw new ApiError(400, "Create your candidate profile before running job matches");
+  }
+
+  if (!buildProfileEmbeddingText(profile)) {
+    throw new ApiError(400, "Add resume text, target role, or skills before running job matches");
   }
 
   const jobs = Array.isArray(options.jobs) && options.jobs.length
