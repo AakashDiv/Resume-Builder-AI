@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchCurrentUser } from "../services/authApi.js";
-import { activateTestProPlan, createCheckoutSession } from "../services/billingApi.js";
+import { activateTestFreePlan, activateTestProPlan, createCheckoutSession } from "../services/billingApi.js";
 
 const plans = [
   {
@@ -36,6 +36,7 @@ export default function SubscriptionPage() {
   const [currentPlan, setCurrentPlan] = useState("free");
   const [loading, setLoading] = useState(false);
   const [activatingTestPro, setActivatingTestPro] = useState(false);
+  const [activatingTestFree, setActivatingTestFree] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -83,6 +84,24 @@ export default function SubscriptionPage() {
     }
   }
 
+  async function handleActivateTestFree() {
+    if (activatingTestFree) return;
+
+    setActivatingTestFree(true);
+    setError("");
+    setMessage("");
+
+    try {
+      const data = await activateTestFreePlan();
+      setCurrentPlan(data.user?.plan || "free");
+      setMessage("Test Free activated for this local account.");
+    } catch (err) {
+      setError(err?.response?.data?.message || "Unable to activate Test Free");
+    } finally {
+      setActivatingTestFree(false);
+    }
+  }
+
   return (
     <section className="space-y-6">
       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -117,6 +136,7 @@ export default function SubscriptionPage() {
         {plans.map((plan) => {
           const isCurrent = currentPlan === plan.id;
           const isPro = plan.id === "pro";
+          const isFree = plan.id === "free";
 
           return (
             <article
@@ -144,6 +164,17 @@ export default function SubscriptionPage() {
                   </li>
                 ))}
               </ul>
+
+              {isFree && import.meta.env.DEV ? (
+                <button
+                  type="button"
+                  onClick={handleActivateTestFree}
+                  disabled={isCurrent || activatingTestFree}
+                  className="mt-5 w-full rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+                >
+                  {activatingTestFree ? "Activating..." : "Activate Test Free"}
+                </button>
+              ) : null}
 
               {isPro ? (
                 <div className="mt-5 space-y-2">

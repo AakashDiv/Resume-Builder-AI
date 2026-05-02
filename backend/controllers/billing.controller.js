@@ -13,15 +13,15 @@ export const createCheckoutSession = asyncHandler(async (req, res) => {
   res.status(200).json(result);
 });
 
-export const activateTestProPlan = asyncHandler(async (req, res) => {
+async function setTestPlan(req, res, plan) {
   if (!env.allowTestProUpgrade || env.nodeEnv === "production") {
-    throw new ApiError(403, "Test Pro upgrade is only available in local development");
+    throw new ApiError(403, "Test plan switching is only available in local development");
   }
 
   const user = await User.findByIdAndUpdate(
     req.user._id,
     {
-      plan: "pro"
+      plan
     },
     {
       new: true
@@ -33,9 +33,17 @@ export const activateTestProPlan = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({
-    message: "Test Pro plan activated for local testing",
+    message: `Test ${plan} plan activated for local testing`,
     user
   });
+}
+
+export const activateTestProPlan = asyncHandler(async (req, res) => {
+  await setTestPlan(req, res, "pro");
+});
+
+export const activateTestFreePlan = asyncHandler(async (req, res) => {
+  await setTestPlan(req, res, "free");
 });
 
 export const stripeWebhook = asyncHandler(async (req, res) => {

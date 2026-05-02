@@ -9,3 +9,8 @@ export async function activateTestProPlan() {
   const { data } = await api.post("/billing/test-pro");
   return data;
 }
+
+export async function activateTestFreePlan() {
+  const { data } = await api.post("/billing/test-free");
+  return data;
+}
