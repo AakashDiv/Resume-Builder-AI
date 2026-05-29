@@ -7,11 +7,11 @@ export default function ResumeSkills({ skills = "" }) {
   return (
     <section className="section" data-resume-section="true">
       <h2 className="section-title">Skills</h2>
-      <ul className="skills-list">
+      <div className="skills-wrap">
         {list.map((skill, index) => (
-          <li key={`${skill}-${index}`}>{skill}</li>
+          <span key={`${skill}-${index}`} className="skill-tag">{skill}</span>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

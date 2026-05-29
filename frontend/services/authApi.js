@@ -5,6 +5,8 @@ export async function register(payload) {
   return data;
 }
 
+export const signup = register;
+
 export async function login(payload) {
   const { data } = await api.post("/auth/login", payload);
   return data;

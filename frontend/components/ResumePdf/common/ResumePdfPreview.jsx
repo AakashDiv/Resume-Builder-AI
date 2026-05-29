@@ -2,6 +2,7 @@ import CreativePreview from "../Creative/CreativePreview.jsx";
 import ModernEdgePreview from "../Modern/ModernEdgePreview.jsx";
 import OrangeSlatePreview from "../Modern/OrangeSlatePreview.jsx";
 import TechFocusPreview from "../Modern/TechFocusPreview.jsx";
+import SharpClassicPreview from "../Simple/SharpClassicPreview.jsx";
 import SimpleProfessionalPreview from "../Simple/SimpleProfessionalPreview.jsx";
 import SimplePreview from "../Simple/SimplePreview.jsx";
 import HarvardTemplate from "../templates/harvard.jsx";
@@ -20,6 +21,8 @@ export default function ResumePdfPreview({ selectedTemplate, resumeData, designS
   };
 
   switch (templateId) {
+    case "sharp-classic":
+      return <SharpClassicPreview data={resumeData} {...sharedDesignProps} />;
     case "classic-pro":
       return <HarvardTemplate data={resumeData} templateId={templateId} />;
     case "executive-lite":
@@ -37,6 +40,6 @@ export default function ResumePdfPreview({ selectedTemplate, resumeData, designS
     case "modern-isabel":
       return <OrangeSlatePreview data={resumeData} {...sharedDesignProps} />;
     default:
-      return <HarvardTemplate data={resumeData} templateId={templateId || "classic-pro"} />;
+      return <SharpClassicPreview data={resumeData} {...sharedDesignProps} />;
   }
 }

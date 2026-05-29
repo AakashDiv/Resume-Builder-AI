@@ -1,6 +1,6 @@
 # Project Progress And Architecture Notes
 
-Last updated: 2026-05-02
+Last updated: 2026-05-26
 
 ## What We Are Building
 
@@ -40,6 +40,117 @@ Daily scheduler refreshes matches and sends digest emails
 - Scheduler: node-cron
 - Email: Nodemailer
 - Billing: Stripe Checkout + webhook plan updates
+
+## Resume Builder Rendering Architecture
+
+The resume builder now uses a universal rendering engine so live preview, modal preview, print layout, PDF export, and template thumbnails all render from the same component tree.
+
+### Resume Builder Flow
+
+```text
+Template selected from frontend/data/resumeTemplates.js
+        ->
+ResumeBuilderPage stores selectedTemplateId and designSettings
+        ->
+resume data is normalized through normalizeResumeForPdf()
+        ->
+DesignableResumePreview receives selectedTemplate + resumeData + designSettings
+        ->
+DesignableResumePreview calls ResumeRenderer
+        ->
+ResumeRenderer resolves visual config from resume-engine/templates/templateRegistry.js
+        ->
+resume-engine/utils/resumeContent.js builds renderable sections
+        ->
+SectionRenderer dispatches shared section components
+        ->
+PageRenderer renders exact A4 pages
+        ->
+The same pages are used for live preview, print, PDF capture, and thumbnails
+```
+
+### Engine Files
+
+```text
+frontend/components/resume-engine/
+  ResumeRenderer.jsx
+  PageRenderer.jsx
+  SectionRenderer.jsx
+  constants.js
+  templates/templateRegistry.js
+  styles/resume-engine.css
+  utils/resumeContent.js
+  sections/
+    ResumeHeader.jsx
+    ResumeSummary.jsx
+    ResumeExperience.jsx
+    ResumeEducation.jsx
+    ResumeProjects.jsx
+    ResumeSkills.jsx
+    AdditionalSections.jsx
+    RichText.jsx
+```
+
+### Rendering Rules
+
+- A4 is fixed at `210mm x 297mm`.
+- Browser capture size is approximately `794 x 1123px`.
+- Blank bottom space on short resumes is expected; the page must remain A4 and should not be cropped.
+- `ResumeBuilderPage.downloadPdf()` captures each `[data-resume-page="true"]` page separately with `html2canvas`, then adds each page to `jsPDF`.
+- Resume sections are shared components, not separate preview/PDF implementations.
+- Experience, education, and projects paginate at entry level so long sections do not clip.
+- Print-safe CSS lives in `resume-engine/styles/resume-engine.css` with `@page`, exact A4 dimensions, and `break-inside` rules.
+
+### Template Model
+
+Each template has public metadata in `frontend/data/resumeTemplates.js` and engine identity in `frontend/components/resume-engine/templates/templateRegistry.js`.
+
+Template registry supports:
+
+- `layout`: `single`, `accent-rail`, `soft-panel`
+- `headerStyle`: `band`, `line`, `line-centered`, `minimal`, `split`, `editorial`
+- `sectionStyle`: `rule`, `underline`, `plain`, `accent-left`, `pill`, `tech`, `gold-rule`
+- `skillStyle`: `boxed`, `plain`, `inline`, `pill`
+- `colors`: `accent`, `headerBg`, `surface`, `text`, `muted`, `subtle`, `border`, `inverse`
+
+Current templates:
+
+- `sharp-classic`
+- `classic-pro`
+- `modern-edge`
+- `executive-lite`
+- `creative-grid`
+- `minimal-clean`
+- `simple-professional`
+- `tech-focus`
+- `modern-isabel`
+
+### Adding A New Template
+
+1. Add the template card metadata to `frontend/data/resumeTemplates.js`.
+2. Add visual identity to `resume-engine/templates/templateRegistry.js`.
+3. Prefer existing layout/header/section/skill styles first.
+4. Add CSS under `.resume-template-{id}` or the renderer data attributes only when needed.
+5. Test the builder route:
+
+```text
+http://127.0.0.1:5173/builder?template={template-id}
+```
+
+6. Run:
+
+```bash
+cd frontend
+npm run build
+```
+
+### Verified Behavior
+
+- All current templates render as visually distinct.
+- Short resumes stay one exact A4 page with expected whitespace.
+- Longer resumes paginate without overflow in tested cases.
+- Frontend build passes.
+- Vite still warns about a large JS chunk; this is unrelated to resume rendering.
 
 ## Important Runtime Modes
 

@@ -1,0 +1,31 @@
+Add New Resume Template
+
+Reference:
+Screen/pdf/Professional CV Resume.pdf
+
+Task:
+Create and integrate this PDF as a new resume builder template.
+
+Requirements:
+
+Build pixel-perfect HTML/CSS replica matching PDF exactly
+Match layout, spacing, typography, colors, icons, alignment
+Fully responsive for website preview
+Dynamic data binding with existing resume form fields
+When user fills details, template should auto-populate and look exactly like PDF
+Support:
+Personal info
+Profile summary
+Work experience
+Education
+Skills
+Projects
+Certifications
+Contact/social links
+Keep export/download PDF output identical to template design
+Do not change existing builder logic
+Add as selectable template in template list
+Maintain clean reusable component structure
+
+Expected Output:
+A production-ready resume template that renders exactly like Professional CV Resume.pdf in preview and exported PDF.

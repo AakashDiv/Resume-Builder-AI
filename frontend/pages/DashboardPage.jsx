@@ -7,575 +7,735 @@ import { fetchApplications } from "../services/applicationsApi.js";
 import { fetchQueueStatus, manualApply, setAutoApplyEnabled } from "../services/applyApi.js";
 import { disableScheduler, enableScheduler, fetchSchedulerStatus } from "../services/schedulerApi.js";
 
+// ─── helpers ────────────────────────────────────────────────────────────────
 function getProfileCompletion(profile) {
   const extracted = profile?.extractedProfile || {};
   const checks = [
-    extracted.fullName,
-    extracted.email,
-    extracted.targetRole,
-    extracted.location,
-    extracted.educationLevel,
+    extracted.fullName, extracted.email, extracted.targetRole,
+    extracted.location, extracted.educationLevel,
     Array.isArray(extracted.skills) && extracted.skills.length,
     profile?.summary,
-    profile?.rawResumeText || profile?.resumeMarkdown
+    profile?.rawResumeText || profile?.resumeMarkdown,
   ];
-
-  const completed = checks.filter(Boolean).length;
-  return Math.round((completed / checks.length) * 100);
+  return Math.round((checks.filter(Boolean).length / checks.length) * 100);
 }
 
-export default function DashboardPage() {
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [applyingJobId, setApplyingJobId] = useState("");
-  const [togglingAutoApply, setTogglingAutoApply] = useState(false);
-  const [togglingScheduler, setTogglingScheduler] = useState(false);
-  const [toast, setToast] = useState(null);
-  const [error, setError] = useState("");
-  const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [matches, setMatches] = useState([]);
-  const [matchTotal, setMatchTotal] = useState(0);
-  const [hasProfile, setHasProfile] = useState(false);
-  const [queueStatus, setQueueStatus] = useState(null);
-  const [applicationSummary, setApplicationSummary] = useState(null);
-  const [schedulerStatus, setSchedulerStatus] = useState(null);
+function scoreColor(n) {
+  if (n >= 75) return { text: "#34D399", bg: "rgba(52,211,153,0.12)", border: "rgba(52,211,153,0.3)" };
+  if (n >= 50) return { text: "#fbbf24", bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.3)" };
+  return   { text: "#fb923c", bg: "rgba(251,146,60,0.12)", border: "rgba(251,146,60,0.3)" };
+}
 
-  async function loadDashboard(showLoader = true) {
-    if (showLoader) {
-      setLoading(true);
-    }
+function platformIcon(platform) {
+  const p = (platform || "").toLowerCase();
+  if (p.includes("linkedin"))   return "in";
+  if (p.includes("naukri"))     return "N";
+  if (p.includes("glassdoor"))  return "G";
+  if (p.includes("indeed"))     return "I";
+  return "J";
+}
 
-    setError("");
+function platformColor(platform) {
+  const p = (platform || "").toLowerCase();
+  if (p.includes("linkedin"))  return "#0A66C2";
+  if (p.includes("naukri"))    return "#FF7555";
+  if (p.includes("glassdoor")) return "#0CAA41";
+  if (p.includes("indeed"))    return "#003A9B";
+  return "#22d3ee";
+}
 
-    try {
-      const userData = await fetchCurrentUser();
-      setUser(userData.user);
+function timeAgo(dateStr) {
+  if (!dateStr) return null;
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const d = Math.floor(diff / 86400000);
+  if (d === 0) return "Today";
+  if (d === 1) return "Yesterday";
+  if (d < 30)  return `${d}d ago`;
+  return new Date(dateStr).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+}
 
-      const requests = [
-        fetchProfile(),
-        fetchMatchedJobs()
-      ];
+// ─── sub-components ──────────────────────────────────────────────────────────
 
-      if (userData.user?.plan === "pro") {
-        requests.push(fetchQueueStatus(), fetchApplications(), fetchSchedulerStatus());
-      }
-
-      const results = await Promise.allSettled(requests);
-      const [profileResult, matchesResult, queueResult, applicationsResult, schedulerResult] = results;
-
-      if (profileResult?.status === "fulfilled") {
-        setProfile(profileResult.value.profile);
-      }
-
-      if (matchesResult?.status === "fulfilled") {
-        setMatches(matchesResult.value.items || []);
-        setMatchTotal(matchesResult.value.total || 0);
-        setHasProfile(Boolean(matchesResult.value.hasProfile));
-      } else {
-        setMatches([]);
-        setMatchTotal(0);
-        setHasProfile(false);
-      }
-
-      if (queueResult?.status === "fulfilled") {
-        setQueueStatus(queueResult.value);
-      } else {
-        setQueueStatus(null);
-      }
-
-      if (applicationsResult?.status === "fulfilled") {
-        setApplicationSummary(applicationsResult.value.summary);
-      } else {
-        setApplicationSummary(null);
-      }
-
-      if (schedulerResult?.status === "fulfilled") {
-        setSchedulerStatus(schedulerResult.value);
-      } else {
-        setSchedulerStatus(null);
-      }
-    } catch (err) {
-      setError(err?.response?.data?.message || "Unable to load dashboard data.");
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }
-
-  useEffect(() => {
-    loadDashboard();
-  }, []);
-
-  const completion = useMemo(() => getProfileCompletion(profile), [profile]);
-
-  async function handleRunMatches() {
-    setRefreshing(true);
-    setToast(null);
-
-    try {
-      const result = await runMatchCalculation();
-      await loadDashboard(false);
-      setToast({
-        type: "success",
-        message: `Recomputed ${result.matchesComputed || 0} matches.`
-      });
-    } catch (err) {
-      setRefreshing(false);
-      setToast({
-        type: "error",
-        message: err?.response?.data?.message || "Unable to run job matching right now."
-      });
-    }
-  }
-
-  async function handleToggleAutoApply() {
-    if (!user || user.plan !== "pro") {
-      return;
-    }
-
-    setTogglingAutoApply(true);
-    setToast(null);
-
-    try {
-      const result = await setAutoApplyEnabled(!queueStatus?.autoApplyEnabled);
-      setQueueStatus((prev) => ({
-        ...(prev || {}),
-        ...result
-      }));
-      setUser((prev) => (prev ? { ...prev, autoApplyEnabled: result.autoApplyEnabled } : prev));
-      setToast({
-        type: "success",
-        message: result.autoApplyEnabled
-          ? `Auto-apply enabled. ${result.createdCount || 0} jobs added to queue.`
-          : "Auto-apply disabled."
-      });
-    } catch (err) {
-      setToast({
-        type: "error",
-        message: err?.response?.data?.message || "Unable to update auto-apply."
-      });
-    } finally {
-      setTogglingAutoApply(false);
-    }
-  }
-
-  async function handleToggleScheduler() {
-    if (!user || user.plan !== "pro") {
-      return;
-    }
-
-    setTogglingScheduler(true);
-    setToast(null);
-
-    try {
-      const nextEnabled = !schedulerStatus?.automaticWorkEnabled;
-      const result = nextEnabled ? await enableScheduler() : await disableScheduler();
-      setSchedulerStatus(result);
-      setToast({
-        type: "success",
-        message: nextEnabled ? "Automatic daily work enabled." : "Automatic daily work stopped."
-      });
-    } catch (err) {
-      setToast({
-        type: "error",
-        message: err?.response?.data?.message || "Unable to update automatic work."
-      });
-    } finally {
-      setTogglingScheduler(false);
-    }
-  }
-
-  async function handleManualApply(jobId) {
-    setApplyingJobId(jobId);
-    setToast(null);
-
-    try {
-      const result = await manualApply(jobId);
-      await loadDashboard(false);
-      setToast({
-        type: "success",
-        message: `Application saved for ${result.application?.job?.title || "selected job"}.`
-      });
-    } catch (err) {
-      setToast({
-        type: "error",
-        message: err?.response?.data?.message || "Unable to create application."
-      });
-    } finally {
-      setApplyingJobId("");
-    }
-  }
-
-  if (loading) {
-    return (
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        Loading dashboard...
-      </section>
-    );
-  }
-
+function Toast({ toast, onClose }) {
+  if (!toast) return null;
+  const isErr = toast.type === "error";
   return (
-    <section className="space-y-6">
-      {toast ? (
-        <div
-          className={`rounded-2xl px-4 py-3 text-sm font-medium ${
-            toast.type === "error" ? "bg-rose-100 text-rose-800" : "bg-emerald-100 text-emerald-800"
-          }`}
-        >
-          {toast.message}
-        </div>
-      ) : null}
-
-      {error ? (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
-          {error}
-        </div>
-      ) : null}
-
-      <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Command Center</p>
-            <h3 className="mt-2 text-2xl font-bold">Resume-to-application pipeline</h3>
-            <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-300">
-              Keep your profile ready, fetch fresh jobs, review ranked matches, and control premium automation from one screen.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              to="/app/profile"
-              className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-            >
-              Update Profile
-            </Link>
-            <Link
-              to="/app/job-search"
-              className="rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
-            >
-              Search Jobs
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-4 xl:grid-cols-[1.5fr,1fr,1fr,1fr]">
-        <MetricCard title="Profile Readiness" value={`${completion}%`} subtitle="Resume + target role + skills coverage" />
-        <MetricCard title="Matched Jobs" value={matchTotal} subtitle={user?.plan === "pro" ? "All saved matches" : "Top 10 visible on free"} />
-        <MetricCard
-          title="Queued Applications"
-          value={queueStatus?.queuedCount ?? 0}
-          subtitle={user?.plan === "pro" ? "Premium auto-apply queue" : "Upgrade to unlock queueing"}
-        />
-        <MetricCard
-          title="Applied Jobs"
-          value={applicationSummary?.applied ?? 0}
-          subtitle={user?.plan === "pro" ? "Tracked in your application board" : "Tracker is available on Pro"}
-        />
-      </div>
-
-      <div className="grid gap-6 xl:grid-cols-[1.25fr,0.95fr]">
-        <div className="space-y-6">
-          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Matching Engine</p>
-                <h3 className="mt-2 text-2xl font-bold">Rank jobs against your profile</h3>
-                <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-300">
-                  Save your profile once, search jobs, then refresh matches to rank opportunities against your resume and skills.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={handleRunMatches}
-                  disabled={refreshing || !hasProfile}
-                  className="rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {refreshing ? "Refreshing..." : "Recompute Matches"}
-                </button>
-                <Link
-                  to="/app/job-search"
-                  className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-                >
-                  Search Jobs
-                </Link>
-              </div>
-            </div>
-
-            {!hasProfile ? (
-              <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100">
-                Add your resume or fill out your candidate profile first. Matching works after we know your role, skills, and resume content.
-                <div className="mt-3">
-                  <Link to="/app/profile" className="font-semibold text-brand-700 hover:text-brand-800 dark:text-brand-200">
-                    Open Profile Setup
-                  </Link>
-                </div>
-              </div>
-            ) : null}
-
-            {profile ? (
-              <div className="mt-5 grid gap-4 md:grid-cols-2">
-                <InfoBlock
-                  title="Target Role"
-                  value={profile.extractedProfile?.targetRole || "Not set yet"}
-                />
-                <InfoBlock
-                  title="Preferred Location"
-                  value={profile.extractedProfile?.location || "Not set yet"}
-                />
-                <InfoBlock
-                  title="Top Skills"
-                  value={(profile.extractedProfile?.skills || []).slice(0, 6).join(", ") || "Add skills to improve matching"}
-                />
-                <InfoBlock
-                  title="Resume Source"
-                  value={profile.lastSource ? `Last updated from ${profile.lastSource}` : "Manual profile"}
-                />
-              </div>
-            ) : null}
-          </section>
-
-          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <h3 className="text-xl font-bold">Top Matches</h3>
-                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                  Ranked against your saved profile and resume.
-                </p>
-              </div>
-              {user?.plan !== "pro" && matchTotal > matches.length ? (
-                <Link to="/app/subscription" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
-                  Unlock all matches
-                </Link>
-              ) : null}
-            </div>
-
-            {!matches.length ? (
-              <div className="mt-5 rounded-2xl border border-dashed border-slate-300 p-5 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
-                No matched jobs yet. Run the scraper to save jobs, then refresh matches from this dashboard.
-              </div>
-            ) : (
-              <div className="mt-5 space-y-4">
-                {matches.map((item) => (
-                  <article
-                    key={item.job.id}
-                    className="rounded-2xl border border-slate-200 p-4 transition hover:border-brand-300 dark:border-slate-800 dark:hover:border-brand-500"
-                  >
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div className="space-y-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h4 className="text-lg font-semibold">{item.job.title}</h4>
-                          <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 dark:bg-brand-600/15 dark:text-brand-100">
-                            {item.matchScore}% match
-                          </span>
-                        </div>
-                        <p className="text-sm text-slate-600 dark:text-slate-300">
-                          {item.job.company || "Unknown company"} {item.job.location ? ` - ${item.job.location}` : ""}
-                        </p>
-                        <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                          {item.job.platform || "Saved job"} {item.job.datePosted ? ` - ${new Date(item.job.datePosted).toLocaleDateString()}` : ""}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {item.job.applyUrl ? (
-                          <a
-                            href={item.job.applyUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="rounded-xl border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-                          >
-                            Open Job
-                          </a>
-                        ) : null}
-                        <button
-                          type="button"
-                          onClick={() => handleManualApply(item.job.id)}
-                          disabled={user?.plan !== "pro" || applyingJobId === item.job.id}
-                          className="rounded-xl bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-brand-600 dark:hover:bg-brand-700"
-                        >
-                          {applyingJobId === item.job.id ? "Applying..." : "Save Application"}
-                        </button>
-                      </div>
-                    </div>
-
-                    {item.highlights?.length ? (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {item.highlights.map((highlight) => (
-                          <span
-                            key={highlight}
-                            className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200"
-                          >
-                            {highlight}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-
-                    <div className="mt-4 grid gap-3 md:grid-cols-2">
-                      <SkillGroup title="Matched Skills" items={item.matchedSkills} tone="emerald" emptyLabel="No direct skill matches yet" />
-                      <SkillGroup title="Missing Skills" items={item.missingSkills} tone="amber" emptyLabel="No major gaps found" />
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </section>
-        </div>
-
-        <div className="space-y-6">
-          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <h3 className="text-xl font-bold">Automation</h3>
-                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                  Queue strong matches for follow-up and application tracking.
-                </p>
-              </div>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase text-slate-700 dark:bg-slate-800 dark:text-slate-100">
-                {user?.plan}
-              </span>
-            </div>
-
-            {user?.plan === "pro" ? (
-              <>
-                <button
-                  type="button"
-                  onClick={handleToggleAutoApply}
-                  disabled={togglingAutoApply}
-                  className={`mt-5 w-full rounded-2xl px-4 py-3 text-sm font-semibold text-white ${
-                    queueStatus?.autoApplyEnabled ? "bg-emerald-600 hover:bg-emerald-700" : "bg-brand-600 hover:bg-brand-700"
-                  } disabled:opacity-60`}
-                >
-                  {togglingAutoApply
-                    ? "Updating..."
-                    : queueStatus?.autoApplyEnabled
-                      ? "Disable Auto-Apply Queue"
-                      : "Enable Auto-Apply Queue"}
-                </button>
-
-                <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-1">
-                  <InfoBlock title="Queue Size" value={`${queueStatus?.queuedCount ?? 0} jobs`} />
-                  <InfoBlock title="Daily Limit" value={`${queueStatus?.autoApplyLimit ?? user?.autoApplyLimit ?? 10} jobs`} />
-                </div>
-
-                <div className="mt-5 rounded-2xl border border-slate-200 p-4 dark:border-slate-800">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-sm font-semibold">Automatic Daily Work</p>
-                      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                        Job fetch, matching, queueing, and digest trigger.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleToggleScheduler}
-                      disabled={togglingScheduler}
-                      className={`rounded-xl px-3 py-2 text-sm font-semibold text-white ${
-                        schedulerStatus?.automaticWorkEnabled ? "bg-rose-600 hover:bg-rose-700" : "bg-emerald-600 hover:bg-emerald-700"
-                      } disabled:opacity-60`}
-                    >
-                      {togglingScheduler
-                        ? "Updating..."
-                        : schedulerStatus?.automaticWorkEnabled
-                          ? "Stop"
-                          : "Start"}
-                    </button>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="mt-5 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 dark:bg-slate-800/80 dark:text-slate-200">
-                Upgrade to Pro to queue top matches, generate cover letters, and manage applications from one board.
-                <div className="mt-3">
-                  <Link to="/app/subscription" className="font-semibold text-brand-600 hover:text-brand-700">
-                    View Pro Plan
-                  </Link>
-                </div>
-              </div>
-            )}
-          </section>
-
-          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-xl font-bold">Application Snapshot</h3>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              Quick view of your tracker status.
-            </p>
-
-            {applicationSummary ? (
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                <MiniStat label="Queued" value={applicationSummary.queued || 0} />
-                <MiniStat label="Applied" value={applicationSummary.applied || 0} />
-                <MiniStat label="Viewed" value={applicationSummary.viewed || 0} />
-                <MiniStat label="Responded" value={applicationSummary.responded || 0} />
-              </div>
-            ) : (
-              <div className="mt-5 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 dark:bg-slate-800 dark:text-slate-200">
-                {user?.plan === "pro"
-                  ? "No tracked applications yet. Save a matched job to create your first application entry."
-                  : "The application tracker becomes available on Pro."}
-              </div>
-            )}
-
-            <div className="mt-5">
-              <Link to="/app/applications" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
-                Open Applications Board
-              </Link>
-            </div>
-          </section>
-        </div>
-      </div>
-    </section>
+    <div style={{
+      display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12,
+      padding: "12px 16px", borderRadius: 12,
+      background: isErr ? "rgba(248,113,113,0.1)" : "rgba(52,211,153,0.1)",
+      border: `1px solid ${isErr ? "rgba(248,113,113,0.3)" : "rgba(52,211,153,0.3)"}`,
+      color: isErr ? "#f87171" : "#34D399",
+      fontSize: 13, fontWeight: 600, marginBottom: 20,
+    }}>
+      <span>{isErr ? "⚠ " : "✓ "}{toast.message}</span>
+      <button onClick={onClose} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer", fontSize: 16, lineHeight: 1 }}>×</button>
+    </div>
   );
 }
 
-function MetricCard({ title, value, subtitle }) {
+function StatCard({ icon, label, value, sub, accent, proOnly, isPro }) {
+  const locked = proOnly && !isPro;
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{title}</p>
-      <p className="mt-3 text-3xl font-bold">{value}</p>
-      <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{subtitle}</p>
+    <div style={{
+      background: "var(--bg-card)", border: "1px solid var(--border)",
+      borderRadius: 16, padding: "20px 20px 16px", position: "relative", overflow: "hidden",
+    }}>
+      {/* accent line top */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: locked ? "var(--border)" : accent }} />
+
+      <div style={{
+        width: 36, height: 36, borderRadius: 10, marginBottom: 14,
+        background: locked ? "var(--bg-card2)" : `${accent}18`,
+        border: `1px solid ${locked ? "var(--border)" : `${accent}35`}`,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: 16,
+      }}>{icon}</div>
+
+      <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", color: "var(--t3)", marginBottom: 6, textTransform: "uppercase" }}>{label}</p>
+
+      {locked ? (
+        <div>
+          <p style={{ fontSize: 22, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t3)" }}>—</p>
+          <Link to="/app/subscription" style={{
+            fontSize: 11, fontWeight: 600, color: "#fbbf24", textDecoration: "none", marginTop: 6, display: "inline-block"
+          }}>⚡ Pro only</Link>
+        </div>
+      ) : (
+        <>
+          <p style={{ fontSize: 28, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", lineHeight: 1 }}>{value}</p>
+          <p style={{ fontSize: 11, color: "var(--t3)", marginTop: 6, lineHeight: 1.5 }}>{sub}</p>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ProfileSummary({ profile, completion }) {
+  const skills = (profile?.extractedProfile?.skills || []).slice(0, 8);
+  const barColor = completion >= 80 ? "#34D399" : completion >= 50 ? "#fbbf24" : "#fb923c";
+
+  return (
+    <div style={{ background: "var(--bg-card2)", borderRadius: 14, padding: 16, marginTop: 16 }}>
+      {/* Completion bar */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--t2)" }}>Profile Completion</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: barColor }}>{completion}%</span>
+      </div>
+      <div style={{ height: 6, background: "var(--border)", borderRadius: 3, marginBottom: 14, overflow: "hidden" }}>
+        <div style={{ height: "100%", width: `${completion}%`, background: barColor, borderRadius: 3, transition: "width 0.6s ease" }} />
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
+        {[
+          { label: "Target Role", val: profile?.extractedProfile?.targetRole },
+          { label: "Location",    val: profile?.extractedProfile?.location },
+          { label: "Experience",  val: profile?.extractedProfile?.experienceYears ? `${profile.extractedProfile.experienceYears} yrs` : null },
+          { label: "Source",      val: profile?.lastSource || "Manual" },
+        ].map(item => (
+          <div key={item.label}>
+            <p style={{ fontSize: 10, fontWeight: 600, color: "var(--t3)", letterSpacing: "0.05em", marginBottom: 2 }}>{item.label.toUpperCase()}</p>
+            <p style={{ fontSize: 12, color: item.val ? "var(--t1)" : "var(--t3)", fontWeight: 500 }}>{item.val || "Not set"}</p>
+          </div>
+        ))}
+      </div>
+
+      {skills.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+          {skills.map(s => (
+            <span key={s} style={{
+              fontSize: 11, padding: "3px 9px", borderRadius: 20,
+              background: "rgba(34,211,238,0.08)", border: "1px solid rgba(34,211,238,0.2)", color: "var(--cyan)"
+            }}>{s}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function JobCard({ item, user, applyingJobId, onApply }) {
+  const sc = scoreColor(item.matchScore);
+  const plColor = platformColor(item.job.platform);
+  const plIcon  = platformIcon(item.job.platform);
+  const isPro   = user?.plan === "pro";
+  const isApplying = applyingJobId === item.job.id;
+
+  return (
+    <article style={{
+      background: "var(--bg-card2)", border: "1px solid var(--border)",
+      borderRadius: 14, padding: 16,
+      transition: "all 0.2s ease",
+    }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = sc.border; e.currentTarget.style.background = "var(--bg-card)"; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.background = "var(--bg-card2)"; }}
+    >
+      {/* Top row */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 10 }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 12, flex: 1, minWidth: 0 }}>
+          {/* Platform dot */}
+          <div style={{
+            width: 36, height: 36, borderRadius: 9, flexShrink: 0,
+            background: `${plColor}20`, border: `1px solid ${plColor}40`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 11, fontWeight: 800, color: plColor, fontFamily: "Sora, sans-serif"
+          }}>{plIcon}</div>
+
+          <div style={{ minWidth: 0 }}>
+            <h4 style={{
+              fontSize: 14, fontWeight: 700, fontFamily: "Sora, sans-serif",
+              color: "var(--t1)", marginBottom: 2, lineHeight: 1.3,
+              overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"
+            }}>{item.job.title}</h4>
+            <p style={{ fontSize: 12, color: "var(--t2)" }}>
+              {item.job.company || "Unknown"}{item.job.location ? ` · ${item.job.location}` : ""}
+            </p>
+          </div>
+        </div>
+
+        {/* Score badge */}
+        <div style={{
+          flexShrink: 0, textAlign: "center",
+          background: sc.bg, border: `1px solid ${sc.border}`,
+          borderRadius: 10, padding: "6px 10px", minWidth: 52
+        }}>
+          <div style={{ fontSize: 16, fontWeight: 800, color: sc.text, fontFamily: "Sora, sans-serif", lineHeight: 1 }}>{item.matchScore}%</div>
+          <div style={{ fontSize: 9, color: sc.text, fontWeight: 600, opacity: 0.8, marginTop: 1 }}>MATCH</div>
+        </div>
+      </div>
+
+      {/* Match bar */}
+      <div style={{ height: 3, background: "var(--border)", borderRadius: 2, marginBottom: 12, overflow: "hidden" }}>
+        <div style={{ height: "100%", width: `${item.matchScore}%`, background: sc.text, borderRadius: 2 }} />
+      </div>
+
+      {/* Meta row */}
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+        <span style={{
+          fontSize: 10, padding: "2px 8px", borderRadius: 6,
+          background: `${plColor}15`, color: plColor, fontWeight: 600
+        }}>{(item.job.platform || "Job").charAt(0).toUpperCase() + (item.job.platform || "job").slice(1)}</span>
+        {timeAgo(item.job.datePosted) && (
+          <span style={{ fontSize: 10, color: "var(--t3)" }}>{timeAgo(item.job.datePosted)}</span>
+        )}
+        {item.highlights?.map(h => (
+          <span key={h} style={{
+            fontSize: 10, padding: "2px 7px", borderRadius: 6,
+            background: "var(--bg-card)", border: "1px solid var(--border)", color: "var(--t2)"
+          }}>{h}</span>
+        ))}
+      </div>
+
+      {/* Skills */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
+        <div style={{ background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.15)", borderRadius: 10, padding: "8px 10px" }}>
+          <p style={{ fontSize: 9, fontWeight: 700, color: "#34D399", letterSpacing: "0.06em", marginBottom: 6 }}>✓ MATCHED</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+            {item.matchedSkills?.length ? item.matchedSkills.slice(0, 4).map(s => (
+              <span key={s} style={{ fontSize: 10, padding: "2px 7px", borderRadius: 10, background: "rgba(52,211,153,0.1)", color: "#34D399" }}>{s}</span>
+            )) : <span style={{ fontSize: 11, color: "var(--t3)" }}>—</span>}
+          </div>
+        </div>
+        <div style={{ background: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.15)", borderRadius: 10, padding: "8px 10px" }}>
+          <p style={{ fontSize: 9, fontWeight: 700, color: "#fbbf24", letterSpacing: "0.06em", marginBottom: 6 }}>⚠ MISSING</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+            {item.missingSkills?.length ? item.missingSkills.slice(0, 4).map(s => (
+              <span key={s} style={{ fontSize: 10, padding: "2px 7px", borderRadius: 10, background: "rgba(251,191,36,0.1)", color: "#fbbf24" }}>{s}</span>
+            )) : <span style={{ fontSize: 11, color: "var(--t3)" }}>None</span>}
+          </div>
+        </div>
+      </div>
+
+      {/* Action buttons */}
+      <div style={{ display: "flex", gap: 8 }}>
+        {item.job.applyUrl && (
+          <a href={item.job.applyUrl} target="_blank" rel="noreferrer" style={{
+            flex: 1, textAlign: "center", textDecoration: "none",
+            background: "var(--bg-card)", border: "1px solid var(--border)",
+            color: "var(--t2)", borderRadius: 9, padding: "8px 12px",
+            fontSize: 12, fontWeight: 600, transition: "all 0.15s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--cyan)"; e.currentTarget.style.color = "var(--cyan)"; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--t2)"; }}>
+            Open →
+          </a>
+        )}
+        <button
+          onClick={() => onApply(item.job.id)}
+          disabled={!isPro || isApplying}
+          style={{
+            flex: 1, borderRadius: 9, padding: "8px 12px",
+            fontSize: 12, fontWeight: 600, cursor: isPro ? "pointer" : "not-allowed",
+            background: isPro ? "linear-gradient(135deg, #06b6d4, #0891b2)" : "var(--bg-card)",
+            border: isPro ? "none" : "1px solid var(--border)",
+            color: isPro ? "#fff" : "var(--t3)",
+            opacity: isApplying ? 0.6 : 1, transition: "all 0.15s",
+          }}>
+          {isApplying ? "Saving..." : isPro ? "Save App" : "🔒 Pro"}
+        </button>
+      </div>
     </article>
   );
 }
 
-function MiniStat({ label, value }) {
+function AutomationPanel({ user, queueStatus, schedulerStatus, togglingAutoApply, togglingScheduler, onToggleAutoApply, onToggleScheduler }) {
+  const isPro = user?.plan === "pro";
+  const autoOn = queueStatus?.autoApplyEnabled;
+  const schedOn = schedulerStatus?.automaticWorkEnabled;
+
+  if (!isPro) {
+    return (
+      <div style={{ marginTop: 16 }}>
+        <div style={{
+          background: "linear-gradient(135deg, rgba(251,191,36,0.06), rgba(251,146,60,0.06))",
+          border: "1px solid rgba(251,191,36,0.2)", borderRadius: 14, padding: 20, textAlign: "center"
+        }}>
+          <div style={{ fontSize: 28, marginBottom: 10 }}>⚡</div>
+          <p style={{ fontSize: 14, fontWeight: 700, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 6 }}>Pro Automation</p>
+          <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.6, marginBottom: 16 }}>
+            Auto-queue top matches, generate cover letters, and track every application.
+          </p>
+          <Link to="/app/subscription" style={{
+            display: "inline-block", textDecoration: "none",
+            background: "linear-gradient(135deg, #f97316, #ea580c)",
+            color: "#fff", borderRadius: 9, padding: "9px 20px",
+            fontSize: 13, fontWeight: 700, fontFamily: "Sora, sans-serif"
+          }}>Upgrade to Pro →</Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-2xl bg-slate-50 p-4 dark:bg-slate-800">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{label}</p>
-      <p className="mt-2 text-2xl font-bold">{value}</p>
+    <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+      {/* Auto-apply toggle */}
+      <div style={{
+        background: autoOn ? "rgba(52,211,153,0.06)" : "var(--bg-card2)",
+        border: `1px solid ${autoOn ? "rgba(52,211,153,0.25)" : "var(--border)"}`,
+        borderRadius: 14, padding: 16
+      }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+          <div>
+            <p style={{ fontSize: 13, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif" }}>Auto-Apply Queue</p>
+            <p style={{ fontSize: 11, color: "var(--t2)", marginTop: 2 }}>Queues top matched jobs automatically</p>
+          </div>
+          <button onClick={onToggleAutoApply} disabled={togglingAutoApply} style={{
+            padding: "6px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700,
+            cursor: togglingAutoApply ? "not-allowed" : "pointer",
+            background: autoOn ? "#34D399" : "var(--bg-card)",
+            border: `1px solid ${autoOn ? "#34D399" : "var(--border2)"}`,
+            color: autoOn ? "#fff" : "var(--t2)",
+            transition: "all 0.2s", opacity: togglingAutoApply ? 0.6 : 1,
+          }}>{togglingAutoApply ? "..." : autoOn ? "ON" : "OFF"}</button>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+          {[
+            { label: "Queue Size", val: `${queueStatus?.queuedCount ?? 0} jobs` },
+            { label: "Daily Limit", val: `${queueStatus?.autoApplyLimit ?? 10} jobs` },
+          ].map(item => (
+            <div key={item.label} style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 9, padding: "8px 12px" }}>
+              <p style={{ fontSize: 9, color: "var(--t3)", fontWeight: 600, letterSpacing: "0.05em" }}>{item.label.toUpperCase()}</p>
+              <p style={{ fontSize: 14, fontWeight: 700, color: "var(--t1)", marginTop: 2 }}>{item.val}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Scheduler toggle */}
+      <div style={{
+        background: schedOn ? "rgba(34,211,238,0.05)" : "var(--bg-card2)",
+        border: `1px solid ${schedOn ? "rgba(34,211,238,0.2)" : "var(--border)"}`,
+        borderRadius: 14, padding: 14,
+        display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12
+      }}>
+        <div>
+          <p style={{ fontSize: 12, fontWeight: 700, color: "var(--t1)" }}>Daily Auto Work</p>
+          <p style={{ fontSize: 10, color: "var(--t2)", marginTop: 2, lineHeight: 1.5 }}>Job fetch · Match · Digest</p>
+        </div>
+        <button onClick={onToggleScheduler} disabled={togglingScheduler} style={{
+          padding: "7px 14px", borderRadius: 9, fontSize: 11, fontWeight: 700,
+          cursor: togglingScheduler ? "not-allowed" : "pointer",
+          background: schedOn ? "rgba(248,113,113,0.15)" : "rgba(52,211,153,0.15)",
+          border: `1px solid ${schedOn ? "rgba(248,113,113,0.3)" : "rgba(52,211,153,0.3)"}`,
+          color: schedOn ? "#f87171" : "#34D399",
+          opacity: togglingScheduler ? 0.6 : 1,
+        }}>{togglingScheduler ? "..." : schedOn ? "Stop" : "Start"}</button>
+      </div>
     </div>
   );
 }
 
-function InfoBlock({ title, value }) {
+function AppSnapshot({ applicationSummary, isPro }) {
+  const stats = [
+    { label: "Queued",    val: applicationSummary?.queued    ?? 0, color: "#22d3ee" },
+    { label: "Applied",   val: applicationSummary?.applied   ?? 0, color: "#818cf8" },
+    { label: "Viewed",    val: applicationSummary?.viewed    ?? 0, color: "#fbbf24" },
+    { label: "Responded", val: applicationSummary?.responded ?? 0, color: "#34D399" },
+  ];
+
+  if (!isPro) {
+    return (
+      <div style={{
+        background: "var(--bg-card2)", border: "1px solid var(--border)",
+        borderRadius: 12, padding: "14px 16px",
+        fontSize: 12, color: "var(--t2)", lineHeight: 1.6
+      }}>
+        Application tracker is available on Pro.
+        <Link to="/app/subscription" style={{ display: "block", marginTop: 8, fontSize: 12, fontWeight: 700, color: "#fbbf24", textDecoration: "none" }}>
+          Upgrade →
+        </Link>
+      </div>
+    );
+  }
+
+  if (!applicationSummary) {
+    return (
+      <div style={{ fontSize: 12, color: "var(--t2)", padding: "12px 0" }}>
+        No applications tracked yet. Save a matched job to start.
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-2xl bg-slate-50 p-4 dark:bg-slate-800">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{title}</p>
-      <p className="mt-2 text-sm font-medium text-slate-800 dark:text-slate-100">{value}</p>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 2 }}>
+      {stats.map(s => (
+        <div key={s.label} style={{
+          background: `${s.color}0D`, border: `1px solid ${s.color}25`,
+          borderRadius: 12, padding: "12px 14px"
+        }}>
+          <p style={{ fontSize: 9, fontWeight: 700, color: s.color, letterSpacing: "0.06em", marginBottom: 4 }}>{s.label.toUpperCase()}</p>
+          <p style={{ fontSize: 22, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)" }}>{s.val}</p>
+        </div>
+      ))}
     </div>
   );
 }
 
-function SkillGroup({ title, items, tone, emptyLabel }) {
-  const palette = tone === "emerald"
-    ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-100"
-    : "bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-100";
+// ─── Main Component ──────────────────────────────────────────────────────────
+export default function DashboardPage() {
+  const [loading,          setLoading]          = useState(true);
+  const [refreshing,       setRefreshing]       = useState(false);
+  const [applyingJobId,    setApplyingJobId]    = useState("");
+  const [togglingAutoApply, setTogglingAutoApply] = useState(false);
+  const [togglingScheduler, setTogglingScheduler] = useState(false);
+  const [toast,            setToast]            = useState(null);
+  const [error,            setError]            = useState("");
+  const [user,             setUser]             = useState(null);
+  const [profile,          setProfile]          = useState(null);
+  const [matches,          setMatches]          = useState([]);
+  const [matchTotal,       setMatchTotal]       = useState(0);
+  const [hasProfile,       setHasProfile]       = useState(false);
+  const [queueStatus,      setQueueStatus]      = useState(null);
+  const [applicationSummary, setApplicationSummary] = useState(null);
+  const [schedulerStatus,  setSchedulerStatus]  = useState(null);
 
+  async function loadDashboard(showLoader = true) {
+    if (showLoader) setLoading(true);
+    setError("");
+    try {
+      const userData = await fetchCurrentUser();
+      setUser(userData.user);
+      const requests = [fetchProfile(), fetchMatchedJobs()];
+      if (userData.user?.plan === "pro") {
+        requests.push(fetchQueueStatus(), fetchApplications(), fetchSchedulerStatus());
+      }
+      const results = await Promise.allSettled(requests);
+      const [profileResult, matchesResult, queueResult, applicationsResult, schedulerResult] = results;
+      if (profileResult?.status === "fulfilled") setProfile(profileResult.value.profile);
+      if (matchesResult?.status === "fulfilled") {
+        setMatches(matchesResult.value.items || []);
+        setMatchTotal(matchesResult.value.total || 0);
+        setHasProfile(Boolean(matchesResult.value.hasProfile));
+      } else { setMatches([]); setMatchTotal(0); setHasProfile(false); }
+      if (queueResult?.status === "fulfilled")        setQueueStatus(queueResult.value);
+      if (applicationsResult?.status === "fulfilled") setApplicationSummary(applicationsResult.value.summary);
+      if (schedulerResult?.status === "fulfilled")    setSchedulerStatus(schedulerResult.value);
+    } catch (err) {
+      setError(err?.response?.data?.message || "Unable to load dashboard data.");
+    } finally { setLoading(false); setRefreshing(false); }
+  }
+
+  useEffect(() => { loadDashboard(); }, []);
+
+  const completion = useMemo(() => getProfileCompletion(profile), [profile]);
+  const isPro = user?.plan === "pro";
+
+  async function handleRunMatches() {
+    setRefreshing(true); setToast(null);
+    try {
+      const result = await runMatchCalculation();
+      await loadDashboard(false);
+      setToast({ type: "success", message: `Recomputed ${result.matchesComputed || 0} matches.` });
+    } catch (err) {
+      setRefreshing(false);
+      setToast({ type: "error", message: err?.response?.data?.message || "Unable to run job matching right now." });
+    }
+  }
+
+  async function handleToggleAutoApply() {
+    if (!user || user.plan !== "pro") return;
+    setTogglingAutoApply(true); setToast(null);
+    try {
+      const result = await setAutoApplyEnabled(!queueStatus?.autoApplyEnabled);
+      setQueueStatus(prev => ({ ...(prev || {}), ...result }));
+      setUser(prev => (prev ? { ...prev, autoApplyEnabled: result.autoApplyEnabled } : prev));
+      setToast({ type: "success", message: result.autoApplyEnabled ? `Auto-apply enabled. ${result.createdCount || 0} jobs queued.` : "Auto-apply disabled." });
+    } catch (err) {
+      setToast({ type: "error", message: err?.response?.data?.message || "Unable to update auto-apply." });
+    } finally { setTogglingAutoApply(false); }
+  }
+
+  async function handleToggleScheduler() {
+    if (!user || user.plan !== "pro") return;
+    setTogglingScheduler(true); setToast(null);
+    try {
+      const nextEnabled = !schedulerStatus?.automaticWorkEnabled;
+      const result = nextEnabled ? await enableScheduler() : await disableScheduler();
+      setSchedulerStatus(result);
+      setToast({ type: "success", message: nextEnabled ? "Daily automation enabled." : "Daily automation stopped." });
+    } catch (err) {
+      setToast({ type: "error", message: err?.response?.data?.message || "Unable to update automatic work." });
+    } finally { setTogglingScheduler(false); }
+  }
+
+  async function handleManualApply(jobId) {
+    setApplyingJobId(jobId); setToast(null);
+    try {
+      const result = await manualApply(jobId);
+      await loadDashboard(false);
+      setToast({ type: "success", message: `Application saved for ${result.application?.job?.title || "selected job"}.` });
+    } catch (err) {
+      setToast({ type: "error", message: err?.response?.data?.message || "Unable to create application." });
+    } finally { setApplyingJobId(""); }
+  }
+
+  // ── Loading skeleton ──
+  if (loading) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 20, padding: "4px 0" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14 }}>
+          {[1,2,3,4].map(i => <div key={i} className="shimmer" style={{ height: 100, borderRadius: 16 }} />)}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1.35fr 0.65fr", gap: 20 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div className="shimmer" style={{ height: 180, borderRadius: 16 }} />
+            <div className="shimmer" style={{ height: 300, borderRadius: 16 }} />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div className="shimmer" style={{ height: 200, borderRadius: 16 }} />
+            <div className="shimmer" style={{ height: 160, borderRadius: 16 }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Render ──
   return (
-    <div className="rounded-2xl border border-slate-200 p-3 dark:border-slate-800">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{title}</p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {items?.length ? (
-          items.map((item) => (
-            <span key={item} className={`rounded-full px-3 py-1 text-xs font-semibold ${palette}`}>
-              {item}
-            </span>
-          ))
-        ) : (
-          <span className="text-sm text-slate-500 dark:text-slate-400">{emptyLabel}</span>
-        )}
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
+      <Toast toast={toast} onClose={() => setToast(null)} />
+
+      {error && (
+        <div style={{
+          background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)",
+          borderRadius: 12, padding: "12px 16px", fontSize: 13, color: "#f87171"
+        }}>{error}</div>
+      )}
+
+      {/* ── Stat cards row ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+        <StatCard icon="👤" label="Profile Ready" value={`${completion}%`}
+          sub="Resume · skills · role" accent="#22d3ee" isPro={isPro} />
+        <StatCard icon="🎯" label="Matched Jobs" value={matchTotal}
+          sub={isPro ? "All saved matches" : "Top 10 on free"} accent="#818cf8" isPro={isPro} />
+        <StatCard icon="📬" label="In Queue" value={queueStatus?.queuedCount ?? 0}
+          sub="Waiting to apply" accent="#fbbf24" proOnly isPro={isPro} />
+        <StatCard icon="✅" label="Applied" value={applicationSummary?.applied ?? 0}
+          sub="Tracked applications" accent="#34D399" proOnly isPro={isPro} />
+      </div>
+
+      {/* ── Main 2-col grid ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1.35fr 0.65fr", gap: 20, alignItems: "start" }}>
+
+        {/* ── LEFT column ── */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
+          {/* Control panel card */}
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+              <div>
+                <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: "var(--cyan)", marginBottom: 6 }}>CONTROL CENTER</p>
+                <h3 style={{ fontSize: 18, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 6 }}>
+                  Your Job-Matching Workspace
+                </h3>
+                <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.6, maxWidth: 500 }}>
+                  Save your profile, search jobs, then recompute matches to rank opportunities against your resume.
+                </p>
+              </div>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <button onClick={handleRunMatches} disabled={refreshing || !hasProfile} style={{
+                  padding: "9px 18px", borderRadius: 10, fontSize: 13, fontWeight: 700,
+                  cursor: (refreshing || !hasProfile) ? "not-allowed" : "pointer",
+                  background: "linear-gradient(135deg, #06b6d4, #0891b2)",
+                  border: "none", color: "#fff", opacity: (refreshing || !hasProfile) ? 0.55 : 1,
+                  fontFamily: "Sora, sans-serif", transition: "all 0.2s"
+                }}>
+                  {refreshing ? "Refreshing..." : "⟳ Recompute Matches"}
+                </button>
+                <Link to="/app/job-search" style={{
+                  padding: "9px 18px", borderRadius: 10, fontSize: 13, fontWeight: 600,
+                  background: "var(--bg-card2)", border: "1px solid var(--border)",
+                  color: "var(--t2)", textDecoration: "none", display: "inline-block",
+                  transition: "all 0.2s"
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--cyan)"; e.currentTarget.style.color = "var(--cyan)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--t2)"; }}>
+                  Search Jobs →
+                </Link>
+              </div>
+            </div>
+
+            {/* No profile warning */}
+            {!hasProfile && (
+              <div style={{
+                marginTop: 16, background: "rgba(251,191,36,0.07)", border: "1px solid rgba(251,191,36,0.25)",
+                borderRadius: 12, padding: "14px 16px"
+              }}>
+                <p style={{ fontSize: 13, color: "#fbbf24", fontWeight: 600, marginBottom: 4 }}>⚠ Profile needed</p>
+                <p style={{ fontSize: 12, color: "var(--t2)", marginBottom: 8, lineHeight: 1.6 }}>
+                  Add your resume or fill your candidate profile so we can match you to relevant jobs.
+                </p>
+                <Link to="/app/profile" style={{ fontSize: 12, fontWeight: 700, color: "#fbbf24", textDecoration: "none" }}>
+                  Set Up Profile →
+                </Link>
+              </div>
+            )}
+
+            {/* Profile summary inline */}
+            {profile && <ProfileSummary profile={profile} completion={completion} />}
+          </div>
+
+          {/* Matched Jobs */}
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+              <div>
+                <h3 style={{ fontSize: 16, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
+                  Top Matches
+                </h3>
+                <p style={{ fontSize: 12, color: "var(--t2)" }}>
+                  Ranked by AI match score against your profile
+                  {!isPro && matchTotal > matches.length ? ` · ${matchTotal - matches.length} more hidden` : ""}
+                </p>
+              </div>
+              {!isPro && matchTotal > matches.length && (
+                <Link to="/app/subscription" style={{
+                  fontSize: 11, fontWeight: 700, color: "#fbbf24", textDecoration: "none",
+                  background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.25)",
+                  borderRadius: 8, padding: "5px 10px"
+                }}>⚡ Unlock all</Link>
+              )}
+            </div>
+
+            {matches.length === 0 ? (
+              <div style={{
+                border: "1px dashed var(--border2)", borderRadius: 14,
+                padding: "32px 24px", textAlign: "center"
+              }}>
+                <div style={{ fontSize: 32, marginBottom: 10 }}>🔍</div>
+                <p style={{ fontSize: 14, fontWeight: 600, color: "var(--t1)", marginBottom: 6 }}>No matches yet</p>
+                <p style={{ fontSize: 12, color: "var(--t2)", marginBottom: 16, lineHeight: 1.6 }}>
+                  Run the Job Scraper to save live jobs, then click Recompute Matches.
+                </p>
+                <Link to="/app/job-search" style={{
+                  display: "inline-block", textDecoration: "none",
+                  background: "linear-gradient(135deg, #06b6d4, #0891b2)",
+                  color: "#fff", borderRadius: 9, padding: "9px 20px",
+                  fontSize: 13, fontWeight: 700
+                }}>Search Jobs →</Link>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {matches.map(item => (
+                  <JobCard
+                    key={item.job.id}
+                    item={item}
+                    user={user}
+                    applyingJobId={applyingJobId}
+                    onApply={handleManualApply}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── RIGHT column ── */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+
+          {/* Automation */}
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif" }}>Automation</h3>
+              <span style={{
+                fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", padding: "3px 8px", borderRadius: 6,
+                background: isPro ? "rgba(34,211,238,0.1)" : "rgba(251,191,36,0.1)",
+                border: `1px solid ${isPro ? "rgba(34,211,238,0.25)" : "rgba(251,191,36,0.25)"}`,
+                color: isPro ? "var(--cyan)" : "#fbbf24"
+              }}>{isPro ? "PRO" : "FREE"}</span>
+            </div>
+            <AutomationPanel
+              user={user}
+              queueStatus={queueStatus}
+              schedulerStatus={schedulerStatus}
+              togglingAutoApply={togglingAutoApply}
+              togglingScheduler={togglingScheduler}
+              onToggleAutoApply={handleToggleAutoApply}
+              onToggleScheduler={handleToggleScheduler}
+            />
+          </div>
+
+          {/* Applications snapshot */}
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+              <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif" }}>Applications</h3>
+              <Link to="/app/applications" style={{
+                fontSize: 11, fontWeight: 600, color: "var(--cyan)", textDecoration: "none"
+              }}>View all →</Link>
+            </div>
+            <AppSnapshot applicationSummary={applicationSummary} isPro={isPro} />
+          </div>
+
+          {/* Quick links */}
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif", marginBottom: 12 }}>Quick Actions</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {[
+                { to: "/app/improve-resume", label: "✨ Improve Resume",   pro: true  },
+                { to: "/app/ats-score",      label: "📊 Check ATS Score",  pro: true  },
+                { to: "/app/tailor-resume",  label: "🎯 Tailor Resume",    pro: true  },
+                { to: "/app/cover-letter",   label: "📝 Cover Letter",     pro: true  },
+                { to: "/app/profile",        label: "👤 Edit Profile",     pro: false },
+              ].map(item => (
+                <Link key={item.to} to={item.to} style={{
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                  padding: "10px 12px", borderRadius: 10, textDecoration: "none",
+                  background: "var(--bg-card2)", border: "1px solid var(--border)",
+                  fontSize: 12, fontWeight: 600, color: "var(--t1)",
+                  transition: "all 0.15s",
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--cyan)"; e.currentTarget.style.color = "var(--cyan)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--t1)"; }}>
+                  {item.label}
+                  {item.pro && !isPro && (
+                    <span style={{ fontSize: 9, fontWeight: 700, color: "#fbbf24", background: "rgba(251,191,36,0.1)", padding: "2px 6px", borderRadius: 5 }}>PRO</span>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );

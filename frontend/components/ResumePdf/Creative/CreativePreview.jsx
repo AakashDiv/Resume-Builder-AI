@@ -11,128 +11,167 @@ import {
 } from "../common/previewUtils.js";
 import { FaEnvelope, FaLocationDot, FaPhone } from "react-icons/fa6";
 
-function CreativeBlock({ title, children }) {
+function SidebarSection({ title, children }) {
   return (
-    <section className="mt-3 text-[11px] leading-relaxed text-slate-800">
-      <h3 className="border-b border-amber-200 pb-0.5 text-[12px] font-extrabold uppercase tracking-wide">{title}</h3>
-      <div className="mt-1">{children}</div>
+    <div style={{ marginTop: "14px" }}>
+      <p style={{ fontSize: "8.5px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.18em", marginBottom: "6px", borderBottom: "1px solid rgba(255,255,255,0.3)", paddingBottom: "3px" }}>
+        {title}
+      </p>
+      {children}
+    </div>
+  );
+}
+
+function MainBlock({ title, children }) {
+  return (
+    <section style={{ marginTop: "12px" }}>
+      <h3 style={{ fontSize: "8.5px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.18em", color: "#5a4a3f", borderBottom: "1.5px solid #d47f13", paddingBottom: "3px", marginBottom: "7px" }}>
+        {title}
+      </h3>
+      {children}
     </section>
   );
 }
 
 export default function CreativePreview({ data }) {
   const skills = splitByCommaOrLine(data.skills?.primarySkills || "");
-  const experience = getMeaningfulExperience(data.experience).slice(0, 1);
-  const education = getMeaningfulEducation(data.education).slice(0, 1);
-  const firstExperience = experience[0];
-  const firstEducation = education[0];
+  const experience = getMeaningfulExperience(data.experience);
+  const education = getMeaningfulEducation(data.education);
   const initials = getInitials(data.header?.fullName);
-  const dateRange = firstExperience ? formatDateRange(firstExperience.startDate, firstExperience.endDate, firstExperience.currentlyWorking) : "";
 
   return (
-    <article data-resume-padding="true" className="h-full w-full overflow-hidden bg-white">
-      <div className="grid h-full grid-cols-[34%,66%]">
+    <article data-resume-padding="true" className="h-full w-full overflow-hidden bg-white" style={{ fontFamily: "Arial, sans-serif" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "34% 66%", height: "100%" }}>
+
+        {/* Sidebar */}
         <aside
-          className="text-white"
           style={{
-            background:
-              "linear-gradient(180deg, #5a4a3f 0%, #5a4a3f 17%, #d47f13 17%, #d47f13 100%)"
+            background: "linear-gradient(180deg, #5a4a3f 0%, #5a4a3f 17%, #d47f13 17%, #d47f13 100%)",
+            color: "#ffffff",
+            padding: "16px 14px 20px",
+            fontSize: "10px",
+            lineHeight: 1.55
           }}
         >
-          <div className="px-4 pt-4">
-            <div className="mx-auto grid h-28 w-24 place-items-center overflow-hidden rounded-sm border-4 border-white bg-slate-200 text-xl font-bold tracking-[0.08em] text-slate-700">
-              {data.header?.photo ? (
-                <img src={data.header.photo} alt="Profile" className="h-full w-full object-cover" />
-              ) : (
-                initials
-              )}
-            </div>
+          {/* Photo / initials */}
+          <div style={{ width: "88px", height: "104px", margin: "0 auto 14px", overflow: "hidden", borderRadius: "2px", border: "3px solid rgba(255,255,255,0.7)", background: "#c4b5a8", display: "grid", placeItems: "center", fontSize: "20px", fontWeight: 700, letterSpacing: "0.05em", color: "#5a4a3f" }}>
+            {data.header?.photo ? (
+              <img src={data.header.photo} alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            ) : initials}
           </div>
 
-          <div className="px-4 pb-4 pt-5 text-[10px]">
-            {(hasText(data.header?.location) || hasText(data.header?.phone) || hasText(data.header?.email)) ? (
-              <>
-                <p className="mb-1 font-bold uppercase">Contact</p>
-                {hasText(data.header?.location) ? <p className="inline-flex items-center gap-1"><FaLocationDot size={9} /> {data.header.location}</p> : null}
-                {hasText(data.header?.phone) ? <p className="inline-flex items-center gap-1"><FaPhone size={9} /> {data.header.phone}</p> : null}
-                {hasText(data.header?.email) ? <p className="inline-flex items-center gap-1"><FaEnvelope size={9} /> {data.header.email}</p> : null}
-              </>
-            ) : null}
+          {/* Contact */}
+          {(hasText(data.header?.location) || hasText(data.header?.phone) || hasText(data.header?.email)) ? (
+            <SidebarSection title="Contact">
+              {hasText(data.header?.location) ? (
+                <p style={{ display: "inline-flex", alignItems: "center", gap: "4px", marginBottom: "3px", width: "100%", wordBreak: "break-all" }}>
+                  <FaLocationDot size={9} /> {data.header.location}
+                </p>
+              ) : null}
+              {hasText(data.header?.phone) ? (
+                <p style={{ display: "inline-flex", alignItems: "center", gap: "4px", marginBottom: "3px", width: "100%" }}>
+                  <FaPhone size={9} /> {data.header.phone}
+                </p>
+              ) : null}
+              {hasText(data.header?.email) ? (
+                <p style={{ display: "inline-flex", alignItems: "center", gap: "4px", marginBottom: "3px", width: "100%", wordBreak: "break-all" }}>
+                  <FaEnvelope size={9} /> {data.header.email}
+                </p>
+              ) : null}
+            </SidebarSection>
+          ) : null}
 
-            {skills.length ? (
-              <>
-                <hr className="my-3 border-white/30" />
-                <p className="mb-1 font-bold uppercase">Skills</p>
-                <ul className="list-disc space-y-1 pl-4">
-                  {skills.slice(0, 7).map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </>
-            ) : null}
+          {/* Skills */}
+          {skills.length ? (
+            <SidebarSection title="Skills">
+              <ul style={{ listStyle: "disc", paddingLeft: "14px", margin: 0, display: "flex", flexDirection: "column", gap: "2px" }}>
+                {skills.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </SidebarSection>
+          ) : null}
 
-            {firstExperience ? (
-              <>
-                <hr className="my-3 border-white/30" />
-                <p className="mb-1 font-bold uppercase">Work History</p>
-                {hasText(firstExperience.jobTitle) ? <p className="font-semibold">{firstExperience.jobTitle}</p> : null}
-                {hasText(firstExperience.employer) ? <p>{firstExperience.employer}</p> : null}
-                {dateRange ? <p>{dateRange}</p> : null}
-              </>
-            ) : null}
-          </div>
+          {/* Education in sidebar */}
+          {education.length ? (
+            <SidebarSection title="Education">
+              {education.map((edu, i) => {
+                const dateRange = formatDateRange(edu.startDate, edu.endDate, edu.currentlyStudying);
+                return (
+                  <div key={i} style={{ marginBottom: i < education.length - 1 ? "8px" : "0" }}>
+                    {hasText(edu.degree) ? <p style={{ fontWeight: 700, fontSize: "10px" }}>{edu.degree}</p> : null}
+                    {hasText(edu.institution) ? <p>{edu.institution}</p> : null}
+                    {hasText(edu.fieldOfStudy) ? <p style={{ fontStyle: "italic" }}>{edu.fieldOfStudy}</p> : null}
+                    {dateRange ? <p style={{ opacity: 0.8 }}>{dateRange}</p> : null}
+                  </div>
+                );
+              })}
+            </SidebarSection>
+          ) : null}
         </aside>
 
-        <section className="px-4 pb-4 pt-3">
-          <h1 className="text-4xl font-extrabold leading-none text-amber-600">{data.header?.fullName || "Your Name"}</h1>
-          {hasText(data.header?.headline) ? <p className="mt-1 text-xl font-semibold">{data.header.headline}</p> : null}
+        {/* Main */}
+        <section style={{ padding: "16px 16px 16px 14px", fontSize: "11px", lineHeight: 1.5, color: "#1a1a1a" }}>
+          <h1 style={{ fontSize: "30px", fontWeight: 800, lineHeight: 1.1, color: "#d47f13", margin: "0 0 3px", wordBreak: "break-word" }}>
+            {data.header?.fullName || "Your Name"}
+          </h1>
+          {hasText(data.header?.headline) ? (
+            <p style={{ fontSize: "12px", fontWeight: 600, color: "#5a4a3f", marginBottom: "6px" }}>
+              {data.header.headline}
+            </p>
+          ) : null}
 
+          {/* Summary */}
           {hasText(data.summary?.text) ? (
-            <CreativeBlock title="Career Objective">
+            <MainBlock title="Career Objective">
               {hasHtmlMarkup(data.summary.text) ? (
                 <div
                   className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                  style={{ fontSize: "11px", lineHeight: 1.6, color: "#2d2d2d" }}
                   dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }}
                 />
               ) : (
-                <p>{data.summary.text}</p>
+                <p style={{ fontSize: "11px", lineHeight: 1.6, color: "#2d2d2d" }}>{data.summary.text}</p>
               )}
-            </CreativeBlock>
+            </MainBlock>
           ) : null}
 
-          {firstExperience ? (
-            <CreativeBlock title="Professional Experience">
-              {hasText(firstExperience.jobTitle) ? <p className="font-semibold">{firstExperience.jobTitle}</p> : null}
-              {hasText(firstExperience.employer) ? <p>{firstExperience.employer}</p> : null}
-              {hasHtmlMarkup(firstExperience.bullets) ? (
-                <div
-                  className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
-                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(firstExperience.bullets) }}
-                />
-              ) : splitBullets(firstExperience.bullets).length ? (
-                <ul className="list-disc pl-4">
-                  {splitBullets(firstExperience.bullets).slice(0, 4).map((bullet, idx) => <li key={idx}>{bullet}</li>)}
-                </ul>
-              ) : null}
-            </CreativeBlock>
-          ) : null}
-
-          {firstEducation ? (
-            <CreativeBlock title="Education">
-              {hasText(firstEducation.endDate) ? <p className="font-semibold">{firstEducation.endDate}</p> : null}
-              {hasText(firstEducation.degree) ? <p className="font-semibold">{firstEducation.degree}</p> : null}
-              {hasText(firstEducation.institution) ? <p>{firstEducation.institution}</p> : null}
-              {hasHtmlMarkup(firstEducation.details) ? (
-                <div
-                  className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
-                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(firstEducation.details) }}
-                />
-              ) : splitBullets(firstEducation.details).length ? (
-                <ul className="mt-1 list-disc pl-4">
-                  {splitBullets(firstEducation.details).slice(0, 3).map((bullet, idx) => <li key={idx}>{bullet}</li>)}
-                </ul>
-              ) : null}
-            </CreativeBlock>
+          {/* Experience */}
+          {experience.length ? (
+            <MainBlock title="Professional Experience">
+              {experience.map((exp, i) => {
+                const dateRange = formatDateRange(exp.startDate, exp.endDate, exp.currentlyWorking);
+                const location = [exp.city, exp.country].filter(hasText).join(", ");
+                const bullets = splitBullets(exp.bullets);
+                return (
+                  <div key={i} style={{ marginBottom: i < experience.length - 1 ? "10px" : "0" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px" }}>
+                      <div>
+                        {hasText(exp.jobTitle) ? <p style={{ fontWeight: 700, fontSize: "11.5px", margin: 0 }}>{exp.jobTitle}</p> : null}
+                        {hasText(exp.employer) ? <p style={{ color: "#5a4a3f", fontSize: "10.5px", margin: "1px 0 0" }}>{exp.employer}</p> : null}
+                        {location ? <p style={{ fontSize: "10px", color: "#888", margin: "1px 0 0", fontStyle: "italic" }}>{location}</p> : null}
+                      </div>
+                      {dateRange ? (
+                        <p style={{ fontSize: "10px", color: "#666", whiteSpace: "nowrap", flexShrink: 0, paddingTop: "2px" }}>{dateRange}</p>
+                      ) : null}
+                    </div>
+                    {hasHtmlMarkup(exp.bullets) ? (
+                      <div
+                        className="[&_ul]:list-disc [&_ul]:pl-4 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-4"
+                        style={{ marginTop: "4px", fontSize: "11px", lineHeight: 1.55, color: "#2d2d2d" }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }}
+                      />
+                    ) : bullets.length ? (
+                      <ul style={{ listStyle: "disc", paddingLeft: "16px", margin: "4px 0 0", display: "flex", flexDirection: "column", gap: "2px" }}>
+                        {bullets.map((bullet, idx) => (
+                          <li key={idx} style={{ fontSize: "11px", lineHeight: 1.5, color: "#2d2d2d" }}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </MainBlock>
           ) : null}
         </section>
       </div>

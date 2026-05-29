@@ -1,17 +1,18 @@
-﻿import { hasHtmlMarkup, sanitizeRichHtml, splitBullets, splitByCommaOrLine, getAdditionalSections, getSectionByTitle } from "../common/previewUtils.js";
-import { FaCalendarDays, FaEnvelope, FaLocationDot, FaPhone } from "react-icons/fa6";
+import { hasHtmlMarkup, sanitizeRichHtml, splitBullets, splitByCommaOrLine, getAdditionalSections, getSectionByTitle } from "../common/previewUtils.js";
 
-function SimpleSectionTitle({ children }) {
+function SectionTitle({ children }) {
   return (
     <h3
       style={{
-        fontSize: "12pt",
+        fontSize: "9pt",
         fontWeight: 700,
-        letterSpacing: "1px",
-        marginTop: "18px",
+        letterSpacing: "0.18em",
+        textTransform: "uppercase",
+        marginTop: "16px",
         marginBottom: "6px",
         paddingBottom: "4px",
-        borderBottom: "1.5px solid #000"
+        borderBottom: "1.5px solid #111111",
+        color: "#111111"
       }}
     >
       {children}
@@ -19,20 +20,40 @@ function SimpleSectionTitle({ children }) {
   );
 }
 
+function ContactItem({ children }) {
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "4px", whiteSpace: "nowrap" }}>
+      {children}
+    </span>
+  );
+}
+
 export default function SimplePreview({ data }) {
-  const technicalSkills = splitByCommaOrLine(data.skills.primarySkills).join(", ");
+  const skills = splitByCommaOrLine(data?.skills?.primarySkills || "");
   const certificationsSection = getSectionByTitle(data.additional, "Certifications & Licenses");
   const languagesSection = getSectionByTitle(data.additional, "Languages");
   const certifications = splitByCommaOrLine(
     (certificationsSection?.items || []).join("\n") || data.additional.certifications
-  ).join(", ");
-  const languages = splitByCommaOrLine((languagesSection?.items || []).join("\n") || data.additional.languages || "").join(", ");
+  );
+  const languages = splitByCommaOrLine(
+    (languagesSection?.items || []).join("\n") || data.additional.languages || ""
+  );
   const extraSections = getAdditionalSections(data.additional).filter(
     (section) =>
-      !["certifications & licenses", "languages"].includes(String(section?.title || "").trim().toLowerCase()) &&
+      !["certifications & licenses", "languages"].includes(
+        String(section?.title || "").trim().toLowerCase()
+      ) &&
       Array.isArray(section?.items) &&
       section.items.some((item) => String(item || "").trim())
   );
+
+  const contactParts = [
+    data.header.email,
+    data.header.phone,
+    data.header.location,
+    data.additional?.linkedin || null,
+    data.additional?.portfolio || null,
+  ].filter(Boolean);
 
   return (
     <article
@@ -45,104 +66,156 @@ export default function SimplePreview({ data }) {
         padding: "20mm 18mm"
       }}
     >
-      <div className="h-full w-full">
-        <h1 style={{ fontSize: "24pt", fontWeight: 600, marginBottom: "4px", lineHeight: 1.2 }}>
-          {data.header.fullName || "Your Name"}
-        </h1>
-        <p style={{ fontSize: "10.5pt", color: "#444", marginBottom: "18px" }}>
-          {[data.header.email ? <span key="e" className="inline-flex items-center gap-1"><FaEnvelope size={10} /> {data.header.email}</span> : null, data.header.phone ? <span key="p" className="inline-flex items-center gap-1"><FaPhone size={10} /> {data.header.phone}</span> : null, data.header.location ? <span key="l" className="inline-flex items-center gap-1"><FaLocationDot size={10} /> {data.header.location}</span> : null].filter(Boolean).map((part, idx) => <span key={idx}>{part}</span>).reduce((acc, curr) => (acc.length ? [...acc, " | ", curr] : [curr]), []) ||
-            "email@example.com | +91 99999 99999 | City, Country"}
+      {/* Header */}
+      <h1 style={{ fontSize: "26pt", fontWeight: 700, marginBottom: "3px", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+        {data.header.fullName || "Your Name"}
+      </h1>
+      {data.header.headline ? (
+        <p style={{ fontSize: "11pt", color: "#444", marginBottom: "8px", fontStyle: "italic" }}>
+          {data.header.headline}
         </p>
+      ) : null}
+      {contactParts.length ? (
+        <p style={{ fontSize: "9.5pt", color: "#444", marginBottom: "0", lineHeight: 1.7, display: "flex", flexWrap: "wrap", gap: "2px 14px" }}>
+          {contactParts.map((part, idx) => (
+            <ContactItem key={idx}>{part}</ContactItem>
+          ))}
+        </p>
+      ) : null}
 
-        <SimpleSectionTitle>EXPERIENCE</SimpleSectionTitle>
-        {data.experience.map((exp, index) => {
-          const bulletList = splitBullets(exp.bullets);
-          return (
-            <div key={`${exp.jobTitle}-${index}`} style={{ marginTop: "12px" }}>
-              <div className="flex items-start justify-between gap-4" style={{ fontWeight: 700, fontSize: "11.5pt" }}>
-                <p>{exp.employer || "Company Name"}</p>
-                <p>
-                  <span className="inline-flex items-center gap-1"><FaCalendarDays size={11} /> {exp.startDate || "Start"} {exp.currentlyWorking ? "- Present" : exp.endDate ? `- ${exp.endDate}` : "- End"}</span>
-                </p>
-              </div>
+      {/* Summary */}
+      {String(data.summary?.text || "").trim() ? (
+        <>
+          <SectionTitle>Summary</SectionTitle>
+          {hasHtmlMarkup(data.summary.text) ? (
+            <div
+              style={{ fontSize: "10.5pt", lineHeight: 1.6 }}
+              className="[&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5"
+              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(data.summary.text) }}
+            />
+          ) : (
+            <p style={{ fontSize: "10.5pt", lineHeight: 1.6 }}>{data.summary.text}</p>
+          )}
+        </>
+      ) : null}
 
-              <p style={{ fontStyle: "italic", fontSize: "11pt", marginBottom: "4px" }}>
-                {exp.jobTitle || "Job Title"} | {[exp.city, exp.country].filter(Boolean).join(", ") || "Location"}
+      {/* Experience */}
+      <SectionTitle>Experience</SectionTitle>
+      {data.experience.map((exp, index) => {
+        const bulletList = splitBullets(exp.bullets);
+        const dateStr = [
+          exp.startDate || "",
+          exp.currentlyWorking ? "Present" : (exp.endDate || "")
+        ].filter(Boolean).join(" – ");
+        const location = [exp.city, exp.country].filter(Boolean).join(", ");
+
+        return (
+          <div key={`${exp.jobTitle}-${index}`} style={{ marginTop: index === 0 ? "0" : "12px" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
+              <p style={{ fontWeight: 700, fontSize: "11.5pt", margin: 0 }}>
+                {exp.employer || "Company Name"}
               </p>
-
-              {hasHtmlMarkup(exp.bullets) ? (
-                <div
-                  className="[&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5"
-                  dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }}
-                />
-              ) : (
-                <ul style={{ margin: "4px 0 8px 18px", padding: 0, listStyleType: "disc" }}>
-                  {(bulletList.length ? bulletList : ["Add measurable impact bullet points here."]).map((bullet, bulletIndex) => (
-                    <li key={bulletIndex} style={{ marginBottom: "4px" }}>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <p style={{ fontSize: "10pt", color: "#444", margin: 0, whiteSpace: "nowrap", flexShrink: 0 }}>
+                {dateStr}
+              </p>
             </div>
-          );
-        })}
+            <p style={{ fontStyle: "italic", fontSize: "11pt", marginBottom: "5px", marginTop: "1px", color: "#333" }}>
+              {exp.jobTitle || "Job Title"}{location ? ` · ${location}` : ""}
+            </p>
+            {hasHtmlMarkup(exp.bullets) ? (
+              <div
+                style={{ fontSize: "10.5pt", lineHeight: 1.55 }}
+                className="[&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5"
+                dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(exp.bullets) }}
+              />
+            ) : (
+              <ul style={{ margin: "4px 0 0 18px", padding: 0, listStyleType: "disc" }}>
+                {(bulletList.length ? bulletList : ["Add measurable impact bullet points here."]).map((bullet, bulletIndex) => (
+                  <li key={bulletIndex} style={{ marginBottom: "3px", fontSize: "10.5pt", lineHeight: 1.5 }}>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })}
 
-        <SimpleSectionTitle>EDUCATION</SimpleSectionTitle>
-        {data.education.map((edu, index) => (
-          <div key={`${edu.degree}-${index}`} style={{ marginTop: "10px" }}>
-            <div className="flex items-start justify-between gap-4" style={{ fontWeight: 700, fontSize: "11.5pt" }}>
-              <p>{edu.institution || "Institution"}</p>
-              <p><span className="inline-flex items-center gap-1"><FaCalendarDays size={11} /> {edu.endDate || "Graduation Date"}</span></p>
+      {/* Education */}
+      <SectionTitle>Education</SectionTitle>
+      {data.education.map((edu, index) => {
+        const gradDate = edu.currentlyStudying ? "Present" : edu.endDate || "Graduation Year";
+        const location = [edu.city, edu.country].filter(Boolean).join(", ");
+        return (
+          <div key={`${edu.degree}-${index}`} style={{ marginTop: index === 0 ? "0" : "10px" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
+              <p style={{ fontWeight: 700, fontSize: "11.5pt", margin: 0 }}>
+                {edu.institution || "Institution"}
+              </p>
+              <p style={{ fontSize: "10pt", color: "#444", margin: 0, whiteSpace: "nowrap", flexShrink: 0 }}>
+                {gradDate}
+              </p>
             </div>
-            <p style={{ fontStyle: "italic", fontSize: "11pt" }}>
-              {edu.degree || "Degree"} | {[edu.city, edu.country].filter(Boolean).join(", ") || "Location"}
+            <p style={{ fontStyle: "italic", fontSize: "11pt", marginTop: "1px", color: "#333" }}>
+              {edu.degree || "Degree"}
+              {edu.fieldOfStudy ? `, ${edu.fieldOfStudy}` : ""}
+              {location ? ` · ${location}` : ""}
             </p>
             {hasHtmlMarkup(edu.details) ? (
               <div
+                style={{ fontSize: "10.5pt", lineHeight: 1.55 }}
                 className="[&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5"
                 dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(edu.details) }}
               />
             ) : splitBullets(edu.details).length ? (
-              <ul style={{ margin: "4px 0 8px 18px", padding: 0, listStyleType: "disc" }}>
-                {splitBullets(edu.details).slice(0, 4).map((bullet, bulletIndex) => (
-                  <li key={bulletIndex} style={{ marginBottom: "4px" }}>
+              <ul style={{ margin: "4px 0 0 18px", padding: 0, listStyleType: "disc" }}>
+                {splitBullets(edu.details).map((bullet, bulletIndex) => (
+                  <li key={bulletIndex} style={{ marginBottom: "3px", fontSize: "10.5pt", lineHeight: 1.5 }}>
                     {bullet}
                   </li>
                 ))}
               </ul>
             ) : null}
           </div>
-        ))}
+        );
+      })}
 
-        <SimpleSectionTitle>OTHER</SimpleSectionTitle>
-        <ul style={{ margin: "4px 0 8px 18px", padding: 0, listStyleType: "disc" }}>
-          <li style={{ marginBottom: "4px" }}>
-            <strong>Technical Skills:</strong> {technicalSkills || "Add your key technical skills"}
+      {/* Skills & Certifications */}
+      <SectionTitle>Skills &amp; More</SectionTitle>
+      <ul style={{ margin: "0 0 0 18px", padding: 0, listStyleType: "disc" }}>
+        {skills.length ? (
+          <li style={{ marginBottom: "4px", fontSize: "10.5pt" }}>
+            <strong>Technical Skills:</strong> {skills.join(", ")}
           </li>
-          <li style={{ marginBottom: "4px" }}>
-            <strong>Certifications:</strong> {certifications || "Add certifications"}
+        ) : null}
+        {certifications.length ? (
+          <li style={{ marginBottom: "4px", fontSize: "10.5pt" }}>
+            <strong>Certifications:</strong> {certifications.join(", ")}
           </li>
-          <li style={{ marginBottom: "4px" }}>
-            <strong>Languages:</strong> {languages || "Add languages"}
+        ) : null}
+        {languages.length ? (
+          <li style={{ marginBottom: "4px", fontSize: "10.5pt" }}>
+            <strong>Languages:</strong> {languages.join(", ")}
           </li>
-        </ul>
+        ) : null}
+      </ul>
 
-        {extraSections.map((section) => (
-          <div key={section.id || section.title}>
-            <SimpleSectionTitle>{section.title || "Additional"}</SimpleSectionTitle>
-            <ul style={{ margin: "4px 0 8px 18px", padding: 0, listStyleType: "disc" }}>
-              {section.items.filter((item) => String(item || "").trim()).slice(0, 6).map((item, index) => (
-                <li key={`${section.title}-${index}`} style={{ marginBottom: "4px" }}>
+      {/* Extra sections */}
+      {extraSections.map((section) => (
+        <div key={section.id || section.title}>
+          <SectionTitle>{section.title || "Additional"}</SectionTitle>
+          <ul style={{ margin: "0 0 0 18px", padding: 0, listStyleType: "disc" }}>
+            {section.items
+              .filter((item) => String(item || "").trim())
+              .slice(0, 6)
+              .map((item, index) => (
+                <li key={`${section.title}-${index}`} style={{ marginBottom: "3px", fontSize: "10.5pt", lineHeight: 1.5 }}>
                   {item}
                 </li>
               ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+          </ul>
+        </div>
+      ))}
     </article>
   );
 }
-
-
