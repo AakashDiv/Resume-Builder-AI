@@ -130,7 +130,7 @@ export default function SimpleProfessionalPreview({
             </p>
           </div>
           <p style={{ fontFamily: "DM Sans, Arial, sans-serif", fontSize: "12px", color: mutedTextColor, fontStyle: "italic" }}>
-            {(edu.institution || "Institution") + (edu.fieldOfStudy || edu.country ? ` | ${edu.fieldOfStudy || edu.country}` : "")}
+            {(edu.institution || "Institution") + (edu.fieldOfStudy ? ` | ${edu.fieldOfStudy}` : "")}
           </p>
           {edu.details ? (
             <p style={{ fontFamily: "DM Sans, Arial, sans-serif", fontSize: "12px", color: mutedTextColor, marginTop: "3px" }}>

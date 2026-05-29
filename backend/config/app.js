@@ -19,6 +19,7 @@ import applicationsRoutes from "../routes/applications.routes.js";
 import schedulerRoutes from "../routes/scheduler.routes.js";
 import { stripeWebhook } from "../controllers/billing.controller.js";
 import { env } from "./env.js";
+
 import notFound from "../middleware/notFound.js";
 import errorHandler from "../middleware/errorHandler.js";
 
