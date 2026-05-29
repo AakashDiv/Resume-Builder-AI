@@ -9,10 +9,8 @@ import { getTemplateById, resumeTemplates } from "../data/resumeTemplates.js";
 import { useResumeBuilder } from "../context/ResumeBuilderContext.jsx";
 import {
   buildProfessionalQualityReport,
-  computeSmartPageOffsets,
   estimateResumePageCount,
-  normalizeResumeForPdf,
-  resolveResumeCanvasHeight
+  normalizeResumeForPdf
 } from "../utils/resumePdfQuality.js";
 
 const steps = [
@@ -117,6 +115,99 @@ const MONTH_OPTIONS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "
 const HEADER_COLOR_PRESETS = ["#1e2d3d", "#3a6186", "#4a8fa8", "#0f766e", "#b45309", "#7c3aed"];
 const BACKGROUND_COLOR_PRESETS = ["#0f172a", "#1e2d3d", "#f4f6f8", "#f5f1eb", "#ffffff", "#e2ebf0"];
 const TEXT_COLOR_PRESETS = ["#0f172a", "#1e2d3d", "#2d3748", "#475569", "#6b7a8d", "#ffffff"];
+const DEMO_RESUME_DATA = {
+  header: {
+    fullName: "Aakash Ralhan",
+    email: "aakash.ralhan@example.com",
+    phone: "+91 98765 43210",
+    location: "New Delhi, India",
+    headline: "MERN Stack Developer | React, Node.js, MongoDB",
+    photo: ""
+  },
+  summary: {
+    text:
+      "MERN Stack Developer with hands-on experience building responsive web apps, REST APIs, resume automation tools, job matching workflows, and admin dashboards. Strong in React, Node.js, Express, MongoDB, TailwindCSS, authentication, API integration, debugging, and performance-focused development."
+  },
+  experience: [
+    {
+      jobTitle: "Full Stack Developer",
+      employer: "Javin Global",
+      city: "New Delhi",
+      country: "India",
+      startDate: "May 2025",
+      endDate: "Present",
+      currentlyWorking: true,
+      bullets:
+        "Built full-stack features using React, Node.js, Express, and MongoDB for candidate profiles, resume workflows, job search, and dashboard experiences.\nCreated secure REST APIs with JWT authentication, validation, centralized error handling, and reusable service layers.\nImproved dashboard responsiveness and reduced repeated UI defects by standardizing TailwindCSS components and form states.\nIntegrated job APIs, queue processing, and automation services to support resume-job matching and application tracking workflows."
+    },
+    {
+      jobTitle: "Frontend Developer",
+      employer: "Freelance & Personal Projects",
+      city: "Remote",
+      country: "India",
+      startDate: "Jan 2023",
+      endDate: "Apr 2025",
+      currentlyWorking: false,
+      bullets:
+        "Delivered responsive websites and React interfaces for portfolio, dashboard, and business use cases with mobile-first layouts.\nConverted design references into reusable components with consistent spacing, typography, alignment, and cross-browser behavior.\nImproved web performance through image optimization, cleaner component structure, lazy loading, and reduced layout shifts."
+    }
+  ],
+  education: [
+    {
+      degree: "Bachelor's Degree",
+      institution: "National Institute of Information Technology",
+      fieldOfStudy: "Computer Science",
+      city: "Shimla",
+      country: "India",
+      startDate: "2018",
+      endDate: "2022",
+      currentlyStudying: false,
+      details:
+        "Relevant coursework: Data Structures, DBMS, Operating Systems, Computer Networks, Web Development.\nCompleted academic projects involving database modeling, API development, and responsive frontend implementation."
+    },
+    {
+      degree: "Diploma",
+      institution: "SD Senior Secondary School",
+      fieldOfStudy: "Non Medical",
+      city: "Shimla",
+      country: "India",
+      startDate: "2016",
+      endDate: "2018",
+      currentlyStudying: false,
+      details: "Built strong fundamentals in mathematics, analytical thinking, and computer science basics."
+    }
+  ],
+  skills: {
+    primarySkills:
+      "React, JavaScript, Node.js, Express.js, MongoDB, REST APIs, TailwindCSS, HTML5, CSS3, Git, JWT Authentication, API Integration, Redis, Puppeteer, Debugging, Performance Optimization"
+  },
+  additional: {
+    linkedin: "linkedin.com/in/aakash-ralhan",
+    portfolio: "github.com/aakash-ralhan",
+    certifications: "",
+    sections: [
+      {
+        id: "projects",
+        title: "Projects",
+        items: [
+          "AI Resume & Job Automation Platform | Full Stack | 2026 | Built a React, Node.js, MongoDB, Redis, Puppeteer, and OpenAI-ready platform for resume building, job scraping, match scoring, scheduled automation, and email notifications.",
+          "Professional Resume Rendering Engine | Frontend | 2026 | Created a shared A4 resume renderer for live preview, print, and PDF export with reusable sections, typography tokens, themes, and page-safe rendering.",
+          "Job Scraper & Matching Pipeline | Backend | 2026 | Integrated JSearch API, Python scraper fallback, embedding cache, deduplication, semantic scoring, and premium auto-apply queue workflows."
+        ]
+      },
+      {
+        id: "certifications_licenses",
+        title: "Certifications & Licenses",
+        items: ["Full Stack Web Development Certification", "MongoDB Basics Certification"]
+      },
+      {
+        id: "languages",
+        title: "Languages",
+        items: ["English", "Hindi"]
+      }
+    ]
+  }
+};
 
 function getTemplateColorPresets(template) {
   const templateId = String(template?.id || "");
@@ -134,6 +225,13 @@ function getTemplateColorPresets(template) {
       text: ["#2d2d2d", "#666666", "#242424", "#ffffff", "#e8a820", "#f0b833"]
     };
   }
+  if (templateId === "professional-cv") {
+    return {
+      accent: ["#2d2d2d", "#1a1a1a", "#2e4057", "#1e3a5f", "#3d2b56", "#1a3a2a"],
+      background: ["#2d2d2d", "#1a1a1a", "#2e4057", "#1e3a5f", "#3d2b56", "#374151"],
+      text: ["#111827", "#1a1a1a", "#374151", "#4b5563", "#ffffff", "#f9fafb"]
+    };
+  }
   return {
     accent: HEADER_COLOR_PRESETS,
     background: BACKGROUND_COLOR_PRESETS,
@@ -143,7 +241,7 @@ function getTemplateColorPresets(template) {
 
 function supportsHeaderColorPicker(template) {
   const templateId = String(template?.id || "");
-  return template?.category === "Modern" || ["modern-edge", "tech-focus", "creative-grid", "simple-professional"].includes(templateId);
+  return template?.category === "Modern" || ["modern-edge", "tech-focus", "creative-grid", "simple-professional", "professional-cv"].includes(templateId);
 }
 
 function getTemplateColorDefaults(template) {
@@ -189,6 +287,17 @@ function getTemplateColorDefaults(template) {
       mainBgColor: "#ffffff",
       primaryTextColor: "#1a1a1a",
       mutedTextColor: "#6b6b6b",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "professional-cv") {
+    return {
+      accentColor: template?.accent || "#2d2d2d",
+      headerBgColor: "#2d2d2d",
+      sidebarBgColor: "#2d2d2d",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#111827",
+      mutedTextColor: "#4b5563",
       inverseTextColor: "#ffffff"
     };
   }
@@ -314,7 +423,8 @@ export default function ResumeBuilderPage() {
     updateEducation,
     addEducation,
     removeEducation,
-    resetDraft
+    resetDraft,
+    loadDraft
   } = useResumeBuilder();
 
   const [activeStep, setActiveStep] = useState("header");
@@ -477,38 +587,30 @@ export default function ResumeBuilderPage() {
 
     setDownloading(true);
     try {
-      const contentWidth = targetNode.scrollWidth || A4_WIDTH_PX;
-      const contentHeight = resolveResumeCanvasHeight(targetNode, A4_HEIGHT_PX);
-
-      const canvas = await html2canvas(targetNode, {
-        scale: 2,
-        backgroundColor: "#ffffff",
-        useCORS: true,
-        width: contentWidth,
-        height: contentHeight,
-        windowWidth: contentWidth,
-        windowHeight: contentHeight,
-        scrollX: 0,
-        scrollY: 0
-      });
-
-      const image = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "pt", "a4");
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      const imageHeight = (canvas.height * pageWidth) / canvas.width;
-      const offsets = computeSmartPageOffsets({
-        targetNode,
-        imageHeightPt: imageHeight,
-        pageHeightPt: pageHeight,
-        pageWidthPt: pageWidth,
-        canvasWidthPx: canvas.width
-      });
 
-      offsets.forEach((offset, index) => {
+      const pageNodes = Array.from(targetNode.querySelectorAll("[data-resume-page='true']"));
+      const captureNodes = pageNodes.length ? pageNodes : [targetNode];
+
+      for (let index = 0; index < captureNodes.length; index += 1) {
+        const pageNode = captureNodes[index];
+        const canvas = await html2canvas(pageNode, {
+          scale: 2,
+          backgroundColor: "#ffffff",
+          useCORS: true,
+          width: pageNode.scrollWidth || A4_WIDTH_PX,
+          height: pageNode.scrollHeight || A4_HEIGHT_PX,
+          windowWidth: pageNode.scrollWidth || A4_WIDTH_PX,
+          windowHeight: pageNode.scrollHeight || A4_HEIGHT_PX,
+          scrollX: 0,
+          scrollY: 0
+        });
+
         if (index > 0) pdf.addPage();
-        pdf.addImage(image, "PNG", 0, -offset, pageWidth, imageHeight);
-      });
+        pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pageWidth, pageHeight);
+      }
 
       pdf.save(`${(resumeForRender.header.fullName || "resume").replace(/\s+/g, "_")}.pdf`);
     } finally {
@@ -534,6 +636,11 @@ export default function ResumeBuilderPage() {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set("template", normalized);
     setSearchParams(nextParams, { replace: true });
+  }
+
+  function fillDemoData() {
+    loadDraft(DEMO_RESUME_DATA);
+    setActiveStep("finalize");
   }
 
   return (
@@ -607,6 +714,13 @@ export default function ResumeBuilderPage() {
             <p className="text-sm text-slate-500">Template: {selectedTemplate.name}</p>
           </div>
           <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={fillDemoData}
+              className="rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-100"
+            >
+              Fill Demo Data
+            </button>
             <button onClick={resetDraft} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-50">
               Reset Draft
             </button>
@@ -677,33 +791,45 @@ export default function ResumeBuilderPage() {
           <span>Live Resume Preview</span>
         </p>
         <div ref={previewViewportRef} className="overflow-auto rounded-xl border border-slate-200 bg-slate-100 p-2">
-          <div style={{ height: `${A4_HEIGHT_PX * previewScale}px` }}>
+          <div style={{ height: `${A4_HEIGHT_PX * estimatedPages * previewScale}px`, overflow: "hidden" }}>
             <div
               ref={previewRef}
               className="origin-top-left"
               style={{
-                width: A4_WIDTH_MM,
-                minHeight: A4_HEIGHT_MM,
+                width: `${A4_WIDTH_PX}px`,
+                minHeight: `${A4_HEIGHT_PX}px`,
                 transform: `scale(${previewScale})`
               }}
             >
-              <DesignableResumePreview selectedTemplate={selectedTemplate} resumeData={resumeForRender} designSettings={designSettings} />
+              <DesignableResumePreview
+                selectedTemplate={selectedTemplate}
+                resumeData={resumeForRender}
+                designSettings={designSettings}
+                mode="preview"
+                onPageCountChange={setEstimatedPages}
+              />
             </div>
           </div>
         </div>
       </section>
       ) : null}
 
-      <div className="pointer-events-none fixed -left-[10000px] top-0 opacity-0" aria-hidden>
+      <div className="pointer-events-none fixed -left-[10000px] top-0" aria-hidden>
         <div
           ref={pdfRef}
           style={{
-            width: A4_WIDTH_MM,
-            minHeight: A4_HEIGHT_MM,
+            width: `${A4_WIDTH_PX}px`,
+            minHeight: `${A4_HEIGHT_PX}px`,
             background: "#ffffff"
           }}
         >
-          <DesignableResumePreview selectedTemplate={selectedTemplate} resumeData={resumeForRender} designSettings={designSettings} />
+          <DesignableResumePreview
+            selectedTemplate={selectedTemplate}
+            resumeData={resumeForRender}
+            designSettings={designSettings}
+            mode="pdf"
+            onPageCountChange={setEstimatedPages}
+          />
         </div>
       </div>
 
@@ -722,7 +848,13 @@ export default function ResumeBuilderPage() {
             </div>
             <div className="flex-1 overflow-auto bg-slate-100 p-4">
               <div className="mx-auto bg-white shadow-sm" style={{ width: A4_WIDTH_MM, minHeight: A4_HEIGHT_MM }}>
-                <DesignableResumePreview selectedTemplate={selectedTemplate} resumeData={resumeForRender} designSettings={designSettings} />
+                <DesignableResumePreview
+                  selectedTemplate={selectedTemplate}
+                  resumeData={resumeForRender}
+                  designSettings={designSettings}
+                  mode="print"
+                  onPageCountChange={setEstimatedPages}
+                />
               </div>
             </div>
           </div>
@@ -966,7 +1098,7 @@ function renderStepForm(step, data, actions) {
                 <select
                   value={item.degree || ""}
                   onChange={(event) => actions.updateEducation(index, "degree", event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base font-normal outline-none focus:border-brand-500"
+                  className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base font-normal text-slate-900 outline-none focus:border-brand-500"
                 >
                   <option value="">Select degree</option>
                   {DEGREE_OPTIONS.map((degree) => (
@@ -979,11 +1111,8 @@ function renderStepForm(step, data, actions) {
 
               <Input
                 label="Field of Study"
-                value={item.fieldOfStudy || item.country || ""}
-                onChange={(v) => {
-                  actions.updateEducation(index, "fieldOfStudy", v);
-                  actions.updateEducation(index, "country", v);
-                }}
+                value={item.fieldOfStudy || ""}
+                onChange={(v) => actions.updateEducation(index, "fieldOfStudy", v)}
               />
 
               <div className="md:col-span-2">
@@ -999,7 +1128,7 @@ function renderStepForm(step, data, actions) {
                       )
                     }
                     disabled={item.currentlyStudying}
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base outline-none focus:border-brand-500 disabled:opacity-60"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 outline-none focus:border-brand-500 disabled:opacity-60"
                   >
                     <option value="">Month</option>
                     {MONTH_OPTIONS.map((month) => (
@@ -1018,7 +1147,7 @@ function renderStepForm(step, data, actions) {
                       )
                     }
                     disabled={item.currentlyStudying}
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base outline-none focus:border-brand-500 disabled:opacity-60"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 outline-none focus:border-brand-500 disabled:opacity-60"
                   >
                     <option value="">Year</option>
                     {Array.from({ length: 70 }, (_, i) => String(1990 + i)).map((year) => (
@@ -1243,6 +1372,7 @@ function FinalizeReviewPanel({ data, actions }) {
             selectedTemplate={actions.selectedTemplate}
             resumeData={previewData}
             designSettings={actions.designSettings}
+            mode="preview"
           />
         </div>
       </section>
@@ -1349,7 +1479,7 @@ function ExperienceBulletComposer({ jobTitle, value, onChange }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={jobTitle ? `Try: ${jobTitle}` : "e.g. Front End Developer"}
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-brand-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-500"
           />
 
           <div className="mt-3 max-h-64 space-y-2 overflow-auto pr-1">
@@ -1487,7 +1617,7 @@ function SkillsComposer({ value, onChange }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="e.g. frontend, communication, testing"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-brand-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-500"
           />
 
           <div className="mt-3 max-h-64 space-y-2 overflow-auto pr-1">
@@ -1756,7 +1886,7 @@ function AdditionalSectionsEditor({ additional, onChange }) {
                 value={customSectionName}
                 onChange={(event) => setCustomSectionName(event.target.value)}
                 placeholder="e.g. Publications, Projects, Achievements"
-                className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-brand-500"
+                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-500"
               />
             </div>
 
@@ -1798,7 +1928,7 @@ function AdditionalSectionsEditor({ additional, onChange }) {
               <input
                 value={editingSection.title}
                 onChange={(event) => setEditingSection((prev) => ({ ...prev, title: event.target.value }))}
-                className="mb-4 w-full rounded-lg border border-slate-300 px-3 py-2 text-xl outline-none focus:border-brand-500"
+                className="mb-4 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-900 outline-none focus:border-brand-500"
               />
 
               <div className="space-y-2">
@@ -1813,7 +1943,7 @@ function AdditionalSectionsEditor({ additional, onChange }) {
                           return { ...prev, items: next };
                         })
                       }
-                      className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xl outline-none focus:border-brand-500"
+                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-900 outline-none focus:border-brand-500"
                     />
                     <button
                       type="button"
@@ -1906,7 +2036,7 @@ function RichTextEditor({ value, onChange, placeholder = "", mode = "paragraph",
         contentEditable
         suppressContentEditableWarning
         onInput={(event) => onChange(event.currentTarget.innerHTML)}
-        className="w-full px-3 py-2 text-sm outline-none"
+        className="w-full bg-white px-3 py-2 text-sm text-slate-900 outline-none"
         style={{ minHeight }}
         data-placeholder={placeholder}
       />
@@ -1956,7 +2086,7 @@ function Input({ label, value, onChange, disabled = false }) {
         value={value}
         disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-brand-500 disabled:bg-slate-100"
+        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 disabled:bg-slate-100 disabled:text-slate-500"
       />
     </label>
   );

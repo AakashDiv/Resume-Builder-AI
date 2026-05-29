@@ -1,20 +1,38 @@
-import ResumePdfPreview from "./ResumePdfPreview.jsx";
+import ResumeRenderer from "../../resume-engine/ResumeRenderer.jsx";
+import ProfessionalCVPreview from "../Professional/ProfessionalCVPreview.jsx";
 
-function getFontFamilyByKey(key) {
-  if (key === "roboto") return "Roboto, Arial, sans-serif";
-  if (key === "lato") return "Lato, Arial, sans-serif";
-  if (key === "poppins") return "Poppins, Arial, sans-serif";
-  if (key === "merriweather") return "Merriweather, Georgia, serif";
-  return "Inter, Helvetica, Arial, sans-serif";
-}
+const STANDALONE_TEMPLATES = {
+  "professional-cv": ProfessionalCVPreview
+};
 
-export default function DesignableResumePreview({ selectedTemplate, resumeData, designSettings }) {
-  const accent = designSettings?.accentColor || selectedTemplate?.accent || "#1d4ed8";
-  const fontFamily = getFontFamilyByKey(designSettings?.fontStyle || "inter");
+export default function DesignableResumePreview({
+  selectedTemplate,
+  resumeData,
+  designSettings,
+  mode = "preview",
+  onPageCountChange
+}) {
+  const StandaloneComponent = STANDALONE_TEMPLATES[selectedTemplate?.id];
+
+  if (StandaloneComponent) {
+    return (
+      <StandaloneComponent
+        data={resumeData}
+        sidebarBgColor={designSettings?.sidebarBgColor || "#2d2d2d"}
+        mainBgColor={designSettings?.mainBgColor || "#ffffff"}
+        primaryTextColor={designSettings?.primaryTextColor || "#111827"}
+        mutedTextColor={designSettings?.mutedTextColor || "#4b5563"}
+      />
+    );
+  }
 
   return (
-    <div style={{ ["--resume-accent-color"]: accent, ["--resume-font-family"]: fontFamily }}>
-      <ResumePdfPreview selectedTemplate={selectedTemplate} resumeData={resumeData} designSettings={designSettings} />
-    </div>
+    <ResumeRenderer
+      selectedTemplate={selectedTemplate}
+      resumeData={resumeData}
+      designSettings={designSettings}
+      mode={mode}
+      onPageCountChange={onPageCountChange}
+    />
   );
 }
