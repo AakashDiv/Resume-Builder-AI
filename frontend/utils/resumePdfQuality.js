@@ -83,11 +83,11 @@ export function normalizeResumeForPdf(resumeData) {
     );
   });
   const experience = meaningfulExperience.slice(0, LIMITS.maxExperienceEntries).map((item) => {
-    const bullets = cleanList(
-      splitBullets(item?.bullets || ""),
-      LIMITS.maxBulletsPerExperience,
-      LIMITS.maxBulletChars
-    );
+    const rawBullets = item?.bullets || "";
+    const bulletHasHtml = String(rawBullets).includes("<");
+    const bullets = bulletHasHtml
+      ? String(rawBullets)
+      : cleanList(splitBullets(rawBullets), LIMITS.maxBulletsPerExperience, LIMITS.maxBulletChars).join("\n");
     return {
       ...item,
       jobTitle: cleanText(item?.jobTitle),
@@ -96,7 +96,7 @@ export function normalizeResumeForPdf(resumeData) {
       country: cleanText(item?.country),
       startDate: cleanText(item?.startDate),
       endDate: cleanText(item?.endDate),
-      bullets: bullets.join("\n")
+      bullets
     };
   });
 
@@ -109,11 +109,11 @@ export function normalizeResumeForPdf(resumeData) {
     return Boolean(cleanText(item?.degree) || cleanText(item?.institution));
   });
   const education = meaningfulEducation.slice(0, LIMITS.maxEducationEntries).map((item) => {
-    const detailBullets = cleanList(
-      splitBullets(item?.details || ""),
-      LIMITS.maxBulletsPerEducation,
-      LIMITS.maxBulletChars
-    );
+    const rawDetails = item?.details || "";
+    const detailHasHtml = String(rawDetails).includes("<");
+    const details = detailHasHtml
+      ? String(rawDetails)
+      : cleanList(splitBullets(rawDetails), LIMITS.maxBulletsPerEducation, LIMITS.maxBulletChars).join("\n");
     return {
       ...item,
       degree: cleanText(item?.degree),
@@ -123,7 +123,7 @@ export function normalizeResumeForPdf(resumeData) {
       fieldOfStudy: cleanText(item?.fieldOfStudy),
       startDate: cleanText(item?.startDate),
       endDate: cleanText(item?.endDate),
-      details: detailBullets.join("\n")
+      details
     };
   });
 
@@ -153,8 +153,12 @@ export function normalizeResumeForPdf(resumeData) {
     warnings.push("Additional sections trimmed for print readability.");
   }
 
-  const summary = clampText(cleanText(source.summary?.text), LIMITS.summaryMaxChars);
-  if (cleanText(source.summary?.text).length > summary.length) {
+  const rawSummaryText = source.summary?.text || "";
+  const summaryHasHtml = String(rawSummaryText).includes("<");
+  const summary = summaryHasHtml
+    ? String(rawSummaryText)
+    : clampText(cleanText(rawSummaryText), LIMITS.summaryMaxChars);
+  if (!summaryHasHtml && cleanText(rawSummaryText).length > summary.length) {
     warnings.push("Summary shortened to avoid dense paragraphs.");
   }
 

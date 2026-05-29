@@ -51,22 +51,27 @@ const defaultState = {
 
 const ResumeBuilderContext = createContext(null);
 
+function normalizeDraft(draft) {
+  const source = draft || {};
+  return {
+    ...defaultState,
+    ...source,
+    header: { ...defaultState.header, ...(source.header || {}) },
+    skills: { ...defaultState.skills, ...(source.skills || {}) },
+    summary: { ...defaultState.summary, ...(source.summary || {}) },
+    additional: { ...defaultState.additional, ...(source.additional || {}) },
+    experience: Array.isArray(source.experience) && source.experience.length ? source.experience : defaultState.experience,
+    education: Array.isArray(source.education) && source.education.length ? source.education : defaultState.education
+  };
+}
+
 export function ResumeBuilderProvider({ children }) {
   const [resumeData, setResumeData] = useState(() => {
     try {
       const raw = localStorage.getItem(DRAFT_KEY);
       if (!raw) return defaultState;
       const parsed = JSON.parse(raw);
-      return {
-        ...defaultState,
-        ...parsed,
-        header: { ...defaultState.header, ...(parsed.header || {}) },
-        skills: { ...defaultState.skills, ...(parsed.skills || {}) },
-        summary: { ...defaultState.summary, ...(parsed.summary || {}) },
-        additional: { ...defaultState.additional, ...(parsed.additional || {}) },
-        experience: Array.isArray(parsed.experience) && parsed.experience.length ? parsed.experience : defaultState.experience,
-        education: Array.isArray(parsed.education) && parsed.education.length ? parsed.education : defaultState.education
-      };
+      return normalizeDraft(parsed);
     } catch (_error) {
       return defaultState;
     }
@@ -80,6 +85,9 @@ export function ResumeBuilderProvider({ children }) {
     () => ({
       resetDraft() {
         setResumeData(defaultState);
+      },
+      loadDraft(nextDraft) {
+        setResumeData(normalizeDraft(nextDraft));
       },
       updateHeader(field, value) {
         setResumeData((prev) => ({ ...prev, header: { ...prev.header, [field]: value } }));
