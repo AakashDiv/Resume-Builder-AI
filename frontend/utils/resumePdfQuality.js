@@ -58,6 +58,10 @@ function cleanList(values, maxItems, maxChars) {
   return trimmed.slice(0, maxItems).map((item) => clampText(item, maxChars));
 }
 
+function cleanFullList(values) {
+  return unique(values.map((item) => cleanText(item)).filter(Boolean));
+}
+
 function extractYear(value) {
   const match = String(value || "").match(/\b(19|20)\d{2}\b/);
   if (!match) return null;
@@ -69,10 +73,7 @@ export function normalizeResumeForPdf(resumeData) {
   const source = resumeData || {};
 
   const rawSkills = splitByCommaOrLine(source.skills?.primarySkills || "");
-  const normalizedSkills = cleanList(rawSkills, LIMITS.maxSkills, 40);
-  if (rawSkills.length > normalizedSkills.length) {
-    warnings.push("Skill list trimmed for cleaner resume density.");
-  }
+  const normalizedSkills = cleanFullList(rawSkills);
 
   const rawExperience = Array.isArray(source.experience) ? source.experience : [];
   const meaningfulExperience = rawExperience.filter((item) => {
@@ -82,12 +83,12 @@ export function normalizeResumeForPdf(resumeData) {
       splitBullets(item?.bullets).length
     );
   });
-  const experience = meaningfulExperience.slice(0, LIMITS.maxExperienceEntries).map((item) => {
+  const experience = meaningfulExperience.map((item) => {
     const rawBullets = item?.bullets || "";
     const bulletHasHtml = String(rawBullets).includes("<");
     const bullets = bulletHasHtml
       ? String(rawBullets)
-      : cleanList(splitBullets(rawBullets), LIMITS.maxBulletsPerExperience, LIMITS.maxBulletChars).join("\n");
+      : cleanFullList(splitBullets(rawBullets)).join("\n");
     return {
       ...item,
       jobTitle: cleanText(item?.jobTitle),
@@ -100,20 +101,16 @@ export function normalizeResumeForPdf(resumeData) {
     };
   });
 
-  if (meaningfulExperience.length > experience.length) {
-    warnings.push("Experience entries trimmed to keep layout professional.");
-  }
-
   const rawEducation = Array.isArray(source.education) ? source.education : [];
   const meaningfulEducation = rawEducation.filter((item) => {
     return Boolean(cleanText(item?.degree) || cleanText(item?.institution));
   });
-  const education = meaningfulEducation.slice(0, LIMITS.maxEducationEntries).map((item) => {
+  const education = meaningfulEducation.map((item) => {
     const rawDetails = item?.details || "";
     const detailHasHtml = String(rawDetails).includes("<");
     const details = detailHasHtml
       ? String(rawDetails)
-      : cleanList(splitBullets(rawDetails), LIMITS.maxBulletsPerEducation, LIMITS.maxBulletChars).join("\n");
+      : cleanFullList(splitBullets(rawDetails)).join("\n");
     return {
       ...item,
       degree: cleanText(item?.degree),
@@ -127,40 +124,24 @@ export function normalizeResumeForPdf(resumeData) {
     };
   });
 
-  if (meaningfulEducation.length > education.length) {
-    warnings.push("Education entries trimmed to improve visual balance.");
-  }
-
   const rawSections = Array.isArray(source.additional?.sections) ? source.additional.sections : [];
   const additionalSections = rawSections
     .filter((section) => cleanText(section?.title))
-    .slice(0, LIMITS.maxAdditionalSections)
     .map((section) => {
-      const items = cleanList(
-        Array.isArray(section?.items) ? section.items : [],
-        LIMITS.maxItemsPerAdditionalSection,
-        LIMITS.maxBulletChars
-      );
+      const items = cleanFullList(Array.isArray(section?.items) ? section.items : []);
       return {
         ...section,
-        title: clampText(cleanText(section?.title), 38),
+        title: cleanText(section?.title),
         items
       };
     })
     .filter((section) => section.items.length);
 
-  if (rawSections.length > additionalSections.length) {
-    warnings.push("Additional sections trimmed for print readability.");
-  }
-
   const rawSummaryText = source.summary?.text || "";
   const summaryHasHtml = String(rawSummaryText).includes("<");
   const summary = summaryHasHtml
     ? String(rawSummaryText)
-    : clampText(cleanText(rawSummaryText), LIMITS.summaryMaxChars);
-  if (!summaryHasHtml && cleanText(rawSummaryText).length > summary.length) {
-    warnings.push("Summary shortened to avoid dense paragraphs.");
-  }
+    : cleanText(rawSummaryText);
 
   return {
     data: {

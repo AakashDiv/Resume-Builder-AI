@@ -2,7 +2,23 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { useSearchParams } from "react-router-dom";
-import { FaDownload, FaEye, FaUser } from "react-icons/fa6";
+import {
+  FaBars,
+  FaBriefcase,
+  FaCheck,
+  FaChevronLeft,
+  FaChevronRight,
+  FaCircle,
+  FaCircleCheck,
+  FaCirclePlus,
+  FaDownload,
+  FaEye,
+  FaFileLines,
+  FaFlagCheckered,
+  FaGraduationCap,
+  FaLightbulb,
+  FaUser
+} from "react-icons/fa6";
 import TemplateThumbnail from "../components/TemplateThumbnail.jsx";
 import DesignableResumePreview from "../components/ResumePdf/common/DesignableResumePreview.jsx";
 import { getTemplateById, resumeTemplates } from "../data/resumeTemplates.js";
@@ -14,13 +30,13 @@ import {
 } from "../utils/resumePdfQuality.js";
 
 const steps = [
-  { key: "header", label: "Header" },
-  { key: "experience", label: "Experience" },
-  { key: "education", label: "Education" },
-  { key: "skills", label: "Skills" },
-  { key: "summary", label: "Summary" },
-  { key: "additional", label: "Additional Details" },
-  { key: "finalize", label: "Finalize" }
+  { key: "header", label: "Header", icon: FaUser },
+  { key: "experience", label: "Experience", icon: FaBriefcase },
+  { key: "education", label: "Education", icon: FaGraduationCap },
+  { key: "skills", label: "Skills", icon: FaLightbulb },
+  { key: "summary", label: "Summary", icon: FaFileLines },
+  { key: "additional", label: "Additional Details", icon: FaCirclePlus },
+  { key: "finalize", label: "Finalize", icon: FaFlagCheckered }
 ];
 const A4_WIDTH_PX = 794;
 const A4_HEIGHT_PX = 1123;
@@ -232,6 +248,132 @@ function getTemplateColorPresets(template) {
       text: ["#111827", "#1a1a1a", "#374151", "#4b5563", "#ffffff", "#f9fafb"]
     };
   }
+  if (templateId === "creative-1") {
+    return {
+      accent: ["#626465", "#555759", "#6f7173", "#ff9f18", "#3f3f46", "#111827"],
+      background: ["#626465", "#555759", "#6f7173", "#ffffff", "#fbfbfa", "#f4f4f2"],
+      text: ["#66676a", "#555759", "#3f3f46", "#ffffff", "#ff9f18", "#111827"]
+    };
+  }
+  if (templateId === "creative-2") {
+    return {
+      accent: ["#444a4d", "#3f4548", "#4a4f52", "#c9c9c9", "#ffffff", "#111827"],
+      background: ["#444a4d", "#f4f4f4", "#ffffff", "#fbfbfb", "#e5e7eb", "#f9fafb"],
+      text: ["#4a4f52", "#111827", "#444a4d", "#ffffff", "#6b7280", "#000000"]
+    };
+  }
+  if (templateId === "modern-professional-1") {
+    return {
+      accent: ["#303b4d", "#1f3449", "#263345", "#435166", "#607084", "#111827"],
+      background: ["#303b4d", "#e2e2e2", "#ffffff", "#f4f5f7", "#edf0f3", "#f9fafb"],
+      text: ["#313b4b", "#1f2937", "#4b5563", "#607084", "#ffffff", "#111827"]
+    };
+  }
+  if (templateId === "modern-professional-2") {
+    return {
+      accent: ["#173b5a", "#2f4359", "#4c91c9", "#255f93", "#1f2937", "#111827"],
+      background: ["#ffffff", "#f8fafc", "#f1f5f9", "#173b5a", "#2f4359", "#4c91c9"],
+      text: ["#20272b", "#555555", "#173b5a", "#2f4359", "#ffffff", "#111827"]
+    };
+  }
+  if (templateId === "modern-professional-3") {
+    return {
+      accent: ["#333c4c", "#273140", "#3f4858", "#5b6473", "#111827", "#000000"],
+      background: ["#e4ebf3", "#dbe4ee", "#ffffff", "#f8fafc", "#333c4c", "#273140"],
+      text: ["#333c4c", "#737373", "#4b5563", "#111827", "#ffffff", "#000000"]
+    };
+  }
+  if (templateId === "modern-professional-4") {
+    return {
+      accent: ["#173d5a", "#12334c", "#1f4b6d", "#2f4359", "#111827", "#000000"],
+      background: ["#173d5a", "#12334c", "#1f4b6d", "#ffffff", "#f8fafc", "#f1f5f9"],
+      text: ["#183c58", "#555555", "#173d5a", "#374151", "#ffffff", "#111827"]
+    };
+  }
+  if (templateId === "black-white-minimalist") {
+    return {
+      accent: ["#323b4c", "#111111", "#2b3443", "#3f4654", "#1f2937", "#475569"],
+      background: ["#323b4c", "#111111", "#2b3443", "#3f4654", "#1f2937", "#475569"],
+      text: ["#323846", "#111827", "#333333", "#4b5563", "#ffffff", "#f9fafb"]
+    };
+  }
+  if (templateId === "white-black-modern-minimalist") {
+    return {
+      accent: ["#272929", "#111111", "#2f3437", "#3d3d3d", "#1f2937", "#475569"],
+      background: ["#272929", "#111111", "#2f3437", "#3d3d3d", "#1f2937", "#475569"],
+      text: ["#3d3d3d", "#272727", "#737373", "#111827", "#ffffff", "#f9fafb"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-1") {
+    return {
+      accent: ["#2e3d50", "#111827", "#1f2937", "#334155", "#475569", "#000000"],
+      background: ["#ffffff", "#f8fafc", "#f5f7fb", "#eef2f7", "#e2e8f0", "#f9fafb"],
+      text: ["#2e3d50", "#111827", "#1f2937", "#334155", "#475569", "#000000"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-2") {
+    return {
+      accent: ["#000000", "#111827", "#1f2937", "#334155", "#475569", "#0000ff"],
+      background: ["#ffffff", "#f8fafc", "#f5f7fb", "#eef2f7", "#e2e8f0", "#f9fafb"],
+      text: ["#000000", "#111827", "#1f2937", "#334155", "#475569", "#0000ff"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-3") {
+    return {
+      accent: ["#8055a2", "#6f4592", "#8b5fb0", "#5b3a78", "#334155", "#111827"],
+      background: ["#ffffff", "#f8fafc", "#f5f7fb", "#faf7fd", "#eef2f7", "#f9fafb"],
+      text: ["#1e1e1e", "#111827", "#334155", "#475569", "#8055a2", "#000000"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-4") {
+    return {
+      accent: ["#1674ea", "#0f63d6", "#2563eb", "#1d4ed8", "#111827", "#000000"],
+      background: ["#ffffff", "#f8fafc", "#f5f7fb", "#eef2f7", "#e2e8f0", "#f9fafb"],
+      text: ["#1f2430", "#111827", "#374151", "#4b5563", "#1674ea", "#000000"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-5") {
+    return {
+      accent: ["#111111", "#000000", "#2d2d2d", "#4f4f4f", "#334155", "#1f2937"],
+      background: ["#ffffff", "#fbfbfb", "#f8fafc", "#f5f5f5", "#eef2f7", "#f9fafb"],
+      text: ["#111111", "#000000", "#2d2d2d", "#4f4f4f", "#374151", "#1f2937"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-6") {
+    return {
+      accent: ["#6366f1", "#4f46e5", "#5b5ff0", "#7c3aed", "#2563eb", "#111827"],
+      background: ["#ffffff", "#fbfbff", "#f8fafc", "#f5f7ff", "#eef2ff", "#f9fafb"],
+      text: ["#1d1d1f", "#111827", "#3f3f46", "#555555", "#6366f1", "#000000"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-7") {
+    return {
+      accent: ["#2562a0", "#0d8bff", "#1d4ed8", "#31343a", "#55575c", "#111827"],
+      background: ["#ffffff", "#d9edff", "#eef7ff", "#f8fafc", "#f5f7fb", "#f9fafb"],
+      text: ["#31343a", "#111827", "#55575c", "#2562a0", "#0d8bff", "#000000"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-8") {
+    return {
+      accent: ["#0f6890", "#0b5fa5", "#1d4ed8", "#000000", "#374151", "#111827"],
+      background: ["#ffffff", "#fbfdff", "#f8fafc", "#f5f7fb", "#eef6fb", "#f9fafb"],
+      text: ["#000000", "#111827", "#1f2937", "#374151", "#0f6890", "#0b5fa5"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-9") {
+    return {
+      accent: ["#df3527", "#c93024", "#ef4444", "#3a3a3d", "#5f5f62", "#111827"],
+      background: ["#ffffff", "#fbfbfb", "#f8fafc", "#f5f5f5", "#eef2f7", "#f9fafb"],
+      text: ["#3a3a3d", "#111827", "#6f6f73", "#5f5f62", "#df3527", "#000000"]
+    };
+  }
+  if (templateId === "ats-friendly-resume-10") {
+    return {
+      accent: ["#1557e6", "#1d4ed8", "#2563eb", "#0b5fa5", "#171717", "#5d5d5d"],
+      background: ["#ffffff", "#fbfdff", "#f8fafc", "#f5f7fb", "#eef6ff", "#f9fafb"],
+      text: ["#171717", "#111827", "#5d5d5d", "#374151", "#1557e6", "#000000"]
+    };
+  }
   return {
     accent: HEADER_COLOR_PRESETS,
     background: BACKGROUND_COLOR_PRESETS,
@@ -241,7 +383,7 @@ function getTemplateColorPresets(template) {
 
 function supportsHeaderColorPicker(template) {
   const templateId = String(template?.id || "");
-  return template?.category === "Modern" || ["modern-edge", "tech-focus", "creative-grid", "simple-professional", "professional-cv"].includes(templateId);
+  return template?.category === "Modern" || ["modern-edge", "tech-focus", "creative-grid", "simple-professional", "professional-cv", "creative-1", "creative-2", "modern-professional-1", "modern-professional-2", "modern-professional-3", "modern-professional-4", "black-white-minimalist", "white-black-modern-minimalist", "ats-friendly-resume-1", "ats-friendly-resume-2", "ats-friendly-resume-3", "ats-friendly-resume-4", "ats-friendly-resume-5", "ats-friendly-resume-6", "ats-friendly-resume-7", "ats-friendly-resume-8", "ats-friendly-resume-9", "ats-friendly-resume-10"].includes(templateId);
 }
 
 function getTemplateColorDefaults(template) {
@@ -298,6 +440,204 @@ function getTemplateColorDefaults(template) {
       mainBgColor: "#ffffff",
       primaryTextColor: "#111827",
       mutedTextColor: "#4b5563",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "creative-1") {
+    return {
+      accentColor: template?.accent || "#626465",
+      headerBgColor: "#626465",
+      sidebarBgColor: "#626465",
+      mainBgColor: "#fbfbfa",
+      primaryTextColor: "#66676a",
+      mutedTextColor: "#66676a",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "creative-2") {
+    return {
+      accentColor: template?.accent || "#444a4d",
+      headerBgColor: "#444a4d",
+      sidebarBgColor: "#f4f4f4",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#4a4f52",
+      mutedTextColor: "#6b7280",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "modern-professional-1") {
+    return {
+      accentColor: template?.accent || "#303b4d",
+      headerBgColor: "#303b4d",
+      sidebarBgColor: "#e2e2e2",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#313b4b",
+      mutedTextColor: "#4b5563",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "modern-professional-2") {
+    return {
+      accentColor: template?.accent || "#173b5a",
+      headerBgColor: "#173b5a",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#20272b",
+      mutedTextColor: "#555555",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "modern-professional-3") {
+    return {
+      accentColor: template?.accent || "#333c4c",
+      headerBgColor: "#333c4c",
+      sidebarBgColor: "#e4ebf3",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#333c4c",
+      mutedTextColor: "#737373",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "modern-professional-4") {
+    return {
+      accentColor: template?.accent || "#173d5a",
+      headerBgColor: "#173d5a",
+      sidebarBgColor: "#173d5a",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#183c58",
+      mutedTextColor: "#555555",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "black-white-minimalist") {
+    return {
+      accentColor: template?.accent || "#323b4c",
+      headerBgColor: "#323b4c",
+      sidebarBgColor: "#323b4c",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#323846",
+      mutedTextColor: "#747474",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "white-black-modern-minimalist") {
+    return {
+      accentColor: template?.accent || "#272929",
+      headerBgColor: "#272929",
+      sidebarBgColor: "#272929",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#3d3d3d",
+      mutedTextColor: "#737373",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-1") {
+    return {
+      accentColor: template?.accent || "#2e3d50",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#2e3d50",
+      mutedTextColor: "#475569",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-2") {
+    return {
+      accentColor: template?.accent || "#000000",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#000000",
+      mutedTextColor: "#111827",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-3") {
+    return {
+      accentColor: template?.accent || "#8055a2",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#1e1e1e",
+      mutedTextColor: "#334155",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-4") {
+    return {
+      accentColor: template?.accent || "#1674ea",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#1f2430",
+      mutedTextColor: "#4b5563",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-5") {
+    return {
+      accentColor: template?.accent || "#111111",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#111111",
+      mutedTextColor: "#4f4f4f",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-6") {
+    return {
+      accentColor: template?.accent || "#6366f1",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#1d1d1f",
+      mutedTextColor: "#555555",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-7") {
+    return {
+      accentColor: template?.accent || "#2562a0",
+      headerBgColor: "#d9edff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#31343a",
+      mutedTextColor: "#55575c",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-8") {
+    return {
+      accentColor: template?.accent || "#0f6890",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#000000",
+      mutedTextColor: "#374151",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-9") {
+    return {
+      accentColor: template?.accent || "#df3527",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#3a3a3d",
+      mutedTextColor: "#6f6f73",
+      inverseTextColor: "#ffffff"
+    };
+  }
+  if (templateId === "ats-friendly-resume-10") {
+    return {
+      accentColor: template?.accent || "#1557e6",
+      headerBgColor: "#ffffff",
+      sidebarBgColor: "#ffffff",
+      mainBgColor: "#ffffff",
+      primaryTextColor: "#171717",
+      mutedTextColor: "#5d5d5d",
       inverseTextColor: "#ffffff"
     };
   }
@@ -454,6 +794,7 @@ export default function ResumeBuilderPage() {
   const previewViewportRef = useRef(null);
   const pdfRef = useRef(null);
   const [previewScale, setPreviewScale] = useState(1);
+  const [previewContentHeight, setPreviewContentHeight] = useState(A4_HEIGHT_PX);
   const [estimatedPages, setEstimatedPages] = useState(1);
 
   const normalizedResult = useMemo(() => normalizeResumeForPdf(resumeData), [resumeData]);
@@ -572,6 +913,30 @@ export default function ResumeBuilderPage() {
     };
   }, [resumeForRender, designSettings, selectedTemplate.id]);
 
+  useEffect(() => {
+    if (activeStep === "finalize") return;
+    const node = previewRef.current;
+    if (!node) return;
+
+    let rafId = 0;
+    const updateHeight = () => {
+      setPreviewContentHeight(Math.max(A4_HEIGHT_PX, node.scrollHeight || node.getBoundingClientRect().height || A4_HEIGHT_PX));
+    };
+    const schedule = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateHeight);
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(schedule);
+    observer.observe(node);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
+  }, [activeStep, resumeForRender, designSettings, selectedTemplate.id]);
+
   async function handlePhotoUpload(file) {
     if (!file) return;
     const reader = new FileReader();
@@ -653,7 +1018,7 @@ export default function ResumeBuilderPage() {
           : isSidebarExpanded
             ? "lg:grid-cols-[220px,minmax(0,1fr),420px]"
             : "lg:grid-cols-[76px,minmax(0,1fr),420px]"
-      }`}
+      } text-slate-900`}
     >
       <aside className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm print:hidden">
         <div>
@@ -662,10 +1027,10 @@ export default function ResumeBuilderPage() {
             <button
               type="button"
               onClick={() => setIsSidebarExpanded((prev) => !prev)}
-              className="rounded-md border border-slate-300 px-2 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              className="inline-flex items-center justify-center rounded-md border border-slate-300 px-2 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               title={isSidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
             >
-              Menu
+              {isSidebarExpanded ? <FaChevronLeft aria-hidden /> : <FaBars aria-hidden />}
             </button>
           </div>
           <div className="h-2 rounded-full bg-slate-200">
@@ -678,6 +1043,7 @@ export default function ResumeBuilderPage() {
           {steps.map((step) => {
             const active = activeStep === step.key;
             const done = completedMap[step.key];
+            const StepIcon = step.icon;
             return (
               <button
                 key={step.key}
@@ -689,8 +1055,13 @@ export default function ResumeBuilderPage() {
               >
                 {isSidebarExpanded ? (
                   <>
-                    <span>{step.label}</span>
-                    <span className={`text-xs ${done ? "text-emerald-600" : "text-slate-400"}`}>{done ? "?" : "?"}</span>
+                    <span className="flex min-w-0 items-center gap-2">
+                      <StepIcon className="shrink-0 text-sm" aria-hidden />
+                      <span className="truncate">{step.label}</span>
+                    </span>
+                    <span className={`text-xs ${done ? "text-emerald-600" : active ? "text-brand-600" : "text-slate-400"}`}>
+                      {done ? <FaCircleCheck aria-label="Complete" /> : active ? <FaChevronRight aria-label="Current" /> : <FaCircle aria-label="Not started" />}
+                    </span>
                   </>
                 ) : (
                   <span
@@ -698,7 +1069,7 @@ export default function ResumeBuilderPage() {
                       active ? "border-brand-600 bg-brand-600 text-white" : done ? "border-emerald-500 text-emerald-600" : "border-slate-300 text-slate-500"
                     }`}
                   >
-                    {steps.findIndex((item) => item.key === step.key) + 1}
+                    {done ? <FaCheck aria-hidden /> : <StepIcon aria-hidden />}
                   </span>
                 )}
               </button>
@@ -710,7 +1081,7 @@ export default function ResumeBuilderPage() {
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm print:hidden">
         <header className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-extrabold">{steps.find((item) => item.key === activeStep)?.label}</h2>
+            <h2 className="text-3xl font-extrabold text-slate-950">{steps.find((item) => item.key === activeStep)?.label}</h2>
             <p className="text-sm text-slate-500">Template: {selectedTemplate.name}</p>
           </div>
           <div className="flex gap-2">
@@ -721,12 +1092,12 @@ export default function ResumeBuilderPage() {
             >
               Fill Demo Data
             </button>
-            <button onClick={resetDraft} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-50">
+            <button onClick={resetDraft} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
               Reset Draft
             </button>
             <button
               onClick={() => setIsPreviewOpen(true)}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-50"
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
             >
               <FaEye className="text-xs" />
               <span>Preview</span>
@@ -769,7 +1140,7 @@ export default function ResumeBuilderPage() {
             type="button"
             onClick={goToPreviousStep}
             disabled={activeStep === "header"}
-            className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Previous Section
           </button>
@@ -791,7 +1162,7 @@ export default function ResumeBuilderPage() {
           <span>Live Resume Preview</span>
         </p>
         <div ref={previewViewportRef} className="overflow-auto rounded-xl border border-slate-200 bg-slate-100 p-2">
-          <div style={{ height: `${A4_HEIGHT_PX * estimatedPages * previewScale}px`, overflow: "hidden" }}>
+          <div style={{ width: `${A4_WIDTH_PX * previewScale}px`, height: `${previewContentHeight * previewScale}px`, overflow: "hidden" }}>
             <div
               ref={previewRef}
               className="origin-top-left"
@@ -896,6 +1267,9 @@ function renderStepForm(step, data, actions) {
                 type="file"
                 accept="image/*"
                 onChange={(event) => actions.handlePhotoUpload(event.target.files?.[0])}
+                onClick={(event) => {
+                  event.currentTarget.value = "";
+                }}
                 className="hidden"
               />
             </label>
@@ -910,121 +1284,125 @@ function renderStepForm(step, data, actions) {
         </div>
 
         {showColorPicker ? (
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-sm font-semibold text-slate-700">Template Color</p>
-            <p className="mt-0.5 text-xs text-slate-500">Choose one of the default colors or set a custom color.</p>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              {colorPresets.accent.map((color) => {
-                const isActive = (actions.designSettings?.accentColor || "").toLowerCase() === color.toLowerCase();
-                return (
-                  <button
-                    key={color}
-                    type="button"
-                    onClick={() => actions.setDesignSettings((prev) => ({ ...prev, accentColor: color }))}
-                    className={`h-7 w-7 rounded-full border-2 transition ${isActive ? "border-slate-700" : "border-white/80 hover:border-slate-400"}`}
-                    style={{ backgroundColor: color }}
-                    title={color}
-                    aria-label={`Select color ${color}`}
-                  />
-                );
-              })}
-              <label className="ml-1 flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600">
-                Custom
-                <input
-                  type="color"
-                  value={actions.designSettings?.accentColor || "#2563eb"}
-                  onChange={(event) => actions.setDesignSettings((prev) => ({ ...prev, accentColor: event.target.value }))}
-                  className="h-6 w-8 cursor-pointer border-0 bg-transparent p-0"
-                />
-              </label>
+          <details className="group rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-800 [&::-webkit-details-marker]:hidden">
+              <span>Resume color setting</span>
+              <FaChevronRight className="text-xs text-slate-500 transition group-open:rotate-90" aria-hidden />
+            </summary>
+            <div className="mt-4 space-y-4">
+              <div>
+                <p className="text-sm font-semibold text-slate-700">Template Color</p>
+                <p className="mt-0.5 text-xs text-slate-500">Choose one of the default colors or set a custom color.</p>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  {colorPresets.accent.map((color) => {
+                    const isActive = (actions.designSettings?.accentColor || "").toLowerCase() === color.toLowerCase();
+                    return (
+                      <button
+                        key={color}
+                        type="button"
+                        onClick={() => actions.setDesignSettings((prev) => ({ ...prev, accentColor: color }))}
+                        className={`h-7 w-7 rounded-full border-2 transition ${isActive ? "border-slate-700" : "border-white/80 hover:border-slate-400"}`}
+                        style={{ backgroundColor: color }}
+                        title={color}
+                        aria-label={`Select color ${color}`}
+                      />
+                    );
+                  })}
+                  <label className="ml-1 flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600">
+                    Custom
+                    <input
+                      type="color"
+                      value={actions.designSettings?.accentColor || "#2563eb"}
+                      onChange={(event) => actions.setDesignSettings((prev) => ({ ...prev, accentColor: event.target.value }))}
+                      className="h-6 w-8 cursor-pointer border-0 bg-transparent p-0"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-200 pt-4">
+                <p className="text-sm font-semibold text-slate-700">Background Colors</p>
+                <p className="mt-0.5 text-xs text-slate-500">Change header, sidebar, and main background colors.</p>
+
+                {[
+                  { key: "headerBgColor", label: "Header BG", fallback: "#1e2d3d" },
+                  { key: "sidebarBgColor", label: "Sidebar BG", fallback: "#f4f6f8" },
+                  { key: "mainBgColor", label: "Main BG", fallback: "#ffffff" }
+                ].map((item) => (
+                  <div key={item.key} className="mt-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">{item.label}</p>
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      {colorPresets.background.map((color) => {
+                        const current = String(actions.designSettings?.[item.key] || item.fallback).toLowerCase();
+                        const isActive = current === color.toLowerCase();
+                        return (
+                          <button
+                            key={`${item.key}-${color}`}
+                            type="button"
+                            onClick={() => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: color }))}
+                            className={`h-7 w-7 rounded-full border-2 transition ${isActive ? "border-slate-700" : "border-white/80 hover:border-slate-400"}`}
+                            style={{ backgroundColor: color }}
+                            title={color}
+                            aria-label={`${item.label} ${color}`}
+                          />
+                        );
+                      })}
+                      <label className="ml-1 flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600">
+                        Custom
+                        <input
+                          type="color"
+                          value={actions.designSettings?.[item.key] || item.fallback}
+                          onChange={(event) => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: event.target.value }))}
+                          className="h-6 w-8 cursor-pointer border-0 bg-transparent p-0"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-slate-200 pt-4">
+                <p className="text-sm font-semibold text-slate-700">Text Colors</p>
+                <p className="mt-0.5 text-xs text-slate-500">Change primary, muted, and light text colors.</p>
+
+                {[
+                  { key: "primaryTextColor", label: "Primary Text", fallback: "#1e2d3d" },
+                  { key: "mutedTextColor", label: "Muted Text", fallback: "#6b7a8d" },
+                  { key: "inverseTextColor", label: "Inverse Text", fallback: "#ffffff" }
+                ].map((item) => (
+                  <div key={item.key} className="mt-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">{item.label}</p>
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      {colorPresets.text.map((color) => {
+                        const current = String(actions.designSettings?.[item.key] || item.fallback).toLowerCase();
+                        const isActive = current === color.toLowerCase();
+                        return (
+                          <button
+                            key={`${item.key}-${color}`}
+                            type="button"
+                            onClick={() => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: color }))}
+                            className={`h-7 w-7 rounded-full border-2 transition ${isActive ? "border-slate-700" : "border-white/80 hover:border-slate-400"}`}
+                            style={{ backgroundColor: color }}
+                            title={color}
+                            aria-label={`${item.label} ${color}`}
+                          />
+                        );
+                      })}
+                      <label className="ml-1 flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600">
+                        Custom
+                        <input
+                          type="color"
+                          value={actions.designSettings?.[item.key] || item.fallback}
+                          onChange={(event) => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: event.target.value }))}
+                          className="h-6 w-8 cursor-pointer border-0 bg-transparent p-0"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ) : null}
-
-        {showColorPicker ? (
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-sm font-semibold text-slate-700">Background Colors</p>
-            <p className="mt-0.5 text-xs text-slate-500">Change header, sidebar, and main background colors.</p>
-
-            {[
-              { key: "headerBgColor", label: "Header BG", fallback: "#1e2d3d" },
-              { key: "sidebarBgColor", label: "Sidebar BG", fallback: "#f4f6f8" },
-              { key: "mainBgColor", label: "Main BG", fallback: "#ffffff" }
-            ].map((item) => (
-              <div key={item.key} className="mt-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">{item.label}</p>
-                <div className="mt-2 flex flex-wrap items-center gap-2">
-                  {colorPresets.background.map((color) => {
-                    const current = String(actions.designSettings?.[item.key] || item.fallback).toLowerCase();
-                    const isActive = current === color.toLowerCase();
-                    return (
-                      <button
-                        key={`${item.key}-${color}`}
-                        type="button"
-                        onClick={() => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: color }))}
-                        className={`h-7 w-7 rounded-full border-2 transition ${isActive ? "border-slate-700" : "border-white/80 hover:border-slate-400"}`}
-                        style={{ backgroundColor: color }}
-                        title={color}
-                        aria-label={`${item.label} ${color}`}
-                      />
-                    );
-                  })}
-                  <label className="ml-1 flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600">
-                    Custom
-                    <input
-                      type="color"
-                      value={actions.designSettings?.[item.key] || item.fallback}
-                      onChange={(event) => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: event.target.value }))}
-                      className="h-6 w-8 cursor-pointer border-0 bg-transparent p-0"
-                    />
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : null}
-
-        {showColorPicker ? (
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-sm font-semibold text-slate-700">Text Colors</p>
-            <p className="mt-0.5 text-xs text-slate-500">Change primary, muted, and light text colors.</p>
-
-            {[
-              { key: "primaryTextColor", label: "Primary Text", fallback: "#1e2d3d" },
-              { key: "mutedTextColor", label: "Muted Text", fallback: "#6b7a8d" },
-              { key: "inverseTextColor", label: "Inverse Text", fallback: "#ffffff" }
-            ].map((item) => (
-              <div key={item.key} className="mt-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">{item.label}</p>
-                <div className="mt-2 flex flex-wrap items-center gap-2">
-                  {colorPresets.text.map((color) => {
-                    const current = String(actions.designSettings?.[item.key] || item.fallback).toLowerCase();
-                    const isActive = current === color.toLowerCase();
-                    return (
-                      <button
-                        key={`${item.key}-${color}`}
-                        type="button"
-                        onClick={() => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: color }))}
-                        className={`h-7 w-7 rounded-full border-2 transition ${isActive ? "border-slate-700" : "border-white/80 hover:border-slate-400"}`}
-                        style={{ backgroundColor: color }}
-                        title={color}
-                        aria-label={`${item.label} ${color}`}
-                      />
-                    );
-                  })}
-                  <label className="ml-1 flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600">
-                    Custom
-                    <input
-                      type="color"
-                      value={actions.designSettings?.[item.key] || item.fallback}
-                      onChange={(event) => actions.setDesignSettings((prev) => ({ ...prev, [item.key]: event.target.value }))}
-                      className="h-6 w-8 cursor-pointer border-0 bg-transparent p-0"
-                    />
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
+          </details>
         ) : null}
       </div>
     );
