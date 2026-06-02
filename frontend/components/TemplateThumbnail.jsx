@@ -87,6 +87,7 @@ const SAMPLE_DATA = {
 export default function TemplateThumbnail({ template, className = "h-full w-full" }) {
   const wrapperRef = useRef(null);
   const [scale, setScale] = useState(0.202);
+  const thumbnailImage = template?.thumbnailImage;
 
   useEffect(() => {
     const node = wrapperRef.current;
@@ -125,6 +126,14 @@ export default function TemplateThumbnail({ template, className = "h-full w-full
       ref={wrapperRef}
       className={`overflow-hidden rounded-sm border border-slate-200 bg-white shadow-md ${className}`}
     >
+      {thumbnailImage ? (
+        <img
+          src={thumbnailImage}
+          alt={`${template.name} preview`}
+          className="h-full w-full object-contain"
+          draggable="false"
+        />
+      ) : (
       <div
         style={{
           transformOrigin: "top left",
@@ -143,6 +152,7 @@ export default function TemplateThumbnail({ template, className = "h-full w-full
           mode="thumbnail"
         />
       </div>
+      )}
     </div>
   );
 }

@@ -90,12 +90,6 @@ export default function HomePage() {
       color: "#fb923c",
     },
     {
-      category: "Simple",
-      label: "Simple Templates",
-      template: resumeTemplates.find(t => t.category === "Simple") || resumeTemplates[1],
-      color: "#22d3ee",
-    },
-    {
       category: "Modern",
       label: "Modern Templates",
       template: resumeTemplates.find(t => t.category === "Modern") || resumeTemplates[2],

@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { resumeTemplates } from "../data/resumeTemplates.js";
 import TemplateThumbnail from "../components/TemplateThumbnail.jsx";
 
-const categories = ["All", "Creative", "Simple", "Modern"];
+const categories = ["All", "Creative", "Modern", "Minimalist", "ATS"];
 
 export default function TemplatesPage() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function TemplatesPage() {
   );
 
   return (
-    <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 md:grid-cols-[260px,1fr] md:px-6">
+    <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-10 text-slate-900 md:grid-cols-[260px,1fr] md:px-6">
       <aside className="rounded-2xl border border-slate-200 bg-white p-5">
         <p className="text-sm font-bold uppercase tracking-wide text-slate-500">Categories</p>
         <div className="mt-3 space-y-2">
@@ -41,7 +41,7 @@ export default function TemplatesPage() {
       </aside>
 
       <div>
-        <h1 className="text-4xl font-extrabold">Resume Template Library</h1>
+        <h1 className="text-4xl font-extrabold text-slate-950">Resume Template Library</h1>
         <p className="mt-2 text-lg text-slate-600">Choose from AI-optimized templates to land your dream job faster.</p>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -54,7 +54,7 @@ export default function TemplatesPage() {
                 </div>
               </div>
               <div className="p-4">
-                <p className="text-xl font-bold">{template.name}</p>
+                <p className="text-xl font-bold text-slate-950">{template.name}</p>
                 <p className="text-sm text-slate-500">{template.category}</p>
                 <button
                   onClick={() => navigate(`/builder?template=${template.id}`)}
