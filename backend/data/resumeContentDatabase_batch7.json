@@ -1,0 +1,611 @@
+{
+  "experience": [
+    {
+      "role": "Machine Learning Engineer",
+      "tags": ["machine learning", "ml", "python", "tensorflow", "pytorch", "mlops", "sklearn", "deep learning"],
+      "phrases": [
+        "Designed and deployed production-grade ML pipelines covering data ingestion, feature engineering, model training, evaluation, and serving.",
+        "Built and optimized deep learning models using TensorFlow and PyTorch for image classification achieving 95%+ accuracy on benchmark datasets.",
+        "Developed end-to-end MLOps infrastructure using MLflow, Kubeflow, and SageMaker enabling reproducible, versioned model deployments.",
+        "Reduced model inference latency from 800ms to 120ms through model quantization, ONNX conversion, and TensorRT optimization.",
+        "Built real-time feature pipelines using Apache Kafka and Spark Streaming enabling sub-second feature freshness for online models.",
+        "Implemented automated model retraining pipelines triggered by data drift detection reducing model degradation in production.",
+        "Delivered recommendation system using matrix factorization and deep embedding models increasing click-through rate by 25%.",
+        "Designed A/B testing infrastructure for model evaluation enabling safe shadow deployment and gradual traffic shifting.",
+        "Collaborated with data scientists to productionize research prototypes translating Jupyter notebooks into scalable, tested ML services.",
+        "Built model monitoring dashboards tracking prediction drift, feature distribution shifts, and business metric impact post-deployment.",
+        "Optimized distributed model training on multi-GPU clusters reducing training time for large models from 12 hours to 90 minutes.",
+        "Implemented automated hyperparameter tuning using Optuna and Ray Tune improving model performance by 15% without manual iteration.",
+        "Built data versioning and experiment tracking workflows using DVC and MLflow ensuring full reproducibility across all ML experiments.",
+        "Developed custom loss functions and evaluation metrics tailored to specific business requirements beyond standard benchmark metrics.",
+        "Managed ML infrastructure on AWS SageMaker and GCP Vertex AI including training jobs, endpoints, and batch transform pipelines.",
+        "Designed feature stores using Feast and Tecton eliminating feature duplication across 12 production models.",
+        "Built NLP preprocessing pipelines including tokenization, embeddings, and fine-tuning of transformer models for domain-specific tasks.",
+        "Established ML code review standards, unit testing for data pipelines, and model validation gates before production promotion.",
+        "Reduced cloud ML training costs by 40% through Spot Instance training, efficient data loaders, and mixed precision training.",
+        "Mentored data scientists on software engineering best practices, code quality, and production readiness for ML systems."
+      ]
+    },
+    {
+      "role": "AI Engineer",
+      "tags": ["ai", "artificial intelligence", "llm", "generative ai", "python", "openai", "langchain", "nlp"],
+      "phrases": [
+        "Built and deployed large language model (LLM) powered applications using OpenAI GPT-4, Claude, and Llama 2 APIs.",
+        "Designed RAG (Retrieval-Augmented Generation) pipelines using LangChain, Pinecone, and ChromaDB enabling context-aware AI responses.",
+        "Developed prompt engineering frameworks and prompt templates optimizing LLM output quality, consistency, and cost efficiency.",
+        "Fine-tuned open-source LLMs (Llama 2, Mistral) using LoRA and PEFT on domain-specific datasets improving task accuracy by 30%.",
+        "Built AI-powered document processing pipelines extracting structured data from PDFs, invoices, and contracts using vision models.",
+        "Developed conversational AI chatbots with multi-turn memory, tool calling, and fallback handling for enterprise customer support.",
+        "Implemented vector similarity search using FAISS and Pinecone enabling semantic search across millions of documents.",
+        "Built AI evaluation frameworks measuring hallucination rate, relevance, faithfulness, and latency for production LLM systems.",
+        "Designed multi-agent AI workflows using LangGraph and AutoGen for complex reasoning, research, and task orchestration.",
+        "Integrated AI features into product APIs using FastAPI with async inference, streaming responses, and token usage monitoring.",
+        "Built image generation and editing workflows using Stable Diffusion and DALL-E APIs for creative and commercial use cases.",
+        "Implemented responsible AI guardrails including content filtering, PII detection, and output validation for production deployments.",
+        "Reduced LLM API inference costs by 45% through prompt compression, caching with semantic hashing, and model routing strategies.",
+        "Built AI-powered search and recommendation features replacing rule-based systems improving user engagement metrics by 20%.",
+        "Developed speech-to-text and text-to-speech pipelines using Whisper and ElevenLabs for voice-enabled AI applications.",
+        "Designed and built AI agent tools including web search, code execution, database query, and API calling capabilities.",
+        "Established LLMOps practices including prompt versioning, A/B testing of model variants, and continuous evaluation pipelines.",
+        "Collaborated with product and business teams to identify high-value AI use cases and translate them into production prototypes.",
+        "Built knowledge graph integrations combining structured data retrieval with LLM reasoning for complex enterprise Q&A applications.",
+        "Contributed to internal AI developer platform providing reusable components for retrieval, generation, and evaluation across teams."
+      ]
+    },
+    {
+      "role": "Cyber Security Analyst",
+      "tags": ["cyber security", "security", "soc", "siem", "threat analysis", "incident response", "penetration testing", "vulnerability"],
+      "phrases": [
+        "Monitored and triaged security alerts in SIEM platforms (Splunk, Microsoft Sentinel) handling 200+ daily alerts with a 98% accuracy rate.",
+        "Led incident response activities for security events including malware infections, phishing attacks, and unauthorized access attempts.",
+        "Conducted vulnerability assessments and penetration testing on web applications, APIs, and internal network infrastructure.",
+        "Performed threat hunting activities identifying advanced persistent threats (APTs) and lateral movement patterns in network logs.",
+        "Implemented and tuned SIEM detection rules reducing false positive alert volume by 60% while maintaining threat detection coverage.",
+        "Managed endpoint security using CrowdStrike Falcon and Microsoft Defender for Endpoint across 5,000+ corporate devices.",
+        "Conducted phishing simulation campaigns and security awareness training reducing employee click rates from 22% to 4%.",
+        "Performed digital forensics investigations preserving evidence and producing chain-of-custody reports for legal and HR proceedings.",
+        "Managed vulnerability remediation programs coordinating with IT teams to patch critical CVEs within defined SLA windows.",
+        "Developed and maintained incident response playbooks covering ransomware, data breaches, DDoS, and insider threat scenarios.",
+        "Conducted security reviews of cloud infrastructure configurations identifying and remediating AWS and Azure misconfigurations.",
+        "Implemented zero-trust network access (ZTNA) controls reducing the attack surface across remote workforce environments.",
+        "Collaborated with development teams in secure SDLC reviews identifying security flaws during design and code review phases.",
+        "Produced monthly threat intelligence reports summarizing industry attack trends, IOCs, and recommended defensive actions.",
+        "Managed DLP (Data Loss Prevention) policies detecting and blocking unauthorized data exfiltration attempts across email and endpoints.",
+        "Participated in red team/blue team exercises improving detection capabilities and refining incident response procedures.",
+        "Configured and managed firewall rules, IDS/IPS policies, and network segmentation controls across enterprise environments.",
+        "Ensured compliance with ISO 27001, SOC 2, GDPR, and PCI-DSS frameworks through regular audits and control assessments.",
+        "Automated threat intelligence ingestion using Python scripts integrating MISP and VirusTotal feeds into SIEM detection rules.",
+        "Mentored junior SOC analysts on alert triage, investigation techniques, and incident documentation best practices."
+      ]
+    },
+    {
+      "role": "Network Engineer",
+      "tags": ["networking", "cisco", "routing", "switching", "firewall", "vpn", "tcp/ip", "ccna", "ccnp"],
+      "phrases": [
+        "Designed, implemented, and maintained enterprise LAN/WAN network infrastructure supporting 3,000+ end users across 5 office locations.",
+        "Configured and managed Cisco routers and switches with OSPF, BGP, and EIGRP routing protocols for optimized traffic flow.",
+        "Deployed and managed Palo Alto and Cisco ASA firewalls with zone-based policies, NAT rules, and VPN configurations.",
+        "Implemented SD-WAN solutions using Cisco Viptela and VMware VeloCloud reducing WAN costs by 35% and improving performance.",
+        "Managed IPSec and SSL VPN infrastructure providing secure remote access for 2,000+ remote workforce users.",
+        "Designed and deployed wireless network infrastructure using Cisco Meraki and Aruba controllers across 10 office locations.",
+        "Conducted network capacity planning and traffic analysis using SolarWinds and PRTG ensuring infrastructure scaled with business growth.",
+        "Implemented QoS policies prioritizing voice and video traffic ensuring consistent call quality across VoIP and video conferencing systems.",
+        "Led network infrastructure migration projects including data centre relocation and campus network redesigns with zero unplanned downtime.",
+        "Managed VLAN segmentation, spanning tree configuration, and port security policies across enterprise switching infrastructure.",
+        "Configured and maintained DNS, DHCP, and NTP services ensuring reliable name resolution and time synchronization across the network.",
+        "Deployed network access control (NAC) solutions enforcing device compliance and restricting unauthorized endpoint access.",
+        "Performed network troubleshooting using Wireshark, traceroute, and packet capture analysis resolving complex connectivity issues.",
+        "Managed ISP relationships and BGP peering configurations maintaining 99.99% internet uptime across dual-carrier WAN setup.",
+        "Implemented network monitoring and alerting using SolarWinds NPM detecting and resolving performance issues proactively.",
+        "Hardened network devices following CIS benchmark and vendor security best practices reducing attack surface across the environment.",
+        "Managed IPv4 address space and led IPv6 adoption project preparing infrastructure for future address space requirements.",
+        "Documented network topology diagrams, IP addressing schemes, and runbooks maintaining accurate and up-to-date network documentation.",
+        "Collaborated with security teams to implement network segmentation and micro-segmentation reducing blast radius of potential breaches.",
+        "Provided Level 3 escalation support for network incidents ensuring swift resolution of high-priority connectivity and performance issues."
+      ]
+    },
+    {
+      "role": "UI Designer",
+      "tags": ["ui design", "figma", "user interface", "visual design", "design systems", "prototyping", "css", "typography"],
+      "phrases": [
+        "Designed pixel-perfect user interface screens for web and mobile applications in Figma collaborating directly with product and engineering teams.",
+        "Built and maintained comprehensive design systems with reusable component libraries, tokens, and guidelines adopted across 5 product teams.",
+        "Created high-fidelity interactive prototypes in Figma enabling stakeholder review and user testing before development commenced.",
+        "Translated business requirements and user research findings into intuitive, visually polished interface designs.",
+        "Conducted design reviews with frontend engineers ensuring accurate implementation of spacing, typography, color, and interaction patterns.",
+        "Designed responsive layouts optimized for desktop, tablet, and mobile screen sizes maintaining visual consistency across breakpoints.",
+        "Collaborated with UX researchers to incorporate usability testing findings and user feedback into iterative design improvements.",
+        "Produced detailed design specifications and redlines enabling developers to implement designs accurately without repeated clarification.",
+        "Designed accessible interfaces meeting WCAG 2.1 AA standards for color contrast, focus states, and keyboard navigation.",
+        "Led visual redesign projects modernizing legacy product interfaces increasing user satisfaction scores by 28%.",
+        "Applied typography, color theory, and grid systems to create visually harmonious and brand-aligned interface designs.",
+        "Created animation and micro-interaction specifications using Principle and After Effects communicating intended motion to developers.",
+        "Designed dashboard and data visualization interfaces making complex data legible and actionable for end users.",
+        "Participated in brand identity projects defining color palettes, typography scales, and iconography for new product launches.",
+        "Managed design file organization and component library versioning in Figma ensuring team-wide consistency and reusability.",
+        "Contributed to design critique sessions providing constructive feedback that elevated the quality of team output.",
+        "Designed onboarding flows, empty states, error pages, and loading screens covering the full range of interface states.",
+        "Created icon sets and illustration styles aligned to product brand guidelines for consistent visual language across the application.",
+        "Collaborated with marketing teams to ensure visual consistency between product UI and brand campaign materials.",
+        "Delivered designs within agile sprint cycles adapting to shifting requirements while maintaining high design quality standards."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "Machine Learning Engineer",
+      "tags": ["machine learning", "ml", "python", "tensorflow", "pytorch", "mlops"],
+      "skills": [
+        "Python (NumPy, pandas, scikit-learn)",
+        "TensorFlow & Keras",
+        "PyTorch",
+        "MLOps (MLflow, Kubeflow, SageMaker)",
+        "Feature Engineering & Feature Stores",
+        "Model Deployment (FastAPI, TorchServe)",
+        "Apache Spark & PySpark",
+        "Apache Kafka (Streaming)",
+        "Docker & Kubernetes",
+        "AWS SageMaker / GCP Vertex AI",
+        "Distributed Training (Horovod, DDP)",
+        "Model Optimization (ONNX, TensorRT)",
+        "Experiment Tracking (MLflow, DVC)",
+        "SQL & Data Pipelines",
+        "Git & Version Control",
+        "Hyperparameter Tuning (Optuna, Ray Tune)",
+        "NLP (Transformers, HuggingFace)",
+        "Data Drift & Model Monitoring"
+      ]
+    },
+    {
+      "role": "AI Engineer",
+      "tags": ["ai", "llm", "generative ai", "langchain", "openai", "python", "rag"],
+      "skills": [
+        "Large Language Models (GPT-4, Claude, Llama)",
+        "LangChain & LangGraph",
+        "RAG (Retrieval-Augmented Generation)",
+        "Vector Databases (Pinecone, ChromaDB, FAISS)",
+        "Prompt Engineering",
+        "Fine-Tuning (LoRA, PEFT, QLoRA)",
+        "Python (FastAPI, asyncio)",
+        "OpenAI / Anthropic / HuggingFace APIs",
+        "Multi-Agent Frameworks (AutoGen, CrewAI)",
+        "Embeddings & Semantic Search",
+        "Stable Diffusion / DALL-E",
+        "Whisper (Speech-to-Text)",
+        "Docker & Cloud Deployment",
+        "LLMOps & AI Evaluation",
+        "SQL & Data Retrieval",
+        "Responsible AI & Guardrails",
+        "NLP & Text Processing",
+        "Git & Version Control"
+      ]
+    },
+    {
+      "role": "Cyber Security Analyst",
+      "tags": ["cyber security", "soc", "siem", "incident response", "penetration testing", "vulnerability"],
+      "skills": [
+        "SIEM (Splunk, Microsoft Sentinel, QRadar)",
+        "Incident Response & Forensics",
+        "Threat Hunting & Intelligence",
+        "Vulnerability Assessment (Nessus, Qualys)",
+        "Penetration Testing (Burp Suite, Metasploit)",
+        "Endpoint Security (CrowdStrike, Defender)",
+        "Firewall & IDS/IPS Management",
+        "MITRE ATT&CK Framework",
+        "Cloud Security (AWS, Azure)",
+        "Zero Trust & NAC",
+        "DLP & Data Protection",
+        "Python / PowerShell Scripting",
+        "Network Traffic Analysis (Wireshark)",
+        "ISO 27001 / SOC 2 / GDPR / PCI-DSS",
+        "Phishing Simulation & Awareness Training",
+        "Digital Forensics (FTK, Autopsy)",
+        "OSINT Techniques"
+      ]
+    },
+    {
+      "role": "Network Engineer",
+      "tags": ["networking", "cisco", "routing", "switching", "firewall", "vpn", "tcp/ip"],
+      "skills": [
+        "Cisco Routers & Switches",
+        "Routing Protocols (OSPF, BGP, EIGRP)",
+        "Firewall Management (Palo Alto, Cisco ASA)",
+        "SD-WAN (Cisco Viptela, VMware VeloCloud)",
+        "VPN (IPSec, SSL, MPLS)",
+        "Wireless Networking (Cisco Meraki, Aruba)",
+        "VLAN & Network Segmentation",
+        "TCP/IP & OSI Model",
+        "Network Monitoring (SolarWinds, PRTG)",
+        "Wireshark & Packet Analysis",
+        "DNS, DHCP, NTP",
+        "QoS & Traffic Engineering",
+        "IPv4 & IPv6 Addressing",
+        "Network Access Control (NAC)",
+        "Data Centre Networking",
+        "Linux Networking",
+        "Bash & Python Scripting"
+      ]
+    },
+    {
+      "role": "UI Designer",
+      "tags": ["ui design", "figma", "user interface", "visual design", "design systems", "prototyping"],
+      "skills": [
+        "Figma",
+        "Adobe XD",
+        "Sketch",
+        "Design Systems & Component Libraries",
+        "Prototyping & Interaction Design",
+        "Responsive & Mobile UI Design",
+        "Typography & Color Theory",
+        "Grid Systems & Layout Design",
+        "Iconography & Illustration",
+        "Accessibility (WCAG 2.1)",
+        "Design Tokens",
+        "Micro-interactions & Animation (Principle)",
+        "HTML & CSS (Handoff Context)",
+        "User Research Collaboration",
+        "Adobe Photoshop & Illustrator",
+        "Zeplin / Design Handoff",
+        "Agile / Sprint Design Delivery"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "Machine Learning Engineer",
+      "tags": ["machine learning", "ml", "python", "tensorflow", "pytorch", "mlops"],
+      "options": [
+        {
+          "title": "Experienced ML Engineer",
+          "text": "Machine Learning Engineer with 4+ years of experience building and deploying production ML systems. Expert in Python, TensorFlow, PyTorch, and MLOps tooling with a track record of reducing model inference latency, automating retraining pipelines, and delivering measurable business impact through production-grade ML solutions."
+        },
+        {
+          "title": "MLOps & Production ML Specialist",
+          "text": "ML Engineer specializing in MLOps infrastructure and production model deployment. Experienced in MLflow, Kubeflow, and SageMaker building automated pipelines that take models from research prototype to scalable, monitored production service with zero manual intervention."
+        },
+        {
+          "title": "Deep Learning & NLP Engineer",
+          "text": "Machine Learning Engineer with deep expertise in deep learning, NLP, and transformer-based models. Built and fine-tuned production NLP systems using HuggingFace achieving state-of-the-art performance on domain-specific tasks while maintaining production reliability standards."
+        },
+        {
+          "title": "Junior Machine Learning Engineer",
+          "text": "Motivated ML Engineer with hands-on experience in Python, scikit-learn, and TensorFlow. Familiar with feature engineering, model evaluation, and ML experiment tracking. Eager to contribute to production ML systems and grow expertise in MLOps and large-scale model deployment."
+        }
+      ]
+    },
+    {
+      "role": "AI Engineer",
+      "tags": ["ai", "llm", "generative ai", "langchain", "openai", "rag"],
+      "options": [
+        {
+          "title": "Generative AI Engineer",
+          "text": "AI Engineer with 3+ years of experience building production applications on top of large language models. Expert in LangChain, RAG architectures, and prompt engineering delivering intelligent AI features that improve user experience and automate complex knowledge work."
+        },
+        {
+          "title": "LLM Application Developer",
+          "text": "AI Engineer specializing in LLM-powered product development. Experienced in OpenAI, Anthropic, and open-source model APIs with expertise in RAG pipelines, fine-tuning, and multi-agent workflows. Delivered AI features reducing manual effort by 60%+ across enterprise use cases."
+        },
+        {
+          "title": "AI Engineer – NLP & Conversational AI",
+          "text": "AI Engineer with a strong NLP background building conversational AI systems, document intelligence pipelines, and semantic search engines. Expert in embedding models, vector databases, and LLM orchestration frameworks enabling context-aware, grounded AI applications."
+        },
+        {
+          "title": "Junior AI Engineer",
+          "text": "Junior AI Engineer with hands-on experience building LLM-based applications using LangChain and OpenAI APIs. Familiar with RAG patterns, vector databases, and prompt engineering. Passionate about generative AI and eager to build production-scale intelligent systems."
+        }
+      ]
+    },
+    {
+      "role": "Cyber Security Analyst",
+      "tags": ["cyber security", "soc", "siem", "incident response"],
+      "options": [
+        {
+          "title": "Experienced Cyber Security Analyst",
+          "text": "Cyber Security Analyst with 4+ years of experience in SOC operations, incident response, and threat hunting. Proficient in Splunk and Microsoft Sentinel with a proven ability to detect, investigate, and contain security incidents while reducing alert fatigue and improving detection fidelity."
+        },
+        {
+          "title": "SOC Analyst – Threat Detection & Response",
+          "text": "SOC Analyst specializing in threat detection, SIEM tuning, and incident response. Experienced in MITRE ATT&CK-based threat hunting, malware analysis, and digital forensics. Reduced mean time to respond (MTTR) by 50% through playbook automation and detection rule optimization."
+        },
+        {
+          "title": "Security Analyst – Vulnerability & Compliance",
+          "text": "Cyber Security Analyst with expertise in vulnerability management, cloud security, and compliance frameworks. Experienced in coordinating remediation programs across ISO 27001, SOC 2, and PCI-DSS ensuring the organization maintains a strong and auditable security posture."
+        },
+        {
+          "title": "Junior Cyber Security Analyst",
+          "text": "Motivated Junior Security Analyst with CompTIA Security+ certification and hands-on SOC experience in alert triage, Splunk queries, and incident documentation. Eager to grow skills in threat hunting, penetration testing, and advanced incident response techniques."
+        }
+      ]
+    },
+    {
+      "role": "Network Engineer",
+      "tags": ["networking", "cisco", "routing", "switching", "firewall", "vpn"],
+      "options": [
+        {
+          "title": "Experienced Network Engineer",
+          "text": "Network Engineer with 5+ years of experience designing, deploying, and managing enterprise LAN/WAN and data centre networks. CCNP certified with deep expertise in Cisco routing and switching, Palo Alto firewalls, and SD-WAN delivering reliable, high-performance network infrastructure."
+        },
+        {
+          "title": "Network & Security Infrastructure Engineer",
+          "text": "Network Engineer with a strong focus on network security, firewall management, and zero-trust architecture. Experienced in Cisco ASA, Palo Alto, and VPN technologies maintaining 99.99% network uptime while enforcing robust security controls across enterprise environments."
+        },
+        {
+          "title": "SD-WAN & Cloud Networking Engineer",
+          "text": "Network Engineer specializing in SD-WAN, cloud networking, and hybrid connectivity. Delivered SD-WAN deployments reducing WAN costs by 35% and improving branch performance. Experienced in AWS Transit Gateway, Azure VNet, and Direct Connect for cloud network integration."
+        },
+        {
+          "title": "Junior Network Engineer",
+          "text": "CCNA-certified Network Engineer with hands-on experience in Cisco routing, switching, VLAN configuration, and basic firewall management. Eager to grow into advanced networking roles covering SD-WAN, cloud networking, and enterprise security infrastructure."
+        }
+      ]
+    },
+    {
+      "role": "UI Designer",
+      "tags": ["ui design", "figma", "user interface", "visual design", "design systems"],
+      "options": [
+        {
+          "title": "Experienced UI Designer",
+          "text": "UI Designer with 4+ years of experience crafting polished, user-centered interfaces for web and mobile products. Expert in Figma with a strong command of design systems, responsive layouts, and accessibility standards. Consistently delivered designs that elevated product aesthetics and improved user engagement."
+        },
+        {
+          "title": "Design Systems & Component Specialist",
+          "text": "UI Designer specializing in building and maintaining scalable design systems. Created comprehensive component libraries with design tokens adopted across multiple product teams, reducing design-to-development cycle time by 40% and ensuring visual consistency at scale."
+        },
+        {
+          "title": "UI Designer – SaaS & Product Design",
+          "text": "Product-focused UI Designer with experience designing complex SaaS dashboards, data-heavy interfaces, and enterprise web applications. Skilled at making dense information visually clear and navigable while maintaining brand consistency and accessibility compliance."
+        },
+        {
+          "title": "Junior UI Designer",
+          "text": "Creative UI Designer with strong Figma skills and a solid foundation in typography, color theory, and responsive design. Experienced in contributing to design systems and producing detailed design specs for developer handoff. Passionate about creating clean, accessible, and visually compelling interfaces."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "Machine Learning Engineer",
+      "tags": ["machine learning", "ml", "python", "tensorflow", "pytorch", "mlops"],
+      "items": [
+        "Reduced model inference latency from 800ms to 120ms through ONNX conversion, quantization, and TensorRT optimization.",
+        "Built automated ML retraining pipeline cutting model degradation incidents from 8 per quarter to zero.",
+        "Reduced cloud ML training costs by 40% through Spot Instance training and mixed precision techniques.",
+        "Delivered recommendation system that increased user click-through rate by 25% and session duration by 18%.",
+        "Reduced model deployment cycle from 3 weeks to 2 days by building self-service MLOps deployment tooling.",
+        "Improved model accuracy by 18% through systematic feature engineering and hyperparameter optimization with Optuna.",
+        "Built feature store eliminating duplicate feature computation saving 30% of daily data pipeline compute costs.",
+        "Reduced distributed training time for large model from 12 hours to 90 minutes using multi-GPU optimization.",
+        "Established ML unit testing and validation gates preventing 3 underperforming models from reaching production.",
+        "Mentored 4 data scientists on production ML engineering practices enabling team to independently ship models to production."
+      ]
+    },
+    {
+      "role": "AI Engineer",
+      "tags": ["ai", "llm", "generative ai", "langchain", "openai"],
+      "items": [
+        "Reduced LLM API costs by 45% through prompt compression, semantic caching, and intelligent model routing strategies.",
+        "Built RAG pipeline achieving 92% answer accuracy on internal knowledge base Q&A replacing manual support lookup.",
+        "Delivered AI document extraction system processing 10,000 invoices per day with 98% field extraction accuracy.",
+        "Reduced customer support ticket volume by 35% by deploying LLM-powered chatbot handling Tier 1 queries autonomously.",
+        "Fine-tuned Llama 2 model on domain-specific dataset improving task accuracy by 30% over base model baseline.",
+        "Built AI evaluation framework measuring 5 quality dimensions enabling data-driven model selection for production.",
+        "Reduced average AI feature development cycle from 6 weeks to 2 weeks by building reusable LLM component library.",
+        "Achieved sub-200ms API response time for LLM-powered search feature through async streaming and caching.",
+        "Implemented responsible AI guardrails blocking 99.8% of policy-violating outputs before reaching end users.",
+        "Delivered AI-powered onboarding assistant reducing new user time-to-activation from 14 days to 3 days."
+      ]
+    },
+    {
+      "role": "Cyber Security Analyst",
+      "tags": ["cyber security", "soc", "siem", "incident response"],
+      "items": [
+        "Reduced SIEM false positive rate by 60% through detection rule tuning and alert logic optimization.",
+        "Led incident response for ransomware attack containing threat within 2 hours preventing data encryption of 500+ endpoints.",
+        "Identified and remediated 3 critical zero-day vulnerabilities in web applications before exploitation occurred.",
+        "Reduced phishing click rate from 22% to 4% through quarterly simulations and targeted security awareness training.",
+        "Achieved ISO 27001 certification for the organization by leading 18-month security control implementation program.",
+        "Automated threat intelligence ingestion reducing manual IOC processing time from 4 hours to 10 minutes daily.",
+        "Reduced mean time to detect (MTTD) from 72 hours to 4 hours by implementing 24/7 SIEM alerting and triage processes.",
+        "Discovered and reported active APT lateral movement in network logs that had evaded automated detection for 3 weeks.",
+        "Reduced critical vulnerability open time from 30 days to 7 days by implementing SLA-driven remediation tracking.",
+        "Blocked $2M potential fraud through real-time DLP alert response identifying unauthorized bulk data transfer attempt."
+      ]
+    },
+    {
+      "role": "Network Engineer",
+      "tags": ["networking", "cisco", "routing", "switching", "firewall"],
+      "items": [
+        "Reduced WAN costs by 35% and improved branch performance by 50% through SD-WAN deployment across 15 sites.",
+        "Achieved 99.99% network uptime over 18 months through proactive monitoring, redundancy design, and rapid incident response.",
+        "Completed data centre network migration of 500+ devices with zero unplanned downtime over a 6-month project.",
+        "Reduced network troubleshooting resolution time by 70% by deploying SolarWinds NPM with custom alerting dashboards.",
+        "Eliminated single points of failure across core network by implementing dual-homed uplinks and HSRP gateway redundancy.",
+        "Reduced VPN support tickets by 80% by migrating from legacy SSL VPN to modern ZTNA solution for remote access.",
+        "Achieved PCI-DSS network segmentation compliance eliminating all 12 cardholder data environment findings from audit.",
+        "Improved wireless network coverage from 70% to 99% across campus by redesigning AP placement and channel configuration.",
+        "Reduced ISP circuit costs by 25% by renegotiating provider contracts backed by utilization data from network monitoring.",
+        "Automated network device configuration backup reducing manual effort and ensuring 100% configuration version control."
+      ]
+    },
+    {
+      "role": "UI Designer",
+      "tags": ["ui design", "figma", "user interface", "visual design", "design systems"],
+      "items": [
+        "Led visual redesign of core product resulting in 28% increase in user satisfaction scores in post-launch survey.",
+        "Built design system of 200+ components adopted by 5 product teams reducing design inconsistencies by 90%.",
+        "Reduced design-to-development handoff cycle by 40% by introducing Figma component libraries and detailed design tokens.",
+        "Improved mobile app store rating from 3.2 to 4.6 stars after redesigning onboarding and core user flows.",
+        "Delivered full product UI redesign for Series B startup within 8-week timeline ahead of investor demo.",
+        "Reduced developer design clarification requests by 65% by introducing comprehensive interaction specs and redlines.",
+        "Designed accessible UI achieving WCAG 2.1 AA compliance across all 80+ screens of enterprise web application.",
+        "Created icon library of 300+ icons reducing illustration dependency and improving design consistency across the product.",
+        "Improved landing page conversion rate by 22% through data-informed visual hierarchy and CTA redesign.",
+        "Reduced design review cycle from 5 rounds to 2 rounds by introducing structured design critique process and review templates."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "Machine Learning Engineer",
+      "tags": ["machine learning", "ml", "python", "tensorflow", "pytorch", "mlops"],
+      "items": [
+        "MLOps Platform: Built end-to-end ML platform using MLflow, Kubeflow, and SageMaker enabling self-service model deployment.",
+        "Real-Time Recommendation Engine: Deployed collaborative filtering model serving 10M daily predictions with sub-50ms latency.",
+        "Churn Prediction Pipeline: Built automated churn model retraining pipeline with data drift detection and Slack alerting.",
+        "NLP Classification System: Fine-tuned BERT model on domain corpus achieving 94% accuracy deployed via FastAPI endpoint.",
+        "Feature Store Implementation: Built Feast-powered feature store eliminating duplication across 12 production ML models.",
+        "Distributed Training Setup: Configured multi-GPU Horovod training cluster reducing large model training time by 85%.",
+        "Model Monitoring Dashboard: Built Grafana + custom metrics dashboard tracking prediction drift and model health in production.",
+        "Hyperparameter Optimization: Implemented Optuna-based tuning system improving model F1 scores by 12-18% across 6 models.",
+        "Image Classification Service: Built CNN-based image classifier containerized with Docker and deployed on AWS SageMaker endpoint.",
+        "Data Pipeline Automation: Designed Airflow DAG-based feature engineering pipeline processing 50M daily records reliably."
+      ]
+    },
+    {
+      "role": "AI Engineer",
+      "tags": ["ai", "llm", "generative ai", "langchain", "openai", "rag"],
+      "items": [
+        "Enterprise RAG System: Built LangChain + Pinecone RAG pipeline over 500K internal documents with 92% answer accuracy.",
+        "AI Customer Support Bot: Deployed GPT-4-powered chatbot handling 35% of Tier 1 support queries autonomously.",
+        "Document Intelligence Pipeline: Built vision model pipeline extracting structured data from 10,000 invoices per day.",
+        "Multi-Agent Research Assistant: Designed AutoGen-based multi-agent system for automated market research and report generation.",
+        "LLM Fine-Tuning: Fine-tuned Llama 2 7B on domain-specific dataset using LoRA improving task accuracy by 30%.",
+        "Semantic Search Engine: Built FAISS-based semantic search replacing keyword search improving result relevance by 45%.",
+        "AI Evaluation Framework: Designed automated LLM evaluation pipeline measuring hallucination, relevance, and faithfulness.",
+        "Voice AI Application: Built Whisper STT + LLM + ElevenLabs TTS pipeline for voice-enabled AI assistant product.",
+        "LLMOps Infrastructure: Set up prompt versioning, A/B testing, and cost tracking for 8 production LLM applications.",
+        "Knowledge Graph QA: Integrated Neo4j knowledge graph with LLM reasoning for complex enterprise compliance Q&A system."
+      ]
+    },
+    {
+      "role": "Cyber Security Analyst",
+      "tags": ["cyber security", "soc", "siem", "incident response"],
+      "items": [
+        "SIEM Implementation: Deployed and configured Microsoft Sentinel with 50+ detection rules and automated incident response.",
+        "Ransomware Incident Response: Led containment of ransomware attack preserving 500+ endpoints and restoring operations in 4 hours.",
+        "Vulnerability Management Program: Established Nessus-based scanning program reducing critical open CVEs by 85% in 6 months.",
+        "Phishing Simulation Campaign: Ran quarterly phishing simulations for 2,000 employees reducing click rate from 22% to 4%.",
+        "Threat Hunting Initiative: Proactively hunted for APT indicators in 6-month log history discovering undetected lateral movement.",
+        "Zero Trust Implementation: Deployed ZTNA solution for 1,500 remote workers replacing legacy VPN with device-aware access.",
+        "Cloud Security Review: Conducted AWS and Azure security assessment identifying 80+ misconfigurations remediated within 30 days.",
+        "ISO 27001 Certification: Led 18-month program implementing 114 controls resulting in successful ISO 27001 certification.",
+        "SOC Automation: Built Python scripts automating IOC enrichment and triage reducing analyst manual effort by 3 hours/day.",
+        "Incident Response Playbooks: Authored 12 detailed IR playbooks covering ransomware, phishing, DDoS, and insider threat scenarios."
+      ]
+    },
+    {
+      "role": "Network Engineer",
+      "tags": ["networking", "cisco", "routing", "switching", "firewall", "vpn"],
+      "items": [
+        "SD-WAN Deployment: Deployed Cisco Viptela SD-WAN across 15 branch offices reducing WAN costs by 35%.",
+        "Data Centre Migration: Led complete network infrastructure migration of 500+ devices to new DC with zero unplanned downtime.",
+        "Campus Network Redesign: Redesigned university campus network supporting 10,000 users with improved redundancy and security.",
+        "ZTNA Implementation: Replaced legacy SSL VPN with Zscaler ZTNA for 1,500 remote users improving security and performance.",
+        "Wireless Network Rollout: Deployed 200 Cisco Meraki APs across 3 office buildings achieving 99% wireless coverage.",
+        "Network Monitoring Platform: Deployed SolarWinds NPM with custom dashboards and alerting for 800+ network devices.",
+        "BGP Peering Configuration: Configured dual-ISP BGP peering with path manipulation ensuring optimal traffic routing and failover.",
+        "Network Segmentation: Implemented VLAN-based micro-segmentation achieving PCI-DSS network isolation compliance.",
+        "Firewall Migration: Migrated 200+ ACL rules from Cisco ASA to Palo Alto NGFW with zero service disruption.",
+        "Network Automation: Built Python + Netmiko scripts automating configuration backup and compliance checks across 300 devices."
+      ]
+    },
+    {
+      "role": "UI Designer",
+      "tags": ["ui design", "figma", "user interface", "visual design", "design systems"],
+      "items": [
+        "Design System v2.0: Built 200-component Figma design system with design tokens, dark mode, and accessibility annotations.",
+        "SaaS Dashboard Redesign: Redesigned analytics dashboard increasing user satisfaction score from 58 to 86 NPS.",
+        "Mobile App UI: Designed end-to-end iOS and Android app UI from wireframes to production-ready Figma files.",
+        "Onboarding Flow Design: Redesigned multi-step onboarding flow reducing user drop-off by 40% and time-to-activation by 60%.",
+        "Brand Identity & UI Kit: Designed visual identity and complete UI kit for B2B SaaS startup for Series A launch.",
+        "E-Commerce Redesign: Redesigned product listing, PDP, and checkout UI increasing conversion rate by 22%.",
+        "Design Handoff System: Established Figma auto-layout component library and Zeplin workflow reducing dev clarification by 65%.",
+        "Icon Library: Created 300-icon custom icon set maintained as shared Figma library across all product teams.",
+        "Accessibility Audit & Redesign: Audited 80+ screens against WCAG 2.1 AA and redesigned non-compliant components.",
+        "Landing Page Suite: Designed 15 marketing landing page variants A/B tested to identify highest-converting visual layout."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "Machine Learning Engineer",
+      "tags": ["machine learning", "ml", "python", "tensorflow", "pytorch", "mlops"],
+      "items": [
+        "Google Professional Machine Learning Engineer",
+        "AWS Certified Machine Learning – Specialty",
+        "Microsoft Certified: Azure Data Scientist Associate (DP-100)",
+        "DeepLearning.AI TensorFlow Developer Certificate",
+        "Deep Learning Specialization – DeepLearning.AI (Coursera)",
+        "MLOps Specialization – DeepLearning.AI (Coursera)",
+        "Databricks Certified Associate Developer for Apache Spark",
+        "Stanford Machine Learning Specialization – Coursera",
+        "Kubeflow Fundamentals – Linux Foundation",
+        "HuggingFace NLP Course Certificate"
+      ]
+    },
+    {
+      "role": "AI Engineer",
+      "tags": ["ai", "llm", "generative ai", "langchain", "openai"],
+      "items": [
+        "DeepLearning.AI LangChain for LLM Application Development",
+        "DeepLearning.AI Building Systems with the ChatGPT API",
+        "AWS Certified Machine Learning – Specialty",
+        "Google Cloud Professional Machine Learning Engineer",
+        "Microsoft Certified: Azure AI Engineer Associate (AI-102)",
+        "DeepLearning.AI Natural Language Processing Specialization",
+        "OpenAI API Developer Certification",
+        "HuggingFace Transformers & Fine-Tuning Course",
+        "Databricks Generative AI Fundamentals",
+        "DeepLearning.AI Prompt Engineering for Developers"
+      ]
+    },
+    {
+      "role": "Cyber Security Analyst",
+      "tags": ["cyber security", "soc", "siem", "incident response", "penetration testing"],
+      "items": [
+        "CompTIA Security+",
+        "CompTIA CySA+ (Cybersecurity Analyst)",
+        "Certified Ethical Hacker (CEH) – EC-Council",
+        "GIAC Security Essentials (GSEC)",
+        "GIAC Certified Incident Handler (GCIH)",
+        "Certified Information Systems Security Professional (CISSP)",
+        "Microsoft Certified: Security Operations Analyst (SC-200)",
+        "Offensive Security Certified Professional (OSCP)",
+        "Splunk Core Certified User",
+        "ISO/IEC 27001 Lead Implementer"
+      ]
+    },
+    {
+      "role": "Network Engineer",
+      "tags": ["networking", "cisco", "routing", "switching", "firewall", "ccna", "ccnp"],
+      "items": [
+        "Cisco Certified Network Professional (CCNP Enterprise)",
+        "Cisco Certified Network Associate (CCNA)",
+        "Palo Alto Networks Certified Network Security Engineer (PCNSE)",
+        "Cisco Certified Specialist – Enterprise SD-WAN",
+        "CompTIA Network+",
+        "Juniper Networks Certified Associate (JNCIA-Junos)",
+        "Fortinet NSE 4 – Network Security Professional",
+        "AWS Certified Advanced Networking – Specialty",
+        "Cisco Certified CyberOps Associate",
+        "VMware SD-WAN by VeloCloud Certification"
+      ]
+    },
+    {
+      "role": "UI Designer",
+      "tags": ["ui design", "figma", "user interface", "visual design", "design systems"],
+      "items": [
+        "Google UX Design Professional Certificate",
+        "Figma UI Design – Advanced Certification",
+        "Interaction Design Foundation: UI Design Patterns",
+        "Adobe Certified Professional – Photoshop",
+        "Designlab UI Design Course Certificate",
+        "Nielsen Norman Group UX Certification",
+        "Accessibility for Designers – WCAG 2.1 Course",
+        "Motion Design with After Effects – Certification",
+        "Coursera – Graphic Design Specialization (CalArts)",
+        "Canva Design Certification"
+      ]
+    }
+  ]
+}

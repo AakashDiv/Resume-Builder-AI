@@ -1,0 +1,612 @@
+{
+  "experience": [
+    {
+      "role": "DevOps Engineer",
+      "tags": ["devops", "cicd", "docker", "kubernetes", "terraform", "jenkins", "aws", "linux"],
+      "phrases": [
+        "Designed and maintained CI/CD pipelines using Jenkins, GitLab CI, and GitHub Actions reducing release cycles from weekly to daily deployments.",
+        "Managed containerized workloads on Kubernetes (EKS/GKE) with Helm charts, autoscaling, and health-check configurations.",
+        "Provisioned and managed cloud infrastructure on AWS using Terraform and CloudFormation with infrastructure-as-code practices.",
+        "Implemented GitOps workflows using ArgoCD and Flux for automated, auditable Kubernetes deployments.",
+        "Reduced infrastructure costs by 35% through right-sizing EC2 instances, Reserved Instance planning, and spot instance adoption.",
+        "Configured centralized observability stack with Prometheus, Grafana, and ELK reducing mean time to detect (MTTD) by 50%.",
+        "Led migration of legacy on-premise applications to AWS cloud-native architecture with minimal downtime.",
+        "Built and enforced Docker containerization standards across 20+ microservices, reducing environment inconsistency issues.",
+        "Automated infrastructure provisioning using Ansible playbooks covering OS hardening, package installation, and service configuration.",
+        "Maintained 99.95% production uptime by implementing blue-green and canary deployment strategies.",
+        "Secured cloud infrastructure by enforcing IAM least-privilege policies, secrets management via HashiCorp Vault, and network segmentation.",
+        "Managed multi-environment deployment pipelines (dev, staging, production) with environment-specific configuration management.",
+        "Collaborated with development teams to optimize Docker images reducing average image size by 60%.",
+        "Established disaster recovery procedures with automated backup, RTO under 2 hours, and RPO under 15 minutes.",
+        "Configured auto-scaling groups and load balancers on AWS to handle traffic spikes of up to 10x baseline load.",
+        "Implemented log aggregation using Fluentd and ElasticSearch enabling real-time log search across 50+ services.",
+        "Managed DNS, SSL certificate lifecycle, and CDN configurations for high-availability web applications.",
+        "Conducted regular security audits on cloud infrastructure identifying and remediating vulnerabilities before production exposure.",
+        "Onboarded development teams to DevOps practices through workshops, documentation, and hands-on enablement sessions.",
+        "Built internal developer portal reducing environment setup time from 3 days to 30 minutes for new engineers."
+      ]
+    },
+    {
+      "role": "Cloud Engineer",
+      "tags": ["cloud", "aws", "gcp", "azure", "terraform", "infrastructure", "serverless", "networking"],
+      "phrases": [
+        "Designed and deployed multi-tier cloud architectures on AWS and GCP following Well-Architected Framework best practices.",
+        "Provisioned cloud resources using Terraform and Pulumi enabling fully automated, version-controlled infrastructure management.",
+        "Implemented cloud networking including VPC design, subnet segmentation, NAT gateways, and Transit Gateway configurations.",
+        "Managed cloud security posture by enforcing IAM policies, SCPs, and security group rules across multi-account environments.",
+        "Architected serverless solutions using AWS Lambda, API Gateway, and DynamoDB reducing operational overhead by 40%.",
+        "Designed and implemented cloud cost governance framework achieving 30% reduction in monthly cloud spend.",
+        "Led lift-and-shift migrations of 20+ on-premise workloads to cloud with minimal downtime.",
+        "Configured multi-region active-passive failover using Route 53 health checks and DNS failover routing.",
+        "Built and maintained cloud storage solutions using S3, Glacier, and EFS with lifecycle policies and access controls.",
+        "Implemented cloud monitoring and alerting using CloudWatch, Cloud Monitoring, and PagerDuty for critical services.",
+        "Managed container platforms on ECS and EKS including cluster provisioning, node group scaling, and workload scheduling.",
+        "Delivered cloud architecture reviews and cost optimization recommendations to engineering and product teams.",
+        "Enforced compliance and governance across cloud accounts using AWS Config, CloudTrail, and Security Hub.",
+        "Designed data lake architecture on AWS S3 and Glue enabling analytics teams to query petabytes of structured data.",
+        "Built auto-scaling compute environments handling traffic fluctuations from 100 to 10,000 concurrent users.",
+        "Set up cloud FinOps practices including tagging strategy, budget alerts, and monthly cost reporting for stakeholders.",
+        "Collaborated with security teams to implement encryption at rest and in transit across all cloud storage and compute.",
+        "Evaluated cloud vendor offerings and presented TCO analyses guiding key infrastructure platform decisions.",
+        "Automated cloud resource provisioning workflows reducing new environment setup from 2 weeks to 4 hours.",
+        "Mentored junior engineers on cloud architecture principles, IaC best practices, and cloud certification preparation."
+      ]
+    },
+    {
+      "role": "AWS Engineer",
+      "tags": ["aws", "amazon", "ec2", "lambda", "s3", "terraform", "cloudformation", "eks"],
+      "phrases": [
+        "Designed and deployed scalable AWS architectures covering compute (EC2, ECS, Lambda), storage (S3, EFS), and networking (VPC, CloudFront).",
+        "Managed multi-account AWS environments using AWS Organizations, Control Tower, and Service Control Policies (SCPs).",
+        "Built serverless applications with AWS Lambda, API Gateway, Step Functions, and EventBridge handling millions of monthly events.",
+        "Provisioned and managed AWS infrastructure using CloudFormation and Terraform with full version control and change management.",
+        "Configured and managed Amazon RDS, Aurora, and DynamoDB databases with automated backups, read replicas, and failover.",
+        "Designed and implemented VPC architectures including public/private subnets, NAT gateways, VPC peering, and Transit Gateway.",
+        "Secured AWS workloads by implementing IAM least-privilege policies, KMS encryption, and Security Hub compliance rules.",
+        "Set up CloudWatch dashboards, alarms, and AWS X-Ray tracing enabling full observability of production workloads.",
+        "Deployed containerized workloads on Amazon EKS and ECS Fargate eliminating the need for EC2 instance management.",
+        "Implemented AWS auto-scaling groups and Elastic Load Balancers to maintain performance under variable traffic loads.",
+        "Built data pipelines on AWS using Glue, Kinesis, and S3 processing 10M+ daily events for analytics workloads.",
+        "Managed AWS CDN and edge infrastructure using CloudFront distributions for global content delivery with low latency.",
+        "Configured AWS WAF and Shield to protect web applications against DDoS and OWASP Top 10 attacks.",
+        "Led AWS cost optimization initiatives saving $30,000 per month through Savings Plans, Spot Instances, and resource cleanup.",
+        "Managed S3 bucket policies, object lifecycle rules, and versioning for compliant and cost-efficient object storage.",
+        "Built cross-account deployment pipelines using CodePipeline, CodeBuild, and CodeDeploy with automated approval gates.",
+        "Implemented Route 53 DNS management including health checks, latency routing, and failover routing policies.",
+        "Conducted AWS Well-Architected Framework reviews identifying and remediating risks across all five pillars.",
+        "Deployed Amazon ElastiCache Redis clusters reducing database load and improving application response time by 50%.",
+        "Migrated on-premise workloads to AWS using AWS Migration Hub, DMS, and Server Migration Service with detailed runbooks."
+      ]
+    },
+    {
+      "role": "Azure Engineer",
+      "tags": ["azure", "microsoft", "aks", "azure devops", "arm", "bicep", "terraform", "active directory"],
+      "phrases": [
+        "Designed and deployed Azure cloud architectures using Virtual Machines, App Services, and Azure Kubernetes Service (AKS).",
+        "Provisioned Azure infrastructure using Terraform and ARM/Bicep templates with full version-controlled IaC workflows.",
+        "Managed Azure Active Directory (Entra ID) including user provisioning, group policies, Conditional Access, and SSO configuration.",
+        "Built and maintained Azure DevOps pipelines with multi-stage YAML pipelines for build, test, and deployment automation.",
+        "Configured Azure Virtual Networks including subnets, NSGs, peering, ExpressRoute, and VPN gateway connections.",
+        "Managed Azure Kubernetes Service (AKS) clusters including node pools, HPA, cluster upgrades, and RBAC configuration.",
+        "Deployed serverless solutions using Azure Functions, Logic Apps, and Event Grid for event-driven processing.",
+        "Managed Azure SQL Database and Cosmos DB instances with automated backups, geo-replication, and performance tuning.",
+        "Implemented Azure Monitor, Application Insights, and Log Analytics Workspace for end-to-end observability.",
+        "Enforced Azure Policy and Microsoft Defender for Cloud to maintain compliance and security posture across subscriptions.",
+        "Configured Azure Front Door, Application Gateway, and CDN for global traffic routing and DDoS protection.",
+        "Managed Azure Blob Storage, Data Lake Gen2, and File Storage with lifecycle management and access tier optimization.",
+        "Led Azure cost governance using Cost Management + Billing, budget alerts, and Reserved Instance recommendations.",
+        "Implemented Azure Key Vault for centralized secrets, certificate, and key management across all application teams.",
+        "Designed Azure Landing Zones using Enterprise-Scale architecture with management groups, policies, and networking hubs.",
+        "Migrated on-premise Windows Server workloads to Azure using Azure Migrate and Azure Site Recovery.",
+        "Built Azure Service Bus and Event Hub integrations enabling decoupled messaging between microservices.",
+        "Managed Azure Container Registry (ACR) and configured private endpoint access for secure image pulls in AKS.",
+        "Delivered Azure cost optimization reports identifying $20,000/month in savings across unused resources and reserved capacity.",
+        "Collaborated with security teams to implement Azure PIM, just-in-time access, and privileged identity governance."
+      ]
+    },
+    {
+      "role": "QA Engineer",
+      "tags": ["qa", "testing", "selenium", "cypress", "automation", "manual testing", "api testing", "jira"],
+      "phrases": [
+        "Designed and executed comprehensive test plans, test cases, and test scripts for web, mobile, and API applications.",
+        "Built and maintained automated test frameworks using Selenium, Cypress, and Playwright for regression and smoke testing.",
+        "Developed API test suites using Postman, RestAssured, and Newman validating request/response contracts and error handling.",
+        "Integrated automated tests into CI/CD pipelines using Jenkins and GitHub Actions enabling fast feedback on every code commit.",
+        "Conducted performance and load testing using JMeter and k6 simulating 10,000+ concurrent users to identify bottlenecks.",
+        "Led defect triage meetings with development and product teams, prioritizing fixes based on severity and business impact.",
+        "Implemented data-driven testing frameworks reducing test maintenance effort by 40% for parameterized test scenarios.",
+        "Executed functional, regression, smoke, and exploratory testing across multiple releases for complex enterprise applications.",
+        "Collaborated with developers in agile sprints to clarify acceptance criteria and write testable user stories.",
+        "Performed cross-browser and cross-device compatibility testing ensuring consistent UX across 15+ browser/OS combinations.",
+        "Built end-to-end test coverage for checkout, authentication, and critical business flows achieving 90%+ automation coverage.",
+        "Maintained detailed defect reports in Jira with clear reproduction steps, expected vs actual results, and attached evidence.",
+        "Validated database integrity by writing SQL queries to verify backend data correctness after application transactions.",
+        "Conducted accessibility testing using axe and screen readers ensuring WCAG 2.1 AA compliance for enterprise products.",
+        "Managed and mentored a team of 3 junior QA engineers providing guidance on test strategy and automation best practices.",
+        "Set up and maintained Selenium Grid and BrowserStack for parallel test execution across browsers and devices.",
+        "Authored and maintained comprehensive QA documentation including test strategies, test plans, and release checklists.",
+        "Implemented visual regression testing using Percy and Applitools detecting unintended UI changes before production release.",
+        "Coordinated UAT sessions with business stakeholders, gathered feedback, and translated findings into actionable defect reports.",
+        "Contributed to shift-left testing culture by embedding QA practices into requirements definition and design review phases."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "DevOps Engineer",
+      "tags": ["devops", "cicd", "docker", "kubernetes", "terraform", "jenkins", "aws", "linux"],
+      "skills": [
+        "Docker",
+        "Kubernetes",
+        "Jenkins",
+        "GitHub Actions",
+        "GitLab CI/CD",
+        "Terraform",
+        "Ansible",
+        "AWS",
+        "Linux Administration",
+        "Bash Scripting",
+        "Prometheus & Grafana",
+        "ELK Stack",
+        "HashiCorp Vault",
+        "Helm",
+        "ArgoCD",
+        "Python Scripting",
+        "Nginx",
+        "CI/CD Pipeline Design",
+        "Git & GitOps"
+      ]
+    },
+    {
+      "role": "Cloud Engineer",
+      "tags": ["cloud", "aws", "gcp", "azure", "terraform", "infrastructure", "serverless", "networking"],
+      "skills": [
+        "AWS (EC2, S3, RDS, Lambda)",
+        "Google Cloud Platform (GCP)",
+        "Microsoft Azure",
+        "Terraform",
+        "Pulumi",
+        "Cloud Networking (VPC, Subnets, NAT)",
+        "IAM & Cloud Security",
+        "Kubernetes (EKS/GKE/AKS)",
+        "Serverless Architecture",
+        "CloudWatch / Stackdriver",
+        "Cloud Cost Optimization",
+        "Route 53 / Cloud DNS",
+        "S3 / Cloud Storage",
+        "Bash & Python Scripting",
+        "Linux Administration",
+        "Docker & Containerization",
+        "FinOps & Budgeting"
+      ]
+    },
+    {
+      "role": "AWS Engineer",
+      "tags": ["aws", "amazon", "ec2", "lambda", "s3", "terraform", "cloudformation", "eks"],
+      "skills": [
+        "AWS EC2 & Auto Scaling",
+        "AWS Lambda & Serverless",
+        "Amazon S3 & Glacier",
+        "Amazon RDS & Aurora",
+        "AWS VPC & Networking",
+        "AWS IAM & Security",
+        "AWS CloudFormation",
+        "Terraform",
+        "Amazon EKS & ECS",
+        "AWS CloudWatch & X-Ray",
+        "Amazon DynamoDB",
+        "AWS CodePipeline & CI/CD",
+        "AWS Route 53",
+        "AWS CloudFront & CDN",
+        "Amazon Kinesis & Glue",
+        "AWS Cost Management",
+        "Docker & Kubernetes",
+        "Python & Bash Scripting"
+      ]
+    },
+    {
+      "role": "Azure Engineer",
+      "tags": ["azure", "microsoft", "aks", "azure devops", "arm", "bicep", "terraform", "active directory"],
+      "skills": [
+        "Microsoft Azure (VM, App Service, AKS)",
+        "Azure DevOps & Pipelines",
+        "Azure Active Directory (Entra ID)",
+        "Terraform & Bicep/ARM Templates",
+        "Azure Kubernetes Service (AKS)",
+        "Azure Functions & Logic Apps",
+        "Azure SQL & Cosmos DB",
+        "Azure Monitor & Application Insights",
+        "Azure Networking (VNet, NSG, Firewall)",
+        "Azure Key Vault",
+        "Azure Policy & Defender for Cloud",
+        "Azure Storage (Blob, Data Lake)",
+        "PowerShell & Azure CLI",
+        "Docker & Helm",
+        "Azure Service Bus & Event Grid",
+        "Azure Cost Management",
+        "Microsoft Entra ID / SSO"
+      ]
+    },
+    {
+      "role": "QA Engineer",
+      "tags": ["qa", "testing", "selenium", "cypress", "automation", "manual testing", "api testing", "jira"],
+      "skills": [
+        "Selenium WebDriver",
+        "Cypress",
+        "Playwright",
+        "Postman & REST API Testing",
+        "JMeter / k6 (Performance Testing)",
+        "Java / Python / JavaScript (Automation)",
+        "TestNG / JUnit / PyTest",
+        "Jira & Test Management",
+        "SQL & Database Testing",
+        "CI/CD Integration (Jenkins, GitHub Actions)",
+        "BrowserStack / Sauce Labs",
+        "Agile / Scrum",
+        "Manual Testing",
+        "Test Planning & Strategy",
+        "BDD / Gherkin (Cucumber)",
+        "Mobile Testing (Appium)",
+        "Accessibility Testing (axe, WCAG)"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "DevOps Engineer",
+      "tags": ["devops", "cicd", "docker", "kubernetes", "terraform"],
+      "options": [
+        {
+          "title": "Experienced DevOps Engineer",
+          "text": "DevOps Engineer with 4+ years of experience building and maintaining CI/CD pipelines, container orchestration, and cloud infrastructure. Skilled in Kubernetes, Docker, and Terraform with a track record of improving deployment frequency and system reliability for high-traffic applications."
+        },
+        {
+          "title": "Cloud-Focused DevOps Specialist",
+          "text": "Results-driven DevOps Engineer specializing in AWS cloud infrastructure and automation. Experienced in GitOps practices, infrastructure-as-code, and observability tooling. Reduced infrastructure costs by 35% and deployment lead time by 70% through automation and cloud optimization."
+        },
+        {
+          "title": "DevOps Engineer – Reliability & Automation",
+          "text": "Automation-first DevOps Engineer with deep expertise in Kubernetes, CI/CD, and site reliability engineering. Consistently maintained 99.9%+ production uptime while enabling engineering teams to ship code faster and with greater confidence."
+        },
+        {
+          "title": "Junior DevOps Engineer",
+          "text": "Motivated DevOps Engineer with hands-on experience in Docker, CI/CD pipelines, and Linux system administration. Passionate about automating repetitive tasks and building scalable deployment workflows for modern engineering teams."
+        }
+      ]
+    },
+    {
+      "role": "Cloud Engineer",
+      "tags": ["cloud", "aws", "gcp", "terraform", "infrastructure", "serverless"],
+      "options": [
+        {
+          "title": "Cloud Engineer – AWS & Multi-Cloud",
+          "text": "Cloud Engineer with 4+ years of experience designing, deploying, and managing cloud infrastructure across AWS, GCP, and Azure. Expert in Terraform, cloud networking, and serverless architecture with a strong focus on reliability, security, and cost optimization."
+        },
+        {
+          "title": "Cloud Infrastructure Specialist",
+          "text": "Detail-oriented Cloud Engineer specializing in cloud architecture design, IaC automation, and cloud security. Delivered 20+ cloud migration projects and reduced cloud costs by 30% through right-sizing and governance frameworks."
+        },
+        {
+          "title": "Serverless & Cloud-Native Engineer",
+          "text": "Cloud Engineer passionate about serverless and cloud-native architectures. Experienced in building event-driven systems on AWS Lambda, API Gateway, and DynamoDB that scale automatically without managing servers."
+        },
+        {
+          "title": "Junior Cloud Engineer",
+          "text": "Enthusiastic Cloud Engineer with hands-on experience in AWS, Terraform, and Linux administration. Eager to design scalable, cost-efficient cloud solutions and grow expertise across multi-cloud environments."
+        }
+      ]
+    },
+    {
+      "role": "AWS Engineer",
+      "tags": ["aws", "amazon", "ec2", "lambda", "terraform", "cloudformation"],
+      "options": [
+        {
+          "title": "Experienced AWS Engineer",
+          "text": "AWS Engineer with 5+ years of hands-on experience designing, deploying, and optimizing cloud infrastructure on Amazon Web Services. Deep expertise in serverless, containerized, and multi-account architectures with a strong focus on security, reliability, and cost management."
+        },
+        {
+          "title": "AWS Solutions Architect & Engineer",
+          "text": "AWS-certified engineer specializing in cloud architecture design and automation. Delivered 15+ cloud projects on AWS reducing infrastructure costs by 30% and enabling engineering teams to deploy faster through IaC and CI/CD automation."
+        },
+        {
+          "title": "Serverless AWS Specialist",
+          "text": "AWS Engineer passionate about serverless-first architectures. Expert in Lambda, API Gateway, Step Functions, and EventBridge building event-driven systems that scale automatically, eliminate operational overhead, and reduce cost significantly."
+        },
+        {
+          "title": "Junior AWS Cloud Engineer",
+          "text": "AWS Cloud Engineer with practical experience in EC2, S3, RDS, and IAM. Familiar with infrastructure automation using Terraform and CloudFormation. Eager to contribute to cloud architecture projects and grow toward AWS professional certifications."
+        }
+      ]
+    },
+    {
+      "role": "Azure Engineer",
+      "tags": ["azure", "microsoft", "aks", "azure devops", "bicep", "terraform"],
+      "options": [
+        {
+          "title": "Experienced Azure Cloud Engineer",
+          "text": "Azure Cloud Engineer with 4+ years of experience designing, deploying, and managing cloud solutions on Microsoft Azure. Expert in AKS, Azure DevOps, Azure AD, and Terraform with a track record of delivering secure, scalable, and cost-effective cloud platforms."
+        },
+        {
+          "title": "Azure Infrastructure & DevOps Specialist",
+          "text": "Results-driven Azure Engineer with deep expertise in Azure infrastructure automation, Azure DevOps pipelines, and enterprise identity management. Delivered Azure Landing Zone implementations and cost optimization programs saving $20,000+ monthly for enterprise clients."
+        },
+        {
+          "title": "Azure Platform Engineer",
+          "text": "Platform engineer focused on building Azure-native solutions using AKS, Azure Functions, and Azure DevOps. Skilled in designing self-service developer platforms on Azure enabling teams to ship faster while maintaining security and compliance standards."
+        },
+        {
+          "title": "Junior Azure Cloud Engineer",
+          "text": "Azure Cloud Engineer with foundational experience in Azure Virtual Machines, Azure DevOps, and Azure Active Directory. Microsoft Azure Fundamentals certified with hands-on experience in IaC, CI/CD pipelines, and cloud networking."
+        }
+      ]
+    },
+    {
+      "role": "QA Engineer",
+      "tags": ["qa", "testing", "selenium", "cypress", "automation", "manual testing"],
+      "options": [
+        {
+          "title": "QA Engineer – Automation & Manual Testing",
+          "text": "QA Engineer with 4+ years of experience in both manual and automated testing for web and API applications. Proficient in Selenium, Cypress, and Postman with a track record of building robust test suites integrated into CI/CD pipelines to deliver high-quality software releases."
+        },
+        {
+          "title": "Automation-First QA Engineer",
+          "text": "Test automation specialist with expertise in Selenium, Cypress, and Playwright. Built end-to-end automated test frameworks achieving 90%+ coverage on critical business flows. Passionate about integrating testing early in the development lifecycle to catch bugs before production."
+        },
+        {
+          "title": "QA Lead – Agile Teams",
+          "text": "QA Engineer and team lead with 6+ years of experience driving quality across agile product teams. Expert in test strategy, defect management, and automation framework design. Reduced release-blocking defects by 60% through shift-left testing practices and cross-functional collaboration."
+        },
+        {
+          "title": "Junior QA Engineer",
+          "text": "Detail-oriented QA Engineer with hands-on experience in manual testing, Selenium, and Postman API testing. Familiar with Jira, agile sprint ceremonies, and writing clear, reproducible bug reports. Committed to continuous learning and growing automation testing skills."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "DevOps Engineer",
+      "tags": ["devops", "cicd", "docker", "kubernetes", "terraform"],
+      "items": [
+        "Reduced deployment lead time from 5 days to 4 hours by redesigning CI/CD pipeline architecture.",
+        "Achieved 99.95% production uptime across all critical services over a 12-month period.",
+        "Cut AWS monthly infrastructure spend by $18,000 through Reserved Instance optimization and resource right-sizing.",
+        "Reduced mean time to recovery (MTTR) from 45 minutes to 8 minutes by implementing automated alerting and runbooks.",
+        "Migrated 15 legacy applications to containerized Kubernetes deployments with zero data loss.",
+        "Reduced Docker image build times by 65% through multi-stage build optimization and layer caching.",
+        "Implemented secrets management with HashiCorp Vault eliminating all hardcoded credentials across the codebase.",
+        "Automated engineer onboarding infrastructure setup reducing new team member setup time from 3 days to 2 hours.",
+        "Established disaster recovery procedures achieving RTO of 90 minutes and RPO of 10 minutes.",
+        "Introduced shift-left security scanning in CI pipeline catching 100+ vulnerabilities before code reached production."
+      ]
+    },
+    {
+      "role": "Cloud Engineer",
+      "tags": ["cloud", "aws", "gcp", "terraform", "infrastructure"],
+      "items": [
+        "Reduced monthly AWS cloud spend by $25,000 through Reserved Instance purchases and workload right-sizing.",
+        "Migrated 20 on-premise applications to AWS with zero critical incidents and under 2 hours total downtime.",
+        "Improved cloud infrastructure provisioning time from 2 weeks to 4 hours using Terraform automation.",
+        "Designed multi-region active-passive failover achieving RTO of 30 minutes for critical production services.",
+        "Eliminated 3 cloud security compliance findings identified in audit by implementing AWS Config and Security Hub rules.",
+        "Achieved 99.99% monthly uptime for cloud-hosted e-commerce platform during peak traffic seasons.",
+        "Reduced S3 storage costs by 45% through automated lifecycle policies moving infrequently accessed data to Glacier.",
+        "Built serverless data processing pipeline handling 5M daily events with 70% lower cost than EC2-based equivalent.",
+        "Implemented cloud tagging strategy enabling granular cost attribution saving $8,000/month in unallocated spend.",
+        "Automated disaster recovery runbooks reducing recovery testing time from 8 hours to 45 minutes."
+      ]
+    },
+    {
+      "role": "AWS Engineer",
+      "tags": ["aws", "amazon", "ec2", "lambda", "terraform"],
+      "items": [
+        "Reduced AWS monthly spend by $30,000 through Savings Plans, Spot Instance adoption, and unused resource cleanup.",
+        "Deployed serverless microservices on AWS Lambda processing 50M monthly invocations with 99.99% reliability.",
+        "Automated full AWS infrastructure provisioning with Terraform reducing environment setup from 2 weeks to 3 hours.",
+        "Achieved AWS Well-Architected Framework zero high-risk items across 4 reviewed production workloads.",
+        "Improved RDS query performance by 60% through index optimization, read replica routing, and connection pooling.",
+        "Eliminated $12,000/month in orphaned cloud resources using automated resource tagging and cleanup Lambda functions.",
+        "Migrated 10 legacy applications to AWS with 100% data integrity and under 4 hours total unplanned downtime.",
+        "Configured AWS WAF rules blocking 50,000+ malicious requests per day from reaching production APIs.",
+        "Designed multi-AZ RDS Aurora cluster achieving 99.99% database uptime with automatic failover in under 30 seconds.",
+        "Built AWS CodePipeline delivering 200+ production deployments per month with automated rollback on failure."
+      ]
+    },
+    {
+      "role": "Azure Engineer",
+      "tags": ["azure", "microsoft", "aks", "azure devops"],
+      "items": [
+        "Reduced Azure monthly cloud spend by $20,000 through Reserved Instance purchases and automated resource cleanup.",
+        "Deployed Azure Kubernetes Service cluster supporting 50+ microservices with 99.9% monthly uptime.",
+        "Automated all Azure environment provisioning with Terraform reducing setup time from 3 weeks to 6 hours.",
+        "Achieved zero critical findings in Azure Security Center compliance assessment across 3 production subscriptions.",
+        "Migrated 12 on-premise workloads to Azure reducing infrastructure total cost of ownership by 40%.",
+        "Reduced Azure DevOps pipeline build time from 30 minutes to 9 minutes through parallelization and caching.",
+        "Implemented Azure AD Conditional Access policies eliminating 100% of unauthorized access incidents.",
+        "Built Azure Service Bus integration decoupling 8 microservices and reducing cascade failure incidents by 90%.",
+        "Designed Azure Landing Zone framework adopted by 6 product teams reducing cloud onboarding time by 75%.",
+        "Configured Azure Front Door with WAF policies blocking 30,000+ malicious requests daily from reaching production."
+      ]
+    },
+    {
+      "role": "QA Engineer",
+      "tags": ["qa", "testing", "selenium", "cypress", "automation"],
+      "items": [
+        "Reduced production defect escape rate by 65% by implementing automated regression suite covering all critical user flows.",
+        "Achieved 90% automation coverage on end-to-end test suite reducing manual regression time from 3 days to 4 hours.",
+        "Identified 120 critical defects before release across 4 major product launches preventing costly post-production incidents.",
+        "Reduced test execution time by 70% by migrating to parallel execution on Selenium Grid and BrowserStack.",
+        "Built Cypress automation suite from scratch covering 300+ test cases within 3 months of joining the team.",
+        "Improved API test coverage from 0% to 85% using RestAssured and Postman collection automation.",
+        "Led performance testing initiative identifying database bottleneck causing 8-second page load — resolved to under 1.5 seconds.",
+        "Reduced bug reopening rate from 25% to under 5% by introducing structured defect reporting templates in Jira.",
+        "Established QA process for new feature releases reducing average UAT cycle from 2 weeks to 4 days.",
+        "Trained 3 junior QA engineers on Selenium and Cypress reducing team's manual testing backlog by 50%."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "DevOps Engineer",
+      "tags": ["devops", "cicd", "docker", "kubernetes", "terraform"],
+      "items": [
+        "Internal Developer Platform: Built self-service Kubernetes deployment portal reducing ops tickets by 70%.",
+        "Multi-Region Kubernetes Cluster: Deployed active-active EKS across 3 AWS regions with automated failover.",
+        "GitOps Migration: Migrated 30+ services from manual deployments to ArgoCD-managed GitOps workflow.",
+        "Observability Platform: Deployed Prometheus, Grafana, and ELK stack providing full-stack visibility for all teams.",
+        "Cost Optimization Dashboard: Built real-time AWS cost monitoring dashboard saving $200K annually.",
+        "CI/CD Pipeline Redesign: Rebuilt Jenkins pipelines using parallel stages, cutting average build time from 25 to 8 minutes.",
+        "Infrastructure as Code Migration: Converted all AWS resources from click-ops to Terraform with automated state management.",
+        "Secrets Management Rollout: Implemented HashiCorp Vault across all microservices for centralized credential management.",
+        "Automated Security Scanning: Integrated Trivy and Snyk into CI pipeline for container and dependency vulnerability scanning.",
+        "Disaster Recovery Automation: Wrote Ansible playbooks automating full environment recovery within 90 minutes."
+      ]
+    },
+    {
+      "role": "Cloud Engineer",
+      "tags": ["cloud", "aws", "gcp", "terraform", "infrastructure"],
+      "items": [
+        "Multi-Account AWS Landing Zone: Designed AWS Organizations structure with SCPs, shared networking, and centralized logging.",
+        "Serverless API Platform: Built serverless REST API using Lambda, API Gateway, and DynamoDB supporting 1M+ requests/day.",
+        "Cloud Cost Dashboard: Deployed AWS Cost Explorer integration with Grafana for real-time FinOps visibility.",
+        "Terraform Module Library: Created reusable Terraform modules for VPC, EKS, RDS, and S3 adopted across 5 teams.",
+        "Hybrid Cloud Connectivity: Established AWS Direct Connect and VPN tunnels connecting on-premise datacenter to cloud.",
+        "Data Lake on AWS: Built S3-based data lake with Glue crawlers, Athena queries, and QuickSight dashboards.",
+        "Cloud Security Posture Management: Deployed AWS Security Hub and Config rules catching 200+ misconfigurations.",
+        "Multi-Region Failover: Implemented Route 53 failover routing with CloudWatch health checks for zero-downtime DR.",
+        "Container Migration: Moved 12 Docker workloads from EC2 to ECS Fargate removing server management overhead.",
+        "Cloud Compliance Framework: Automated SOC2 and GDPR compliance checks across all cloud accounts using Config rules."
+      ]
+    },
+    {
+      "role": "AWS Engineer",
+      "tags": ["aws", "amazon", "ec2", "lambda", "terraform", "cloudformation"],
+      "items": [
+        "Multi-Account AWS Landing Zone: Designed AWS Organizations with centralized logging, security, and network accounts.",
+        "Serverless Event Processing: Built Lambda + Kinesis pipeline processing 10M daily events with sub-second latency.",
+        "AWS Infrastructure Automation: Created 25+ reusable Terraform modules for EC2, RDS, S3, EKS, and IAM.",
+        "EKS Production Cluster: Provisioned Amazon EKS cluster with Helm, Karpenter autoscaling, and IRSA security model.",
+        "Data Lake Architecture: Built S3-based data lake with Glue ETL pipelines, Athena queries, and QuickSight dashboards.",
+        "Disaster Recovery Automation: Implemented automated cross-region DR using Lambda, Route 53, and RDS snapshots.",
+        "Cost Governance Dashboard: Deployed CloudWatch and Cost Explorer dashboard surfacing daily spend by team and service.",
+        "CI/CD on AWS: Built CodePipeline with CodeBuild stages for unit testing, Docker build, ECR push, and ECS deploy.",
+        "Application Security: Deployed WAF, Shield, and GuardDuty findings automation for proactive threat response.",
+        "Database Migration: Migrated 5 on-premise Oracle databases to Amazon Aurora PostgreSQL using AWS DMS."
+      ]
+    },
+    {
+      "role": "Azure Engineer",
+      "tags": ["azure", "microsoft", "aks", "azure devops", "bicep"],
+      "items": [
+        "Azure Landing Zone: Designed enterprise-scale Azure environment with management groups, policies, and hub-spoke networking.",
+        "AKS Production Platform: Deployed Azure Kubernetes Service with GitOps, KEDA scaling, and Workload Identity.",
+        "Azure DevOps Migration: Migrated 15 teams from Jenkins to Azure DevOps multi-stage YAML pipelines.",
+        "Serverless Integration Platform: Built Azure Functions + Service Bus integration hub processing 2M daily messages.",
+        "Azure AD SSO Rollout: Implemented enterprise SSO for 50+ SaaS applications using Azure AD with SAML and OIDC.",
+        "Cost Optimization Program: Delivered $240K annual Azure savings through Reserved Instances and governance policies.",
+        "Data Platform on Azure: Deployed Azure Data Factory, Data Lake Gen2, and Synapse Analytics for enterprise BI.",
+        "Zero-Trust Security: Implemented Azure PIM, Conditional Access, and Microsoft Defender for Cloud across all subscriptions.",
+        "Disaster Recovery: Configured Azure Site Recovery replicating 8 VMs with tested RTO of 45 minutes.",
+        "Compliance Automation: Deployed Azure Policy initiative mapping to SOC2 and ISO27001 controls with automated remediation."
+      ]
+    },
+    {
+      "role": "QA Engineer",
+      "tags": ["qa", "testing", "selenium", "cypress", "automation"],
+      "items": [
+        "Regression Automation Suite: Built 500+ Cypress E2E tests covering checkout, auth, and dashboard flows with CI integration.",
+        "API Testing Framework: Developed RestAssured + TestNG framework for 200+ API test cases with data-driven execution.",
+        "Performance Testing Program: Executed JMeter load tests simulating 10K concurrent users identifying 5 critical bottlenecks.",
+        "Visual Regression Testing: Integrated Percy into CI pipeline detecting pixel-level UI regressions across 50+ components.",
+        "Mobile Test Automation: Built Appium framework for Android and iOS app testing covering 100+ test scenarios.",
+        "BDD Test Framework: Implemented Cucumber + Selenium with Gherkin scenarios shared between QA and product teams.",
+        "API Contract Testing: Set up Pact contract testing between 8 microservices preventing interface breaking changes.",
+        "Accessibility Audit: Conducted WCAG 2.1 AA audit on enterprise portal identifying 30 accessibility issues prioritized for fix.",
+        "QA Dashboard: Built Allure + Jenkins test reporting dashboard giving teams real-time visibility into test pass/fail trends.",
+        "Database Validation Suite: Wrote 80+ SQL-based test scripts validating data integrity after ETL pipeline runs."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "DevOps Engineer",
+      "tags": ["devops", "cicd", "docker", "kubernetes", "terraform"],
+      "items": [
+        "AWS Certified DevOps Engineer – Professional",
+        "Certified Kubernetes Administrator (CKA)",
+        "Certified Kubernetes Application Developer (CKAD)",
+        "HashiCorp Certified: Terraform Associate",
+        "AWS Certified Solutions Architect – Associate",
+        "Google Professional Cloud DevOps Engineer",
+        "Docker Certified Associate (DCA)",
+        "Linux Foundation Certified System Administrator (LFCS)",
+        "Red Hat Certified Engineer (RHCE)",
+        "GitHub Actions Certification"
+      ]
+    },
+    {
+      "role": "Cloud Engineer",
+      "tags": ["cloud", "aws", "gcp", "azure", "terraform"],
+      "items": [
+        "AWS Certified Solutions Architect – Professional",
+        "AWS Certified Cloud Practitioner",
+        "Google Cloud Professional Cloud Architect",
+        "Microsoft Certified: Azure Solutions Architect Expert",
+        "HashiCorp Certified: Terraform Associate",
+        "AWS Certified Security – Specialty",
+        "Google Cloud Associate Cloud Engineer",
+        "Certified Kubernetes Administrator (CKA)",
+        "AWS Certified Advanced Networking – Specialty",
+        "FinOps Certified Practitioner"
+      ]
+    },
+    {
+      "role": "AWS Engineer",
+      "tags": ["aws", "amazon", "ec2", "lambda", "terraform"],
+      "items": [
+        "AWS Certified Solutions Architect – Associate",
+        "AWS Certified Solutions Architect – Professional",
+        "AWS Certified DevOps Engineer – Professional",
+        "AWS Certified Developer – Associate",
+        "AWS Certified SysOps Administrator – Associate",
+        "AWS Certified Security – Specialty",
+        "AWS Certified Database – Specialty",
+        "AWS Certified Advanced Networking – Specialty",
+        "AWS Certified Cloud Practitioner",
+        "HashiCorp Certified: Terraform Associate"
+      ]
+    },
+    {
+      "role": "Azure Engineer",
+      "tags": ["azure", "microsoft", "aks", "azure devops"],
+      "items": [
+        "Microsoft Certified: Azure Solutions Architect Expert (AZ-305)",
+        "Microsoft Certified: Azure Administrator Associate (AZ-104)",
+        "Microsoft Certified: Azure DevOps Engineer Expert (AZ-400)",
+        "Microsoft Certified: Azure Fundamentals (AZ-900)",
+        "Microsoft Certified: Azure Security Engineer Associate (AZ-500)",
+        "Microsoft Certified: Azure Network Engineer Associate (AZ-700)",
+        "Microsoft Certified: Azure Developer Associate (AZ-204)",
+        "HashiCorp Certified: Terraform Associate",
+        "Certified Kubernetes Administrator (CKA)",
+        "Microsoft Certified: Azure Data Engineer Associate (DP-203)"
+      ]
+    },
+    {
+      "role": "QA Engineer",
+      "tags": ["qa", "testing", "selenium", "cypress", "automation", "istqb"],
+      "items": [
+        "ISTQB Certified Tester – Foundation Level (CTFL)",
+        "ISTQB Certified Tester – Advanced Level (Test Automation Engineer)",
+        "ISTQB Advanced Level – Test Manager",
+        "Cypress End-to-End Testing Certification",
+        "API Testing with Postman Certification",
+        "Certified Software Quality Analyst (CSQA)",
+        "Agile Testing – Scrum Alliance",
+        "Performance Testing with JMeter Certification",
+        "Mobile App Testing with Appium Certification",
+        "Selenium WebDriver Professional Certification"
+      ]
+    }
+  ]
+}

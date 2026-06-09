@@ -1,0 +1,610 @@
+{
+  "experience": [
+    {
+      "role": "Automation Tester",
+      "tags": ["automation", "selenium", "cypress", "playwright", "testng", "java", "python", "cicd"],
+      "phrases": [
+        "Designed and built end-to-end automation frameworks using Selenium WebDriver and Java with TestNG achieving 85%+ regression coverage.",
+        "Developed Cypress automation suite covering 400+ UI test cases integrated into GitHub Actions CI pipeline for continuous testing.",
+        "Built data-driven test frameworks using Apache POI and Excel-based test data reducing test script maintenance effort by 45%.",
+        "Implemented Page Object Model (POM) design pattern across all automation projects improving test maintainability and readability.",
+        "Automated API regression testing using RestAssured and Postman Newman reducing manual API testing cycle from 2 days to 2 hours.",
+        "Migrated legacy QTP/UFT scripts to Selenium WebDriver reducing licensing costs and improving cross-browser test coverage.",
+        "Configured Selenium Grid and BrowserStack integration enabling parallel test execution across 10+ browser/OS combinations.",
+        "Implemented Cucumber BDD framework with Gherkin scenarios enabling non-technical stakeholders to understand and review tests.",
+        "Built Playwright automation framework for modern web apps handling shadow DOM, iFrames, and dynamic element interactions.",
+        "Integrated test execution reports using Allure and ExtentReports providing stakeholders with visual pass/fail dashboards.",
+        "Automated mobile application testing using Appium on Android and iOS emulators and real devices.",
+        "Reduced flaky test rate from 20% to under 3% by implementing explicit waits, retry logic, and test isolation strategies.",
+        "Built CI/CD-integrated smoke test suites that ran on every deployment providing 5-minute pass/fail feedback to the team.",
+        "Collaborated with developers to shift left by writing unit-level automation tests during feature development sprints.",
+        "Maintained and refactored legacy automation scripts keeping framework up to date with application UI changes.",
+        "Created automation test plans, framework documentation, and onboarding guides enabling new engineers to contribute quickly.",
+        "Implemented screenshot capture on failure and video recording for CI test runs enabling fast root-cause analysis.",
+        "Built performance regression automation using JMeter scripts scheduled nightly to detect latency regressions early.",
+        "Automated database validation tests using JDBC verifying backend data integrity after complex transactional workflows.",
+        "Contributed to sprint planning by estimating automation effort and communicating coverage gaps to the QA lead."
+      ]
+    },
+    {
+      "role": "Manual Tester",
+      "tags": ["manual testing", "qa", "test cases", "jira", "functional testing", "regression", "agile"],
+      "phrases": [
+        "Designed comprehensive test plans and detailed test cases covering functional, regression, smoke, and exploratory test scenarios.",
+        "Executed manual test cycles for web and mobile applications validating business logic, UI flows, and data accuracy.",
+        "Identified, documented, and tracked 500+ defects in Jira with clear reproduction steps, screenshots, and severity classifications.",
+        "Collaborated closely with developers and product managers in agile sprints to clarify requirements and acceptance criteria.",
+        "Performed cross-browser and cross-device compatibility testing on Chrome, Firefox, Safari, Edge, iOS, and Android.",
+        "Conducted regression testing across 20+ application modules before every major and minor product release.",
+        "Led user acceptance testing (UAT) sessions with business stakeholders gathering sign-off on critical feature releases.",
+        "Participated in sprint reviews and retrospectives contributing QA insights to improve team processes and quality standards.",
+        "Executed exploratory testing sessions uncovering edge-case defects not covered by formal test scripts.",
+        "Maintained and updated test case repositories in TestRail and Zephyr keeping documentation current with every release.",
+        "Performed API testing using Postman validating REST endpoint responses, error codes, and payload structures.",
+        "Validated third-party integrations including payment gateways, SMS providers, and email services for correctness.",
+        "Conducted database validation by running SQL queries to verify data accuracy after application operations.",
+        "Tested accessibility compliance using browser tools and screen readers checking against WCAG 2.1 guidelines.",
+        "Authored release notes and QA sign-off reports summarizing test coverage, outstanding defects, and go/no-go recommendations.",
+        "Collaborated with UX designers to validate that implemented interfaces matched approved design specifications.",
+        "Prioritized defect reports in coordination with product owners ensuring critical issues were resolved before release.",
+        "Performed end-to-end testing of checkout, authentication, and notification flows for high-traffic e-commerce platforms.",
+        "Executed performance sanity checks and reported observations on page load, form submission, and search response times.",
+        "Contributed to building team QA knowledge base by documenting common defect patterns and testing techniques."
+      ]
+    },
+    {
+      "role": "Data Analyst",
+      "tags": ["data analysis", "sql", "excel", "python", "tableau", "power bi", "statistics", "reporting"],
+      "phrases": [
+        "Analyzed large datasets using SQL, Python (pandas, NumPy), and Excel to extract actionable business insights for stakeholders.",
+        "Built interactive dashboards and reports in Tableau and Power BI enabling leadership to make data-driven decisions.",
+        "Wrote complex SQL queries involving multi-table joins, window functions, CTEs, and subqueries on million-row datasets.",
+        "Conducted customer segmentation analysis using RFM modeling identifying high-value customer cohorts driving 60% of revenue.",
+        "Cleaned, transformed, and validated raw data from multiple source systems ensuring accuracy for downstream reporting.",
+        "Performed A/B test analysis calculating statistical significance, confidence intervals, and business impact for product experiments.",
+        "Built automated reporting pipelines using Python scripts reducing manual report generation time from 4 hours to 15 minutes.",
+        "Collaborated with product and marketing teams to define KPIs, metrics frameworks, and measurement methodologies.",
+        "Conducted cohort analysis and funnel analysis identifying drop-off points in the user acquisition and onboarding flow.",
+        "Presented data findings and recommendations to non-technical senior stakeholders through clear visualizations and storytelling.",
+        "Maintained and optimized ETL pipelines ingesting data from CRM, ERP, and third-party APIs into the analytics warehouse.",
+        "Built revenue forecasting models using regression analysis supporting quarterly business planning and budget allocation.",
+        "Performed churn analysis identifying at-risk customers and enabling the retention team to reduce churn by 18%.",
+        "Validated data quality across analytics pipelines writing Python-based data quality checks and alerting mechanisms.",
+        "Documented data dictionaries, metric definitions, and analysis methodologies for team-wide reference and onboarding.",
+        "Supported pricing strategy decisions by analyzing competitor pricing data and price elasticity trends.",
+        "Monitored product metrics dashboards daily identifying anomalies and escalating unexpected trends to product teams.",
+        "Built Excel financial models with pivot tables, VLOOKUP, and dynamic charts supporting financial planning cycles.",
+        "Integrated Google Analytics and Mixpanel data with internal databases for end-to-end user journey analysis.",
+        "Collaborated with data engineering teams to define data requirements and validate new data pipeline outputs."
+      ]
+    },
+    {
+      "role": "Business Analyst",
+      "tags": ["business analysis", "requirements", "agile", "jira", "stakeholder management", "process improvement", "brd", "user stories"],
+      "phrases": [
+        "Elicited, documented, and validated business requirements from stakeholders producing BRDs, FRDs, and user stories for development teams.",
+        "Facilitated requirement workshops, stakeholder interviews, and JAD sessions to capture and align business needs.",
+        "Created detailed process flow diagrams, use cases, and wireframes bridging the gap between business stakeholders and engineering.",
+        "Managed product backlog in Jira writing clear user stories with acceptance criteria aligned to business objectives.",
+        "Conducted gap analysis comparing current-state and future-state processes identifying opportunities for automation and improvement.",
+        "Collaborated with development teams in agile ceremonies including sprint planning, grooming, and retrospectives.",
+        "Analyzed business processes and recommended solutions that reduced operational costs by 25% through workflow automation.",
+        "Built business cases for proposed solutions including cost-benefit analysis, ROI projections, and risk assessments.",
+        "Coordinated UAT with business users creating test scenarios, tracking defects, and managing sign-off documentation.",
+        "Acted as the primary liaison between business stakeholders and technology teams ensuring shared understanding of requirements.",
+        "Tracked and reported project milestones, risks, and issues to senior management ensuring on-time delivery of initiatives.",
+        "Conducted competitive analysis and market research supporting product strategy and feature prioritization decisions.",
+        "Translated complex regulatory and compliance requirements into clear technical specifications for engineering teams.",
+        "Created training materials and conducted end-user training sessions for newly implemented business systems.",
+        "Defined and monitored KPIs and success metrics for delivered business solutions validating post-implementation value.",
+        "Supported change management activities including impact assessments, stakeholder communication plans, and rollout coordination.",
+        "Produced executive-level reports and dashboards consolidating project status, financials, and risk across multiple workstreams.",
+        "Facilitated cross-functional workshops resulting in standardized business processes adopted across 3 departments.",
+        "Reviewed and validated data migration plans ensuring business rules were accurately reflected in transformed datasets.",
+        "Mentored junior business analysts providing guidance on requirements techniques, stakeholder communication, and documentation standards."
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "tags": ["data science", "machine learning", "python", "statistics", "pandas", "sklearn", "tensorflow", "modeling"],
+      "phrases": [
+        "Built and deployed supervised machine learning models (classification, regression) using scikit-learn and XGBoost achieving 92% prediction accuracy.",
+        "Designed end-to-end ML pipelines covering data ingestion, feature engineering, model training, evaluation, and deployment.",
+        "Developed customer churn prediction model reducing churn rate by 22% through targeted retention campaign recommendations.",
+        "Conducted exploratory data analysis (EDA) on large datasets using Python (pandas, matplotlib, seaborn) uncovering key business patterns.",
+        "Built NLP models using TF-IDF, Word2Vec, and BERT for sentiment analysis and text classification on customer feedback data.",
+        "Deployed machine learning models as REST APIs using Flask and FastAPI integrated into production data pipelines.",
+        "Performed feature selection and dimensionality reduction using PCA, LASSO, and mutual information to improve model performance.",
+        "Collaborated with data engineers to design feature stores enabling consistent, reproducible feature pipelines across model versions.",
+        "Applied time series forecasting techniques (ARIMA, Prophet, LSTM) to predict sales, demand, and operational metrics.",
+        "Designed and analyzed A/B experiments calculating statistical power, sample sizes, and effect sizes for product decisions.",
+        "Built recommendation engine using collaborative filtering and content-based methods increasing average order value by 15%.",
+        "Managed the full model lifecycle including retraining schedules, monitoring for data drift, and versioning with MLflow.",
+        "Presented model results, limitations, and business implications to non-technical executive stakeholders through clear storytelling.",
+        "Optimized model hyperparameters using GridSearchCV, RandomizedSearchCV, and Bayesian optimization improving F1 score by 12%.",
+        "Processed and analyzed unstructured datasets including images, text logs, and clickstream data for behavioral insights.",
+        "Built anomaly detection models identifying fraudulent transactions with 98% precision reducing false positive rates significantly.",
+        "Contributed to open-source data science tools and maintained internal Python packages for shared team use.",
+        "Established data science best practices including experiment tracking, reproducibility standards, and peer review processes.",
+        "Mentored junior data scientists through code reviews, model evaluation guidance, and technical coaching sessions.",
+        "Worked cross-functionally with product, engineering, and marketing teams to define problem statements and data requirements."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "Automation Tester",
+      "tags": ["automation", "selenium", "cypress", "playwright", "testng", "java", "python"],
+      "skills": [
+        "Selenium WebDriver",
+        "Cypress",
+        "Playwright",
+        "Java / Python / JavaScript",
+        "TestNG / JUnit / PyTest",
+        "Cucumber BDD / Gherkin",
+        "Appium (Mobile Testing)",
+        "RestAssured / Postman Newman",
+        "Page Object Model (POM)",
+        "Jenkins / GitHub Actions",
+        "Selenium Grid / BrowserStack",
+        "Allure / ExtentReports",
+        "Maven / Gradle",
+        "SQL & Database Testing",
+        "Git & Version Control",
+        "JMeter (Performance)",
+        "Jira & Zephyr",
+        "Agile / Scrum"
+      ]
+    },
+    {
+      "role": "Manual Tester",
+      "tags": ["manual testing", "qa", "test cases", "jira", "functional testing", "regression"],
+      "skills": [
+        "Test Case Design & Execution",
+        "Functional & Regression Testing",
+        "Exploratory Testing",
+        "Jira & Defect Tracking",
+        "TestRail / Zephyr",
+        "API Testing (Postman)",
+        "SQL & Database Validation",
+        "Cross-Browser Testing",
+        "Mobile Testing (iOS & Android)",
+        "Agile / Scrum",
+        "UAT Coordination",
+        "Accessibility Testing (WCAG)",
+        "Test Planning & Documentation",
+        "Smoke & Sanity Testing",
+        "BrowserStack / Sauce Labs",
+        "Confluence & Documentation"
+      ]
+    },
+    {
+      "role": "Data Analyst",
+      "tags": ["data analysis", "sql", "excel", "python", "tableau", "power bi", "statistics"],
+      "skills": [
+        "SQL (PostgreSQL, MySQL, BigQuery)",
+        "Python (pandas, NumPy, matplotlib)",
+        "Tableau",
+        "Power BI",
+        "Microsoft Excel (Advanced)",
+        "Google Analytics / Mixpanel",
+        "Statistical Analysis",
+        "A/B Testing",
+        "Data Visualization",
+        "ETL & Data Pipelines",
+        "Cohort & Funnel Analysis",
+        "Data Cleaning & Transformation",
+        "Looker / Metabase",
+        "R (basic)",
+        "Jira / Confluence",
+        "Storytelling with Data",
+        "Business Intelligence (BI)"
+      ]
+    },
+    {
+      "role": "Business Analyst",
+      "tags": ["business analysis", "requirements", "agile", "jira", "stakeholder management", "brd"],
+      "skills": [
+        "Requirements Gathering & Analysis",
+        "User Stories & Acceptance Criteria",
+        "Business Process Modelling (BPMN)",
+        "Stakeholder Management",
+        "Jira & Confluence",
+        "Agile / Scrum / SAFe",
+        "Gap & Impact Analysis",
+        "Wireframing (Figma, Balsamiq)",
+        "SQL & Data Analysis",
+        "UAT Coordination",
+        "Business Case Writing",
+        "Process Flow Diagrams",
+        "MS Visio / Lucidchart",
+        "Microsoft Excel & PowerPoint",
+        "Change Management",
+        "Risk & Issue Management",
+        "SDLC & Project Delivery"
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "tags": ["data science", "machine learning", "python", "statistics", "sklearn", "tensorflow", "nlp"],
+      "skills": [
+        "Python (pandas, NumPy, scikit-learn)",
+        "Machine Learning (Classification, Regression, Clustering)",
+        "Deep Learning (TensorFlow, PyTorch)",
+        "Natural Language Processing (NLP)",
+        "SQL & Database Querying",
+        "Feature Engineering",
+        "A/B Testing & Experimentation",
+        "Data Visualization (matplotlib, seaborn, Plotly)",
+        "Statistical Modelling",
+        "Time Series Forecasting",
+        "MLflow & Experiment Tracking",
+        "Flask / FastAPI (Model Deployment)",
+        "XGBoost / LightGBM",
+        "Jupyter Notebooks",
+        "Git & Version Control",
+        "Cloud ML (AWS SageMaker, GCP Vertex AI)",
+        "Recommendation Systems",
+        "Big Data (Spark, Databricks)"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "Automation Tester",
+      "tags": ["automation", "selenium", "cypress", "playwright"],
+      "options": [
+        {
+          "title": "Experienced Automation Tester",
+          "text": "Automation Tester with 4+ years of experience building robust test frameworks using Selenium, Cypress, and Playwright. Skilled in integrating automated suites into CI/CD pipelines to deliver fast, reliable feedback on every release and reduce manual regression effort by 80%."
+        },
+        {
+          "title": "Selenium & Java Automation Specialist",
+          "text": "Test automation engineer with deep expertise in Selenium WebDriver, Java, and TestNG. Delivered Page Object Model frameworks with BDD integration achieving 90%+ automation coverage on critical user journeys across web and mobile applications."
+        },
+        {
+          "title": "Full-Stack Test Automation Engineer",
+          "text": "Test automation engineer covering UI, API, and mobile automation. Experienced in Cypress, RestAssured, and Appium with a track record of building scalable, low-maintenance automation frameworks that integrate seamlessly into agile CI/CD workflows."
+        },
+        {
+          "title": "Junior Automation Tester",
+          "text": "Motivated Automation Tester with hands-on experience in Selenium WebDriver, Cypress, and Postman. Familiar with TestNG, BDD with Cucumber, and CI pipeline integration. Eager to build automation coverage and grow skills in performance and mobile testing."
+        }
+      ]
+    },
+    {
+      "role": "Manual Tester",
+      "tags": ["manual testing", "qa", "functional testing", "regression"],
+      "options": [
+        {
+          "title": "Experienced Manual QA Tester",
+          "text": "Manual QA Tester with 4+ years of experience in functional, regression, and exploratory testing for web and mobile applications. Skilled in writing detailed test cases, managing defects in Jira, and coordinating UAT to ensure high-quality software releases."
+        },
+        {
+          "title": "QA Tester – Agile Product Teams",
+          "text": "Detail-oriented QA Tester with strong experience working in fast-paced agile teams. Expert in requirements analysis, test planning, and defect management. Consistently identified critical defects pre-release and contributed to shipping products with measurably fewer production incidents."
+        },
+        {
+          "title": "Manual & API Tester",
+          "text": "QA professional experienced in both manual UI testing and API testing with Postman. Comfortable with SQL validation, cross-browser testing, and accessibility audits. Strong communicator who bridges the gap between QA findings and development team fixes."
+        },
+        {
+          "title": "Junior Manual QA Tester",
+          "text": "Detail-oriented junior QA Tester with hands-on experience in test case execution, defect reporting in Jira, and agile sprint participation. Passionate about product quality and eager to grow toward automation testing and broader QA responsibilities."
+        }
+      ]
+    },
+    {
+      "role": "Data Analyst",
+      "tags": ["data analysis", "sql", "python", "tableau", "power bi"],
+      "options": [
+        {
+          "title": "Experienced Data Analyst",
+          "text": "Data Analyst with 4+ years of experience transforming raw data into actionable insights using SQL, Python, and Tableau. Skilled in building dashboards, conducting A/B tests, and presenting findings to business stakeholders to drive data-informed decisions."
+        },
+        {
+          "title": "Business Intelligence Analyst",
+          "text": "Analytics professional specializing in Power BI, Tableau, and SQL for business intelligence reporting. Delivered self-service dashboards enabling leadership teams to monitor KPIs in real time and reduced manual reporting workload by 60%."
+        },
+        {
+          "title": "Data Analyst – Marketing & Product",
+          "text": "Data Analyst with expertise in product analytics, customer segmentation, and funnel analysis. Experienced in Google Analytics, Mixpanel, and Python enabling product and marketing teams to optimize user acquisition, retention, and conversion strategies."
+        },
+        {
+          "title": "Junior Data Analyst",
+          "text": "Analytical and detail-oriented Data Analyst with proficiency in SQL, Excel, and Python (pandas). Experienced in data cleaning, visualization, and reporting. Passionate about finding patterns in data and communicating insights clearly to drive business decisions."
+        }
+      ]
+    },
+    {
+      "role": "Business Analyst",
+      "tags": ["business analysis", "requirements", "agile", "stakeholder management"],
+      "options": [
+        {
+          "title": "Experienced Business Analyst",
+          "text": "Business Analyst with 5+ years of experience bridging business stakeholders and technology teams in agile environments. Skilled in requirements elicitation, user story writing, process modelling, and UAT coordination delivering solutions that reduce costs and improve operational efficiency."
+        },
+        {
+          "title": "Agile Business Analyst",
+          "text": "Agile BA with a strong track record of managing product backlogs, facilitating sprint ceremonies, and writing precise user stories with acceptance criteria. Delivered 20+ features across cross-functional teams while maintaining full alignment between business objectives and technical output."
+        },
+        {
+          "title": "Business Analyst – Digital Transformation",
+          "text": "Business Analyst specializing in digital transformation and process automation. Experienced in mapping as-is processes, designing to-be solutions, and managing change across complex multi-stakeholder environments resulting in 25%+ operational cost savings."
+        },
+        {
+          "title": "Junior Business Analyst",
+          "text": "Motivated Junior BA with hands-on experience in requirement documentation, Jira backlog management, and stakeholder workshops. Familiar with agile delivery, BPMN process diagrams, and user story writing. Eager to grow into a senior BA role through challenging projects."
+        }
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "tags": ["data science", "machine learning", "python", "statistics", "nlp"],
+      "options": [
+        {
+          "title": "Experienced Data Scientist",
+          "text": "Data Scientist with 4+ years of experience building and deploying machine learning models in production environments. Proficient in Python, scikit-learn, XGBoost, and TensorFlow with a track record of delivering models that measurably improved business outcomes across churn, fraud, and recommendation use cases."
+        },
+        {
+          "title": "ML & NLP Data Scientist",
+          "text": "Data Scientist specializing in natural language processing and supervised learning. Built NLP pipelines using BERT and Word2Vec for sentiment analysis and classification at scale. Passionate about translating complex model outputs into clear business recommendations."
+        },
+        {
+          "title": "Data Scientist – Experimentation & Analytics",
+          "text": "Data Scientist with strong foundations in statistical experimentation, A/B testing, and causal inference. Designed 30+ product experiments and built forecasting models that directly informed product roadmap and growth strategy decisions."
+        },
+        {
+          "title": "Junior Data Scientist",
+          "text": "Junior Data Scientist with practical experience in Python, machine learning model development, and exploratory data analysis. Familiar with scikit-learn, pandas, and Jupyter notebooks. Passionate about building impactful ML solutions and growing toward production-scale model deployment."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "Automation Tester",
+      "tags": ["automation", "selenium", "cypress", "playwright"],
+      "items": [
+        "Built Cypress automation suite from scratch covering 400+ test cases and reducing regression cycle from 3 days to 4 hours.",
+        "Reduced flaky test rate from 22% to under 2% by implementing retry logic, explicit waits, and test isolation improvements.",
+        "Achieved 90%+ end-to-end automation coverage on critical business flows within 6 months of joining the team.",
+        "Cut CI pipeline test execution time by 65% by introducing parallel test execution on Selenium Grid.",
+        "Migrated legacy QTP scripts to Selenium WebDriver saving $15,000 annually in licensing costs.",
+        "Integrated automated test suite into GitHub Actions pipeline enabling 5-minute smoke test feedback on every pull request.",
+        "Eliminated 100% of manual API regression testing by building comprehensive RestAssured test suite.",
+        "Identified 80 critical defects in pre-release automation runs preventing 5 emergency production hotfixes.",
+        "Mentored 2 junior testers on Selenium and Cypress, growing team automation capacity by 40%.",
+        "Reduced new automation script development time by 50% by creating reusable component library and helper utilities."
+      ]
+    },
+    {
+      "role": "Manual Tester",
+      "tags": ["manual testing", "qa", "functional testing", "regression"],
+      "items": [
+        "Identified 200+ defects across 6 major product releases preventing critical issues from reaching production users.",
+        "Reduced UAT cycle time from 3 weeks to 5 days by streamlining test scenarios and coordinating stakeholder sessions.",
+        "Achieved zero Severity 1 defects escaping to production across 4 consecutive release cycles.",
+        "Built and maintained test case library of 1,000+ scenarios in TestRail covering all core application modules.",
+        "Reduced defect reopening rate from 30% to under 8% by improving defect report quality and reproduction steps.",
+        "Delivered end-to-end test execution for 3 major feature launches on time with no release delays due to QA.",
+        "Introduced exploratory testing approach uncovering 40 edge-case defects missed by scripted test scenarios.",
+        "Trained 2 new QA team members on testing processes, Jira usage, and defect management workflows.",
+        "Identified performance issue causing 6-second checkout delay during manual regression — resolved before public launch.",
+        "Completed full regression cycle for 5-module enterprise application in 4 days against a planned 7-day estimate."
+      ]
+    },
+    {
+      "role": "Data Analyst",
+      "tags": ["data analysis", "sql", "python", "tableau", "power bi"],
+      "items": [
+        "Built Power BI executive dashboard consolidating 8 data sources, reducing weekly reporting effort from 10 hours to 30 minutes.",
+        "Identified customer churn risk segment through cohort analysis, enabling retention campaign that reduced churn by 18%.",
+        "Automated monthly financial reporting pipeline using Python reducing generation time from 4 hours to 12 minutes.",
+        "Delivered A/B test analysis for 15 product experiments providing statistical recommendations that increased conversion by 12%.",
+        "Uncovered $500K in unattributed revenue by reconciling CRM and billing system discrepancies through SQL analysis.",
+        "Reduced average SQL query execution time by 70% through query optimization and proper indexing on analytical tables.",
+        "Built customer segmentation model identifying 4 high-value cohorts driving 65% of total annual revenue.",
+        "Created self-service Tableau dashboards enabling 3 business teams to answer data questions without analyst involvement.",
+        "Improved data pipeline reliability from 85% to 99.5% by implementing Python-based data quality validation checks.",
+        "Presented quarterly business review analysis to C-suite influencing $2M strategic investment decision."
+      ]
+    },
+    {
+      "role": "Business Analyst",
+      "tags": ["business analysis", "requirements", "agile", "process improvement"],
+      "items": [
+        "Delivered requirements for 30+ features across 4 agile product teams with zero major post-release requirement changes.",
+        "Reduced operational costs by $300K annually by documenting and implementing process automation recommendations.",
+        "Facilitated cross-functional workshop resolving 6-month-old stakeholder alignment blocker enabling project to proceed.",
+        "Reduced sprint rework rate by 40% by improving user story quality and introducing structured acceptance criteria templates.",
+        "Built business case for CRM replacement project securing $500K budget approval from executive leadership.",
+        "Delivered UAT coordination for enterprise ERP rollout managing 50+ business users with 95% on-time sign-off rate.",
+        "Streamlined 3 manual business processes saving 15 hours of weekly operational effort through workflow redesign.",
+        "Produced regulatory compliance gap analysis mapping 200+ requirements to system capabilities for audit preparation.",
+        "Reduced requirements change requests mid-sprint by 55% by introducing prototype reviews before development started.",
+        "Mentored 2 junior BAs on requirements documentation techniques, stakeholder communication, and Jira workflow management."
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "tags": ["data science", "machine learning", "python", "statistics"],
+      "items": [
+        "Built customer churn prediction model with 92% accuracy enabling targeted retention that reduced churn rate by 22%.",
+        "Deployed fraud detection model in production identifying 98% of fraudulent transactions with 2% false positive rate.",
+        "Built recommendation engine increasing average order value by 15% and session engagement by 30%.",
+        "Reduced model training pipeline runtime from 8 hours to 45 minutes through feature store adoption and parallelization.",
+        "Delivered A/B test framework improving experiment velocity from 2 to 10 concurrent experiments per quarter.",
+        "Built demand forecasting model achieving MAPE of 4.2% enabling $1.2M reduction in overstock inventory costs.",
+        "Improved model F1 score by 18% through systematic feature engineering and hyperparameter optimization.",
+        "Created internal Python ML library reducing common model development tasks by 60% across the data science team.",
+        "Identified $800K in at-risk revenue through customer lifetime value analysis informing sales strategy decisions.",
+        "Delivered NLP sentiment analysis pipeline processing 50,000 daily customer reviews enabling real-time brand monitoring."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "Automation Tester",
+      "tags": ["automation", "selenium", "cypress", "playwright"],
+      "items": [
+        "E2E Cypress Framework: Built full Cypress automation framework with custom commands, fixtures, and GitHub Actions CI integration.",
+        "Selenium POM Framework: Designed Java Selenium framework using Page Object Model with TestNG and Allure reporting.",
+        "API Automation Suite: Built RestAssured + TestNG API test suite covering 200+ endpoints with data-driven test execution.",
+        "BDD Cucumber Framework: Implemented Cucumber + Selenium BDD framework with Gherkin scenarios and living documentation.",
+        "Mobile Automation Framework: Built Appium + Java framework for Android and iOS app regression testing on BrowserStack.",
+        "Parallel Execution Setup: Configured Selenium Grid enabling 10x faster regression runs across multiple browsers simultaneously.",
+        "Performance Regression Suite: Built nightly JMeter test suite monitoring API response time baselines and alerting on regressions.",
+        "Visual Regression Testing: Integrated Percy into Cypress CI pipeline catching UI visual regressions across 80+ pages.",
+        "Test Data Factory: Built Java utility library generating dynamic test data for parameterized automation scenarios.",
+        "CI/CD Test Integration: Embedded automation suites into Jenkins and GitHub Actions delivering 5-minute smoke feedback per commit."
+      ]
+    },
+    {
+      "role": "Manual Tester",
+      "tags": ["manual testing", "qa", "functional testing", "regression"],
+      "items": [
+        "Test Case Repository: Built and maintained 1,000+ test cases in TestRail covering all functional modules of a SaaS platform.",
+        "E-Commerce UAT: Coordinated end-to-end UAT for e-commerce replatform with 30 business users across 3 departments.",
+        "Mobile Compatibility Testing: Executed full cross-device test cycle covering 20 device/OS combinations on BrowserStack.",
+        "API Regression Testing: Conducted Postman-based API regression testing for 150+ endpoints across 3 sprint releases.",
+        "Accessibility Audit: Performed WCAG 2.1 AA audit on enterprise web portal identifying 30 accessibility defects for remediation.",
+        "Regression Test Cycle: Led 5-day regression cycle for multi-module healthcare application covering 800 test scenarios.",
+        "Payment Gateway Testing: Executed end-to-end functional and error-path testing for Stripe and PayPal payment integrations.",
+        "Release Checklist Process: Designed release readiness checklist adopted by the QA team reducing post-release incidents by 40%.",
+        "Performance Sanity Testing: Documented and escalated page load performance observations contributing to 3-second load improvement.",
+        "Defect Triage Process: Led weekly defect triage meetings prioritizing 50+ open bugs with development leads and product owners."
+      ]
+    },
+    {
+      "role": "Data Analyst",
+      "tags": ["data analysis", "sql", "python", "tableau", "power bi"],
+      "items": [
+        "Executive KPI Dashboard: Built Power BI dashboard pulling from 5 sources giving leadership real-time business performance visibility.",
+        "Customer Segmentation Model: Performed RFM analysis identifying 4 customer tiers used to personalize marketing campaigns.",
+        "Churn Analysis Report: Analysed 2-year customer cohort data identifying churn predictors reducing 18% annual churn rate.",
+        "Automated Reporting Pipeline: Built Python ETL + Tableau pipeline automating 6 weekly reports saving 10 hours/week.",
+        "A/B Test Analytics Framework: Created standardized A/B test analysis template used across all product experiments.",
+        "Revenue Reconciliation: Built SQL queries reconciling CRM, billing, and ledger systems uncovering $500K revenue discrepancy.",
+        "Marketing Attribution Model: Built multi-touch attribution model in Python helping marketing allocate $2M ad budget more efficiently.",
+        "Product Funnel Analysis: Identified 3 major drop-off points in user onboarding funnel enabling product changes increasing activation 20%.",
+        "Data Quality Framework: Built Python-based data quality checks on 10 data pipelines reducing reporting errors by 95%.",
+        "Forecasting Model: Built regression-based revenue forecast model with 96% accuracy used in quarterly board presentations."
+      ]
+    },
+    {
+      "role": "Business Analyst",
+      "tags": ["business analysis", "requirements", "agile", "process improvement"],
+      "items": [
+        "CRM Implementation: Led BA workstream for Salesforce CRM rollout gathering requirements from 8 business units.",
+        "Process Automation Initiative: Documented and redesigned 5 manual workflows saving 15 hours of weekly operational effort.",
+        "ERP UAT Coordination: Managed UAT for SAP ERP implementation coordinating 50 business users across Finance and Ops.",
+        "Digital Onboarding Redesign: Elicited requirements for customer onboarding redesign reducing completion time from 20 to 7 minutes.",
+        "Regulatory Compliance Project: Documented 200+ regulatory requirements mapped to system capabilities for GDPR audit preparation.",
+        "Agile Product Backlog: Managed 100+ story backlog across 4 sprints for customer portal rebuild with zero missed sprint goals.",
+        "Business Case Development: Built ROI business case for data warehouse project securing $400K executive budget approval.",
+        "Data Migration Requirements: Defined data mapping and business rules for migration of 500K records from legacy to new system.",
+        "Competitor Analysis: Delivered feature gap analysis comparing 5 competitor platforms informing 6-month product roadmap decisions.",
+        "Training Programme: Designed and delivered BA training curriculum for 5 junior analysts covering requirements techniques and tools."
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "tags": ["data science", "machine learning", "python", "statistics", "nlp"],
+      "items": [
+        "Churn Prediction Model: Built XGBoost classifier predicting customer churn with 92% accuracy deployed via Flask API to production.",
+        "Recommendation Engine: Designed collaborative filtering recommendation system increasing average order value by 15%.",
+        "Fraud Detection System: Built anomaly detection model identifying fraudulent transactions in real time with 98% precision.",
+        "NLP Sentiment Pipeline: Developed BERT-based sentiment classifier processing 50,000 daily customer reviews for brand analytics.",
+        "Demand Forecasting: Built Prophet + LSTM ensemble model forecasting product demand with 4.2% MAPE across 200 SKUs.",
+        "A/B Testing Framework: Designed Python experimentation framework for sequential testing enabling 10 concurrent product experiments.",
+        "Customer Lifetime Value Model: Built CLV prediction model segmenting 1M+ customers enabling targeted high-value retention campaigns.",
+        "MLflow Model Registry: Set up MLflow experiment tracking and model registry standardizing model versioning across the DS team.",
+        "Feature Store: Collaborated with data engineers to build feature store reducing feature computation duplication across 8 models.",
+        "Pricing Optimization: Built price elasticity model informing dynamic pricing strategy estimated to increase margin by 8%."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "Automation Tester",
+      "tags": ["automation", "selenium", "cypress", "istqb"],
+      "items": [
+        "ISTQB Certified Tester – Advanced Level (Test Automation Engineer)",
+        "Selenium WebDriver with Java – Professional Certification",
+        "Cypress End-to-End Testing Certification",
+        "ISTQB Certified Tester – Foundation Level (CTFL)",
+        "Playwright Automation Testing Certification",
+        "API Testing with RestAssured and Java Certification",
+        "Mobile App Automation with Appium Certification",
+        "BDD with Cucumber and Selenium Certification",
+        "Jenkins CI/CD for Test Automation Certification",
+        "Performance Testing with JMeter Certification"
+      ]
+    },
+    {
+      "role": "Manual Tester",
+      "tags": ["manual testing", "qa", "istqb", "functional testing"],
+      "items": [
+        "ISTQB Certified Tester – Foundation Level (CTFL)",
+        "ISTQB Certified Tester – Advanced Level (Test Analyst)",
+        "API Testing with Postman Certification",
+        "Agile Testing – Scrum Alliance",
+        "TestRail Certified Test Manager",
+        "Accessibility Testing – WCAG 2.1 Foundations",
+        "Certified Software Quality Analyst (CSQA)",
+        "Jira for QA Teams Certification",
+        "Mobile App Testing Fundamentals",
+        "SQL for Testers Certification"
+      ]
+    },
+    {
+      "role": "Data Analyst",
+      "tags": ["data analysis", "sql", "python", "tableau", "power bi"],
+      "items": [
+        "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
+        "Tableau Desktop Specialist",
+        "Google Data Analytics Professional Certificate",
+        "IBM Data Analyst Professional Certificate",
+        "SQL for Data Science – Coursera / UC Davis",
+        "Python for Data Analysis – Coursera",
+        "AWS Certified Cloud Practitioner (Analytics context)",
+        "Google Analytics Individual Qualification (GAIQ)",
+        "Statistics for Data Analysis – edX",
+        "Meta Data Analyst Professional Certificate"
+      ]
+    },
+    {
+      "role": "Business Analyst",
+      "tags": ["business analysis", "agile", "requirements", "cbap"],
+      "items": [
+        "Certified Business Analysis Professional (CBAP) – IIBA",
+        "Entry Certificate in Business Analysis (ECBA) – IIBA",
+        "Certification of Competency in Business Analysis (CCBA) – IIBA",
+        "PMI Professional in Business Analysis (PMI-PBA)",
+        "Certified Scrum Product Owner (CSPO) – Scrum Alliance",
+        "Agile Analysis Certification (AAC) – IIBA",
+        "PRINCE2 Foundation & Practitioner",
+        "Lean Six Sigma Green Belt",
+        "Salesforce Certified Business Analyst",
+        "Microsoft Power Platform Fundamentals (PL-900)"
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "tags": ["data science", "machine learning", "python", "statistics"],
+      "items": [
+        "Google Professional Machine Learning Engineer",
+        "AWS Certified Machine Learning – Specialty",
+        "IBM Data Science Professional Certificate",
+        "DeepLearning.AI TensorFlow Developer Certificate",
+        "Microsoft Certified: Azure Data Scientist Associate (DP-100)",
+        "Databricks Certified Associate Developer for Apache Spark",
+        "Stanford Machine Learning Specialization – Coursera",
+        "Deep Learning Specialization – DeepLearning.AI",
+        "Natural Language Processing Specialization – DeepLearning.AI",
+        "Certified Analytics Professional (CAP)"
+      ]
+    }
+  ]
+}

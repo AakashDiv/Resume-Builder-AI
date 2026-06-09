@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { useSearchParams } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   FaBars,
   FaBriefcase,
@@ -12,11 +14,17 @@ import {
   FaCircleCheck,
   FaCirclePlus,
   FaDownload,
+  FaEnvelope,
   FaEye,
   FaFileLines,
   FaFlagCheckered,
   FaGraduationCap,
   FaLightbulb,
+  FaMagnifyingGlassMinus,
+  FaMagnifyingGlassPlus,
+  FaPenToSquare,
+  FaPrint,
+  FaXmark,
   FaUser
 } from "react-icons/fa6";
 import TemplateThumbnail from "../components/TemplateThumbnail.jsx";
@@ -28,6 +36,7 @@ import {
   estimateResumePageCount,
   normalizeResumeForPdf
 } from "../utils/resumePdfQuality.js";
+import { fetchResumeSuggestions } from "../services/resumeApi.js";
 
 const steps = [
   { key: "header", label: "Header", icon: FaUser },
@@ -704,9 +713,48 @@ function splitBullets(text) {
 function extractPlainText(value) {
   const raw = String(value || "");
   if (!raw.includes("<")) return raw;
+  if (typeof document === "undefined") {
+    return raw
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<\/(li|p|div)>/gi, "\n")
+      .replace(/<[^>]+>/g, "");
+  }
+
   const parser = document.createElement("div");
   parser.innerHTML = raw;
-  return parser.textContent || "";
+  const lines = [];
+  let currentLine = "";
+
+  const pushLine = () => {
+    const cleanLine = currentLine.replace(/\s+/g, " ").trim();
+    if (cleanLine) lines.push(cleanLine);
+    currentLine = "";
+  };
+
+  const walk = (node) => {
+    if (node.nodeType === 3) {
+      currentLine += node.textContent || "";
+      return;
+    }
+
+    if (node.nodeType !== 1) return;
+
+    const tag = node.tagName.toLowerCase();
+    if (tag === "br") {
+      pushLine();
+      return;
+    }
+
+    Array.from(node.childNodes).forEach(walk);
+
+    if (["div", "p", "li", "tr"].includes(tag)) {
+      pushLine();
+    }
+  };
+
+  Array.from(parser.childNodes).forEach(walk);
+  pushLine();
+  return lines.join("\n");
 }
 
 function getAdditionalSections(additional) {
@@ -791,11 +839,15 @@ export default function ResumeBuilderPage() {
     paragraphIndent: 0
   });
   const [finalizeFocus, setFinalizeFocus] = useState("resume_sections");
+  const [isFinalizeSectionsOpen, setIsFinalizeSectionsOpen] = useState(true);
+  const [isFinalizeScoreOpen, setIsFinalizeScoreOpen] = useState(true);
   const previewViewportRef = useRef(null);
   const pdfRef = useRef(null);
   const [previewScale, setPreviewScale] = useState(1);
+  const [previewZoom, setPreviewZoom] = useState(1);
   const [previewContentHeight, setPreviewContentHeight] = useState(A4_HEIGHT_PX);
   const [estimatedPages, setEstimatedPages] = useState(1);
+  const [saveNotice, setSaveNotice] = useState("");
 
   const normalizedResult = useMemo(() => normalizeResumeForPdf(resumeData), [resumeData]);
   const resumeForRender = useMemo(
@@ -1008,38 +1060,62 @@ export default function ResumeBuilderPage() {
     setActiveStep("finalize");
   }
 
+  function handleSaveDraft() {
+    localStorage.setItem("resume_builder_manual_save_at", new Date().toISOString());
+    setSaveNotice("Draft saved");
+    window.setTimeout(() => setSaveNotice(""), 1800);
+  }
+
+  const effectivePreviewScale = previewScale * previewZoom;
+  const activeStepIndex = steps.findIndex((step) => step.key === activeStep);
+  const activeStepLabel = steps.find((item) => item.key === activeStep)?.label || "Resume Builder";
+  const missingChecks = (qualityReport.checks || []).filter((check) => check.status !== "ok");
+
   return (
     <div
-      className={`grid gap-4 print:block ${
+      className={`premium-builder grid print:block ${
         activeStep === "finalize"
           ? isSidebarExpanded
-            ? "lg:grid-cols-[220px,minmax(0,1fr)]"
-            : "lg:grid-cols-[76px,minmax(0,1fr)]"
+            ? "xl:grid-cols-[240px,minmax(0,1fr)]"
+            : "xl:grid-cols-[78px,minmax(0,1fr)]"
           : isSidebarExpanded
-            ? "lg:grid-cols-[220px,minmax(0,1fr),420px]"
-            : "lg:grid-cols-[76px,minmax(0,1fr),420px]"
-      } text-slate-900`}
+            ? "xl:grid-cols-[240px,minmax(0,1fr),340px]"
+            : "xl:grid-cols-[78px,minmax(0,1fr),340px]"
+      } min-h-screen`}
     >
-      <aside className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm print:hidden">
+      <aside className={`premium-sidebar ${isSidebarExpanded ? "is-expanded" : "is-compact"} print:hidden`}>
         <div>
           <div className="mb-3 flex items-center justify-between gap-2">
-            {isSidebarExpanded ? <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Builder Progress</p> : <span />}
+            {isSidebarExpanded ? (
+              <div>
+                <p className="text-xs font-black uppercase text-slate-500">Your Progress</p>
+                <p className="mt-1 text-sm font-bold text-slate-950">{progressPercent}% complete</p>
+              </div>
+            ) : <span />}
             <button
               type="button"
               onClick={() => setIsSidebarExpanded((prev) => !prev)}
-              className="inline-flex items-center justify-center rounded-md border border-slate-300 px-2 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              className="premium-icon-button"
               title={isSidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
             >
               {isSidebarExpanded ? <FaChevronLeft aria-hidden /> : <FaBars aria-hidden />}
             </button>
           </div>
-          <div className="h-2 rounded-full bg-slate-200">
-            <div className="h-2 rounded-full bg-brand-600 transition-all duration-500" style={{ width: `${progressPercent}%` }} />
+          <div className="premium-progress-ring" style={{ "--progress": progressPercent }}>
+            <svg viewBox="0 0 72 72" aria-hidden>
+              <circle cx="36" cy="36" r="30" />
+              <circle cx="36" cy="36" r="30" />
+            </svg>
+            <strong>{progressPercent}%</strong>
           </div>
-          {isSidebarExpanded ? <p className="mt-1 text-right text-sm font-bold text-brand-700">{progressPercent}%</p> : null}
+          {isSidebarExpanded ? (
+            <p className="mt-2 text-xs text-slate-500">
+              {progressPercent === 100 ? "Complete" : `${steps.length - 1 - Object.values(completedMap).filter(Boolean).length} steps left`}
+            </p>
+          ) : null}
         </div>
 
-        <nav className="mt-4 space-y-2">
+        <nav className="mt-5 space-y-2">
           {steps.map((step) => {
             const active = activeStep === step.key;
             const done = completedMap[step.key];
@@ -1048,68 +1124,112 @@ export default function ResumeBuilderPage() {
               <button
                 key={step.key}
                 onClick={() => setActiveStep(step.key)}
-                className={`flex w-full items-center ${isSidebarExpanded ? "justify-between px-3 py-2" : "justify-center px-2 py-2"} rounded-lg text-left text-sm font-semibold transition ${
-                  active ? "bg-brand-50 text-brand-700" : "text-slate-700 hover:bg-slate-50"
-                }`}
+                className={`premium-step-button ${active ? "is-active" : ""} ${done ? "is-done" : ""} ${isSidebarExpanded ? "is-expanded" : "is-compact"}`}
                 title={step.label}
               >
                 {isSidebarExpanded ? (
                   <>
                     <span className="flex min-w-0 items-center gap-2">
-                      <StepIcon className="shrink-0 text-sm" aria-hidden />
-                      <span className="truncate">{step.label}</span>
+                      <span className="premium-step-icon">{done ? <FaCheck aria-hidden /> : steps.findIndex((item) => item.key === step.key) + 1}</span>
+                      <span className="min-w-0">
+                        <span className="block truncate">{step.label}</span>
+                        <span className="block text-[10px] font-semibold text-slate-400">{done ? "Done" : active ? "In progress" : "Pending"}</span>
+                      </span>
                     </span>
                     <span className={`text-xs ${done ? "text-emerald-600" : active ? "text-brand-600" : "text-slate-400"}`}>
                       {done ? <FaCircleCheck aria-label="Complete" /> : active ? <FaChevronRight aria-label="Current" /> : <FaCircle aria-label="Not started" />}
                     </span>
                   </>
                 ) : (
-                  <span
-                    className={`grid h-7 w-7 place-items-center rounded-full border text-xs ${
-                      active ? "border-brand-600 bg-brand-600 text-white" : done ? "border-emerald-500 text-emerald-600" : "border-slate-300 text-slate-500"
-                    }`}
-                  >
-                    {done ? <FaCheck aria-hidden /> : <StepIcon aria-hidden />}
+                  <span className="premium-step-icon">
+                    {done ? <FaCheck aria-hidden /> : steps.findIndex((item) => item.key === step.key) + 1}
                   </span>
                 )}
               </button>
             );
           })}
         </nav>
+
+        {isSidebarExpanded ? (
+          <div className="premium-ats-card premium-template-chip mt-5">
+            <p className="text-xs font-black uppercase text-slate-500">Template</p>
+            <div className="mt-3 flex items-center justify-between">
+              <span className="inline-flex h-3 w-3 rounded-full" style={{ background: selectedTemplate.accent || "#06B6D4" }} />
+              <span className="text-xs font-bold text-slate-500">{selectedTemplate.category}</span>
+            </div>
+            <p className="mt-2 text-xs font-bold leading-5 text-slate-500">{selectedTemplate.name}</p>
+            <button type="button" onClick={() => window.location.assign("/templates")} className="mt-2 text-xs font-black text-brand-600">Change</button>
+          </div>
+        ) : null}
       </aside>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm print:hidden">
-        <header className="mb-4 flex items-center justify-between">
-          <div>
-            <h2 className="text-3xl font-extrabold text-slate-950">{steps.find((item) => item.key === activeStep)?.label}</h2>
-            <p className="text-sm text-slate-500">Template: {selectedTemplate.name}</p>
+      <section className="premium-editor-panel print:hidden">
+        <header className="premium-action-bar">
+          <div className="premium-action-title-row">
+            <button
+              type="button"
+              onClick={goToPreviousStep}
+              disabled={activeStep === "header"}
+              className="premium-builder-back-button"
+              aria-label="Back to previous section"
+            >
+              <FaChevronLeft />
+            </button>
+            <div className="min-w-0">
+              <p className="premium-step-number-chip">{String(activeStepIndex + 1).padStart(2, "0")}</p>
+              <h2 className="mt-1 text-3xl font-black text-slate-950">{activeStepLabel}</h2>
+              <p className="mt-1 text-sm text-slate-500">Template: {selectedTemplate.name} · Autosaved locally</p>
+            </div>
           </div>
-          <div className="flex gap-2">
+          <div className="premium-toolbar">
             <button
               type="button"
               onClick={fillDemoData}
-              className="rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-100"
+              className="premium-ghost-button"
             >
               Fill Demo Data
             </button>
-            <button onClick={resetDraft} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+            <button onClick={resetDraft} className="premium-ghost-button">
               Reset Draft
+            </button>
+            <button onClick={handleSaveDraft} className="premium-ghost-button">
+              Save Draft
             </button>
             <button
               onClick={() => setIsPreviewOpen(true)}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              className="premium-secondary-button"
             >
               <FaEye className="text-xs" />
               <span>Preview</span>
             </button>
-            <button onClick={downloadPdf} className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+            <button onClick={downloadPdf} className="premium-primary-button">
               <FaDownload className="text-xs" />
               <span>{downloading ? "Preparing..." : "Download PDF"}</span>
             </button>
           </div>
         </header>
+        {saveNotice ? <p className="mb-4 rounded-xl bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-700">{saveNotice}</p> : null}
 
-        <div className="transition-all duration-300">
+        <div className={`premium-engagement-grid mb-5 ${activeStep === "finalize" ? "is-finalize-compact" : ""}`}>
+          <div>
+            <p className="text-xs font-bold uppercase text-slate-500">Completion</p>
+            <p className="mt-1 text-2xl font-black text-slate-950">{progressPercent}%</p>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase text-slate-500">Resume Score</p>
+            <p className="mt-1 text-2xl font-black text-slate-950">{qualityReport.score}/100</p>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase text-slate-500">Missing Sections</p>
+            <p className="mt-1 text-2xl font-black text-slate-950">{Math.max(0, Object.values(completedMap).filter((done) => !done).length - 1)}</p>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase text-slate-500">Pages</p>
+            <p className="mt-1 text-2xl font-black text-slate-950">{estimatedPages}</p>
+          </div>
+        </div>
+
+        <div className={`transition-all duration-300 ${activeStep === "finalize" ? "premium-finalize-stage" : ""}`}>
           {renderStepForm(activeStep, resumeData, {
             updateHeader,
             updateSummary,
@@ -1130,46 +1250,67 @@ export default function ResumeBuilderPage() {
             selectedTemplate,
             finalizeFocus,
             setFinalizeFocus,
+            isFinalizeSectionsOpen,
+            setIsFinalizeSectionsOpen,
+            isFinalizeScoreOpen,
+            setIsFinalizeScoreOpen,
+            estimatedPages,
+            downloadPdf,
+            downloading,
+            openPreview: () => setIsPreviewOpen(true),
             resumeData,
             previewData: resumeForRender,
             qualityReport
           })}
         </div>
-        <div className="mt-4 flex justify-end gap-2">
+        <div className="premium-nav-footer">
           <button
             type="button"
             onClick={goToPreviousStep}
             disabled={activeStep === "header"}
-            className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="premium-ghost-button disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Previous Section
+            ← Previous Section
           </button>
+          <span>Step {activeStepIndex + 1} of {steps.length}</span>
           <button
             type="button"
             onClick={goToNextStep}
             disabled={activeStep === "finalize"}
-            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="premium-primary-button disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Next Section
+            Next Section →
           </button>
         </div>
       </section>
 
       {activeStep !== "finalize" ? (
-      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm print:border-0 print:bg-white print:p-0">
-        <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-500 print:hidden">
-          <FaUser className="text-[10px]" />
-          <span>Live Resume Preview</span>
-        </p>
-        <div ref={previewViewportRef} className="overflow-auto rounded-xl border border-slate-200 bg-slate-100 p-2">
-          <div style={{ width: `${A4_WIDTH_PX * previewScale}px`, height: `${previewContentHeight * previewScale}px`, overflow: "hidden" }}>
+      <section className="premium-preview-panel print:border-0 print:bg-white print:p-0">
+        <div className="premium-preview-header print:hidden">
+          <div className="premium-live-label">
+            <span />
+            <p className="text-xs font-black uppercase text-slate-500">Live Resume Preview</p>
+            <p className="mt-1 text-sm font-bold text-slate-950">A4 document · {estimatedPages} page{estimatedPages > 1 ? "s" : ""}</p>
+          </div>
+          <div className="premium-zoom-controls">
+            <button type="button" onClick={() => setPreviewZoom((value) => Math.max(0.65, Number((value - 0.1).toFixed(2))))}>-</button>
+            <span>{Math.round(previewZoom * 100)}%</span>
+            <button type="button" onClick={() => setPreviewZoom((value) => Math.min(1.25, Number((value + 0.1).toFixed(2))))}>+</button>
+          </div>
+        </div>
+        <div className="premium-page-indicator print:hidden">
+          <span>Page 1</span>
+          {estimatedPages > 1 ? <span>Multi-page export ready</span> : <span>Single-page target</span>}
+        </div>
+        <div ref={previewViewportRef} className="premium-preview-viewport">
+          <div style={{ width: `${A4_WIDTH_PX * effectivePreviewScale}px`, height: `${previewContentHeight * effectivePreviewScale}px`, overflow: "hidden" }}>
             <div
               ref={previewRef}
-              className="origin-top-left"
+              className="origin-top-left bg-white"
               style={{
                 width: `${A4_WIDTH_PX}px`,
                 minHeight: `${A4_HEIGHT_PX}px`,
-                transform: `scale(${previewScale})`
+                transform: `scale(${effectivePreviewScale})`
               }}
             >
               <DesignableResumePreview
@@ -1182,6 +1323,11 @@ export default function ResumeBuilderPage() {
             </div>
           </div>
         </div>
+        <footer className="premium-preview-footer print:hidden">
+          <span>{selectedTemplate.name}</span>
+          <button type="button" onClick={() => window.location.assign("/templates")}>Change</button>
+          <em>Page 1 of {estimatedPages}</em>
+        </footer>
       </section>
       ) : null}
 
@@ -1242,7 +1388,7 @@ function renderStepForm(step, data, actions) {
 
     return (
       <div className="space-y-3">
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="builder-section-card grid gap-3 md:grid-cols-2">
           <Input label="Full Name" value={data.header.fullName} onChange={(v) => actions.updateHeader("fullName", v)} />
           <Input label="Headline" value={data.header.headline || ""} onChange={(v) => actions.updateHeader("headline", v)} />
           <Input label="Email" value={data.header.email} onChange={(v) => actions.updateHeader("email", v)} />
@@ -1250,7 +1396,7 @@ function renderStepForm(step, data, actions) {
           <Input label="Location" value={data.header.location} onChange={(v) => actions.updateHeader("location", v)} />
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+        <div className="builder-section-card rounded-xl border border-slate-200 bg-slate-50 p-3">
           <p className="text-sm font-semibold text-slate-700">Image Section</p>
           <p className="mt-0.5 text-xs text-slate-500">If the selected template/PDF design supports profile image, it will be shown in preview and export.</p>
           <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -1276,7 +1422,7 @@ function renderStepForm(step, data, actions) {
             <button
               type="button"
               onClick={() => actions.updateHeader("photo", "")}
-              className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-50"
+              className="builder-action-badge is-remove"
             >
               Remove
             </button>
@@ -1419,7 +1565,7 @@ function renderStepForm(step, data, actions) {
                 type="button"
                 onClick={() => actions.removeExperience(index)}
                 disabled={data.experience.length === 1}
-                className="rounded-lg border border-rose-300 bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-40"
+                className="builder-action-badge is-remove disabled:cursor-not-allowed disabled:opacity-40"
               >
                 - Remove
               </button>
@@ -1438,12 +1584,13 @@ function renderStepForm(step, data, actions) {
             </label>
             <ExperienceBulletComposer
               jobTitle={item.jobTitle}
+              headline={data.header.headline}
               value={item.bullets}
               onChange={(v) => actions.updateExperience(index, "bullets", v)}
             />
           </div>
         ))}
-        <button onClick={actions.addExperience} className="rounded-lg border border-dashed border-brand-400 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50">
+        <button onClick={actions.addExperience} className="builder-action-badge is-add">
           + Add More Experience
         </button>
       </div>
@@ -1461,7 +1608,7 @@ function renderStepForm(step, data, actions) {
                 type="button"
                 onClick={() => actions.removeEducation(index)}
                 disabled={data.education.length === 1}
-                className="rounded-lg border border-rose-300 bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-40"
+                className="builder-action-badge is-remove disabled:cursor-not-allowed disabled:opacity-40"
               >
                 - Remove
               </button>
@@ -1549,7 +1696,7 @@ function renderStepForm(step, data, actions) {
             />
           </div>
         ))}
-        <button onClick={actions.addEducation} className="rounded-lg border border-dashed border-brand-400 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50">
+        <button onClick={actions.addEducation} className="builder-action-badge is-add">
           + Add More Education
         </button>
       </div>
@@ -1557,15 +1704,15 @@ function renderStepForm(step, data, actions) {
   }
 
   if (step === "skills") {
-    return <SkillsComposer value={data.skills.primarySkills} onChange={actions.updateSkills} />;
+    return <SkillsComposer value={data.skills.primarySkills} onChange={actions.updateSkills} headline={data.header.headline} />;
   }
 
   if (step === "summary") {
-    return <SummaryComposer value={data.summary.text} onChange={actions.updateSummary} />;
+    return <SummaryComposer value={data.summary.text} onChange={actions.updateSummary} headline={data.header.headline} />;
   }
 
   if (step === "additional") {
-    return <AdditionalSectionsEditor additional={data.additional} onChange={actions.updateAdditional} />;
+    return <AdditionalSectionsEditor additional={data.additional} onChange={actions.updateAdditional} headline={data.header.headline} />;
   }
 
   return <FinalizeReviewPanel data={data} actions={actions} />;
@@ -1574,6 +1721,10 @@ function renderStepForm(step, data, actions) {
 function FinalizeReviewPanel({ data, actions }) {
   const previewData = actions.previewData || data;
   const qualityReport = actions.qualityReport || { score: 0, checks: [], blockingCount: 0 };
+  const [isEditDrawerOpen, setIsEditDrawerOpen] = useState(false);
+  const [finalizeZoom, setFinalizeZoom] = useState(0.9);
+  const [activePage, setActivePage] = useState(1);
+  const finalizeCanvasRef = useRef(null);
 
   const reviewItems = [
     { key: "resume_sections", label: "Resume sections", done: isHeaderComplete(data) && isExperienceComplete(data) && isEducationComplete(data) },
@@ -1592,23 +1743,81 @@ function FinalizeReviewPanel({ data, actions }) {
     ["Education and Training", "education"],
     ["Additional", "additional"]
   ];
+  const pageCount = Math.max(1, actions.estimatedPages || 1);
+
+  useEffect(() => {
+    setActivePage((page) => Math.min(page, pageCount));
+  }, [pageCount]);
+
+  useEffect(() => {
+    const node = finalizeCanvasRef.current;
+    if (!node) return;
+    const pageGap = 16;
+    node.scrollTo({
+      top: Math.max(0, (activePage - 1) * (A4_HEIGHT_PX + pageGap) * finalizeZoom),
+      behavior: "smooth"
+    });
+  }, [activePage, finalizeZoom]);
+
+  const openFinalizeDrawer = (focus = "resume_sections") => {
+    actions.setFinalizeFocus(focus);
+    setIsEditDrawerOpen(true);
+  };
+
+  const handleEmail = () => {
+    const email = data.header?.email || "";
+    const subject = encodeURIComponent(`${data.header?.fullName || "Resume"} - Resume`);
+    window.location.href = `mailto:${email}?subject=${subject}`;
+  };
 
   return (
-    <div className="grid gap-4 rounded-2xl bg-[#1d2a61] p-4 text-white xl:grid-cols-[260px,minmax(0,1fr),280px]">
-      <aside className="rounded-xl bg-[#192454] p-4">
+    <div className="premium-finalize premium-finalize-review">
+      {isEditDrawerOpen ? <button type="button" className="premium-finalize-drawer-backdrop" onClick={() => setIsEditDrawerOpen(false)} aria-label="Close edit drawer" /> : null}
+      <aside className={`premium-finalize-drawer ${isEditDrawerOpen ? "is-open" : ""}`} aria-hidden={!isEditDrawerOpen}>
+        <div className="premium-finalize-drawer-head">
+          <div>
+            <p className="text-xs font-black uppercase text-slate-500">Edit Resume</p>
+            <h3>{actions.finalizeFocus === "templates" ? "Templates" : actions.finalizeFocus === "design" ? "Design & formatting" : "Resume sections"}</h3>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsEditDrawerOpen(false)}
+            className="premium-finalize-icon-button"
+            aria-label="Close edit drawer"
+          >
+            <FaXmark />
+          </button>
+        </div>
+
+        <div className="premium-finalize-drawer-tabs">
+          {[
+            ["resume_sections", "Sections"],
+            ["templates", "Templates"],
+            ["design", "Design"]
+          ].map(([key, label]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => actions.setFinalizeFocus(key)}
+              className={actions.finalizeFocus === key ? "is-active" : ""}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
         {actions.finalizeFocus === "resume_sections" ? (
           <>
-            <h3 className="text-3xl font-extrabold">Resume sections</h3>
-            <div className="mt-4 space-y-2">
+            <div className="premium-finalize-edit-list">
               {jumpLinks.map(([label, key]) => (
                 <button
                   key={key}
                   type="button"
                   onClick={() => actions.goToStep(key)}
-                  className="flex w-full items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-left text-sm font-semibold hover:bg-white/10"
+                  className="flex w-full items-center justify-between rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm font-semibold hover:border-blue-200 hover:bg-blue-50"
                 >
                   <span>{label}</span>
-                  <span className="text-xs text-cyan-200">Edit</span>
+                  <span className="text-xs text-blue-600">Edit</span>
                 </button>
               ))}
             </div>
@@ -1617,8 +1826,7 @@ function FinalizeReviewPanel({ data, actions }) {
 
         {actions.finalizeFocus === "templates" ? (
           <>
-            <h3 className="text-3xl font-extrabold">Templates</h3>
-            <div className="mt-4 grid max-h-[640px] grid-cols-2 gap-2 overflow-auto pr-1">
+            <div className="premium-finalize-template-grid">
               {resumeTemplates.map((template) => {
                 const active = template.id === actions.selectedTemplateId;
                 return (
@@ -1627,7 +1835,7 @@ function FinalizeReviewPanel({ data, actions }) {
                     type="button"
                     onClick={() => actions.selectTemplate(template.id)}
                     className={`overflow-hidden rounded-lg border p-1 ${
-                      active ? "border-brand-400 ring-2 ring-brand-400/40" : "border-white/20 hover:border-white/40"
+                      active ? "border-blue-500 ring-2 ring-blue-500/20" : "border-slate-200 hover:border-blue-200"
                     }`}
                   >
                     <div className="h-24">
@@ -1642,15 +1850,14 @@ function FinalizeReviewPanel({ data, actions }) {
 
         {actions.finalizeFocus === "design" ? (
           <>
-            <h3 className="text-3xl font-extrabold">Design & formatting</h3>
-            <div className="mt-4 space-y-3">
+            <div className="premium-finalize-design-controls">
               <label className="block text-sm font-semibold">Font Style</label>
               <select
                 value={actions.designSettings?.fontStyle || "inter"}
                 onChange={(event) =>
                   actions.setDesignSettings((prev) => ({ ...prev, fontStyle: event.target.value }))
                 }
-                className="w-full rounded border border-white/20 bg-transparent px-3 py-2 text-sm"
+                className="w-full rounded border border-slate-200 bg-white px-3 py-2 text-sm"
               >
                 {FONT_STYLE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value} className="text-slate-900">
@@ -1736,63 +1943,146 @@ function FinalizeReviewPanel({ data, actions }) {
                 onChange={(event) =>
                   actions.setDesignSettings((prev) => ({ ...prev, accentColor: event.target.value }))
                 }
-                className="h-12 w-full cursor-pointer rounded border border-white/20 bg-transparent p-1"
+                className="h-12 w-full cursor-pointer rounded border border-slate-200 bg-white p-1"
               />
-              <p className="text-xs text-slate-200">Changes are applied live to center resume and PDF export.</p>
+              <p className="text-xs text-slate-500">Changes are applied live to center resume and PDF export.</p>
             </div>
           </>
         ) : null}
       </aside>
 
-      <section className="min-w-0 rounded-xl bg-white p-3 text-slate-900">
-        <div className="mx-auto max-w-[760px] overflow-auto">
-          <DesignableResumePreview
-            selectedTemplate={actions.selectedTemplate}
-            resumeData={previewData}
-            designSettings={actions.designSettings}
-            mode="preview"
-          />
+      <section className="premium-finalize-preview">
+        <header className="premium-finalize-preview-toolbar">
+          <div className="premium-finalize-title-row">
+            <button
+              type="button"
+              onClick={() => actions.goToStep("additional")}
+              className="premium-finalize-back-button"
+              aria-label="Back to previous section"
+            >
+              <FaChevronLeft />
+            </button>
+            <div>
+              <p className="text-xs font-black uppercase text-slate-500">Final Review</p>
+              <h3>{previewData.header?.fullName || "Resume Preview"}</h3>
+            </div>
+          </div>
+          <div className="premium-finalize-toolbar-actions">
+            <button type="button" onClick={actions.openPreview} className="premium-secondary-button">
+              <FaEye />
+              <span>Preview</span>
+            </button>
+            <button type="button" onClick={() => openFinalizeDrawer("resume_sections")} className="premium-secondary-button">
+              <FaPenToSquare />
+              <span>Edit Resume</span>
+            </button>
+            <div className="premium-finalize-zoom">
+              <button type="button" onClick={() => setFinalizeZoom((value) => Math.max(0.65, Number((value - 0.05).toFixed(2))))} aria-label="Zoom out">
+                <FaMagnifyingGlassMinus />
+              </button>
+              <span>{Math.round(finalizeZoom * 100)}%</span>
+              <button type="button" onClick={() => setFinalizeZoom((value) => Math.min(1.2, Number((value + 0.05).toFixed(2))))} aria-label="Zoom in">
+                <FaMagnifyingGlassPlus />
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div className="premium-finalize-pagebar">
+          <button type="button" onClick={() => setActivePage((page) => Math.max(1, page - 1))} disabled={activePage <= 1}>
+            <FaChevronLeft />
+          </button>
+          <span>Page {activePage} / {pageCount}</span>
+          <button type="button" onClick={() => setActivePage((page) => Math.min(pageCount, page + 1))} disabled={activePage >= pageCount}>
+            <FaChevronRight />
+          </button>
+          <strong>{pageCount > 1 ? "Multi-page ready" : "Single page preview"}</strong>
+        </div>
+
+        <div ref={finalizeCanvasRef} className="premium-finalize-preview-canvas">
+          <div
+            className="premium-finalize-page-shell"
+            style={{
+              width: `${A4_WIDTH_PX * finalizeZoom}px`,
+              height: `${(A4_HEIGHT_PX * pageCount + 16 * Math.max(0, pageCount - 1)) * finalizeZoom}px`
+            }}
+          >
+            <div
+              className="premium-finalize-page-scale"
+              style={{
+                width: `${A4_WIDTH_PX}px`,
+                minHeight: `${A4_HEIGHT_PX}px`,
+                transform: `scale(${finalizeZoom})`
+              }}
+            >
+              <DesignableResumePreview
+                selectedTemplate={actions.selectedTemplate}
+                resumeData={previewData}
+                designSettings={actions.designSettings}
+                mode="preview"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      <aside className="rounded-xl bg-[#192454] p-4">
-        <div className="mb-4 rounded-lg border border-white/10 bg-white/5 p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Professional Score</p>
-          <p className="mt-1 text-3xl font-extrabold text-white">{qualityReport.score}/100</p>
-          <p className="mt-1 text-xs text-slate-300">
+      <aside className="premium-finalize-side premium-finalize-score">
+        <div className="premium-finalize-export-actions">
+          <button type="button" onClick={actions.downloadPdf} disabled={actions.downloading}>
+            <FaDownload />
+            <span>{actions.downloading ? "Preparing" : "Download"}</span>
+          </button>
+          <button type="button" onClick={() => window.print()}>
+            <FaPrint />
+            <span>Print</span>
+          </button>
+          <button type="button" onClick={handleEmail}>
+            <FaEnvelope />
+            <span>Email</span>
+          </button>
+        </div>
+
+        <button type="button" onClick={actions.downloadPdf} disabled={actions.downloading} className="premium-finalize-download">
+          <FaDownload />
+          <span>{actions.downloading ? "Preparing PDF" : "Download PDF"}</span>
+        </button>
+
+        <div className="premium-finalize-score-card">
+          <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Resume Score</p>
+          <p className="mt-1 text-4xl font-extrabold text-slate-950">{qualityReport.score}/100</p>
+          <p className="mt-1 text-xs text-slate-600">
             {qualityReport.blockingCount ? `${qualityReport.blockingCount} item(s) need attention.` : "Resume is in strong shape for export."}
           </p>
         </div>
-        <h3 className="text-3xl font-extrabold">Review checklist</h3>
-        <div className="mt-4 space-y-2">
-          {reviewItems.map((item) => (
-            <button
-              key={item.key}
-              type="button"
-              onClick={() => {
-                if (["resume_sections", "templates", "design"].includes(item.key)) {
-                  actions.setFinalizeFocus(item.key);
-                }
-              }}
-              className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold ${
-                actions.finalizeFocus === item.key ? "bg-white/15" : "bg-white/5 hover:bg-white/10"
-              }`}
-            >
-              <span>{item.label}</span>
-              <span className={item.done ? "text-emerald-300" : "text-amber-300"}>{item.done ? "OK" : "Pending"}</span>
-            </button>
-          ))}
+
+        <div className="premium-finalize-checks">
+          <h3>Export Readiness</h3>
+          <div className="mt-3 space-y-2">
+            {reviewItems.map((item) => (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => {
+                  if (["resume_sections", "templates", "design"].includes(item.key)) {
+                    openFinalizeDrawer(item.key);
+                  }
+                }}
+                className={actions.finalizeFocus === item.key ? "is-active" : ""}
+              >
+                <span>{item.label}</span>
+                <span className={item.done ? "text-emerald-600" : "text-amber-600"}>{item.done ? "OK" : "Pending"}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-4 rounded-lg border border-white/10 bg-white/5 p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">Quality Checks</p>
+        <div className="premium-finalize-missing">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Missing Items</p>
           <div className="mt-2 space-y-2">
             {(qualityReport.checks || []).map((check) => (
-              <div key={check.key} className="flex items-start justify-between gap-2 rounded bg-white/5 px-2 py-1.5">
-                <p className="text-xs text-slate-100">{check.label}</p>
-                <span className={`shrink-0 text-[11px] font-semibold ${check.status === "ok" ? "text-emerald-300" : "text-amber-300"}`}>
-                  {check.status === "ok" ? "OK" : "Fix"}
-                </span>
+              <div key={check.key}>
+                <p>{check.label}</p>
+                <span className={check.status === "ok" ? "is-ok" : "is-fix"}>{check.status === "ok" ? "OK" : "Fix"}</span>
               </div>
             ))}
           </div>
@@ -1822,11 +2112,28 @@ function RangeControl({ label, min, max, step, value, suffix, onChange }) {
   );
 }
 
-function ExperienceBulletComposer({ jobTitle, value, onChange }) {
+function ExperienceBulletComposer({ jobTitle, headline, value, onChange }) {
   const [query, setQuery] = useState("");
-  const normalizedQuery = String(query || jobTitle || "").trim().toLowerCase();
+  const [remotePhrases, setRemotePhrases] = useState(null);
+  const normalizedQuery = String(query || headline || jobTitle || "").trim().toLowerCase();
+
+  useEffect(() => {
+    let active = true;
+    fetchResumeSuggestions({ type: "experience", q: normalizedQuery })
+      .then((data) => {
+        if (active && Array.isArray(data?.experience)) setRemotePhrases(data.experience);
+      })
+      .catch(() => {
+        if (active) setRemotePhrases(null);
+      });
+    return () => {
+      active = false;
+    };
+  }, [normalizedQuery]);
 
   const suggestions = useMemo(() => {
+    if (remotePhrases?.length) return remotePhrases;
+
     if (!normalizedQuery) {
       return EXPERIENCE_PHRASE_LIBRARY.slice(0, 8);
     }
@@ -1837,7 +2144,7 @@ function ExperienceBulletComposer({ jobTitle, value, onChange }) {
     });
 
     return (filtered.length ? filtered : EXPERIENCE_PHRASE_LIBRARY).slice(0, 12);
-  }, [normalizedQuery]);
+  }, [normalizedQuery, remotePhrases]);
 
   function addPhrase(phrase) {
     const lines = splitBullets(value);
@@ -1846,12 +2153,12 @@ function ExperienceBulletComposer({ jobTitle, value, onChange }) {
   }
 
   return (
-    <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div className="builder-flat-composer mt-5 border-t border-slate-200 pt-4">
       <p className="text-sm font-semibold text-slate-700">Experience Highlights</p>
       <p className="mt-0.5 text-xs text-slate-500">Select ready phrases or write your own.</p>
 
       <div className="mt-3 grid gap-3 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white p-3">
+        <div className="builder-inline-panel rounded-lg border border-slate-200 bg-white p-3">
           <label className="block text-xs font-semibold text-slate-600">Search by Job Title / Keyword</label>
           <input
             value={query}
@@ -1862,11 +2169,11 @@ function ExperienceBulletComposer({ jobTitle, value, onChange }) {
 
           <div className="mt-3 max-h-64 space-y-2 overflow-auto pr-1">
             {suggestions.map((item, index) => (
-              <div key={`${item.text}-${index}`} className="flex items-start gap-2 rounded-lg border border-slate-200 p-2">
+              <div key={`${item.text}-${index}`} className="builder-suggestion-row flex items-start gap-2 rounded-lg border border-slate-200 p-2">
                 <button
                   type="button"
                   onClick={() => addPhrase(item.text)}
-                  className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-amber-300 bg-amber-100 text-lg font-bold text-amber-700 hover:bg-amber-200"
+                  className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-emerald-300 bg-emerald-100 text-lg font-bold text-emerald-700 hover:bg-emerald-200"
                   title="Add phrase"
                 >
                   +
@@ -1877,7 +2184,7 @@ function ExperienceBulletComposer({ jobTitle, value, onChange }) {
           </div>
         </div>
 
-        <label className="block rounded-lg border border-slate-200 bg-white p-3">
+        <label className="builder-inline-panel block rounded-lg border border-slate-200 bg-white p-3">
           <span className="mb-1 block text-sm font-semibold text-slate-700">Description Bullets</span>
           <RichTextEditor
             value={value}
@@ -1909,19 +2216,19 @@ function EducationDetailComposer({ value, onChange }) {
   }
 
   return (
-    <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div className="builder-flat-composer mt-5 border-t border-slate-200 pt-4">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between text-left"
+        className={`builder-accordion-trigger ${open ? "is-open" : ""}`}
       >
-        <span className="text-sm font-semibold text-slate-700">Add education details</span>
+        <span>Add education details</span>
         <span className="text-base font-bold text-slate-500">{open ? "⌃" : "⌄"}</span>
       </button>
 
       {open ? (
         <div className="mt-3 grid gap-3 lg:grid-cols-2">
-          <div className="rounded-lg border border-slate-200 bg-white p-3">
+          <div className="builder-inline-panel rounded-lg border border-slate-200 bg-white p-3">
             <div className="max-h-64 space-y-2 overflow-auto pr-1">
               {EDUCATION_DETAIL_LIBRARY.map((item, index) => {
                 const isAdded = selected.includes(item);
@@ -1931,7 +2238,7 @@ function EducationDetailComposer({ value, onChange }) {
                       type="button"
                       onClick={() => (isAdded ? removePhrase(item) : addPhrase(item))}
                       className={`mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full text-lg font-bold ${
-                        isAdded ? "bg-slate-200 text-slate-600 hover:bg-slate-300" : "bg-amber-200 text-amber-800 hover:bg-amber-300"
+                        isAdded ? "border border-rose-300 bg-rose-100 text-rose-700 hover:bg-rose-200" : "border border-emerald-300 bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
                       }`}
                       title={isAdded ? "Remove phrase" : "Add phrase"}
                     >
@@ -1944,7 +2251,7 @@ function EducationDetailComposer({ value, onChange }) {
             </div>
           </div>
 
-          <label className="block rounded-lg border border-slate-200 bg-white p-3">
+          <label className="builder-inline-panel block rounded-lg border border-slate-200 bg-white p-3">
             <span className="mb-1 block text-sm font-semibold text-slate-700">Education Notes</span>
             <RichTextEditor
               value={value}
@@ -1963,16 +2270,33 @@ function EducationDetailComposer({ value, onChange }) {
   );
 }
 
-function SkillsComposer({ value, onChange }) {
+function SkillsComposer({ value, onChange, headline }) {
   const [query, setQuery] = useState("");
+  const [remoteSkills, setRemoteSkills] = useState(null);
   const selectedSkills = useMemo(() => splitByCommaOrLine(value), [value]);
-  const normalizedQuery = String(query || "").trim().toLowerCase();
+  const normalizedQuery = String(query || headline || "").trim().toLowerCase();
+
+  useEffect(() => {
+    let active = true;
+    fetchResumeSuggestions({ type: "skills", q: normalizedQuery })
+      .then((data) => {
+        if (active && Array.isArray(data?.skills)) setRemoteSkills(data.skills);
+      })
+      .catch(() => {
+        if (active) setRemoteSkills(null);
+      });
+    return () => {
+      active = false;
+    };
+  }, [normalizedQuery]);
 
   const suggestions = useMemo(() => {
+    if (remoteSkills?.length) return remoteSkills;
+
     if (!normalizedQuery) return SKILL_LIBRARY;
     const filtered = SKILL_LIBRARY.filter((item) => item.toLowerCase().includes(normalizedQuery));
     return filtered.length ? filtered : SKILL_LIBRARY;
-  }, [normalizedQuery]);
+  }, [normalizedQuery, remoteSkills]);
 
   function addSkill(skill) {
     if (selectedSkills.includes(skill)) return;
@@ -2009,7 +2333,7 @@ function SkillsComposer({ value, onChange }) {
                     className={`grid h-7 w-7 place-items-center rounded-full border text-lg font-bold ${
                       selected
                         ? "border-rose-300 bg-rose-100 text-rose-700 hover:bg-rose-200"
-                        : "border-amber-300 bg-amber-100 text-amber-700 hover:bg-amber-200"
+                        : "border-emerald-300 bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
                     }`}
                     title={selected ? "Remove skill" : "Add skill"}
                   >
@@ -2038,7 +2362,24 @@ function SkillsComposer({ value, onChange }) {
   );
 }
 
-function SummaryComposer({ value, onChange }) {
+function SummaryComposer({ value, onChange, headline }) {
+  const [remoteSummaries, setRemoteSummaries] = useState(null);
+  const summaryOptions = remoteSummaries?.length ? remoteSummaries : SUMMARY_LIBRARY;
+
+  useEffect(() => {
+    let active = true;
+    fetchResumeSuggestions({ type: "summary", q: headline || "" })
+      .then((data) => {
+        if (active && Array.isArray(data?.summaries)) setRemoteSummaries(data.summaries);
+      })
+      .catch(() => {
+        if (active) setRemoteSummaries(null);
+      });
+    return () => {
+      active = false;
+    };
+  }, [headline]);
+
   function addSummary(text) {
     const current = String(value || "").trim();
     if (!current) {
@@ -2050,14 +2391,14 @@ function SummaryComposer({ value, onChange }) {
   }
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div className="builder-section-card rounded-xl border border-slate-200 bg-slate-50 p-3">
       <p className="text-sm font-semibold text-slate-700">Craft your summary</p>
       <p className="mt-0.5 text-xs text-slate-500">Start with a prewritten option or write your own. Edit as needed.</p>
 
       <div className="mt-3 grid gap-3 lg:grid-cols-2">
-        <div className="max-h-[440px] space-y-2 overflow-auto rounded-lg border border-slate-200 bg-white p-3">
+        <div className="builder-inline-panel max-h-[440px] space-y-2 overflow-auto rounded-lg border border-slate-200 bg-white p-3">
           <p className="text-xs font-semibold text-slate-600">Prewritten options</p>
-          {SUMMARY_LIBRARY.map((item) => (
+          {summaryOptions.map((item) => (
             <div key={item.title} className="rounded-lg border border-indigo-200 bg-indigo-50/40 p-3">
               <span className="inline-flex rounded border border-indigo-400 px-2 py-0.5 text-[11px] font-semibold text-indigo-700">
                 Personalized for you
@@ -2068,7 +2409,7 @@ function SummaryComposer({ value, onChange }) {
                 <button
                   type="button"
                   onClick={() => addSummary(item.text)}
-                  className="rounded-full border border-amber-300 bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800 hover:bg-amber-200"
+                  className="builder-action-badge is-add is-compact"
                 >
                   + Add
                 </button>
@@ -2077,7 +2418,7 @@ function SummaryComposer({ value, onChange }) {
           ))}
         </div>
 
-        <label className="block rounded-lg border border-slate-200 bg-white p-3">
+        <label className="builder-inline-panel block rounded-lg border border-slate-200 bg-white p-3">
           <div className="mb-2">
             <span className="text-sm font-semibold text-slate-700">Summary Editor</span>
           </div>
@@ -2096,7 +2437,56 @@ function SummaryComposer({ value, onChange }) {
   );
 }
 
-function AdditionalSectionsEditor({ additional, onChange }) {
+function AdditionalSuggestionPanel({ sectionTitle, headline, onAdd }) {
+  const [suggestions, setSuggestions] = useState([]);
+
+  const sectionType = useMemo(() => {
+    const t = String(sectionTitle || "").trim().toLowerCase();
+    if (t.includes("achievement")) return "achievements";
+    if (t.includes("project")) return "projects";
+    if (t.includes("cert")) return "certifications";
+    return null;
+  }, [sectionTitle]);
+
+  useEffect(() => {
+    if (!sectionType) { setSuggestions([]); return; }
+    let active = true;
+    fetchResumeSuggestions({ type: sectionType, q: headline || "" })
+      .then((data) => {
+        if (!active) return;
+        const items = data?.[sectionType];
+        if (Array.isArray(items)) setSuggestions(items);
+      })
+      .catch(() => { if (active) setSuggestions([]); });
+    return () => { active = false; };
+  }, [sectionType, headline]);
+
+  if (!sectionType || !suggestions.length) return null;
+
+  return (
+    <div className="mt-4 rounded-xl border border-indigo-200 bg-indigo-50/40 p-3">
+      <p className="mb-2 text-sm font-semibold text-slate-700">Suggested items</p>
+      <p className="mb-3 text-xs text-slate-500">Click + to add a suggestion to this section.</p>
+      <div className="max-h-52 space-y-2 overflow-auto pr-1">
+        {suggestions.map((item, i) => (
+          <div key={i} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-2">
+            <button
+              type="button"
+              onClick={() => onAdd(item)}
+              className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-emerald-300 bg-emerald-100 text-lg font-bold text-emerald-700 hover:bg-emerald-200"
+              title="Add to section"
+            >
+              +
+            </button>
+            <p className="text-sm text-slate-700">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AdditionalSectionsEditor({ additional, onChange, headline }) {
   const sections = getAdditionalSections(additional);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedPresetKeys, setSelectedPresetKeys] = useState([]);
@@ -2178,7 +2568,7 @@ function AdditionalSectionsEditor({ additional, onChange }) {
         <button
           type="button"
           onClick={() => setIsAddModalOpen(true)}
-          className="rounded-full border border-amber-300 bg-amber-100 px-5 py-2 text-sm font-semibold text-amber-900 hover:bg-amber-200"
+          className="builder-action-badge is-add"
         >
           + Add section
         </button>
@@ -2203,13 +2593,13 @@ function AdditionalSectionsEditor({ additional, onChange }) {
               <div className="flex items-center justify-between border-t border-slate-200 bg-slate-50 px-4 py-2">
                 <p className="text-sm text-emerald-700">Looks good</p>
                 <div className="flex items-center gap-3 text-xs font-semibold">
-                  <button type="button" onClick={() => openEditSection(section, true)} className="text-indigo-600 hover:text-indigo-800">
+                  <button type="button" onClick={() => openEditSection(section, true)} className="builder-action-badge is-add is-compact">
                     Add
                   </button>
-                  <button type="button" onClick={() => openEditSection(section)} className="text-indigo-600 hover:text-indigo-800">
+                  <button type="button" onClick={() => openEditSection(section)} className="builder-action-badge is-edit is-compact">
                     Edit
                   </button>
-                  <button type="button" onClick={() => handleDeleteSection(section.id)} className="text-rose-600 hover:text-rose-800">
+                  <button type="button" onClick={() => handleDeleteSection(section.id)} className="builder-action-badge is-remove is-compact">
                     Delete
                   </button>
                 </div>
@@ -2331,7 +2721,7 @@ function AdditionalSectionsEditor({ additional, onChange }) {
                           items: prev.items.filter((_, i) => i !== index)
                         }))
                       }
-                      className="rounded-lg border border-rose-300 bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-700 hover:bg-rose-100"
+                      className="builder-action-badge is-remove"
                       title="Delete row"
                     >
                       Delete
@@ -2342,10 +2732,18 @@ function AdditionalSectionsEditor({ additional, onChange }) {
               <button
                 type="button"
                 onClick={() => setEditingSection((prev) => ({ ...prev, items: [...prev.items, ""] }))}
-                className="mt-4 text-3xl font-bold text-brand-600 hover:text-brand-700"
+                className="builder-action-badge is-add mt-4"
               >
                 + Add another
               </button>
+
+              <AdditionalSuggestionPanel
+                sectionTitle={editingSection.title}
+                headline={headline}
+                onAdd={(item) =>
+                  setEditingSection((prev) => ({ ...prev, items: [...prev.items, item] }))
+                }
+              />
             </div>
 
             <div className="mt-7 flex items-center justify-between">
@@ -2368,69 +2766,84 @@ function AdditionalSectionsEditor({ additional, onChange }) {
 }
 
 function RichTextEditor({ value, onChange, placeholder = "", mode = "paragraph", minHeight = 220, showEnhance = false }) {
-  const editorRef = useRef(null);
+  const quillRef = useRef(null);
+  const editorValue = normalizeRichValue(value, mode);
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "strike"],
+          [{ header: [false, 2, 3, 4] }],
+          [{ list: "bullet" }, { list: "ordered" }],
+          [{ indent: "-1" }, { indent: "+1" }],
+          ["blockquote", "link"],
+          [{ align: [] }],
+          ["clean"],
+          ["undo", "redo"]
+        ],
+        handlers: {
+          list(value) {
+            const range = this.quill.getSelection(true);
+            if (range) this.quill.setSelection(range);
+            this.quill.format("list", value || false);
+          },
+          undo() {
+            this.quill.history.undo();
+          },
+          redo() {
+            this.quill.history.redo();
+          }
+        }
+      },
+      history: {
+        delay: 500,
+        maxStack: 100,
+        userOnly: true
+      }
+    }),
+    []
+  );
 
-  useEffect(() => {
-    const node = editorRef.current;
-    if (!node) return;
-    const next = normalizeRichValue(value, mode);
-    if (node.innerHTML !== next) {
-      node.innerHTML = next;
-    }
-  }, [value, mode]);
+  const formats = useMemo(
+    () => ["header", "bold", "italic", "underline", "strike", "list", "bullet", "indent", "blockquote", "link", "align"],
+    []
+  );
 
-  function exec(command) {
-    const node = editorRef.current;
-    if (!node) return;
-    node.focus();
-    document.execCommand(command, false, null);
-    onChange(node.innerHTML);
+  function handleChange(content, _delta, _source, editor) {
+    const html = editor.getHTML();
+    onChange(isEmptyRichHtml(html) ? "" : html);
+  }
+
+  function handleBlur() {
+    const editor = quillRef.current?.getEditor();
+    if (!editor) return;
+    const html = editor.root.innerHTML;
+    onChange(isEmptyRichHtml(html) ? "" : normalizeRichValue(html, mode));
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-slate-300">
-      <div className="flex items-center justify-between border-b border-slate-300 bg-slate-50 px-2 py-1.5">
-        <div className="flex items-center gap-1">
-          <ToolbarButton label="B" onClick={() => exec("bold")} />
-          <ToolbarButton label="I" onClick={() => exec("italic")} />
-          <ToolbarButton label="U" onClick={() => exec("underline")} />
-          <ToolbarButton label="List" onClick={() => exec("insertUnorderedList")} />
-          <ToolbarButton label="Undo" onClick={() => exec("undo")} />
-          <ToolbarButton label="Redo" onClick={() => exec("redo")} />
-        </div>
-        {showEnhance ? (
-          <button
-            type="button"
-            disabled
-            className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500"
-            title="Enhance with AI (coming soon)"
-          >
-            Enhance with AI
-          </button>
-        ) : null}
-      </div>
-      <div
-        ref={editorRef}
-        contentEditable
-        suppressContentEditableWarning
-        onInput={(event) => onChange(event.currentTarget.innerHTML)}
-        className="w-full bg-white px-3 py-2 text-sm text-slate-900 outline-none"
-        style={{ minHeight }}
-        data-placeholder={placeholder}
+    <div className="builder-quill-editor" style={{ "--builder-editor-min-height": `${minHeight}px` }}>
+      <ReactQuill
+        ref={quillRef}
+        theme="snow"
+        value={editorValue}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        modules={modules}
+        formats={formats}
+        placeholder={placeholder}
       />
+      {showEnhance ? (
+        <button
+          type="button"
+          disabled
+          className="mt-2 rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500"
+          title="Enhance with AI (coming soon)"
+        >
+          Enhance with AI
+        </button>
+      ) : null}
     </div>
-  );
-}
-
-function ToolbarButton({ label, onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
-    >
-      {label}
-    </button>
   );
 }
 
@@ -2447,6 +2860,12 @@ function normalizeRichValue(value, mode) {
   }
 
   return `<p>${lines.map((line) => escapeHtml(line)).join("<br/>")}</p>`;
+}
+
+function isEmptyRichHtml(value) {
+  const raw = String(value || "").trim();
+  if (!raw || raw === "<p><br></p>") return true;
+  return !extractPlainText(raw).replace(/\u00a0/g, " ").trim();
 }
 
 function escapeHtml(text) {
