@@ -43,7 +43,7 @@ export default function AtsScorePage() {
         onSubmit={handleSubmit}
         className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Resume Diagnostics</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">Resume Diagnostics</p>
         <h3 className="mt-2 text-2xl font-bold">ATS Score Analyzer</h3>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
           Paste your resume and a job description to find missing keywords, scoring gaps, and fixes before you apply.
@@ -57,7 +57,7 @@ export default function AtsScorePage() {
               rows={12}
               value={form.resumeText}
               onChange={handleChange}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-950"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950"
               required
             />
           </label>
@@ -69,7 +69,7 @@ export default function AtsScorePage() {
               rows={12}
               value={form.jobDescriptionText}
               onChange={handleChange}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-950"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-950"
               required
             />
           </label>
@@ -81,14 +81,14 @@ export default function AtsScorePage() {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-60"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
           >
             {loading ? "Scoring..." : "Calculate ATS Score"}
           </button>
 
           <button
             type="button"
-            className="rounded-lg border border-brand-500 px-4 py-2 text-sm font-semibold text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-600/10"
+            className="rounded-lg border border-blue-500 px-4 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-600/10"
           >
             Optimize to 90+
           </button>
@@ -179,7 +179,7 @@ function CircularScore({ value, size, stroke }) {
           r={radius}
           stroke="currentColor"
           strokeWidth={stroke}
-          className="text-brand-600"
+          className="text-blue-600"
           fill="transparent"
           strokeLinecap="round"
           strokeDasharray={circumference}

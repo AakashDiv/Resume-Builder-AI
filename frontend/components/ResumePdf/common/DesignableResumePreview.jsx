@@ -13,6 +13,7 @@ import CreativeOnePreview from "../Creative/CreativeOnePreview.jsx";
 import CreativeTwoPreview from "../Creative/CreativeTwoPreview.jsx";
 import BlackWhiteMinimalistPreview from "../Minimalist/BlackWhiteMinimalistPreview.jsx";
 import ModernProfessionalFourPreview from "../Modern/ModernProfessionalFourPreview.jsx";
+import ModernProfessionalFivePreview from "../Modern/ModernProfessionalFivePreview.jsx";
 import ModernProfessionalOnePreview from "../Modern/ModernProfessionalOnePreview.jsx";
 import ModernProfessionalThreePreview from "../Modern/ModernProfessionalThreePreview.jsx";
 import ModernProfessionalTwoPreview from "../Modern/ModernProfessionalTwoPreview.jsx";
@@ -37,6 +38,7 @@ const STANDALONE_TEMPLATES = {
   "modern-professional-2": ModernProfessionalTwoPreview,
   "modern-professional-3": ModernProfessionalThreePreview,
   "modern-professional-4": ModernProfessionalFourPreview,
+  "modern-professional-5": ModernProfessionalFivePreview,
   "white-black-modern-minimalist": WhiteBlackModernMinimalistPreview,
   "professional-cv": ProfessionalCVPreview
 };
@@ -61,6 +63,7 @@ export default function DesignableResumePreview({
         primaryTextColor={designSettings?.primaryTextColor || "#111827"}
         mutedTextColor={designSettings?.mutedTextColor || "#4b5563"}
         inverseTextColor={designSettings?.inverseTextColor || "#ffffff"}
+        onPageCountChange={onPageCountChange}
       />
     );
   }

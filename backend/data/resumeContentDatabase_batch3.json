@@ -1,0 +1,819 @@
+{
+  "experience": [
+    {
+      "role": "PHP Developer",
+      "tags": ["php", "backend", "mysql", "api", "web"],
+      "phrases": [
+        "Developed dynamic web applications using PHP with MVC architecture and modern PHP 8.x features including enums, fibers, and named arguments.",
+        "Built and maintained RESTful APIs in PHP consumed by mobile and JavaScript single-page applications.",
+        "Designed and optimized MySQL database schemas with complex joins, stored procedures, and indexing strategies.",
+        "Implemented secure user authentication systems including session management, password hashing with bcrypt, and CSRF protection.",
+        "Integrated third-party APIs and payment gateways including PayPal, Stripe, and Razorpay into PHP applications.",
+        "Developed custom PHP libraries and reusable utility classes following PSR coding standards.",
+        "Managed Composer dependencies and maintained autoloading configuration for modular PHP projects.",
+        "Applied object-oriented programming principles to build modular, testable PHP codebases.",
+        "Wrote unit tests using PHPUnit achieving 75%+ coverage on business-critical PHP modules.",
+        "Optimized PHP application performance through opcode caching with OPcache, query optimization, and Redis session management.",
+        "Deployed PHP applications on Apache/Nginx servers with PHP-FPM configuration and SSL setup.",
+        "Implemented file upload handling with validation, virus scanning integration, and cloud storage via AWS S3.",
+        "Built cron job automation using PHP CLI scripts for scheduled reporting, cleanup, and data sync tasks.",
+        "Applied input validation, prepared statements, and output escaping to prevent SQL injection and XSS vulnerabilities.",
+        "Migrated legacy PHP 5.x applications to PHP 8.x with improved type safety and modern syntax patterns.",
+        "Integrated email functionality using PHPMailer and SendGrid for transactional and marketing email delivery.",
+        "Configured and maintained PHP environments on VPS and cloud platforms using Nginx, Let's Encrypt, and SSH.",
+        "Developed RESTful JSON APIs consumed by React and Angular frontends with proper HTTP status codes and error handling.",
+        "Collaborated with frontend developers to define API contracts and resolve integration issues efficiently.",
+        "Maintained detailed technical documentation for PHP applications and APIs to facilitate team knowledge sharing."
+      ]
+    },
+    {
+      "role": "Laravel Developer",
+      "tags": ["laravel", "php", "backend", "mysql", "api", "eloquent"],
+      "phrases": [
+        "Built production-grade web applications and REST APIs using Laravel with Eloquent ORM and Blade templating engine.",
+        "Implemented complex business logic using Laravel's service container, service providers, and repository pattern.",
+        "Developed RESTful APIs with Laravel API Resources, request validation, and Sanctum/Passport authentication.",
+        "Designed Laravel database schemas with Eloquent relationships, migrations, and database seeding for realistic test data.",
+        "Implemented background job processing using Laravel Queues with Redis and Horizon for task monitoring and management.",
+        "Built real-time features using Laravel Echo and Pusher for WebSocket-powered notifications and live data updates.",
+        "Wrote comprehensive tests using Laravel's built-in testing features and PHPUnit achieving 80%+ code coverage.",
+        "Configured multi-environment deployments using Laravel Forge and Envoyer with zero-downtime release pipelines.",
+        "Implemented file storage abstraction using Laravel Storage with local, S3, and Cloudinary driver support.",
+        "Applied Laravel middleware for authentication, throttling, CORS, and request logging across API routes.",
+        "Integrated Stripe billing using Laravel Cashier for subscription management and one-time payment flows.",
+        "Built event-driven workflows using Laravel Events and Listeners for decoupled, maintainable feature integration.",
+        "Optimized Eloquent queries using eager loading, chunking, and raw query fallbacks for performance-critical code paths.",
+        "Implemented full-text search using Laravel Scout with Algolia and Meilisearch driver integrations.",
+        "Developed multi-tenant Laravel applications with tenant-scoped database access and middleware isolation.",
+        "Created reusable Laravel packages and shared service libraries for use across multiple internal projects.",
+        "Configured automated CI/CD pipelines using GitHub Actions to lint, test, and deploy Laravel applications.",
+        "Applied RBAC using Laravel Policies and Gates for resource-level authorization across API endpoints.",
+        "Integrated third-party services including Mailgun, Twilio, and Google OAuth into Laravel applications.",
+        "Mentored junior developers on Laravel best practices, design patterns, and clean code principles."
+      ]
+    },
+    {
+      "role": "WordPress Developer",
+      "tags": ["wordpress", "php", "cms", "themes", "plugins", "woocommerce"],
+      "phrases": [
+        "Developed custom WordPress themes from scratch using PHP, HTML5, CSS3, and JavaScript aligned with client design specifications.",
+        "Built custom WordPress plugins extending core functionality including custom post types, taxonomies, and shortcodes.",
+        "Implemented ACF (Advanced Custom Fields) and Gutenberg block development to create flexible page-building experiences.",
+        "Optimized WordPress site performance achieving sub-2-second load times through caching, CDN integration, and image optimization.",
+        "Configured and maintained WooCommerce stores with custom payment gateways, shipping rules, and product variation management.",
+        "Developed headless WordPress solutions using the WP REST API and WPGraphQL for decoupled React or Next.js frontends.",
+        "Integrated third-party services including Mailchimp, HubSpot, Google Analytics, and payment gateways into WordPress sites.",
+        "Applied WordPress security hardening including role management, plugin auditing, and Wordfence/Sucuri configuration.",
+        "Managed WordPress multisite networks for enterprise clients with centralized theme and plugin management.",
+        "Deployed WordPress on WP Engine, Kinsta, and Cloudways with staging environments and automated daily backups.",
+        "Built Elementor and Divi-compatible custom widgets and dynamic content modules for non-technical site editors.",
+        "Developed WooCommerce extensions adding custom checkout flows, order management, and B2B pricing functionality.",
+        "Migrated WordPress sites between hosting providers with zero content loss using All-in-One WP Migration and WP-CLI.",
+        "Conducted WordPress performance audits using GTmetrix and PageSpeed Insights, implementing targeted optimizations.",
+        "Maintained and updated WordPress core, themes, and plugins while preserving site stability and custom customizations.",
+        "Implemented custom REST API endpoints in WordPress for mobile app and external service integrations.",
+        "Built responsive, mobile-first WordPress themes using Tailwind CSS and CSS Grid layouts.",
+        "Applied child theme development best practices enabling safe parent theme updates without overwriting customizations.",
+        "Created WordPress documentation and training materials enabling non-technical clients to self-manage their own content.",
+        "Delivered WordPress projects on time within agreed scope, handling requirement changes and client feedback iteratively."
+      ]
+    },
+    {
+      "role": "Angular Developer",
+      "tags": ["angular", "typescript", "frontend", "rxjs", "spa", "javascript"],
+      "phrases": [
+        "Developed large-scale enterprise Angular applications using TypeScript, RxJS, and Angular's component-based architecture.",
+        "Implemented reactive state management using NgRx Store, Effects, and Selectors for complex application data flows.",
+        "Built reusable Angular component libraries following Angular design principles and published to internal npm registries.",
+        "Designed and developed lazy-loaded Angular modules improving initial load performance by 40%+ on large SPAs.",
+        "Integrated Angular applications with RESTful APIs and GraphQL using HttpClient and Apollo Angular.",
+        "Implemented Angular Reactive Forms with complex validation, custom validators, and asynchronous validation patterns.",
+        "Developed Angular interceptors for centralized authentication token injection, error handling, and request logging.",
+        "Applied Angular Change Detection strategies including OnPush and manual ChangeDetectorRef to optimize rendering.",
+        "Built custom Angular directives and pipes extending template functionality across application modules.",
+        "Conducted Angular application performance profiling and optimization using Chrome DevTools and Angular DevTools.",
+        "Wrote unit and integration tests using Jasmine and Karma with comprehensive coverage of components and services.",
+        "Set up end-to-end test suites using Cypress covering critical user journeys in production Angular applications.",
+        "Implemented responsive Angular UIs using Angular Material and custom SCSS themes aligned with brand guidelines.",
+        "Managed Angular application routing with Route Guards, Resolvers, and CanActivate for secure navigation flows.",
+        "Configured Angular build pipeline with Webpack, code splitting, and AOT compilation optimizations.",
+        "Led migration of AngularJS 1.x applications to modern Angular, delivering improved performance and maintainability.",
+        "Integrated WebSockets and Server-Sent Events into Angular applications for real-time data update features.",
+        "Applied WCAG 2.1 accessibility standards to Angular components using CDK a11y and ARIA implementation.",
+        "Participated in architecture reviews and established Angular style guides adopted by cross-team frontend developers.",
+        "Collaborated with backend developers to define API contracts and reviewed data models for Angular-backend integration."
+      ]
+    },
+    {
+      "role": "Vue.js Developer",
+      "tags": ["vuejs", "vue", "frontend", "javascript", "nuxt", "spa"],
+      "phrases": [
+        "Built interactive single-page applications using Vue.js 3 with the Composition API, script setup syntax, and TypeScript.",
+        "Implemented centralized state management using Pinia and Vuex for complex Vue.js application data flows.",
+        "Developed reusable Vue component libraries documented in Storybook and published to internal package registries.",
+        "Integrated Vue applications with REST APIs and GraphQL using Axios and Apollo Client with reactive data patterns.",
+        "Built server-side rendered and statically generated applications with Nuxt.js for SEO-optimized Vue frontends.",
+        "Developed custom Vue directives, composables, and plugins extending application functionality across components.",
+        "Applied Vue Router for advanced client-side navigation with route guards, lazy loading, and nested route structures.",
+        "Implemented Vue Forms with complex validation using VeeValidate and Zod schema enforcement.",
+        "Wrote unit and component tests using Vitest and Vue Test Utils achieving 80%+ component coverage.",
+        "Optimized Vue application rendering using defineAsyncComponent, KeepAlive, and virtual scroll techniques.",
+        "Integrated real-time features into Vue applications using WebSockets and Vue's reactivity system.",
+        "Built responsive Vue UIs with Tailwind CSS and Headless UI ensuring cross-browser and mobile compatibility.",
+        "Configured Vite build pipeline for Vue projects with code splitting, HMR, and production optimization settings.",
+        "Migrated Vue 2 Options API codebases to Vue 3 Composition API with improved type safety and logic reuse.",
+        "Set up CI/CD pipelines for Vue applications using GitHub Actions for automated testing and Netlify/Vercel deployment.",
+        "Conducted Vue application performance auditing using Vue DevTools and Chrome Lighthouse.",
+        "Applied Vue accessibility best practices ensuring WCAG 2.1 AA compliance in component implementations.",
+        "Participated in agile sprints delivering Vue features aligned with product roadmap and design specifications.",
+        "Collaborated with Laravel and Node.js backend developers to define API contracts for Vue frontend consumption.",
+        "Mentored junior Vue developers through component design workshops, code reviews, and best practices documentation."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "PHP Developer",
+      "tags": ["php", "backend", "mysql", "api", "web"],
+      "skills": [
+        "PHP (7.x/8.x)",
+        "MySQL",
+        "PostgreSQL",
+        "Apache/Nginx",
+        "Composer",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "jQuery",
+        "REST API Design",
+        "PHPUnit",
+        "Redis",
+        "Docker",
+        "Git & GitHub",
+        "AWS (S3/EC2)",
+        "AJAX",
+        "JSON/XML",
+        "OOP & Design Patterns",
+        "PDO & Prepared Statements",
+        "PHPMailer/SendGrid",
+        "Linux/Bash",
+        "OPcache",
+        "cron jobs",
+        "MVC Architecture",
+        "Responsive Web Design"
+      ]
+    },
+    {
+      "role": "Laravel Developer",
+      "tags": ["laravel", "php", "backend", "mysql", "api"],
+      "skills": [
+        "Laravel (9/10/11)",
+        "PHP (8.x)",
+        "Eloquent ORM",
+        "MySQL",
+        "PostgreSQL",
+        "Redis",
+        "Laravel Queues & Horizon",
+        "Laravel Echo/Pusher",
+        "Laravel Sanctum/Passport",
+        "Laravel Cashier (Stripe)",
+        "Blade Templating",
+        "Laravel Scout",
+        "PHPUnit",
+        "Git & GitHub",
+        "Docker",
+        "AWS (S3/EC2)",
+        "Nginx",
+        "Composer",
+        "REST API Design",
+        "JWT & OAuth2",
+        "Laravel Forge/Envoyer",
+        "CI/CD Pipelines",
+        "Vue.js/React (API integration)",
+        "Linux/Bash",
+        "Design Patterns"
+      ]
+    },
+    {
+      "role": "WordPress Developer",
+      "tags": ["wordpress", "php", "cms", "themes", "plugins"],
+      "skills": [
+        "WordPress",
+        "PHP (7.x/8.x)",
+        "WooCommerce",
+        "ACF (Advanced Custom Fields)",
+        "Gutenberg Block Development",
+        "Elementor",
+        "Custom Theme Development",
+        "Custom Plugin Development",
+        "WP REST API",
+        "MySQL",
+        "JavaScript/jQuery",
+        "HTML5",
+        "CSS3/SCSS",
+        "Git & GitHub",
+        "WP-CLI",
+        "Docker",
+        "Cloudways/WP Engine/Kinsta",
+        "CDN Integration",
+        "Performance Optimization",
+        "SEO (Yoast/RankMath)",
+        "Google Analytics",
+        "Mailchimp/HubSpot",
+        "Bootstrap/Tailwind CSS",
+        "Multisite Networks",
+        "PHP Composer"
+      ]
+    },
+    {
+      "role": "Angular Developer",
+      "tags": ["angular", "typescript", "frontend", "rxjs", "spa"],
+      "skills": [
+        "Angular (12–17)",
+        "TypeScript",
+        "RxJS",
+        "NgRx (Store/Effects/Selectors)",
+        "Angular Material",
+        "Angular Router",
+        "HttpClient",
+        "Reactive Forms",
+        "Angular CLI",
+        "SCSS/Sass",
+        "Jasmine & Karma",
+        "Cypress",
+        "Webpack",
+        "Node.js (tooling)",
+        "REST API Design",
+        "GraphQL (Apollo Angular)",
+        "Git & GitHub",
+        "Docker",
+        "Jest",
+        "Angular CDK",
+        "Storybook",
+        "CI/CD Pipelines",
+        "Performance Optimization",
+        "i18n (Angular)",
+        "WCAG Accessibility"
+      ]
+    },
+    {
+      "role": "Vue.js Developer",
+      "tags": ["vuejs", "vue", "frontend", "javascript", "nuxt"],
+      "skills": [
+        "Vue.js (2 & 3)",
+        "Nuxt.js",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "Pinia",
+        "Vuex",
+        "Vue Router",
+        "Composition API",
+        "VeeValidate",
+        "Axios",
+        "Tailwind CSS",
+        "Headless UI",
+        "Vite",
+        "Vitest",
+        "Vue Test Utils",
+        "Storybook",
+        "GraphQL (Apollo Vue)",
+        "REST API Design",
+        "Git & GitHub",
+        "Docker",
+        "CI/CD (GitHub Actions)",
+        "WebSockets",
+        "SCSS/Sass",
+        "ESLint/Prettier",
+        "Responsive Design"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "PHP Developer",
+      "tags": ["php", "backend", "mysql", "api", "web"],
+      "options": [
+        {
+          "title": "Experienced PHP Web Developer",
+          "text": "Experienced PHP Developer with expertise in building dynamic web applications and REST APIs using modern PHP 8.x. Proficient in MySQL, OOP design patterns, and MVC architecture with a strong focus on security, performance, and code quality."
+        },
+        {
+          "title": "API-First PHP Developer",
+          "text": "PHP Developer specialized in building robust RESTful APIs consumed by React, Angular, and mobile frontends. Delivers well-structured, documented PHP APIs with proper authentication, input validation, and error handling."
+        },
+        {
+          "title": "PHP Performance Engineer",
+          "text": "PHP Developer focused on application performance through OPcache, Redis caching, and database query optimization. Consistently delivers sub-second PHP applications that handle production load without degradation."
+        },
+        {
+          "title": "Security-Focused PHP Developer",
+          "text": "PHP Developer who treats security as a first-class concern — applying prepared statements, output escaping, CSRF protection, and OWASP best practices across every application built."
+        },
+        {
+          "title": "Full-Stack PHP Developer",
+          "text": "Full-Stack Developer combining PHP backend expertise with strong frontend skills in HTML, CSS, and JavaScript. Delivers complete web products end-to-end with clean, maintainable code across all tiers."
+        },
+        {
+          "title": "Legacy PHP Modernizer",
+          "text": "PHP Developer experienced in upgrading and modernizing legacy PHP 5.x and 7.x codebases to modern PHP 8.x. Delivers migrations with zero functional regression, improved type safety, and measurable performance improvements."
+        },
+        {
+          "title": "E-Commerce PHP Specialist",
+          "text": "PHP Developer with hands-on experience building custom e-commerce platforms and integrating payment gateways. Delivers transactionally reliable, performant PHP solutions for high-revenue online stores."
+        },
+        {
+          "title": "Freelance & Agency PHP Developer",
+          "text": "PHP Developer with extensive freelance and agency experience delivering custom web applications for diverse industries. Skilled in client communication, scope management, and iterative delivery of PHP projects."
+        },
+        {
+          "title": "PHP OOP Specialist",
+          "text": "PHP Developer with deep expertise in object-oriented design, SOLID principles, and design patterns. Builds modular, testable PHP codebases that are easy to extend and maintain over time."
+        },
+        {
+          "title": "PHP & MySQL Backend Developer",
+          "text": "PHP Developer with strong database expertise in MySQL schema design, query optimization, and stored procedures. Delivers data-driven PHP applications with efficient, reliable data access layers."
+        }
+      ]
+    },
+    {
+      "role": "Laravel Developer",
+      "tags": ["laravel", "php", "backend", "mysql", "api"],
+      "options": [
+        {
+          "title": "Laravel Specialist",
+          "text": "Experienced Laravel Developer with deep expertise in building production-grade PHP web applications and APIs. Proficient in Eloquent ORM, Laravel Queues, and Sanctum authentication with a strong track record of delivering scalable, maintainable products."
+        },
+        {
+          "title": "API-First Laravel Developer",
+          "text": "Laravel Developer specialized in building robust RESTful APIs consumed by React, Vue.js, and mobile frontends. Delivers well-structured, versioned APIs with proper authentication, validation, and Swagger documentation."
+        },
+        {
+          "title": "Full-Stack Laravel Developer",
+          "text": "Full-Stack Developer with Laravel on the backend and Vue.js or React on the frontend. Delivers complete web products from database schema design through to user interface using the full Laravel ecosystem."
+        },
+        {
+          "title": "Laravel SaaS Builder",
+          "text": "Laravel Developer experienced in building multi-tenant SaaS platforms with subscription billing, role management, and usage analytics using Laravel Cashier, Queues, and Horizon."
+        },
+        {
+          "title": "Performance-Focused Laravel Developer",
+          "text": "Laravel Developer with expertise in Eloquent query optimization, Redis caching, and queue architecture. Delivers high-performance applications that handle real user load without degradation."
+        },
+        {
+          "title": "Laravel Ecosystem Expert",
+          "text": "Laravel Developer deeply familiar with the complete Laravel ecosystem including Forge, Envoyer, Horizon, Echo, Scout, Cashier, and Sanctum. Leverages first-party packages to deliver features faster with less custom code."
+        },
+        {
+          "title": "Quality-Driven Laravel Developer",
+          "text": "Laravel Developer who prioritizes code quality through comprehensive PHPUnit testing, clean service layer architecture, and rigorous code review standards that keep Laravel codebases maintainable at scale."
+        },
+        {
+          "title": "Agile Laravel Developer",
+          "text": "Laravel Developer experienced in delivering features in agile cross-functional teams. Strong collaborator who works effectively with frontend developers, DevOps engineers, and product stakeholders."
+        },
+        {
+          "title": "Real-Time Laravel Developer",
+          "text": "Laravel Developer with expertise in real-time application features using Laravel Echo, Pusher, and WebSockets. Builds interactive platforms with live notifications, dashboards, and collaborative user workflows."
+        },
+        {
+          "title": "Laravel Security Specialist",
+          "text": "Laravel Developer who applies security best practices including CSRF protection, SQL injection prevention, rate limiting, and OWASP compliance across every application and API layer."
+        }
+      ]
+    },
+    {
+      "role": "WordPress Developer",
+      "tags": ["wordpress", "php", "cms", "themes", "plugins"],
+      "options": [
+        {
+          "title": "Custom WordPress Developer",
+          "text": "Experienced WordPress Developer specializing in custom theme and plugin development. Delivers tailored WordPress solutions built to client specification with clean code, strong performance, and intuitive editing experiences."
+        },
+        {
+          "title": "WooCommerce Specialist",
+          "text": "WordPress Developer with deep WooCommerce expertise including custom payment gateways, product variations, B2B pricing, and checkout customizations. Builds e-commerce stores optimized for conversion and reliability."
+        },
+        {
+          "title": "WordPress Performance Expert",
+          "text": "WordPress Developer focused on site speed and Core Web Vitals optimization. Consistently delivers sub-2-second WordPress sites through caching, image optimization, CDN configuration, and clean theme architecture."
+        },
+        {
+          "title": "Headless WordPress Developer",
+          "text": "WordPress Developer experienced in decoupled architectures using the WP REST API and WPGraphQL with React or Next.js frontends. Combines WordPress content management strengths with modern frontend performance."
+        },
+        {
+          "title": "Full-Stack WordPress Developer",
+          "text": "Full-Stack Developer who combines PHP/WordPress backend expertise with strong frontend skills. Delivers complete WordPress products from plugin development through to pixel-perfect responsive user interfaces."
+        },
+        {
+          "title": "Enterprise WordPress Developer",
+          "text": "WordPress Developer experienced in building and maintaining enterprise-grade WordPress installations including multisite networks, custom user roles, and high-traffic hosting configurations."
+        },
+        {
+          "title": "Gutenberg Block Developer",
+          "text": "WordPress Developer specialized in custom Gutenberg block development and Full Site Editing. Builds modular, reusable block components that give content teams flexible, code-free editing capabilities."
+        },
+        {
+          "title": "Client-Focused WordPress Developer",
+          "text": "WordPress Developer with a strong track record of translating client requirements into polished WordPress sites delivered on time and within budget. Skilled in client communication and iterative feedback management."
+        },
+        {
+          "title": "WordPress Security Specialist",
+          "text": "WordPress Developer who prioritizes security at every layer — from plugin auditing and hardening to secure custom code, role management, and proactive vulnerability monitoring."
+        },
+        {
+          "title": "Agency WordPress Developer",
+          "text": "WordPress Developer with extensive agency experience managing multiple concurrent client projects. Skilled in scoping, time management, and delivering high-quality sites under tight timelines."
+        }
+      ]
+    },
+    {
+      "role": "Angular Developer",
+      "tags": ["angular", "typescript", "frontend", "rxjs", "spa"],
+      "options": [
+        {
+          "title": "Angular Enterprise Developer",
+          "text": "Experienced Angular Developer with deep expertise in building large-scale enterprise SPAs using TypeScript, RxJS, and NgRx. Delivers performant, maintainable Angular applications that meet enterprise-grade reliability and scalability requirements."
+        },
+        {
+          "title": "NgRx State Management Specialist",
+          "text": "Angular Developer specialized in complex reactive state management using NgRx Store, Effects, and Entity adapters. Designs predictable, scalable state architectures for enterprise Angular applications."
+        },
+        {
+          "title": "Angular Performance Engineer",
+          "text": "Angular Developer with a strong focus on application performance — lazy loading, change detection optimization, AOT compilation, and bundle analysis. Consistently delivers fast, smooth Angular user experiences."
+        },
+        {
+          "title": "Full Angular Ecosystem Developer",
+          "text": "Angular Developer proficient across the complete Angular ecosystem including Angular Material, Angular CDK, Angular Router, and Angular CLI. Leverages first-party tooling to build consistent, maintainable enterprise frontends."
+        },
+        {
+          "title": "TypeScript-First Frontend Developer",
+          "text": "Angular Developer who uses TypeScript as the default for all frontend work, building strict type-safe components, services, and state models that reduce bugs and improve code confidence."
+        },
+        {
+          "title": "Angular Component Architect",
+          "text": "Angular Developer experienced in building modular, reusable component libraries and design systems. Delivers shared components that accelerate development velocity across multiple product teams."
+        },
+        {
+          "title": "Angular Migration Specialist",
+          "text": "Angular Developer experienced in migrating AngularJS 1.x applications to modern Angular. Delivers migrations with zero functional regression, improved performance, and a cleaner, testable codebase."
+        },
+        {
+          "title": "Reactive Programming Expert",
+          "text": "Angular Developer with deep RxJS expertise in Observables, operators, and subjects. Builds complex async data flows that are readable, composable, and free from memory leaks."
+        },
+        {
+          "title": "Test-Driven Angular Developer",
+          "text": "Angular Developer who writes tests before code, maintaining comprehensive Jasmine/Karma unit test suites and Cypress E2E coverage. Ensures Angular applications behave correctly through automated validation at every layer."
+        },
+        {
+          "title": "Agile Angular Contributor",
+          "text": "Angular Developer with proven experience shipping features in cross-functional agile teams. Strong collaborator who works effectively with backend developers, UX designers, and product managers to deliver Angular features on time."
+        }
+      ]
+    },
+    {
+      "role": "Vue.js Developer",
+      "tags": ["vuejs", "vue", "frontend", "javascript", "nuxt"],
+      "options": [
+        {
+          "title": "Vue.js Specialist",
+          "text": "Experienced Vue.js Developer with expertise in Vue 3, Composition API, and the Nuxt.js ecosystem. Builds performant, maintainable single-page and server-side-rendered applications with a strong focus on component design and developer experience."
+        },
+        {
+          "title": "Nuxt.js & SSR Developer",
+          "text": "Vue.js Developer specialized in server-side rendering and static site generation with Nuxt.js. Builds SEO-optimized, fast-loading Vue applications that combine SPA flexibility with the performance benefits of SSR."
+        },
+        {
+          "title": "Pinia State Management Expert",
+          "text": "Vue.js Developer with deep expertise in reactive state management using Pinia and Vuex. Designs clean, modular store architectures that scale with growing application complexity."
+        },
+        {
+          "title": "Full-Stack Vue & Laravel Developer",
+          "text": "Full-Stack Developer combining Vue.js frontend expertise with Laravel backend skills. Delivers complete web products end-to-end within the PHP/JavaScript ecosystem with seamless API integration."
+        },
+        {
+          "title": "Vue Component Library Builder",
+          "text": "Vue.js Developer specialized in building reusable, accessible component libraries documented in Storybook. Creates shared design systems that accelerate development and enforce visual consistency across teams."
+        },
+        {
+          "title": "Performance-Focused Vue Developer",
+          "text": "Vue.js Developer focused on rendering performance, bundle optimization, and Core Web Vitals. Applies defineAsyncComponent, KeepAlive, and Vite optimizations to deliver consistently fast Vue applications."
+        },
+        {
+          "title": "TypeScript Vue Developer",
+          "text": "Vue.js Developer who builds fully typed Vue 3 applications with TypeScript script setup syntax. Enforces strict type safety across components, composables, and API integrations for confident refactoring."
+        },
+        {
+          "title": "Vue 2 to Vue 3 Migration Specialist",
+          "text": "Vue.js Developer experienced in migrating Vue 2 Options API codebases to Vue 3 Composition API. Delivers migrations with zero functional regression, improved type safety, and better code reuse through composables."
+        },
+        {
+          "title": "Agile Vue Developer",
+          "text": "Vue.js Developer with proven experience shipping features in agile cross-functional teams. Strong collaborator who works effectively with backend developers, designers, and product owners to deliver Vue applications on time."
+        },
+        {
+          "title": "API-Driven Vue Developer",
+          "text": "Vue.js Developer skilled in building seamless integrations between Vue frontends and REST/GraphQL backends. Delivers reactive, real-time interfaces with clean data flows, optimistic updates, and robust error handling."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "PHP Developer",
+      "tags": ["php", "backend", "mysql", "api", "web"],
+      "items": [
+        "Reduced PHP application load time by 50% through OPcache configuration, query optimization, and Redis sessions.",
+        "Migrated a PHP 5.6 legacy application to PHP 8.2, eliminating deprecated functions and improving performance by 35%.",
+        "Built a PHP REST API handling 80,000+ daily requests with 99.8% uptime across 3 years of operation.",
+        "Reduced database query count per page by 60% through query batching and eager loading with PDO.",
+        "Delivered a custom PHP e-commerce platform processing $500K+ in annual sales with zero downtime incidents.",
+        "Cut server response time from 2.8s to 0.6s by implementing PHP-FPM tuning and Nginx caching headers.",
+        "Automated 8 manual reporting tasks with PHP CLI scripts saving 10 hours per week of analyst effort.",
+        "Resolved 150+ SQL injection and XSS vulnerabilities by implementing prepared statements and output escaping across legacy code.",
+        "Built a multi-tenant PHP SaaS application serving 3,000+ active businesses on shared infrastructure.",
+        "Reduced codebase size by 30% by refactoring procedural PHP to OOP with reusable classes and services.",
+        "Achieved 78% PHPUnit coverage on a PHP API codebase that previously had zero automated tests.",
+        "Integrated a PHP payment gateway processing 10,000+ transactions monthly with PCI-DSS best practices.",
+        "Deployed PHP applications to AWS EC2 with load balancing cutting monthly server costs by 25%.",
+        "Reduced customer-reported bugs by 45% by introducing PHPUnit testing and a pre-deployment checklist.",
+        "Delivered 4 PHP web applications for clients across retail, healthcare, and education sectors within a single year."
+      ]
+    },
+    {
+      "role": "Laravel Developer",
+      "tags": ["laravel", "php", "backend", "mysql", "api"],
+      "items": [
+        "Reduced Eloquent query count per request by 65% through eager loading and query caching with Redis.",
+        "Delivered a multi-tenant Laravel SaaS platform serving 5,000+ active tenants with schema-level database isolation.",
+        "Built a Laravel Queue system processing 100,000+ background jobs daily with a 99.7% success rate.",
+        "Achieved 85% PHPUnit test coverage across a Laravel API codebase previously lacking any automated tests.",
+        "Reduced API response time from 450ms to 95ms through targeted Eloquent optimization and Redis caching.",
+        "Migrated a legacy CodeIgniter application to Laravel 10, improving developer velocity by 40%.",
+        "Integrated Laravel Cashier handling $250K+ monthly recurring revenue with zero billing discrepancies.",
+        "Configured zero-downtime deployments using Laravel Envoyer cutting release downtime from 8 minutes to zero.",
+        "Built a real-time notification system using Laravel Echo serving 8,000+ concurrent WebSocket connections.",
+        "Delivered 3 complete Laravel web applications for clients across fintech, healthcare, and EdTech in 12 months.",
+        "Reduced server costs by 30% by optimizing Laravel queue workers and Redis connection pooling.",
+        "Established Laravel coding standards and review guidelines adopted by a 6-person development team.",
+        "Resolved 200+ legacy security vulnerabilities by applying Laravel's built-in protection mechanisms systematically.",
+        "Built a Laravel package used across 5 internal projects eliminating repeated boilerplate code.",
+        "Shipped a full-text search feature using Laravel Scout and Meilisearch reducing search response time to under 50ms."
+      ]
+    },
+    {
+      "role": "WordPress Developer",
+      "tags": ["wordpress", "php", "cms", "themes", "plugins"],
+      "items": [
+        "Reduced WordPress site load time from 7.2s to 1.4s through caching plugin configuration, CDN setup, and image optimization.",
+        "Built a custom WooCommerce store processing $800K+ in annual sales with zero checkout downtime incidents.",
+        "Developed 15+ custom WordPress themes for clients across retail, healthcare, and hospitality industries.",
+        "Improved WordPress site Google PageSpeed score from 42 to 93 through targeted performance optimizations.",
+        "Migrated 30+ WordPress sites to a new hosting provider with zero data loss and minimal downtime.",
+        "Built a custom WordPress plugin used across 5 client sites eliminating $3,000/year in third-party plugin licensing costs.",
+        "Reduced WooCommerce cart abandonment rate by 25% after redesigning the checkout flow and adding trust signals.",
+        "Developed a headless WordPress and Next.js site achieving 98 Lighthouse performance score on launch.",
+        "Maintained 99.9% uptime across 12 client WordPress sites through proactive monitoring and update management.",
+        "Created custom Gutenberg blocks enabling content teams to self-manage pages with zero developer involvement.",
+        "Delivered a WordPress multisite network for a media company managing 20+ regional content properties.",
+        "Reduced WordPress plugin conflicts from 8 per month to zero by auditing and replacing incompatible plugins.",
+        "Built a WooCommerce B2B portal with custom pricing tiers serving 200+ wholesale business accounts.",
+        "Increased organic search traffic by 40% by implementing Yoast SEO configurations and schema markup.",
+        "Completed 20+ WordPress project deliveries in a single year with 100% positive client satisfaction ratings."
+      ]
+    },
+    {
+      "role": "Angular Developer",
+      "tags": ["angular", "typescript", "frontend", "rxjs", "spa"],
+      "items": [
+        "Reduced Angular app initial load time by 55% through lazy loading, code splitting, and AOT compilation tuning.",
+        "Migrated a 50,000-line AngularJS application to Angular 15 with zero functional regressions over 4 months.",
+        "Improved Angular component rendering performance by 70% by switching to OnPush change detection strategy.",
+        "Built a reusable Angular component library of 70+ components adopted by 4 product teams across the organization.",
+        "Achieved 90% Jasmine and Karma unit test coverage across core Angular services and components.",
+        "Reduced Angular bundle size from 3.2MB to 780KB through differential loading and tree shaking optimizations.",
+        "Delivered an Angular enterprise dashboard serving 50,000+ monthly active users with zero post-launch critical bugs.",
+        "Implemented NgRx state management replacing ad-hoc Subject-based state and eliminating 35% of data-related bugs.",
+        "Cut CI pipeline time from 18 minutes to 5 minutes by optimizing Angular test parallelization and build caching.",
+        "Built accessible Angular UI meeting WCAG 2.1 AA for a financial services platform with 100,000+ users.",
+        "Delivered 25+ Angular features across 8 sprints with a consistent 98% on-time delivery rate.",
+        "Introduced Angular DevTools profiling that identified and resolved 12 render bottlenecks in a data-heavy table view.",
+        "Established Angular coding standards and style guide adopted by a 10-person frontend engineering team.",
+        "Integrated Angular Universal SSR improving Google PageSpeed score from 55 to 91 for a content-heavy application.",
+        "Reduced RxJS memory leak incidents from 6 per month to zero by introducing subscription management best practices."
+      ]
+    },
+    {
+      "role": "Vue.js Developer",
+      "tags": ["vuejs", "vue", "frontend", "javascript", "nuxt"],
+      "items": [
+        "Reduced Vue application bundle size from 2.4MB to 580KB through code splitting and Vite tree shaking.",
+        "Migrated a 40,000-line Vue 2 codebase to Vue 3 Composition API with zero regressions in 8 weeks.",
+        "Improved Vue app Lighthouse performance score from 55 to 94 through lazy loading and rendering optimizations.",
+        "Built a reusable Vue component library of 60+ components adopted across 3 product teams.",
+        "Implemented Nuxt.js SSR improving SEO organic traffic by 50% within 3 months of launch.",
+        "Achieved 85% Vitest coverage across Vue components and Pinia stores within 6 weeks.",
+        "Delivered 30+ Vue features across 7 sprints with a 97% on-time delivery rate.",
+        "Reduced time-to-interactive from 5.8s to 1.9s by implementing lazy loading and async component splitting.",
+        "Built a real-time Vue dashboard serving live data to 3,000+ concurrent users via WebSocket integration.",
+        "Integrated Vue application with Stripe processing $200K+ monthly transactions with zero payment errors.",
+        "Established Vue 3 coding standards and Composition API patterns adopted by a 7-person frontend team.",
+        "Cut developer onboarding time for new Vue projects from 3 days to 4 hours using a custom Vite starter template.",
+        "Implemented accessible Vue UI meeting WCAG 2.1 AA for a public-sector platform used by 80,000+ citizens.",
+        "Reduced Vue component re-renders by 60% using computed caching and KeepAlive strategically across the app.",
+        "Delivered a Nuxt.js static site with 200+ pages achieving perfect Lighthouse score on core marketing pages."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "PHP Developer",
+      "tags": ["php", "backend", "mysql", "api", "web"],
+      "items": [
+        "Built a custom PHP MVC e-commerce platform with product catalog, cart, Stripe payments, and admin panel.",
+        "Developed a PHP-based CMS with content editor, media library, multi-user roles, and scheduled publishing.",
+        "Created a REST API in PHP consumed by a React SPA with JWT authentication and role-based access control.",
+        "Built a PHP multi-tenant billing portal with subscription plans, invoicing, and PayPal/Stripe integration.",
+        "Developed a PHP-based school management system with student records, attendance, and grade reporting.",
+        "Created a PHP job portal with employer and candidate registration, job listings, and application tracking.",
+        "Built a PHP real estate listing site with property search, map integration, and inquiry management.",
+        "Developed a PHP-based event management system with registration, ticketing, and email confirmation.",
+        "Created a PHP inventory control system with barcode generation, stock alerts, and purchase order management.",
+        "Built a PHP survey platform with customizable question types, response collection, and CSV export.",
+        "Developed a PHP-based hotel booking system with room availability, reservations, and payment processing.",
+        "Created a PHP news aggregation portal with RSS feed parsing, category management, and SEO-optimized URLs.",
+        "Built a PHP REST API backend for a mobile fitness application with workout tracking and progress analytics.",
+        "Developed a PHP coupon and discount code engine integrated into an e-commerce checkout workflow.",
+        "Created a PHP admin dashboard with user management, analytics charts, and configurable system settings."
+      ]
+    },
+    {
+      "role": "Laravel Developer",
+      "tags": ["laravel", "php", "backend", "mysql", "api"],
+      "items": [
+        "Built a multi-tenant SaaS platform using Laravel with Cashier billing, tenant isolation, and usage analytics.",
+        "Developed a Laravel REST API backend for a React Native mobile application with JWT authentication.",
+        "Created a Laravel e-commerce platform with product management, cart, orders, and Stripe payment integration.",
+        "Built a real-time collaboration tool using Laravel Echo and Pusher for a project management application.",
+        "Developed a Laravel-based healthcare portal with patient management, appointments, and prescription records.",
+        "Created a Laravel job board with employer dashboards, resume parsing, and applicant tracking workflows.",
+        "Built a Laravel blog CMS with markdown editor, media uploads, SEO optimization, and scheduled publishing.",
+        "Developed a Laravel-based LMS with course management, video streaming, quizzes, and certificate generation.",
+        "Created a Laravel inventory system with supplier management, purchase orders, and stock alert notifications.",
+        "Built a Laravel analytics dashboard aggregating data from Google Analytics, Stripe, and internal databases.",
+        "Developed a Laravel-based property listing platform with agent profiles, map integration, and inquiry management.",
+        "Created a Laravel admin portal with user roles, activity logging, and configurable system settings.",
+        "Built a subscription-based newsletter platform using Laravel Queues for bulk email scheduling and delivery.",
+        "Developed a Laravel microservice for webhook processing and event routing between third-party integrations.",
+        "Created a Laravel-based restaurant ordering system with menu management, orders, and real-time kitchen notifications."
+      ]
+    },
+    {
+      "role": "WordPress Developer",
+      "tags": ["wordpress", "php", "cms", "themes", "plugins"],
+      "items": [
+        "Built a custom WordPress e-commerce theme with WooCommerce integration, advanced product filtering, and wishlist.",
+        "Developed a real estate listing plugin for WordPress with property search, map integration, and agent profiles.",
+        "Created a membership site using WordPress and MemberPress with tiered access levels and payment integration.",
+        "Built a custom Gutenberg block library of 20+ blocks for a media company's editorial team.",
+        "Developed a headless WordPress backend with WPGraphQL consumed by a Next.js frontend for a news portal.",
+        "Created a multi-vendor WooCommerce marketplace with vendor dashboards and commission management.",
+        "Built a custom WordPress events plugin with registration, ticketing, attendee management, and email notifications.",
+        "Developed a WordPress LMS using LearnDash with custom course templates, quizzes, and certificate generation.",
+        "Created a WordPress restaurant website with online ordering, table reservations, and menu management.",
+        "Built a WordPress directory site with advanced search, user submissions, and featured listing monetization.",
+        "Developed a custom WordPress theme for a law firm with appointment booking and attorney profile management.",
+        "Created a charity fundraising WordPress site with Stripe donation forms, campaign tracking, and donor reporting.",
+        "Built a WooCommerce subscription store with recurring billing, customer portal, and churn reduction workflows.",
+        "Developed a WordPress intranet portal with department pages, document library, and staff directory.",
+        "Created a custom WordPress multisite network for a franchise business with centralized brand management."
+      ]
+    },
+    {
+      "role": "Angular Developer",
+      "tags": ["angular", "typescript", "frontend", "rxjs", "spa"],
+      "items": [
+        "Developed an Angular enterprise ERP module for HR, payroll, and leave management used by 5,000+ employees.",
+        "Built a real-time financial trading dashboard using Angular and WebSockets displaying live market data.",
+        "Created a complex multi-step Angular form wizard for an insurance application with dynamic validation rules.",
+        "Developed a custom Angular admin panel with role-based access, data tables, and export functionality.",
+        "Built an Angular PWA for a retail platform with offline support, push notifications, and product catalog browsing.",
+        "Created a healthcare patient portal in Angular with appointment booking, medical history, and prescription viewing.",
+        "Developed a real-time collaboration platform using Angular and Socket.io for document editing and team chat.",
+        "Built an Angular design system with 60+ components published to an internal npm registry for team-wide use.",
+        "Created an Angular analytics dashboard with Highcharts visualizations and configurable date range filters.",
+        "Developed an Angular e-commerce storefront with product filtering, cart management, and Angular Universal SSR.",
+        "Built an Angular LMS with course navigation, video player integration, quiz engine, and progress tracking.",
+        "Created a multi-language Angular application supporting 10 locales using Angular i18n.",
+        "Developed an Angular CRM module with contact management, activity timeline, and sales pipeline visualization.",
+        "Built an Angular mobile-first responsive UI for a logistics platform with shipment tracking and driver dispatch.",
+        "Created an Angular B2B portal with company account management, order history, and invoice download functionality."
+      ]
+    },
+    {
+      "role": "Vue.js Developer",
+      "tags": ["vuejs", "vue", "frontend", "javascript", "nuxt"],
+      "items": [
+        "Built a Vue 3 e-commerce storefront with Pinia cart management, product filtering, and Stripe checkout.",
+        "Developed a Nuxt.js news portal with SSR, dynamic article pages, and Algolia search integration.",
+        "Created a Vue-based project management tool with Kanban boards, task assignments, and real-time sync.",
+        "Built a Vue admin dashboard with role-based views, sortable data tables, and analytics chart widgets.",
+        "Developed a real-time chat application using Vue and Socket.io with rooms, typing indicators, and file sharing.",
+        "Created a Vue design system with 50+ Headless UI-powered components documented in Storybook.",
+        "Built a Nuxt.js SaaS landing page with CMS-driven content, A/B testing, and conversion tracking.",
+        "Developed a Vue LMS with course enrollment, video progress tracking, quiz engine, and certificate generation.",
+        "Created a Vue fitness tracking app with workout logs, progress charts, and goal management features.",
+        "Built a multi-tenant Vue SaaS dashboard with usage analytics, billing management, and team member controls.",
+        "Developed a Vue-based travel booking platform with availability search, filters, and itinerary management.",
+        "Created a Vue form builder allowing non-technical users to design and publish data collection forms.",
+        "Built a Vue-powered blog with markdown content, category filtering, search, and comment functionality.",
+        "Developed a Vue calendar scheduling application with recurring events, timezone support, and availability blocking.",
+        "Created a Vue social feed with infinite scroll, post creation, image upload, and real-time like and comment updates."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "PHP Developer",
+      "tags": ["php", "backend", "mysql", "api", "web"],
+      "items": [
+        "Zend Certified PHP Engineer (Zend/Perforce)",
+        "PHP for Beginners to Advanced Ninja (Udemy – Edwin Diaz)",
+        "Object-Oriented PHP & MVC (Udemy – Brad Traversy)",
+        "PHP Unit Testing with PHPUnit (Udemy)",
+        "MySQL for Developers (PlanetScale)",
+        "RESTful APIs with PHP from Scratch (Udemy)",
+        "Docker for PHP Developers (Udemy)",
+        "AWS Certified Cloud Practitioner (Amazon Web Services)",
+        "SQL and Database Design A-Z (Udemy)",
+        "Git & GitHub – The Complete Guide (Udemy)"
+      ]
+    },
+    {
+      "role": "Laravel Developer",
+      "tags": ["laravel", "php", "backend", "mysql", "api"],
+      "items": [
+        "Laravel Certification (Laravel LLC – Official)",
+        "Zend Certified PHP Engineer (Zend/Perforce)",
+        "Laravel & PHP – The Complete Artisan Course (Udemy)",
+        "Laravel API Development with Sanctum (Udemy)",
+        "PHPUnit Testing with Laravel (Udemy)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Docker for PHP/Laravel Developers (Udemy)",
+        "MySQL for Developers (PlanetScale)",
+        "Git & GitHub for PHP Developers (Udemy)",
+        "REST API Design: Best Practices (Udemy)"
+      ]
+    },
+    {
+      "role": "WordPress Developer",
+      "tags": ["wordpress", "php", "cms", "themes", "plugins"],
+      "items": [
+        "WordPress Certified Developer (WordPress.org Learning Program)",
+        "WooCommerce Fundamentals Certification (WooCommerce)",
+        "Advanced WordPress Development (Udemy)",
+        "Custom WordPress Plugin Development (Udemy – Brad Traversy)",
+        "WooCommerce Developer Bootcamp (Udemy)",
+        "Gutenberg Block Development for WordPress (Udemy)",
+        "Advanced ACF – Custom Fields Mastery (Udemy)",
+        "WordPress Performance Optimization (Udemy)",
+        "Headless WordPress with Next.js (Udemy)",
+        "SEO Training with Yoast (Yoast Academy)"
+      ]
+    },
+    {
+      "role": "Angular Developer",
+      "tags": ["angular", "typescript", "frontend", "rxjs", "spa"],
+      "items": [
+        "Angular – The Complete Guide (Udemy – Maximilian Schwarzmüller)",
+        "RxJS & Angular: Reactive Development (Pluralsight)",
+        "NgRx – The Complete Guide (Udemy)",
+        "TypeScript: The Complete Developer's Guide (Udemy)",
+        "Angular Testing Masterclass (Udemy)",
+        "Angular Performance Optimization (Pluralsight)",
+        "Meta Front-End Developer Professional Certificate (Coursera)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Accessibility in Angular Applications (Pluralsight)",
+        "JavaScript Algorithms and Data Structures (freeCodeCamp)"
+      ]
+    },
+    {
+      "role": "Vue.js Developer",
+      "tags": ["vuejs", "vue", "frontend", "javascript", "nuxt"],
+      "items": [
+        "Vue.js 3 – The Complete Guide (Udemy – Maximilian Schwarzmüller)",
+        "Nuxt.js – Vue.js on Steroids (Udemy – Maximilian Schwarzmüller)",
+        "Vue Mastery – Vue 3 Essentials (Vue Mastery)",
+        "Pinia – The Enjoyable Vue Store (Vue Mastery)",
+        "TypeScript for Vue Developers (Vue Mastery)",
+        "Testing Vue.js Applications with Vitest (Udemy)",
+        "Vue.js Composition API (Vue Mastery)",
+        "Meta Front-End Developer Professional Certificate (Coursera)",
+        "JavaScript Algorithms and Data Structures (freeCodeCamp)",
+        "AWS Certified Cloud Practitioner (Amazon Web Services)"
+      ]
+    }
+  ]
+}

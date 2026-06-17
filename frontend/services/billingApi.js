@@ -14,3 +14,8 @@ export async function activateTestFreePlan() {
   const { data } = await api.post("/billing/test-free");
   return data;
 }
+
+export async function activateTestAdminRole() {
+  const { data } = await api.post("/billing/test-admin");
+  return data;
+}

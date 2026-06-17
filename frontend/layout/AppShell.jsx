@@ -14,6 +14,7 @@ const ICONS = {
   applications:    "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
   subscription:    "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   profile:         "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+  admin:           "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 14a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
 };
 
 const menuItems = [
@@ -27,6 +28,7 @@ const menuItems = [
   { key: "applications", label: "Applications",   to: "/app/applications",   icon: "applications" },
   { key: "subscription", label: "Subscription",   to: "/app/subscription",   icon: "subscription" },
   { key: "profile",      label: "Profile",        to: "/app/profile",        icon: "profile" },
+  { key: "admin-blog",   label: "Blog Admin",     to: "/app/admin/blogs",    icon: "admin", adminOnly: true },
 ];
 
 const titleByPath = Object.fromEntries(menuItems.map((item) => [item.to, item.label]));
@@ -47,21 +49,39 @@ export default function AppShell() {
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("resume_builder_theme");
     if (stored) return stored === "dark";
-    return true; // default dark
+    return false;
   });
   const [plan, setPlan] = useState("free");
+  const [role, setRole] = useState("user");
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
+    document.documentElement.classList.toggle("theme-dark", darkMode);
+    document.documentElement.classList.toggle("theme-light", !darkMode);
     localStorage.setItem("resume_builder_theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
   useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
 
   useEffect(() => {
-    fetchCurrentUser()
-      .then((data) => setPlan(data.user?.plan || "free"))
-      .catch(() => setPlan("free"));
+    function loadCurrentUser() {
+      fetchCurrentUser()
+        .then((data) => {
+          setPlan(data.user?.plan || "free");
+          setRole(data.user?.role || "user");
+        })
+        .catch(() => {
+          setPlan("free");
+          setRole("user");
+        });
+    }
+
+    loadCurrentUser();
+    window.addEventListener("user-access-changed", loadCurrentUser);
+
+    return () => {
+      window.removeEventListener("user-access-changed", loadCurrentUser);
+    };
   }, [location.pathname]);
 
   const currentTitle = useMemo(() => titleByPath[location.pathname] || "Dashboard", [location.pathname]);
@@ -74,7 +94,7 @@ export default function AppShell() {
   const isPro = plan === "pro";
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--t1)", display: "flex" }}>
+    <div className={`app26-shell ${darkMode ? "theme-dark" : "theme-light"}`} style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--t1)", display: "flex" }}>
 
       {/* ── Sidebar ── */}
       <aside style={{
@@ -93,13 +113,13 @@ export default function AppShell() {
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
             <div style={{
               width: 34, height: 34, borderRadius: 9,
-              background: "linear-gradient(135deg, #22d3ee, #818cf8)",
+              background: "var(--brand-grad)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 15, fontWeight: 800, color: "#fff", fontFamily: "Sora, sans-serif",
+              fontSize: 15, fontWeight: 800, color: "#fff", fontFamily: "Inter, Manrope, sans-serif",
               flexShrink: 0
             }}>N</div>
             <div>
-              <div style={{ fontSize: 15, fontWeight: 700, fontFamily: "Sora, sans-serif", lineHeight: 1.2 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif", lineHeight: 1.2 }}>
                 NightHire<span style={{ color: "var(--cyan)" }}>.</span>ai
               </div>
               <div style={{ fontSize: 10, color: "var(--t3)", marginTop: 1 }}>AI Career Suite</div>
@@ -124,7 +144,7 @@ export default function AppShell() {
 
         {/* Nav items */}
         <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
-          {menuItems.map((item) => (
+          {menuItems.filter((item) => !item.adminOnly || role === "admin").map((item) => (
             <NavLink
               key={item.key}
               to={item.to}
@@ -186,7 +206,7 @@ export default function AppShell() {
         {/* Top bar */}
         <header style={{
           position: "sticky", top: 0, zIndex: 20,
-          background: "rgba(7,8,15,0.9)", backdropFilter: "blur(16px)",
+          background: "var(--shell-header-bg)", backdropFilter: "blur(16px)",
           borderBottom: "1px solid var(--border)",
           display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "0 20px", height: 56
@@ -200,7 +220,7 @@ export default function AppShell() {
                 fontSize: 12, cursor: "pointer", display: "none"
               }}
             >☰</button>
-            <h2 style={{ fontSize: 16, fontWeight: 700, fontFamily: "Sora, sans-serif" }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif" }}>
               {currentTitle}
             </h2>
           </div>
@@ -212,10 +232,10 @@ export default function AppShell() {
               <button
                 onClick={() => navigate("/app/subscription")}
                 style={{
-                  background: "linear-gradient(135deg, rgba(251,146,60,0.15), rgba(234,88,12,0.1))",
-                  border: "1px solid rgba(251,146,60,0.3)",
-                  color: "#fb923c", borderRadius: 8, padding: "5px 12px",
-                  fontSize: 11, fontWeight: 700, cursor: "pointer", fontFamily: "Sora, sans-serif"
+                  background: "var(--cyan-dim)",
+                  border: "1px solid var(--border2)",
+                  color: "var(--cyan)", borderRadius: 8, padding: "5px 12px",
+                  fontSize: 11, fontWeight: 700, cursor: "pointer", fontFamily: "Inter, Manrope, sans-serif"
                 }}>
                 ⚡ Upgrade to Pro
               </button>

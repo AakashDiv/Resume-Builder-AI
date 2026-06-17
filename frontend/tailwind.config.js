@@ -42,11 +42,25 @@ export default {
           400: "#fb923c",
           500: "#f97316",
           600: "#ea580c",
+        },
+        nh: {
+          bg: "#090B13",
+          surface: "#111420",
+          raised: "#181C2A",
+          overlay: "#1E2338",
+          border: "rgba(255,255,255,0.08)",
+          teal: "#06B6D4",
+          ai: "#5B6EF5",
+          tx1: "#EEF0FF",
+          tx2: "#8B94B8",
+          tx3: "#3D4666",
         }
       },
       fontFamily: {
-        display: ["Sora", "sans-serif"],
-        body:    ["Manrope", "sans-serif"],
+        display: ["Inter", "Manrope", "sans-serif"],
+        sans: ["Manrope", "Inter", "sans-serif"],
+        body: ["Manrope", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       animation: {
         "fade-in":    "fadeIn 0.5s ease-out forwards",

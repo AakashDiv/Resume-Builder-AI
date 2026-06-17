@@ -17,6 +17,9 @@ import matchRoutes from "../routes/match.routes.js";
 import applyRoutes from "../routes/apply.routes.js";
 import applicationsRoutes from "../routes/applications.routes.js";
 import schedulerRoutes from "../routes/scheduler.routes.js";
+import blogRoutes from "../routes/blog.routes.js";
+import adminAuthRoutes from "../routes/adminAuth.routes.js";
+import superAdminRoutes from "../routes/superAdmin.routes.js";
 import { stripeWebhook } from "../controllers/billing.controller.js";
 import { env } from "./env.js";
 
@@ -26,10 +29,11 @@ import errorHandler from "../middleware/errorHandler.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DOWNLOADS_DIR = path.resolve(__dirname, "..", "tmp");
+const BLOG_UPLOADS_DIR = path.resolve(__dirname, "..", "tmp", "blog-uploads");
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(
   cors({
     origin: env.clientOrigin,
@@ -43,6 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
 app.use("/downloads", express.static(DOWNLOADS_DIR));
+app.use("/uploads/blog", express.static(BLOG_UPLOADS_DIR));
 
 app.use(
   "/api",
@@ -68,6 +73,11 @@ app.use("/api/match", matchRoutes);
 app.use("/api/apply", applyRoutes);
 app.use("/api/applications", applicationsRoutes);
 app.use("/api/scheduler", schedulerRoutes);
+app.use("/api/blogs", blogRoutes);
+app.use("/api/admin-auth", adminAuthRoutes);
+app.use("/api/super-admin", superAdminRoutes);
+app.get("/robots.txt", (_req, res) => res.redirect(301, "/api/blogs/robots.txt"));
+app.get("/sitemap.xml", (_req, res) => res.redirect(301, "/api/blogs/sitemap.xml"));
 
 app.use(notFound);
 app.use(errorHandler);

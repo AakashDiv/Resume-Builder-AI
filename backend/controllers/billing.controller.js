@@ -46,6 +46,31 @@ export const activateTestFreePlan = asyncHandler(async (req, res) => {
   await setTestPlan(req, res, "free");
 });
 
+export const activateTestAdminRole = asyncHandler(async (req, res) => {
+  if (!env.allowTestProUpgrade || env.nodeEnv === "production") {
+    throw new ApiError(403, "Test admin switching is only available in local development");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      role: "admin"
+    },
+    {
+      new: true
+    }
+  ).select("_id name email plan role autoApplyEnabled autoApplyLimit");
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  res.status(200).json({
+    message: "Test admin role activated for local testing",
+    user
+  });
+});
+
 export const stripeWebhook = asyncHandler(async (req, res) => {
   const signature = req.headers["stripe-signature"];
   if (!signature) {

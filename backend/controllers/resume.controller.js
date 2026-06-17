@@ -8,6 +8,7 @@ import { tailorResumeToJob } from "../services/resumeTailor.service.js";
 import { generateCoverLetterForJob } from "../services/coverLetter.service.js";
 import { saveExtractedCandidateProfile } from "../services/profile.service.js";
 import { getResumeSuggestionLibrary } from "../services/resumeSuggestions.service.js";
+import { parseResumeFile } from "../services/resumeParse.service.js";
 
 export const generateResume = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
@@ -91,4 +92,22 @@ export const getResumeSuggestions = asyncHandler(async (req, res) => {
   });
 
   res.status(200).json(suggestions);
+});
+
+export const parseResume = asyncHandler(async (req, res) => {
+  const result = await parseResumeFile(req.file);
+
+  if (req.user && result.rawText) {
+    try {
+      await saveExtractedCandidateProfile({
+        userId: req.user._id,
+        resumeText: result.rawText,
+        source: "upload"
+      });
+    } catch (err) {
+      console.warn("[resume] Could not auto-save candidate profile after parse:", err.message);
+    }
+  }
+
+  res.status(200).json(result);
 });

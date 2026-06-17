@@ -1,0 +1,819 @@
+{
+  "experience": [
+    {
+      "role": "Java Developer",
+      "tags": ["java", "spring", "springboot", "backend", "microservices", "api"],
+      "phrases": [
+        "Developed enterprise-grade Java applications using Spring Boot, following SOLID principles and proven design patterns.",
+        "Built scalable RESTful APIs with Spring MVC and Spring Security handling 200,000+ daily requests with 99.9% uptime.",
+        "Implemented microservices architecture using Spring Cloud, Eureka service discovery, and API Gateway.",
+        "Designed and optimized Hibernate/JPA entity mappings and JPQL queries for high-performance data access.",
+        "Integrated Apache Kafka for event-driven communication between distributed microservices.",
+        "Applied multithreading and concurrency patterns using Java ExecutorService and CompletableFuture for async processing.",
+        "Wrote comprehensive unit and integration tests with JUnit 5 and Mockito achieving 80%+ code coverage.",
+        "Managed Maven and Gradle build lifecycles and maintained dependency versioning across multi-module projects.",
+        "Containerized Java applications with Docker and deployed to Kubernetes clusters with Helm charts.",
+        "Implemented OAuth2 and JWT-based authentication using Spring Security for enterprise-grade API protection.",
+        "Conducted code reviews enforcing Java best practices, clean code principles, and SonarQube quality gates.",
+        "Configured CI/CD pipelines using Jenkins and GitHub Actions for automated build, test, and deployment.",
+        "Optimized JVM performance through heap tuning, garbage collection configuration, and profiling with JProfiler.",
+        "Migrated legacy Java EE applications to modern Spring Boot microservices, reducing deployment complexity.",
+        "Implemented caching strategies using Spring Cache with Redis reducing database load by 40%.",
+        "Built batch processing workflows using Spring Batch for large-scale data transformation and ETL pipelines.",
+        "Integrated third-party services including payment gateways, email providers, and external APIs via REST clients.",
+        "Developed GraphQL APIs using Spring for GraphQL enabling flexible data querying for frontend consumers.",
+        "Maintained and enhanced legacy Java codebases while incrementally introducing modern Spring Boot patterns.",
+        "Collaborated with cross-functional agile teams to deliver Java-based features aligned with business requirements."
+      ]
+    },
+    {
+      "role": "Python Developer",
+      "tags": ["python", "django", "fastapi", "flask", "backend", "data"],
+      "phrases": [
+        "Developed scalable web applications and REST APIs using Python with Django, FastAPI, and Flask frameworks.",
+        "Built data processing pipelines using Pandas, NumPy, and SQLAlchemy to transform and analyze large datasets.",
+        "Implemented asynchronous API endpoints with FastAPI and async/await patterns achieving high-throughput performance.",
+        "Designed and managed PostgreSQL and MongoDB database models with Django ORM and SQLAlchemy.",
+        "Developed machine learning model integration pipelines serving predictions via REST APIs in production environments.",
+        "Automated repetitive business workflows using Python scripts, reducing manual effort by hours per week.",
+        "Wrote comprehensive unit and integration tests using Pytest with fixtures and mocking achieving 85%+ coverage.",
+        "Built web scraping and data collection tools using Scrapy, BeautifulSoup, and Selenium.",
+        "Integrated third-party APIs including Stripe, Twilio, and Google APIs into Python backend applications.",
+        "Deployed Python applications on AWS using Lambda, EC2, and Elastic Beanstalk with automated CI/CD pipelines.",
+        "Implemented task queues with Celery and Redis for background job processing and scheduled automation.",
+        "Applied caching strategies with Redis and Django cache framework reducing database query load by 35%.",
+        "Containerized Python applications with Docker and managed deployments on Kubernetes clusters.",
+        "Developed GraphQL APIs using Graphene-Django enabling flexible, efficient data access for frontend clients.",
+        "Maintained code quality through Pylint, Black formatting, type annotations, and strict pre-commit hooks.",
+        "Created internal Python libraries and reusable modules used across multiple backend services.",
+        "Built admin dashboards using Django Admin with custom views, filters, and bulk action capabilities.",
+        "Implemented OAuth2 and JWT authentication using Django REST Framework and SimpleJWT.",
+        "Collaborated in agile sprints delivering Python features aligned with product roadmap and business goals.",
+        "Mentored junior Python developers through code reviews, pair programming, and best practices documentation."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "tags": ["software engineer", "engineering", "backend", "system design", "algorithms"],
+      "phrases": [
+        "Designed and implemented software systems following clean architecture principles, SOLID design, and domain-driven design patterns.",
+        "Collaborated with product managers and stakeholders to define technical requirements and translate them into engineering solutions.",
+        "Conducted system design reviews evaluating scalability, reliability, and maintainability tradeoffs for new features.",
+        "Delivered end-to-end software features from technical specification through development, testing, and production deployment.",
+        "Participated in architecture discussions and contributed to engineering roadmap planning for platform-level initiatives.",
+        "Wrote high-quality, well-tested code across backend, API, and data layers using Java, Python, or Node.js.",
+        "Performed root cause analysis on production incidents, implemented fixes, and authored post-mortem documentation.",
+        "Optimized critical system bottlenecks through algorithmic improvements, caching, and database query optimization.",
+        "Established and enforced engineering standards including code review processes, documentation, and testing requirements.",
+        "Mentored junior engineers through structured feedback, pair programming, and technical knowledge sharing.",
+        "Led technical interviews for engineering candidates, contributing to team hiring and skill gap analysis.",
+        "Maintained and extended legacy systems while incrementally improving code quality and test coverage.",
+        "Integrated observability tooling including distributed tracing, metrics dashboards, and alerting for production systems.",
+        "Contributed to open-source projects and internal shared libraries improving developer productivity across teams.",
+        "Delivered cross-team platform features requiring coordination with multiple engineering squads and stakeholders.",
+        "Applied data structures and algorithms knowledge to optimize time and space complexity in performance-critical code paths.",
+        "Documented system architecture, API contracts, and operational runbooks for production services.",
+        "Evaluated and introduced new technologies, frameworks, and tools through proof-of-concept projects.",
+        "Managed technical debt reduction initiatives alongside feature delivery maintaining consistent product velocity.",
+        "Championed engineering best practices including TDD, CI/CD automation, and trunk-based development."
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "tags": ["software developer", "development", "programming", "application", "coding"],
+      "phrases": [
+        "Developed and maintained web and desktop applications across the full software development lifecycle from design to deployment.",
+        "Collaborated with business analysts and stakeholders to gather requirements and translate them into functional software solutions.",
+        "Built and consumed REST APIs integrating front-end applications with backend services and third-party platforms.",
+        "Wrote clean, readable, and well-documented code following established team conventions and coding standards.",
+        "Participated actively in agile ceremonies including sprint planning, daily standups, and retrospectives.",
+        "Resolved software bugs and defects by performing systematic debugging, root cause analysis, and targeted fixes.",
+        "Performed code reviews providing constructive feedback to peers and contributing to overall team code quality.",
+        "Developed automated unit and integration tests reducing manual QA time and improving release confidence.",
+        "Maintained and enhanced existing applications adding new features while preserving backward compatibility.",
+        "Worked closely with QA engineers to define acceptance criteria, review test cases, and resolve identified defects.",
+        "Managed source control using Git with branching strategies including GitFlow and trunk-based development.",
+        "Configured and maintained CI/CD pipelines enabling automated build, test, and deployment of application changes.",
+        "Created and maintained technical documentation including API specifications, runbooks, and onboarding guides.",
+        "Monitored deployed applications using logging and alerting tools, responding promptly to production issues.",
+        "Applied object-oriented programming principles to design modular, extensible, and maintainable software components.",
+        "Supported production deployments, verified feature correctness post-release, and performed post-deploy smoke testing.",
+        "Contributed to architectural discussions providing input on technology choices, libraries, and implementation approaches.",
+        "Delivered software features incrementally using agile iterations, gathering feedback and adjusting based on user input.",
+        "Demonstrated initiative by proactively identifying technical debt and proposing actionable remediation plans.",
+        "Participated in sprint retrospectives contributing ideas for process improvements that increased team efficiency."
+      ]
+    },
+    {
+      "role": "MERN Stack Developer",
+      "tags": ["mern", "mongodb", "express", "react", "nodejs", "fullstack", "javascript"],
+      "phrases": [
+        "Architected and delivered full-stack web applications using the MERN stack — MongoDB, Express.js, React, and Node.js — from design to production.",
+        "Built scalable Node.js/Express REST APIs integrated seamlessly with React frontends and MongoDB document collections.",
+        "Designed MongoDB schemas with embedded documents and references optimized for query patterns and application performance.",
+        "Implemented JWT-based authentication and role-based authorization across Express backend and React frontend layers.",
+        "Developed responsive, component-based React UIs consuming Express REST APIs with Axios and React Query.",
+        "Managed application state in React using Redux Toolkit and Context API for complex multi-step user workflows.",
+        "Deployed MERN applications on cloud platforms including AWS, Heroku, Railway, and Render with CI/CD automation.",
+        "Integrated Cloudinary and AWS S3 for media upload, storage, and CDN delivery in MERN stack applications.",
+        "Implemented real-time features using Socket.io across the full MERN stack for chat, notifications, and live updates.",
+        "Wrote automated tests for Express APIs using Supertest and Mocha and React components using Jest and RTL.",
+        "Optimized MongoDB query performance through indexing, aggregation pipelines, and Mongoose query structuring.",
+        "Built admin dashboards using React with role-gated routes, data tables, analytics charts, and export functionality.",
+        "Configured Express middleware for request validation, rate limiting, CORS, and structured error handling.",
+        "Applied pagination, search, and filtering patterns across MongoDB and Express for data-heavy application features.",
+        "Maintained environment-specific configuration using dotenv across MERN tiers for dev and production parity.",
+        "Containerized MERN stack applications with Docker Compose enabling consistent local and production environments.",
+        "Developed multi-step form flows in React with validation using React Hook Form and Zod schema enforcement.",
+        "Integrated payment processing with Stripe into MERN stack SaaS products supporting subscription and one-time billing.",
+        "Delivered MERN stack features in cross-functional agile teams collaborating with designers, QA, and product managers.",
+        "Refactored existing MERN applications improving code organization, performance, and test coverage incrementally."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "Java Developer",
+      "tags": ["java", "spring", "springboot", "backend", "microservices"],
+      "skills": [
+        "Java (8/11/17/21)",
+        "Spring Boot",
+        "Spring MVC",
+        "Spring Security",
+        "Spring Cloud",
+        "Hibernate/JPA",
+        "Maven/Gradle",
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "Apache Kafka",
+        "Redis",
+        "Docker",
+        "Kubernetes",
+        "JUnit 5 & Mockito",
+        "REST API Design",
+        "GraphQL",
+        "Jenkins/GitHub Actions",
+        "Microservices Architecture",
+        "Git & GitHub",
+        "SonarQube",
+        "AWS (EC2/RDS/S3)",
+        "Linux/Bash",
+        "OAuth2/JWT",
+        "Design Patterns (GoF)"
+      ]
+    },
+    {
+      "role": "Python Developer",
+      "tags": ["python", "django", "fastapi", "flask", "backend"],
+      "skills": [
+        "Python (3.x)",
+        "Django",
+        "Django REST Framework",
+        "FastAPI",
+        "Flask",
+        "SQLAlchemy",
+        "PostgreSQL",
+        "MongoDB",
+        "MySQL",
+        "Redis",
+        "Celery",
+        "Pandas",
+        "NumPy",
+        "Pytest",
+        "Docker",
+        "AWS (Lambda/EC2/S3)",
+        "Git & GitHub",
+        "REST API Design",
+        "GraphQL (Graphene)",
+        "JWT & OAuth2",
+        "Scrapy/BeautifulSoup",
+        "Linux/Bash",
+        "CI/CD Pipelines",
+        "Type Annotations (mypy)",
+        "Swagger/OpenAPI"
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "tags": ["software engineer", "engineering", "backend", "system design"],
+      "skills": [
+        "System Design",
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+        "Clean Code Principles",
+        "REST API Design",
+        "SQL & NoSQL Databases",
+        "Git & GitHub",
+        "Docker",
+        "CI/CD Pipelines",
+        "Unit & Integration Testing",
+        "Agile/Scrum",
+        "Distributed Systems",
+        "Cloud Platforms (AWS/GCP/Azure)",
+        "Linux/Bash",
+        "Code Review",
+        "Technical Documentation",
+        "Design Patterns (GoF)",
+        "Observability (Metrics/Logging/Tracing)",
+        "Microservices Architecture",
+        "Performance Optimization",
+        "Java/Python/Node.js",
+        "PostgreSQL",
+        "Redis",
+        "Kubernetes",
+        "Problem Solving"
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "tags": ["software developer", "development", "programming", "application"],
+      "skills": [
+        "JavaScript/TypeScript",
+        "Python or Java",
+        "HTML5",
+        "CSS3",
+        "React.js or Angular",
+        "Node.js or Spring Boot",
+        "SQL (PostgreSQL/MySQL)",
+        "MongoDB",
+        "REST API Design",
+        "Git & GitHub",
+        "Docker",
+        "CI/CD Pipelines",
+        "Unit Testing (Jest/JUnit/Pytest)",
+        "Agile/Scrum",
+        "VS Code/IntelliJ IDEA",
+        "Linux/Bash",
+        "Debugging & Profiling",
+        "OOP Principles",
+        "Design Patterns",
+        "AWS Fundamentals",
+        "Code Review",
+        "Technical Documentation",
+        "Problem Solving",
+        "Responsive Design",
+        "Data Structures & Algorithms"
+      ]
+    },
+    {
+      "role": "MERN Stack Developer",
+      "tags": ["mern", "mongodb", "express", "react", "nodejs", "javascript"],
+      "skills": [
+        "MongoDB",
+        "Express.js",
+        "React.js",
+        "Node.js",
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "Mongoose",
+        "REST API Design",
+        "Redux Toolkit",
+        "React Query",
+        "React Hook Form",
+        "JWT Authentication",
+        "Socket.io",
+        "Axios",
+        "Tailwind CSS",
+        "Docker",
+        "AWS (EC2/S3)",
+        "Git & GitHub",
+        "Jest & React Testing Library",
+        "Supertest",
+        "Cloudinary",
+        "Stripe API",
+        "CI/CD Pipelines",
+        "Webpack/Vite",
+        "Agile/Scrum"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "Java Developer",
+      "tags": ["java", "spring", "springboot", "backend", "microservices"],
+      "options": [
+        {
+          "title": "Enterprise Java Developer",
+          "text": "Experienced Java Developer with expertise in Spring Boot and microservices architecture. Delivers scalable, maintainable enterprise applications following clean code principles, SOLID design, and thorough test coverage."
+        },
+        {
+          "title": "Spring Ecosystem Specialist",
+          "text": "Java Developer deeply proficient in the Spring ecosystem including Spring Boot, Spring Security, Spring Cloud, and Spring Batch. Builds secure, high-performance backend systems for enterprise and SaaS products."
+        },
+        {
+          "title": "Microservices Architect",
+          "text": "Java Developer experienced in designing and deploying cloud-native microservices using Spring Cloud, Kafka, and Docker. Transforms monolithic systems into independently scalable services with clear domain boundaries and automated deployment."
+        },
+        {
+          "title": "Performance-Focused Java Engineer",
+          "text": "Java Developer with expertise in JVM performance tuning, concurrency programming, and database optimization. Consistently delivers backend systems that meet demanding throughput and latency requirements in production."
+        },
+        {
+          "title": "Full Backend Java Developer",
+          "text": "Backend-focused Java Developer with end-to-end experience building REST APIs, integrating databases, implementing security, and deploying applications to cloud infrastructure at enterprise scale."
+        },
+        {
+          "title": "Quality-Driven Java Engineer",
+          "text": "Java Developer who treats code quality as a first-class concern — enforcing SonarQube standards, writing thorough JUnit tests, and conducting code reviews that maintain architectural integrity across the team."
+        },
+        {
+          "title": "Enterprise Integration Specialist",
+          "text": "Java Developer experienced in integrating enterprise systems via REST APIs, Apache Kafka, and Spring Integration. Builds reliable, resilient workflows that connect complex business systems with high data fidelity."
+        },
+        {
+          "title": "Agile Java Developer",
+          "text": "Java Developer with proven experience delivering features in agile sprints across enterprise product teams. Strong collaborator who bridges technical implementation with business-driven requirements and user goals."
+        },
+        {
+          "title": "Cloud-Native Java Engineer",
+          "text": "Java Developer proficient in containerizing Spring Boot applications with Docker and deploying to Kubernetes on AWS and Azure. Comfortable with CI/CD pipelines, Helm charts, and infrastructure-as-code practices."
+        },
+        {
+          "title": "Legacy Modernization Specialist",
+          "text": "Java Developer experienced in migrating legacy Java EE and monolithic applications to modern Spring Boot microservices. Delivers modernization projects with zero functional regression and measurable performance improvements."
+        }
+      ]
+    },
+    {
+      "role": "Python Developer",
+      "tags": ["python", "django", "fastapi", "flask", "backend"],
+      "options": [
+        {
+          "title": "Full-Stack Python Developer",
+          "text": "Experienced Python Developer with expertise in Django and FastAPI for building scalable web applications and REST APIs. Proficient in database design, background task processing, and cloud deployment with a strong emphasis on code quality."
+        },
+        {
+          "title": "Django Specialist",
+          "text": "Python Developer with deep expertise in the Django ecosystem including Django REST Framework, Django Admin, and Celery. Builds secure, feature-rich web applications and APIs used by thousands of active users."
+        },
+        {
+          "title": "FastAPI & Async Python Developer",
+          "text": "Python Developer specialized in high-performance asynchronous API development using FastAPI and asyncio. Delivers APIs with exceptional throughput and low latency suitable for demanding production workloads."
+        },
+        {
+          "title": "Python Automation Engineer",
+          "text": "Python Developer skilled in automating complex business workflows, data pipelines, and ETL processes. Consistently reduces manual effort through well-designed Python scripts and Celery-based task queue systems."
+        },
+        {
+          "title": "Data-Driven Python Developer",
+          "text": "Python Developer with strong data engineering skills using Pandas, NumPy, and SQLAlchemy. Bridges the gap between backend development and data processing to deliver insight-driven web applications and APIs."
+        },
+        {
+          "title": "Cloud-Native Python Developer",
+          "text": "Python Developer proficient in deploying and scaling applications on AWS using Lambda, EC2, and container orchestration. Designs Python services that are resilient, cost-efficient, and operationally observable."
+        },
+        {
+          "title": "API Integration Specialist",
+          "text": "Python Developer with extensive experience integrating third-party APIs, payment gateways, and external services into production Django and FastAPI applications with robust error handling and retry logic."
+        },
+        {
+          "title": "Quality-Focused Python Engineer",
+          "text": "Python Developer who prioritizes code quality through type annotations, Pytest coverage, Black formatting, and rigorous code review practices that keep Python codebases maintainable at scale."
+        },
+        {
+          "title": "Agile Python Developer",
+          "text": "Python Developer with proven experience delivering features in agile cross-functional teams. Strong communicator who translates business requirements into clean, well-tested Python code on schedule."
+        },
+        {
+          "title": "Full-Stack Python & React Developer",
+          "text": "Versatile developer combining Python backend expertise with React frontend skills. Delivers complete web products end-to-end, from Django APIs and database design through to responsive React user interfaces."
+        }
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "tags": ["software engineer", "engineering", "backend", "system design"],
+      "options": [
+        {
+          "title": "Versatile Software Engineer",
+          "text": "Software Engineer with broad experience across the full software development lifecycle, from architecture through deployment. Skilled in designing maintainable systems, writing clean code, and collaborating in agile teams to deliver reliable, high-impact products."
+        },
+        {
+          "title": "Systems Thinker & Builder",
+          "text": "Software Engineer with a systems-level mindset who designs for scalability, reliability, and long-term maintainability. Experienced across backend, API, and infrastructure layers with a consistent track record of shipping production-quality software."
+        },
+        {
+          "title": "Problem-Solving Engineer",
+          "text": "Software Engineer with strong fundamentals in data structures, algorithms, and system design. Applies rigorous analytical thinking to solve complex technical problems and deliver optimized, correct solutions under real-world constraints."
+        },
+        {
+          "title": "Full-Lifecycle Engineer",
+          "text": "Software Engineer experienced across the complete software lifecycle: requirements analysis, technical design, implementation, testing, deployment, and operations. Brings end-to-end ownership to every feature and initiative."
+        },
+        {
+          "title": "Quality & Reliability Champion",
+          "text": "Software Engineer committed to code quality, observability, and system reliability. Builds software with thorough test coverage, structured logging, and proactive monitoring that reduces on-call burden and production incidents."
+        },
+        {
+          "title": "Collaborative Team Engineer",
+          "text": "Software Engineer who thrives in cross-functional agile teams. Strong communicator who bridges engineering and product, mentors junior colleagues, and contributes to a healthy, productive engineering culture."
+        },
+        {
+          "title": "Platform & Infrastructure Engineer",
+          "text": "Software Engineer with hands-on experience building platform services, shared libraries, and developer tooling that accelerate delivery across product engineering teams and reduce duplicated effort."
+        },
+        {
+          "title": "Senior Technical Contributor",
+          "text": "Senior Software Engineer with experience leading technical design, driving engineering standards, and delivering complex cross-team initiatives. Combines deep technical skills with the ability to influence and align stakeholders."
+        },
+        {
+          "title": "Distributed Systems Engineer",
+          "text": "Software Engineer experienced in building distributed systems with high availability, fault tolerance, and horizontal scalability. Applies proven patterns for consistency, partition tolerance, and operational observability."
+        },
+        {
+          "title": "Continuous Improvement Engineer",
+          "text": "Software Engineer who continuously improves both the software and the team. Champions clean code, automated testing, CI/CD practices, and blameless post-mortems that raise quality and engineering culture over time."
+        }
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "tags": ["software developer", "development", "programming", "application"],
+      "options": [
+        {
+          "title": "Reliable Application Developer",
+          "text": "Dedicated Software Developer with experience building reliable, maintainable web applications across the full development lifecycle. Skilled in multiple languages and frameworks with a consistent record of delivering features that meet user needs and business goals."
+        },
+        {
+          "title": "Agile Team Developer",
+          "text": "Software Developer with strong experience working in agile cross-functional teams. Comfortable delivering features iteratively, collaborating across disciplines, and adapting quickly to changing requirements and priorities."
+        },
+        {
+          "title": "Full-Cycle Developer",
+          "text": "Software Developer who takes ownership of work from requirement analysis through coding, testing, and deployment. Brings end-to-end accountability to every feature and proactively identifies and resolves issues before they reach production."
+        },
+        {
+          "title": "Quality-Focused Developer",
+          "text": "Software Developer who prioritizes code quality, automated testing, and thorough documentation. Writes clean, readable code that is easy for teams to maintain, extend, and confidently deploy."
+        },
+        {
+          "title": "Multi-Language Developer",
+          "text": "Versatile Software Developer proficient in both frontend and backend technologies. Adapts quickly to new languages, frameworks, and codebases while delivering consistent, high-quality software across each."
+        },
+        {
+          "title": "Problem-Solving Developer",
+          "text": "Software Developer with strong analytical and debugging skills. Breaks down complex technical problems into clear solutions and delivers working software with a methodical, detail-oriented approach."
+        },
+        {
+          "title": "API & Integration Developer",
+          "text": "Software Developer experienced in building and consuming REST APIs, integrating third-party services, and connecting frontend and backend systems into cohesive, functional applications."
+        },
+        {
+          "title": "Growth-Oriented Developer",
+          "text": "Software Developer with a growth mindset who continuously expands technical skills while delivering business value. Receptive to feedback, proactive in learning, and committed to improving code quality sprint over sprint."
+        },
+        {
+          "title": "Startup-Ready Developer",
+          "text": "Software Developer comfortable in fast-moving environments where wearing multiple hats is the norm. Takes initiative, ships quickly, and balances speed with code quality in early-stage product development."
+        },
+        {
+          "title": "Enterprise Application Developer",
+          "text": "Software Developer with experience delivering software in structured enterprise environments. Follows established engineering standards, contributes to technical design, and ensures compliance with security and quality requirements."
+        }
+      ]
+    },
+    {
+      "role": "MERN Stack Developer",
+      "tags": ["mern", "mongodb", "express", "react", "nodejs", "javascript"],
+      "options": [
+        {
+          "title": "MERN Stack Specialist",
+          "text": "Experienced MERN Stack Developer with deep expertise in MongoDB, Express.js, React, and Node.js. Builds complete, production-ready web applications end-to-end with a strong focus on performance, security, and code quality."
+        },
+        {
+          "title": "Full-Stack JavaScript Developer",
+          "text": "Full-Stack Developer specializing in the JavaScript ecosystem with hands-on MERN stack experience. Delivers cohesive applications where the frontend and backend share a consistent language, data model, and development workflow."
+        },
+        {
+          "title": "Real-Time Application Builder",
+          "text": "MERN Stack Developer with expertise in real-time application features using Socket.io and event-driven Node.js. Builds interactive web applications with live data updates, chat systems, and collaborative user workflows."
+        },
+        {
+          "title": "SaaS Product Developer",
+          "text": "MERN Stack Developer experienced in building multi-tenant SaaS products with subscription billing, authentication systems, admin dashboards, and user-facing portals — all delivered within the JavaScript stack."
+        },
+        {
+          "title": "Performance-Focused MERN Developer",
+          "text": "MERN Stack Developer focused on application performance — optimizing MongoDB aggregations, Node.js throughput, and React rendering to deliver fast, smooth user experiences under real production load."
+        },
+        {
+          "title": "MongoDB Data Modeler",
+          "text": "MERN Stack Developer with strong MongoDB expertise including schema design, indexing strategy, and aggregation pipeline development. Ensures data models are optimized for both query performance and application flexibility."
+        },
+        {
+          "title": "Agile MERN Developer",
+          "text": "MERN Stack Developer with proven experience delivering features in fast-paced agile environments. Comfortable owning tasks across the full JavaScript stack from MongoDB schema design to React UI component."
+        },
+        {
+          "title": "React & API Integration Expert",
+          "text": "MERN Stack Developer skilled in building seamless integrations between React frontends and Express backends. Delivers consistent, reliable data flows with clean API contracts and responsive UI state management."
+        },
+        {
+          "title": "Startup Product Developer",
+          "text": "MERN Stack Developer with startup experience who moves quickly without sacrificing code quality. Comfortable making pragmatic technology choices and delivering MVPs that scale as the product and user base grow."
+        },
+        {
+          "title": "Cloud-Deployed MERN Engineer",
+          "text": "MERN Stack Developer proficient in containerizing and deploying full-stack JavaScript applications on AWS and cloud PaaS platforms. Implements CI/CD pipelines that automate testing and delivery across all environments."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "Java Developer",
+      "tags": ["java", "spring", "springboot", "backend", "microservices"],
+      "items": [
+        "Reduced API response time from 450ms to 90ms by refactoring Hibernate queries and adding Redis caching.",
+        "Migrated a Java EE monolith to 8 Spring Boot microservices, reducing deployment cycles from weekly to daily.",
+        "Achieved 99.95% uptime on a critical payment processing service handling $5M+ monthly transactions.",
+        "Improved JVM garbage collection performance reducing application pause times by 65%.",
+        "Cut CI build time from 22 minutes to 7 minutes by parallelizing Maven modules and optimizing test suites.",
+        "Delivered a Spring Batch ETL pipeline processing 10M+ records nightly with zero data loss.",
+        "Reduced database connection pool exhaustion incidents from 12 per month to zero through connection management refactoring.",
+        "Increased unit test coverage from 18% to 82% through a targeted testing sprint across 3 microservices.",
+        "Implemented Kafka event streaming decoupling 4 tightly coupled services and improving team deployment autonomy.",
+        "Resolved a critical memory leak in a Spring Boot service eliminating daily server restarts in production.",
+        "Built a Spring Security implementation that passed enterprise penetration testing with zero critical findings.",
+        "Reduced developer onboarding time from 2 weeks to 3 days by creating starter templates and documentation guides.",
+        "Delivered 20+ Java microservice features across 6 sprints with 100% on-time delivery rate.",
+        "Optimized a slow-running batch job from 4 hours to 35 minutes through parallel processing and indexing.",
+        "Consolidated 3 redundant Java services into a unified API, reducing infrastructure cost by 25%."
+      ]
+    },
+    {
+      "role": "Python Developer",
+      "tags": ["python", "django", "fastapi", "flask", "backend"],
+      "items": [
+        "Reduced Django API response time from 320ms to 75ms through query optimization and Redis caching.",
+        "Built a Celery task queue processing 50,000+ background jobs daily with a 99.5% success rate.",
+        "Automated a data reconciliation workflow saving 15 hours of manual analyst work per week.",
+        "Scaled a FastAPI service to handle 30,000+ concurrent requests without performance degradation.",
+        "Reduced Python test execution time by 60% through Pytest parallelization and fixture optimization.",
+        "Achieved 88% Pytest coverage across a Django monolith that had zero pre-existing tests.",
+        "Cut AWS Lambda cold start time by 55% through package optimization and layer caching.",
+        "Delivered a Python ETL pipeline migrating 8M+ records with 100% data integrity validation.",
+        "Built a web scraping system collecting 500K+ product listings daily with automatic deduplication.",
+        "Integrated Stripe billing into a Django SaaS application processing $300K+ monthly recurring revenue.",
+        "Reduced production bug rate by 45% after introducing type annotations and mypy static analysis.",
+        "Containerized 5 Python microservices reducing environment-specific bugs across dev and production.",
+        "Shipped Django admin customizations that reduced customer support ticket resolution time by 30%.",
+        "Created a Python library used by 4 internal teams, eliminating duplicate code across services.",
+        "Optimized a slow Django ORM query from 8 seconds to 120ms by adding database indexes and rewriting joins."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "tags": ["software engineer", "engineering", "backend", "system design"],
+      "items": [
+        "Reduced system latency by 50% through algorithmic optimization and caching in a high-traffic production service.",
+        "Led a platform migration affecting 12 services, delivering zero-downtime cutover within a 6-week timeline.",
+        "Reduced production incident rate by 40% by introducing distributed tracing and proactive alerting.",
+        "Increased unit and integration test coverage from 30% to 85% across 5 core services.",
+        "Mentored 4 junior engineers who achieved independent feature ownership within 3 months.",
+        "Delivered 3 major platform features on schedule in a 6-month roadmap with zero post-release critical bugs.",
+        "Reduced code review turnaround time by 60% by introducing automated linting, formatting, and static analysis.",
+        "Designed a shared API gateway used by 8 product teams, eliminating duplicated authentication and rate-limiting logic.",
+        "Cut infrastructure spend by 20% by identifying and decommissioning unused cloud resources.",
+        "Resolved a critical data race condition causing intermittent data corruption in a high-concurrency service.",
+        "Built an internal developer portal that reduced service onboarding time from 2 days to 2 hours.",
+        "Shipped a system design that scaled from 1,000 to 100,000 daily active users without architectural changes.",
+        "Established a technical documentation standard adopted by the entire engineering organization.",
+        "Led a security audit identifying and remediating 15 vulnerabilities across 6 production services.",
+        "Drove a technical debt reduction initiative eliminating 35% of legacy code over 2 quarters."
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "tags": ["software developer", "development", "programming", "application"],
+      "items": [
+        "Delivered 3 product features per sprint for 6 consecutive sprints with zero post-release critical defects.",
+        "Reduced application page load time by 35% through frontend optimization and asset compression.",
+        "Fixed 80+ backlogged bugs in 4 weeks, clearing a legacy defect backlog that had accumulated for 18 months.",
+        "Introduced automated testing to a legacy project increasing coverage from 0% to 65% in 8 weeks.",
+        "Reduced manual deployment steps from 12 to 3 by setting up a CI/CD pipeline with automated testing gates.",
+        "Onboarded to a new tech stack and shipped a production feature within the first 3 weeks on the team.",
+        "Improved developer onboarding documentation reducing new joiner setup time from 2 days to 4 hours.",
+        "Identified and resolved a critical performance bottleneck causing 30% of API requests to time out.",
+        "Contributed to a code refactoring effort reducing codebase complexity score by 40% as measured by SonarQube.",
+        "Reduced database query count per page request from 45 to 8 by implementing eager loading and query batching.",
+        "Collaborated with QA to reduce regression testing cycle from 3 days to 4 hours through test automation.",
+        "Shipped an internal tool that saved the operations team 6 hours of manual data entry per week.",
+        "Resolved 15 high-severity production issues during on-call rotation with average resolution time of 22 minutes.",
+        "Migrated 4 legacy REST endpoints to a versioned API schema with backward compatibility maintained throughout.",
+        "Completed 3 online certifications and applied learnings to introduce 2 new productivity improvements to the team."
+      ]
+    },
+    {
+      "role": "MERN Stack Developer",
+      "tags": ["mern", "mongodb", "express", "react", "nodejs", "javascript"],
+      "items": [
+        "Delivered a full MERN stack SaaS product from zero to launch in 10 weeks serving 1,000+ beta users.",
+        "Reduced MongoDB query execution time by 55% by adding compound indexes and rewriting aggregation pipelines.",
+        "Implemented real-time chat using Socket.io across the MERN stack supporting 5,000+ concurrent connections.",
+        "Cut React application bundle size from 2.1MB to 520KB through code splitting and tree shaking.",
+        "Built a Stripe subscription billing system processing $150K+ monthly recurring revenue with zero billing errors.",
+        "Achieved 99.8% API uptime over 12 months after migrating Node.js deployments to a load-balanced cluster.",
+        "Reduced Express API response time by 48% through Redis caching and Mongoose query optimization.",
+        "Delivered 35+ MERN stack features across 8 sprints with zero critical post-release incidents.",
+        "Migrated a jQuery/PHP legacy application to a full MERN stack, improving overall performance by 60%.",
+        "Built a reusable React component library of 50+ components reducing UI development time by 35%.",
+        "Implemented JWT refresh token rotation and device-based session management improving application security posture.",
+        "Achieved 80% test coverage across Express API routes and React components within 6 weeks.",
+        "Reduced server costs by 40% by optimizing Node.js cluster configuration and MongoDB Atlas tier selection.",
+        "Built a real-time admin dashboard tracking 20+ application KPIs updated live without page refreshes.",
+        "Containerized a 4-service MERN application with Docker Compose enabling one-command local environment setup."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "Java Developer",
+      "tags": ["java", "spring", "springboot", "backend", "microservices"],
+      "items": [
+        "Developed a Spring Boot microservices platform for an insurance company with policy management and claims processing.",
+        "Built a real-time event streaming system using Java and Apache Kafka for a financial trading application.",
+        "Created a Spring Batch data migration tool transferring 50M+ legacy records to a new database schema.",
+        "Developed a secure REST API with Spring Security, OAuth2, and RBAC for a healthcare data management system.",
+        "Built a multi-tenant SaaS backend using Spring Boot with schema-per-tenant database isolation.",
+        "Created a Java-based PDF report generation service using Apache PDFBox and Thymeleaf templates.",
+        "Developed an inventory management system with Spring Boot, JPA, and PostgreSQL for a retail client.",
+        "Built a Spring Cloud API gateway with routing, load balancing, circuit breaking, and rate limiting.",
+        "Created a real-time order tracking system using Java WebSockets and Spring for an e-commerce platform.",
+        "Developed a Java microservice processing and validating 100K+ daily financial transactions.",
+        "Built an audit logging system using Spring AOP capturing all data mutations with user attribution.",
+        "Created a Spring Boot integration layer connecting legacy SAP ERP systems with modern REST APIs.",
+        "Developed a notification service using Java and Spring supporting email, SMS, and push notification channels.",
+        "Built a Java-based recommendation engine using collaborative filtering for a content streaming platform.",
+        "Created a Spring Boot admin portal with user management, role assignment, and activity reporting dashboards."
+      ]
+    },
+    {
+      "role": "Python Developer",
+      "tags": ["python", "django", "fastapi", "flask", "backend"],
+      "items": [
+        "Built a Django REST Framework API for a subscription-based SaaS platform with Stripe billing and user management.",
+        "Developed a FastAPI microservice for real-time document processing and OCR extraction from user uploads.",
+        "Created a Python web scraping pipeline aggregating job listings from 20+ career portals into a unified database.",
+        "Built a Celery-powered email marketing automation system with scheduling, segmentation, and analytics.",
+        "Developed a Django-based e-commerce backend with inventory management, order processing, and payment integration.",
+        "Created a Python ETL pipeline transforming raw sensor data from IoT devices into a structured analytics database.",
+        "Built a FastAPI-based ML model serving API delivering predictions for a customer churn detection system.",
+        "Developed a Django admin portal with custom dashboards, user impersonation, and bulk data management tools.",
+        "Created a Python chatbot integration connecting WhatsApp Business API with a Django backend for customer support.",
+        "Built a RESTful API for a healthcare platform with patient records, appointment scheduling, and prescription management.",
+        "Developed a Python-based report generation service producing scheduled PDF reports from PostgreSQL data.",
+        "Created a Python CLI tool automating cloud resource provisioning on AWS using boto3.",
+        "Built a Django CMS for a media company with article publishing, SEO metadata, and CDN image delivery.",
+        "Developed a Python data validation framework enforcing schema rules across 15 incoming third-party data feeds.",
+        "Created a real-time analytics dashboard backend using FastAPI and WebSockets delivering live metric updates."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "tags": ["software engineer", "engineering", "backend", "system design"],
+      "items": [
+        "Designed and built a distributed rate limiting service used across 10 product APIs handling millions of requests daily.",
+        "Developed a feature flag and A/B testing platform enabling safe, incremental feature rollouts across the engineering org.",
+        "Built an internal developer CLI tool streamlining project scaffolding, local setup, and deployment workflows.",
+        "Created a shared observability library integrating structured logging, metrics, and tracing into all company services.",
+        "Designed a high-availability event processing pipeline consuming 50M+ events per day with exactly-once delivery.",
+        "Developed a service mesh configuration using Istio enabling traffic management, circuit breaking, and mTLS.",
+        "Built a data anonymization service processing PII across multiple databases for GDPR compliance requirements.",
+        "Created an automated code quality gate pipeline blocking deployments failing SonarQube or coverage thresholds.",
+        "Designed a cross-region data replication system ensuring disaster recovery RTO under 5 minutes.",
+        "Developed an internal ticketing and workflow automation tool reducing operational toil by 10 hours per week.",
+        "Built a GraphQL federation layer aggregating data from 6 independent microservices into a unified schema.",
+        "Created a performance benchmarking suite comparing API throughput across 3 backend language implementations.",
+        "Developed an async task orchestration platform using event queues for complex multi-step business workflows.",
+        "Built a self-healing infrastructure module using health checks and automated remediation scripts on AWS.",
+        "Designed a schema versioning and migration strategy adopted across 12 database-backed services."
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "tags": ["software developer", "development", "programming", "application"],
+      "items": [
+        "Developed a task management web app with user authentication, project boards, and deadline notifications.",
+        "Built a REST API backend for a mobile application with user profile management and social features.",
+        "Created an internal HR portal with employee records, leave management, and approval workflow automation.",
+        "Developed a booking and reservation system with calendar integration, availability management, and email confirmations.",
+        "Built a CMS allowing non-technical users to manage website content without developer involvement.",
+        "Created a reporting dashboard aggregating operational KPIs from multiple data sources with export functionality.",
+        "Developed an e-learning portal with course enrollment, video content delivery, and progress tracking.",
+        "Built a customer feedback collection platform with surveys, rating flows, and analytics summary pages.",
+        "Created a RESTful microservice for user notification preferences and delivery channel management.",
+        "Developed an internal admin tool for managing product catalog, pricing, and promotional discount codes.",
+        "Built a document management system with upload, version control, tagging, and search functionality.",
+        "Created a webhook integration connecting a SaaS platform to internal Slack and email notification channels.",
+        "Developed a form builder allowing operations teams to create custom data collection forms without writing code.",
+        "Built a basic analytics tracker capturing custom user events and visualizing them on an admin dashboard.",
+        "Created a data export tool generating formatted reports from relational database queries for business stakeholders."
+      ]
+    },
+    {
+      "role": "MERN Stack Developer",
+      "tags": ["mern", "mongodb", "express", "react", "nodejs", "javascript"],
+      "items": [
+        "Built a full-stack MERN e-commerce platform with product management, cart, Stripe checkout, and order tracking.",
+        "Developed a social networking application using MERN stack with post feeds, follow system, and real-time messaging.",
+        "Created a project management tool with Kanban boards, task assignments, deadline tracking, and team collaboration.",
+        "Built a MERN-based job portal with employer and candidate dashboards, job posting, and application management.",
+        "Developed a real-time chat application using MERN and Socket.io with rooms, file sharing, and read receipts.",
+        "Created a blogging platform with rich text editor, category management, SEO metadata, and comment system.",
+        "Built a multi-vendor marketplace with seller onboarding, product listings, and commission-based billing.",
+        "Developed a recipe sharing community with ingredient search, rating system, and personalized recommendations.",
+        "Created a MERN-based resume builder with drag-and-drop sections, template selection, and PDF export.",
+        "Built a subscription-based SaaS dashboard with usage analytics, plan management, and billing portal.",
+        "Developed a fitness tracking app with workout logging, progress charts, and goal-setting functionality.",
+        "Created a MERN event management platform with ticketing, QR code check-in, and attendee management.",
+        "Built a real estate listing portal with map integration, property search filters, and agent contact forms.",
+        "Developed a collaborative whiteboard app using MERN and Socket.io with real-time drawing synchronization.",
+        "Created a school management system with student records, grade management, attendance tracking, and parent portal."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "Java Developer",
+      "tags": ["java", "spring", "springboot", "backend", "microservices"],
+      "items": [
+        "Oracle Certified Professional: Java SE 17 Developer",
+        "Oracle Certified Associate: Java SE 11 Developer",
+        "Spring Professional Certification (VMware/Broadcom)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Certified Kubernetes Application Developer (CKAD)",
+        "Docker Certified Associate (DCA)",
+        "Java Microservices with Spring Boot and Spring Cloud (Udemy – in28Minutes)",
+        "Java Multithreading, Concurrency & Performance Optimization (Udemy)",
+        "Apache Kafka for Java Developers (Udemy)",
+        "SonarQube for Java Developers – Code Quality & Security (Udemy)"
+      ]
+    },
+    {
+      "role": "Python Developer",
+      "tags": ["python", "django", "fastapi", "flask", "backend"],
+      "items": [
+        "Python Institute PCEP – Certified Entry-Level Python Programmer",
+        "Python Institute PCAP – Certified Associate Python Programmer",
+        "Django REST Framework – Building APIs with Django (Udemy)",
+        "FastAPI – The Complete Course (Udemy)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Docker and Kubernetes: The Complete Guide (Udemy)",
+        "Complete Python Bootcamp: Zero to Hero (Udemy – Jose Portilla)",
+        "Python for Data Science and Machine Learning Bootcamp (Udemy)",
+        "Testing Python Applications with Pytest (Pluralsight)",
+        "Celery with Django: Background Tasks and Async Jobs (Udemy)"
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "tags": ["software engineer", "engineering", "backend", "system design"],
+      "items": [
+        "AWS Certified Solutions Architect – Associate",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Google Cloud Professional Cloud Architect",
+        "Certified Kubernetes Application Developer (CKAD)",
+        "Docker Certified Associate (DCA)",
+        "Microsoft Certified: Azure Developer Associate",
+        "Clean Code and Software Design Principles (Pluralsight)",
+        "Grokking the System Design Interview (Educative.io)",
+        "Data Structures and Algorithms Specialization (Coursera – UC San Diego)",
+        "The Complete Software Engineer Roadmap (Udemy)"
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "tags": ["software developer", "development", "programming", "application"],
+      "items": [
+        "AWS Certified Cloud Practitioner (Amazon Web Services)",
+        "Meta Back-End Developer Professional Certificate (Coursera)",
+        "The Complete Web Developer Bootcamp (Udemy – Angela Yu)",
+        "JavaScript Algorithms and Data Structures (freeCodeCamp)",
+        "Responsive Web Design Certification (freeCodeCamp)",
+        "Introduction to Software Engineering (IBM – Coursera)",
+        "Git & GitHub for Beginners – The Complete Course (Udemy)",
+        "Agile with Atlassian Jira (Atlassian – Coursera)",
+        "SQL and Database Design A-Z (Udemy)",
+        "Docker for Beginners: From Zero to Docker in Production (Udemy)"
+      ]
+    },
+    {
+      "role": "MERN Stack Developer",
+      "tags": ["mern", "mongodb", "express", "react", "nodejs", "javascript"],
+      "items": [
+        "MERN Stack – React Node from Scratch (Udemy – Ryan Dhungel)",
+        "Node.js, Express, MongoDB & More: The Complete Bootcamp (Udemy – Jonas Schmedtmann)",
+        "React – The Complete Guide (Udemy – Maximilian Schwarzmüller)",
+        "MongoDB Certified Developer Associate",
+        "JavaScript Algorithms and Data Structures (freeCodeCamp)",
+        "Meta Front-End Developer Professional Certificate (Coursera)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Docker and Kubernetes: The Complete Guide (Udemy)",
+        "Full-Stack Web Development with React Specialization (Coursera)",
+        "Node.js Application Developer Certification (OpenJS Foundation)"
+      ]
+    }
+  ]
+}

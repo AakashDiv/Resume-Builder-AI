@@ -87,10 +87,10 @@ function PlatformToggle({ platform, selected, onToggle }) {
         border: `1px solid ${on ? meta.color : "var(--border)"}`,
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: 11, fontWeight: 800,
-        color: on ? "#fff" : "var(--t3)", fontFamily: "Sora, sans-serif",
+        color: on ? "#fff" : "var(--t3)", fontFamily: "Inter, Manrope, sans-serif",
       }}>{meta.icon}</div>
       <div style={{ minWidth: 0 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: on ? "var(--t1)" : "var(--t2)", fontFamily: "Sora, sans-serif", lineHeight: 1.2 }}>{platform}</div>
+        <div style={{ fontSize: 13, fontWeight: 700, color: on ? "var(--t1)" : "var(--t2)", fontFamily: "Inter, Manrope, sans-serif", lineHeight: 1.2 }}>{platform}</div>
         <div style={{ fontSize: 10, color: on ? meta.color : "var(--t3)", marginTop: 1 }}>{meta.desc}</div>
       </div>
       <div style={{
@@ -116,7 +116,7 @@ function LoadingState() {
         }} />
       </div>
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontSize: 15, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif", marginBottom: 6 }}>Scraping live jobs…</p>
+        <p style={{ fontSize: 15, fontWeight: 700, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif", marginBottom: 6 }}>Scraping live jobs…</p>
         <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.6, maxWidth: 300 }}>
           JSearch API is fast (seconds). If Python fallback runs, it may take 1–2 minutes. Hang tight!
         </p>
@@ -136,7 +136,7 @@ function EmptyState({ hasSearched }) {
   if (!hasSearched) return (
     <div style={{ padding: "56px 24px", textAlign: "center" }}>
       <div style={{ fontSize: 48, marginBottom: 16 }}>🔎</div>
-      <p style={{ fontSize: 16, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif", marginBottom: 8 }}>
+      <p style={{ fontSize: 16, fontWeight: 700, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif", marginBottom: 8 }}>
         Ready to find your next role?
       </p>
       <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.7, maxWidth: 340, margin: "0 auto" }}>
@@ -181,7 +181,7 @@ function SummaryStats({ summary, count }) {
           borderRadius: 12, padding: "12px 14px", textAlign: "center"
         }}>
           <div style={{ fontSize: 18, marginBottom: 4 }}>{s.icon}</div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: "var(--t1)", fontFamily: "Sora, sans-serif" }}>{s.val}</div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif" }}>{s.val}</div>
           <div style={{ fontSize: 10, color: "var(--t2)", marginTop: 2, fontWeight: 500 }}>{s.label}</div>
         </div>
       ))}
@@ -209,14 +209,14 @@ function JobCard({ job, index }) {
         width: 40, height: 40, borderRadius: 10, flexShrink: 0,
         background: `${plColor}18`, border: `1px solid ${plColor}35`,
         display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: 12, fontWeight: 800, color: plColor, fontFamily: "Sora, sans-serif"
+        fontSize: 12, fontWeight: 800, color: plColor, fontFamily: "Inter, Manrope, sans-serif"
       }}>{plIcon}</div>
 
       {/* Main info */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3, flexWrap: "wrap" }}>
           <span style={{
-            fontSize: 14, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif",
+            fontSize: 14, fontWeight: 700, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif",
             overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 280
           }}>{job.title || "Untitled Role"}</span>
           {date && (
@@ -351,7 +351,7 @@ export default function JobSearchPage() {
         }}>
           <div style={{ marginBottom: 20 }}>
             <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: "var(--cyan)", marginBottom: 6 }}>JOB SCRAPER</p>
-            <h3 style={{ fontSize: 17, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 4 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 4 }}>
               Smart Job Search
             </h3>
             <p style={{ fontSize: 11, color: "var(--t3)", lineHeight: 1.5 }}>
@@ -438,12 +438,12 @@ export default function JobSearchPage() {
             disabled={loading || !filters.platforms.length}
             style={{
               width: "100%", padding: "12px", borderRadius: 11, fontSize: 14,
-              fontWeight: 800, fontFamily: "Sora, sans-serif", cursor: (loading || !filters.platforms.length) ? "not-allowed" : "pointer",
-              background: "linear-gradient(135deg, #06b6d4, #0891b2)",
+              fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", cursor: (loading || !filters.platforms.length) ? "not-allowed" : "pointer",
+              background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
               border: "none", color: "#fff",
               opacity: (loading || !filters.platforms.length) ? 0.55 : 1,
               marginBottom: 8, transition: "all 0.2s",
-              boxShadow: (!loading && filters.platforms.length) ? "0 4px 20px rgba(34,211,238,0.25)" : "none",
+              boxShadow: (!loading && filters.platforms.length) ? "0 4px 20px rgba(37,99,235,0.28)" : "none",
             }}
           >
             {loading ? "Searching…" : "🔍 Search Jobs"}
@@ -474,7 +474,7 @@ export default function JobSearchPage() {
             display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10,
           }}>
             <div>
-              <h4 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
+              <h4 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
                 {success ? `${jobs.length} Jobs Found` : "Job Results"}
               </h4>
               <p style={{ fontSize: 11, color: "var(--t3)" }}>
@@ -515,7 +515,7 @@ export default function JobSearchPage() {
                 style={{
                   padding: "7px 12px", borderRadius: 9, fontSize: 12, fontWeight: 700,
                   textDecoration: "none", transition: "all 0.15s",
-                  background: downloadPath ? "linear-gradient(135deg, #06b6d4, #0891b2)" : "var(--bg-card2)",
+                  background: downloadPath ? "linear-gradient(135deg, #2563EB, #1d4ed8)" : "var(--bg-card2)",
                   border: downloadPath ? "none" : "1px solid var(--border)",
                   color: downloadPath ? "#fff" : "var(--t3)",
                   pointerEvents: downloadPath ? "auto" : "none",

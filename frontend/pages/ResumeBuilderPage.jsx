@@ -29,6 +29,7 @@ import {
 } from "react-icons/fa6";
 import TemplateThumbnail from "../components/TemplateThumbnail.jsx";
 import DesignableResumePreview from "../components/ResumePdf/common/DesignableResumePreview.jsx";
+import ResumeUploadModal from "../components/ResumeUploadModal.jsx";
 import { getTemplateById, resumeTemplates } from "../data/resumeTemplates.js";
 import { useResumeBuilder } from "../context/ResumeBuilderContext.jsx";
 import {
@@ -661,6 +662,7 @@ function getTemplateColorDefaults(template) {
   };
 }
 const ADDITIONAL_PRESET_SECTIONS = [
+  { key: "projects", title: "Projects", defaultItems: ["Project Name | Full Stack | 2026 | Brief description of what you built and the problem it solved."] },
   { key: "languages", title: "Languages", defaultItems: ["English"] },
   { key: "websites_social", title: "Websites & Social Links", defaultItems: ["Portfolio: https://"] },
   { key: "activities", title: "Activities", defaultItems: ["Volunteer / extracurricular activity"] },
@@ -819,6 +821,7 @@ export default function ResumeBuilderPage() {
   const [downloading, setDownloading] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
   const initialTemplate = useMemo(() => getTemplateById(searchParams.get("template")), [searchParams]);
   const initialColorDefaults = useMemo(() => getTemplateColorDefaults(initialTemplate), [initialTemplate]);
   const [designSettings, setDesignSettings] = useState({
@@ -1136,7 +1139,7 @@ export default function ResumeBuilderPage() {
                         <span className="block text-[10px] font-semibold text-slate-400">{done ? "Done" : active ? "In progress" : "Pending"}</span>
                       </span>
                     </span>
-                    <span className={`text-xs ${done ? "text-emerald-600" : active ? "text-brand-600" : "text-slate-400"}`}>
+                    <span className={`text-xs ${done ? "text-emerald-600" : active ? "text-blue-600" : "text-slate-400"}`}>
                       {done ? <FaCircleCheck aria-label="Complete" /> : active ? <FaChevronRight aria-label="Current" /> : <FaCircle aria-label="Not started" />}
                     </span>
                   </>
@@ -1158,7 +1161,7 @@ export default function ResumeBuilderPage() {
               <span className="text-xs font-bold text-slate-500">{selectedTemplate.category}</span>
             </div>
             <p className="mt-2 text-xs font-bold leading-5 text-slate-500">{selectedTemplate.name}</p>
-            <button type="button" onClick={() => window.location.assign("/templates")} className="mt-2 text-xs font-black text-brand-600">Change</button>
+            <button type="button" onClick={() => window.location.assign("/templates")} className="mt-2 text-xs font-black text-blue-600">Change</button>
           </div>
         ) : null}
       </aside>
@@ -1182,6 +1185,13 @@ export default function ResumeBuilderPage() {
             </div>
           </div>
           <div className="premium-toolbar">
+            <button
+              type="button"
+              onClick={() => setIsUploadOpen(true)}
+              className="premium-ghost-button"
+            >
+              Upload Resume
+            </button>
             <button
               type="button"
               onClick={fillDemoData}
@@ -1377,6 +1387,12 @@ export default function ResumeBuilderPage() {
           </div>
         </div>
       ) : null}
+
+      <ResumeUploadModal
+        open={isUploadOpen}
+        onClose={() => setIsUploadOpen(false)}
+        templateId={selectedTemplateId}
+      />
     </div>
   );
 }
@@ -1623,7 +1639,7 @@ function renderStepForm(step, data, actions) {
                 <select
                   value={item.degree || ""}
                   onChange={(event) => actions.updateEducation(index, "degree", event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base font-normal text-slate-900 outline-none focus:border-brand-500"
+                  className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base font-normal text-slate-900 outline-none focus:border-blue-500"
                 >
                   <option value="">Select degree</option>
                   {DEGREE_OPTIONS.map((degree) => (
@@ -1653,7 +1669,7 @@ function renderStepForm(step, data, actions) {
                       )
                     }
                     disabled={item.currentlyStudying}
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 outline-none focus:border-brand-500 disabled:opacity-60"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 outline-none focus:border-blue-500 disabled:opacity-60"
                   >
                     <option value="">Month</option>
                     {MONTH_OPTIONS.map((month) => (
@@ -1672,7 +1688,7 @@ function renderStepForm(step, data, actions) {
                       )
                     }
                     disabled={item.currentlyStudying}
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 outline-none focus:border-brand-500 disabled:opacity-60"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 outline-none focus:border-blue-500 disabled:opacity-60"
                   >
                     <option value="">Year</option>
                     {Array.from({ length: 70 }, (_, i) => String(1990 + i)).map((year) => (
@@ -2164,7 +2180,7 @@ function ExperienceBulletComposer({ jobTitle, headline, value, onChange }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={jobTitle ? `Try: ${jobTitle}` : "e.g. Front End Developer"}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500"
           />
 
           <div className="mt-3 max-h-64 space-y-2 overflow-auto pr-1">
@@ -2319,7 +2335,7 @@ function SkillsComposer({ value, onChange, headline }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="e.g. frontend, communication, testing"
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500"
           />
 
           <div className="mt-3 max-h-64 space-y-2 overflow-auto pr-1">
@@ -2486,12 +2502,157 @@ function AdditionalSuggestionPanel({ sectionTitle, headline, onAdd }) {
   );
 }
 
+function ProjectPrewritePanel({ headline, onAdd, onRemove, onClose }) {
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [addedIndices, setAddedIndices] = useState(new Set());
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    fetchResumeSuggestions({ type: "projects", q: headline || "" })
+      .then((data) => {
+        if (!active) return;
+        if (Array.isArray(data?.projects)) setSuggestions(data.projects);
+        setLoading(false);
+      })
+      .catch(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, [headline]);
+
+  function handleAdd(item, i) {
+    onAdd(item);
+    setAddedIndices((prev) => new Set([...prev, i]));
+  }
+
+  function handleRemove(item, i) {
+    onRemove(item);
+    setAddedIndices((prev) => { const next = new Set(prev); next.delete(i); return next; });
+  }
+
+  return (
+    <div className="mt-2 rounded-lg border border-indigo-200 bg-indigo-50/40 p-3">
+      <div className="mb-2 flex items-center justify-between">
+        <p className="text-xs font-semibold text-slate-700">
+          Prewrite suggestions <span className="font-normal text-slate-400">— click + to add multiple</span>
+        </p>
+        <button type="button" onClick={onClose} className="text-xs text-slate-400 hover:text-slate-600">✕ Close</button>
+      </div>
+      {loading ? (
+        <p className="py-1 text-xs text-slate-400">Loading suggestions…</p>
+      ) : suggestions.length ? (
+        <div className="max-h-52 space-y-1.5 overflow-y-auto pr-1">
+          {suggestions.map((item, i) => {
+            const added = addedIndices.has(i);
+            return (
+              <div key={i} className={`flex items-start gap-2 rounded-lg border p-2 transition-colors ${added ? "border-emerald-200 bg-emerald-50" : "border-slate-200 bg-white"}`}>
+                {added ? (
+                  <button
+                    type="button"
+                    onClick={() => handleRemove(item, i)}
+                    className="mt-0.5 shrink-0 rounded-md border border-red-200 bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600 hover:bg-red-100"
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleAdd(item, i)}
+                    className="mt-0.5 shrink-0 rounded-md bg-blue-600 px-2.5 py-0.5 text-xs font-bold text-white hover:bg-blue-700"
+                  >
+                    +
+                  </button>
+                )}
+                <p className={`text-xs leading-relaxed ${added ? "text-emerald-800" : "text-slate-700"}`}>{item}</p>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="py-1 text-xs text-slate-400">No suggestions available.</p>
+      )}
+    </div>
+  );
+}
+
+const CERT_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function isCertSection(section) {
+  const title = String(section?.title || "").toLowerCase();
+  return title.includes("cert") || title.includes("licens");
+}
+
+function parseCertItem(str) {
+  const parts = String(str || "").split(" | ").map((p) => p.trim());
+  const [name = "", issuer = "", dateStr = "", credentialId = "", credentialUrl = ""] = parts;
+  const [issueMonth = "", issueYear = ""] = dateStr.split(" ");
+  return { name, issuer, issueMonth, issueYear, credentialId, credentialUrl };
+}
+
+function serializeCertItem(cert) {
+  const name = String(cert.name || "").trim();
+  if (!name) return "";
+  const issuer = String(cert.issuer || "").trim();
+  const date = [cert.issueMonth, cert.issueYear].filter(Boolean).join(" ");
+  const credId = String(cert.credentialId || "").trim();
+  const credUrl = String(cert.credentialUrl || "").trim();
+  const parts = [name];
+  if (issuer) parts.push(issuer);
+  if (date) parts.push(date);
+  if (credId) parts.push(credId);
+  if (credUrl) parts.push(credUrl);
+  return parts.join(" | ");
+}
+
+const EMPTY_CERT = { name: "", issuer: "", issueMonth: "", issueYear: "", credentialId: "", credentialUrl: "" };
+
+const PROJECT_TYPE_OPTIONS = [
+  "Full Stack", "Frontend", "Backend", "Mobile App", "Desktop App",
+  "AI / ML", "Data Science", "DevOps / Cloud", "API / Microservice", "Other"
+];
+
+function isProjectSection(section) {
+  const title = String(section?.title || "").toLowerCase();
+  return title.includes("project");
+}
+
+function parseProjectItem(str) {
+  // format: "Name | Type | Year | Description | URL | TechStack"
+  const parts = String(str || "").split(" | ").map((p) => p.trim());
+  const [name = "", type = "", year = "", description = "", url = "", techStack = ""] = parts;
+  return { name, type, year, description, url, techStack };
+}
+
+function serializeProjectItem(project) {
+  const name = String(project.name || "").trim();
+  if (!name) return "";
+  const type = String(project.type || "").trim();
+  const year = String(project.year || "").trim();
+  const rawDesc = String(project.description || "").trim();
+  // Strip HTML tags to plain text so PDF templates receive clean text
+  const description = rawDesc.includes("<") ? extractPlainText(rawDesc) : rawDesc;
+  const url = String(project.url || "").trim();
+  const techStack = String(project.techStack || "").trim();
+  // Keep 4 core fields in fixed positions for PDF template compatibility
+  const parts = [name, type, year, description];
+  if (url || techStack) {
+    parts.push(url);
+    parts.push(techStack);
+  }
+  return parts.join(" | ");
+}
+
+const EMPTY_PROJECT = { name: "", type: "", year: "", description: "", url: "", techStack: "" };
+
 function AdditionalSectionsEditor({ additional, onChange, headline }) {
   const sections = getAdditionalSections(additional);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedPresetKeys, setSelectedPresetKeys] = useState([]);
   const [customSectionName, setCustomSectionName] = useState("");
   const [editingSection, setEditingSection] = useState(null);
+  const [editingCerts, setEditingCerts] = useState(null);
+  const [editingProjects, setEditingProjects] = useState(null);
+  const [prewriteOpenIndex, setPrewriteOpenIndex] = useState(null);
 
   function updateSections(nextSections) {
     onChange("sections", nextSections);
@@ -2558,6 +2719,67 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
     setEditingSection(null);
   }
 
+  function openEditCertSection(section, withNew = false) {
+    const items = Array.isArray(section.items) ? section.items : [];
+    const certItems = items.map(parseCertItem).filter((c) => c.name);
+    if (withNew || !certItems.length) certItems.push({ ...EMPTY_CERT });
+    setEditingCerts({
+      id: section.id,
+      title: section.title || "",
+      certs: certItems
+    });
+  }
+
+  function handleSaveCerts() {
+    if (!editingCerts) return;
+    const cleaned = {
+      id: editingCerts.id,
+      title: String(editingCerts.title || "").trim() || "Certifications & Licenses",
+      items: editingCerts.certs.map(serializeCertItem).filter(Boolean)
+    };
+    updateSections(sections.map((s) => (s.id === cleaned.id ? cleaned : s)));
+    setEditingCerts(null);
+  }
+
+  function updateCertField(index, field, value) {
+    setEditingCerts((prev) => {
+      const next = [...prev.certs];
+      next[index] = { ...next[index], [field]: value };
+      return { ...prev, certs: next };
+    });
+  }
+
+  function openEditProjectSection(section, withNew = false) {
+    const items = Array.isArray(section.items) ? section.items : [];
+    const projectItems = items.map(parseProjectItem).filter((p) => p.name);
+    if (withNew || !projectItems.length) projectItems.push({ ...EMPTY_PROJECT });
+    setEditingProjects({
+      id: section.id,
+      title: section.title || "",
+      projects: projectItems
+    });
+  }
+
+  function handleSaveProjects() {
+    if (!editingProjects) return;
+    const cleaned = {
+      id: editingProjects.id,
+      title: String(editingProjects.title || "").trim() || "Projects",
+      items: editingProjects.projects.map(serializeProjectItem).filter(Boolean)
+    };
+    updateSections(sections.map((s) => (s.id === cleaned.id ? cleaned : s)));
+    setEditingProjects(null);
+    setPrewriteOpenIndex(null);
+  }
+
+  function updateProjectField(index, field, value) {
+    setEditingProjects((prev) => {
+      const next = [...prev.projects];
+      next[index] = { ...next[index], [field]: value };
+      return { ...prev, projects: next };
+    });
+  }
+
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
@@ -2580,25 +2802,107 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
             <article key={section.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
               <div className="p-4">
                 <h4 className="text-xl font-bold text-slate-900">{section.title || "Additional Section"}</h4>
-                {Array.isArray(section.items) && section.items.some((item) => String(item || "").trim()) ? (
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
-                    {section.items.filter((item) => String(item || "").trim()).map((item, index) => (
-                      <li key={`${section.id}-${index}`}>{item}</li>
-                    ))}
-                  </ul>
+                {isCertSection(section) ? (
+                  Array.isArray(section.items) && section.items.some((item) => String(item || "").trim()) ? (
+                    <div className="mt-3 space-y-2">
+                      {section.items.filter((item) => String(item || "").trim()).map((item, index) => {
+                        const cert = parseCertItem(item);
+                        return (
+                          <div key={`${section.id}-${index}`} className="flex items-start gap-3 rounded-lg border border-slate-100 bg-slate-50/60 p-3">
+                            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-slate-200 bg-white">
+                              <FaCircleCheck size={16} className="text-blue-500" />
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-sm font-semibold text-slate-900">{cert.name}</p>
+                              {cert.issuer && <p className="text-xs text-slate-600">{cert.issuer}</p>}
+                              {(cert.issueMonth || cert.issueYear) && (
+                                <p className="text-xs text-slate-500">Issued {[cert.issueMonth, cert.issueYear].filter(Boolean).join(" ")}</p>
+                              )}
+                              {cert.credentialId && (
+                                <p className="mt-0.5 truncate text-xs text-slate-400">ID: {cert.credentialId}</p>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="mt-2 text-sm text-slate-500">No certifications added yet.</p>
+                  )
+                ) : isProjectSection(section) ? (
+                  Array.isArray(section.items) && section.items.some((item) => String(item || "").trim()) ? (
+                    <div className="mt-3 space-y-2">
+                      {section.items.filter((item) => String(item || "").trim()).map((item, index) => {
+                        const proj = parseProjectItem(item);
+                        return (
+                          <div key={`${section.id}-${index}`} className="rounded-lg border border-slate-100 bg-slate-50/60 p-3">
+                            <div className="flex items-start justify-between gap-2">
+                              <p className="text-sm font-semibold text-slate-900">{proj.name}</p>
+                              {proj.url && (
+                                <span className="shrink-0 truncate text-xs text-blue-600">{proj.url}</span>
+                              )}
+                            </div>
+                            {(proj.type || proj.year) && (
+                              <p className="mt-0.5 text-xs text-slate-500">
+                                {[proj.type, proj.year].filter(Boolean).join(" • ")}
+                              </p>
+                            )}
+                            {proj.description && (
+                              <p className="mt-1 line-clamp-2 text-xs text-slate-600">{proj.description}</p>
+                            )}
+                            {proj.techStack && (
+                              <p className="mt-1 text-xs text-slate-400">Tech: {proj.techStack}</p>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="mt-2 text-sm text-slate-500">No projects added yet.</p>
+                  )
                 ) : (
-                  <p className="mt-2 text-sm text-slate-500">No details added yet.</p>
+                  Array.isArray(section.items) && section.items.some((item) => String(item || "").trim()) ? (
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
+                      {section.items.filter((item) => String(item || "").trim()).map((item, index) => (
+                        <li key={`${section.id}-${index}`}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-2 text-sm text-slate-500">No details added yet.</p>
+                  )
                 )}
               </div>
               <div className="flex items-center justify-between border-t border-slate-200 bg-slate-50 px-4 py-2">
                 <p className="text-sm text-emerald-700">Looks good</p>
                 <div className="flex items-center gap-3 text-xs font-semibold">
-                  <button type="button" onClick={() => openEditSection(section, true)} className="builder-action-badge is-add is-compact">
-                    Add
-                  </button>
-                  <button type="button" onClick={() => openEditSection(section)} className="builder-action-badge is-edit is-compact">
-                    Edit
-                  </button>
+                  {isCertSection(section) ? (
+                    <>
+                      <button type="button" onClick={() => openEditCertSection(section, true)} className="builder-action-badge is-add is-compact">
+                        Add
+                      </button>
+                      <button type="button" onClick={() => openEditCertSection(section)} className="builder-action-badge is-edit is-compact">
+                        Edit
+                      </button>
+                    </>
+                  ) : isProjectSection(section) ? (
+                    <>
+                      <button type="button" onClick={() => openEditProjectSection(section, true)} className="builder-action-badge is-add is-compact">
+                        Add
+                      </button>
+                      <button type="button" onClick={() => openEditProjectSection(section)} className="builder-action-badge is-edit is-compact">
+                        Edit
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button type="button" onClick={() => openEditSection(section, true)} className="builder-action-badge is-add is-compact">
+                        Add
+                      </button>
+                      <button type="button" onClick={() => openEditSection(section)} className="builder-action-badge is-edit is-compact">
+                        Edit
+                      </button>
+                    </>
+                  )}
                   <button type="button" onClick={() => handleDeleteSection(section.id)} className="builder-action-badge is-remove is-compact">
                     Delete
                   </button>
@@ -2636,7 +2940,7 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
                     key={preset.key}
                     onClick={() => togglePreset(preset.key)}
                     className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-xl font-semibold ${
-                      checked ? "border-brand-500 bg-brand-50 text-brand-700" : "border-slate-300 text-slate-800 hover:bg-slate-50"
+                      checked ? "border-blue-500 bg-blue-50 text-blue-700" : "border-slate-300 text-slate-800 hover:bg-slate-50"
                     }`}
                   >
                     <span className="grid h-6 w-6 place-items-center rounded border border-slate-400 text-sm">
@@ -2654,18 +2958,18 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
                 value={customSectionName}
                 onChange={(event) => setCustomSectionName(event.target.value)}
                 placeholder="e.g. Publications, Projects, Achievements"
-                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-500"
+                className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500"
               />
             </div>
 
             <div className="mt-7 flex items-center justify-between">
-              <button type="button" onClick={() => setIsAddModalOpen(false)} className="text-2xl font-bold text-brand-600 hover:text-brand-700">
+              <button type="button" onClick={() => setIsAddModalOpen(false)} className="text-2xl font-bold text-blue-600 hover:text-blue-700">
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleAddSections}
-                className="rounded-full bg-brand-600 px-10 py-3 text-2xl font-bold text-white hover:bg-brand-700"
+                className="rounded-full bg-blue-600 px-10 py-3 text-2xl font-bold text-white hover:bg-blue-700"
               >
                 Done
               </button>
@@ -2696,7 +3000,7 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
               <input
                 value={editingSection.title}
                 onChange={(event) => setEditingSection((prev) => ({ ...prev, title: event.target.value }))}
-                className="mb-4 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-900 outline-none focus:border-brand-500"
+                className="mb-4 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-900 outline-none focus:border-blue-500"
               />
 
               <div className="space-y-2">
@@ -2711,7 +3015,7 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
                           return { ...prev, items: next };
                         })
                       }
-                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-900 outline-none focus:border-brand-500"
+                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-900 outline-none focus:border-blue-500"
                     />
                     <button
                       type="button"
@@ -2747,15 +3051,334 @@ function AdditionalSectionsEditor({ additional, onChange, headline }) {
             </div>
 
             <div className="mt-7 flex items-center justify-between">
-              <button type="button" onClick={() => setEditingSection(null)} className="text-2xl font-bold text-brand-600 hover:text-brand-700">
+              <button type="button" onClick={() => setEditingSection(null)} className="text-2xl font-bold text-blue-600 hover:text-blue-700">
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleSaveEditSection}
-                className="rounded-full bg-brand-600 px-10 py-3 text-2xl font-bold text-white hover:bg-brand-700"
+                className="rounded-full bg-blue-600 px-10 py-3 text-2xl font-bold text-white hover:bg-blue-700"
               >
                 Done
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {editingCerts ? (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/40 p-4 backdrop-blur-sm">
+          <div className="mx-auto my-4 w-full max-w-xl rounded-2xl bg-white p-6 shadow-2xl">
+            <div className="mb-1 flex items-center justify-between">
+              <h3 className="text-2xl font-extrabold text-slate-900">{editingCerts.title || "Certifications & Licenses"}</h3>
+              <button
+                type="button"
+                onClick={() => setEditingCerts(null)}
+                className="grid h-8 w-8 place-items-center rounded-lg border border-slate-300 text-slate-500 hover:bg-slate-50"
+                aria-label="Close"
+              >
+                <FaXmark />
+              </button>
+            </div>
+            <p className="mb-5 text-sm text-slate-500">Add your certifications and licenses. The issuing organization and date will appear on your resume.</p>
+
+            <div className="space-y-4">
+              {editingCerts.certs.map((cert, index) => (
+                <div key={index} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <div className="mb-3 flex items-center justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Certification {index + 1}</p>
+                    {editingCerts.certs.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => setEditingCerts((prev) => ({ ...prev, certs: prev.certs.filter((_, i) => i !== index) }))}
+                        className="text-xs font-semibold text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Name *</label>
+                      <input
+                        value={cert.name}
+                        onChange={(e) => updateCertField(index, "name", e.target.value)}
+                        placeholder="e.g. AWS Certified Developer – Associate"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Issuing Organization</label>
+                      <input
+                        value={cert.issuer}
+                        onChange={(e) => updateCertField(index, "issuer", e.target.value)}
+                        placeholder="e.g. Amazon Web Services, Udemy, Coursera"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="mb-1 block text-xs font-semibold text-slate-700">Issue Month</label>
+                        <select
+                          value={cert.issueMonth}
+                          onChange={(e) => updateCertField(index, "issueMonth", e.target.value)}
+                          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                        >
+                          <option value="">Month</option>
+                          {CERT_MONTHS.map((m) => (
+                            <option key={m} value={m}>{m}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-xs font-semibold text-slate-700">Issue Year</label>
+                        <input
+                          value={cert.issueYear}
+                          onChange={(e) => updateCertField(index, "issueYear", e.target.value)}
+                          placeholder="e.g. 2025"
+                          maxLength={4}
+                          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Credential ID <span className="font-normal text-slate-400">(optional)</span></label>
+                      <input
+                        value={cert.credentialId}
+                        onChange={(e) => updateCertField(index, "credentialId", e.target.value)}
+                        placeholder="e.g. UC-805e5dfb-4688-4e9c-bf6c-4b55e7dca93a"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Credential URL <span className="font-normal text-slate-400">(optional)</span></label>
+                      <input
+                        value={cert.credentialUrl}
+                        onChange={(e) => updateCertField(index, "credentialUrl", e.target.value)}
+                        placeholder="e.g. ude.my/UC-805e5dfb-..."
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setEditingCerts((prev) => ({ ...prev, certs: [...prev.certs, { ...EMPTY_CERT }] }))}
+              className="builder-action-badge is-add mt-4"
+            >
+              + Add another certification
+            </button>
+
+            <AdditionalSuggestionPanel
+              sectionTitle={editingCerts.title}
+              headline={headline}
+              onAdd={(item) =>
+                setEditingCerts((prev) => ({
+                  ...prev,
+                  certs: [...prev.certs, { ...EMPTY_CERT, name: item }]
+                }))
+              }
+            />
+
+            <div className="mt-6 flex items-center justify-between">
+              <button type="button" onClick={() => setEditingCerts(null)} className="text-lg font-bold text-blue-600 hover:text-blue-700">
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveCerts}
+                className="rounded-full bg-blue-600 px-8 py-2.5 text-lg font-bold text-white hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {editingProjects ? (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/40 p-4 backdrop-blur-sm">
+          <div className="mx-auto my-4 w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl">
+            <div className="mb-1 flex items-center justify-between">
+              <h3 className="text-2xl font-extrabold text-slate-900">{editingProjects.title || "Projects"}</h3>
+              <button
+                type="button"
+                onClick={() => { setEditingProjects(null); setPrewriteOpenIndex(null); }}
+                className="grid h-8 w-8 place-items-center rounded-lg border border-slate-300 text-slate-500 hover:bg-slate-50"
+                aria-label="Close"
+              >
+                <FaXmark />
+              </button>
+            </div>
+            <p className="mb-5 text-sm text-slate-500">Add your projects with key details. All fields except the name are optional.</p>
+
+            <div className="space-y-5">
+              {editingProjects.projects.map((project, index) => (
+                <div key={index} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <div className="mb-3 flex items-center justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Project {index + 1}</p>
+                    {editingProjects.projects.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => setEditingProjects((prev) => ({ ...prev, projects: prev.projects.filter((_, i) => i !== index) }))}
+                        className="text-xs font-semibold text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Project Name *</label>
+                      <input
+                        value={project.name}
+                        onChange={(e) => updateProjectField(index, "name", e.target.value)}
+                        placeholder="e.g. AI Resume Builder, E-Commerce Platform"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Project URL / Link <span className="font-normal text-slate-400">(optional)</span></label>
+                      <input
+                        value={project.url}
+                        onChange={(e) => updateProjectField(index, "url", e.target.value)}
+                        placeholder="e.g. github.com/username/project or live-demo.com"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="mb-1 block text-xs font-semibold text-slate-700">Project Type</label>
+                        <select
+                          value={project.type}
+                          onChange={(e) => updateProjectField(index, "type", e.target.value)}
+                          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                        >
+                          <option value="">Select type…</option>
+                          {PROJECT_TYPE_OPTIONS.map((opt) => (
+                            <option key={opt} value={opt}>{opt}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-xs font-semibold text-slate-700">Year</label>
+                        <input
+                          value={project.year}
+                          onChange={(e) => updateProjectField(index, "year", e.target.value)}
+                          placeholder="e.g. 2025"
+                          maxLength={4}
+                          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="mb-1 flex items-center justify-between">
+                        <label className="text-xs font-semibold text-slate-700">Description</label>
+                        <button
+                          type="button"
+                          onClick={() => setPrewriteOpenIndex(prewriteOpenIndex === index ? null : index)}
+                          className={`flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs font-semibold transition-colors ${
+                            prewriteOpenIndex === index
+                              ? "border-blue-400 bg-blue-50 text-blue-700"
+                              : "border-slate-300 text-slate-500 hover:border-blue-300 hover:text-blue-600"
+                          }`}
+                        >
+                          ✦ Prewrite
+                        </button>
+                      </div>
+                      <RichTextEditor
+                        value={project.description}
+                        onChange={(val) => updateProjectField(index, "description", val)}
+                        placeholder="What did you build? What problem did it solve? What was your role and impact?"
+                        mode="bullets"
+                        minHeight={110}
+                      />
+                      {prewriteOpenIndex === index && (
+                        <ProjectPrewritePanel
+                          headline={headline}
+                          onAdd={(text) => {
+                            const curr = String(editingProjects.projects[index].description || "").trim();
+                            const li = `<li>${text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</li>`;
+                            const next = curr.includes("<ul")
+                              ? curr.replace(/<\/ul>(?![\s\S]*<\/ul>)/, `${li}</ul>`)
+                              : curr ? `${curr}<ul>${li}</ul>` : `<ul>${li}</ul>`;
+                            updateProjectField(index, "description", next);
+                          }}
+                          onRemove={(text) => {
+                            const curr = String(editingProjects.projects[index].description || "");
+                            const esc = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                            const next = curr.replace(`<li>${esc}</li>`, "").replace(/<ul>\s*<\/ul>/g, "").trim();
+                            updateProjectField(index, "description", next);
+                          }}
+                          onClose={() => setPrewriteOpenIndex(null)}
+                        />
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-slate-700">Technologies Used <span className="font-normal text-slate-400">(optional)</span></label>
+                      <input
+                        value={project.techStack}
+                        onChange={(e) => updateProjectField(index, "techStack", e.target.value)}
+                        placeholder="e.g. React, Node.js, MongoDB, AWS, Docker"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500"
+                      />
+                      {project.techStack && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {project.techStack.split(",").map((t) => t.trim()).filter(Boolean).map((tech, ti) => (
+                            <span key={ti} className="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setEditingProjects((prev) => ({ ...prev, projects: [...prev.projects, { ...EMPTY_PROJECT }] }))}
+              className="builder-action-badge is-add mt-4"
+            >
+              + Add another project
+            </button>
+
+            <AdditionalSuggestionPanel
+              sectionTitle={editingProjects.title}
+              headline={headline}
+              onAdd={(item) =>
+                setEditingProjects((prev) => ({
+                  ...prev,
+                  projects: [...prev.projects, { ...EMPTY_PROJECT, name: item }]
+                }))
+              }
+            />
+
+            <div className="mt-6 flex items-center justify-between">
+              <button type="button" onClick={() => { setEditingProjects(null); setPrewriteOpenIndex(null); }} className="text-lg font-bold text-blue-600 hover:text-blue-700">
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveProjects}
+                className="rounded-full bg-blue-600 px-8 py-2.5 text-lg font-bold text-white hover:bg-blue-700"
+              >
+                Save
               </button>
             </div>
           </div>
@@ -2883,7 +3506,7 @@ function Input({ label, value, onChange, disabled = false }) {
         value={value}
         disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 disabled:bg-slate-100 disabled:text-slate-500"
+        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 disabled:bg-slate-100 disabled:text-slate-500"
       />
     </label>
   );

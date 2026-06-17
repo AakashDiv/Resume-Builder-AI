@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchCurrentUser } from "../services/authApi.js";
-import { activateTestFreePlan, activateTestProPlan, createCheckoutSession } from "../services/billingApi.js";
+import { activateTestAdminRole, activateTestFreePlan, activateTestProPlan, createCheckoutSession } from "../services/billingApi.js";
 
 const plans = [
   {
@@ -37,6 +37,7 @@ export default function SubscriptionPage() {
   const [loading, setLoading] = useState(false);
   const [activatingTestPro, setActivatingTestPro] = useState(false);
   const [activatingTestFree, setActivatingTestFree] = useState(false);
+  const [activatingTestAdmin, setActivatingTestAdmin] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -99,6 +100,24 @@ export default function SubscriptionPage() {
       setError(err?.response?.data?.message || "Unable to activate Test Free");
     } finally {
       setActivatingTestFree(false);
+    }
+  }
+
+  async function handleActivateTestAdmin() {
+    if (activatingTestAdmin) return;
+
+    setActivatingTestAdmin(true);
+    setError("");
+    setMessage("");
+
+    try {
+      await activateTestAdminRole();
+      window.dispatchEvent(new Event("user-access-changed"));
+      setMessage("Test Admin activated. Blog Admin should now appear in the sidebar.");
+    } catch (err) {
+      setError(err?.response?.data?.message || "Unable to activate Test Admin");
+    } finally {
+      setActivatingTestAdmin(false);
     }
   }
 
@@ -201,6 +220,24 @@ export default function SubscriptionPage() {
           );
         })}
       </div>
+
+      {import.meta.env.DEV ? (
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Local Testing</p>
+          <h4 className="mt-2 text-lg font-bold">Admin Access</h4>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            Use this only in development to show Blog Admin in the sidebar without editing MongoDB.
+          </p>
+          <button
+            type="button"
+            onClick={handleActivateTestAdmin}
+            disabled={activatingTestAdmin}
+            className="mt-4 rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+          >
+            {activatingTestAdmin ? "Activating..." : "Activate Test Admin"}
+          </button>
+        </section>
+      ) : null}
     </section>
   );
 }

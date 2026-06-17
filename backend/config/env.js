@@ -33,6 +33,7 @@ for (const key of requiredVars) {
 export const env = {
   nodeEnv,
   port: Number(process.env.PORT || 5000),
+  backendPublicUrl: process.env.BACKEND_PUBLIC_URL || `http://localhost:${Number(process.env.PORT || 5000)}`,
   mongoUri: process.env.MONGO_URI,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
@@ -68,5 +69,15 @@ export const env = {
   stripeSecretKey: process.env.STRIPE_SECRET_KEY || "",
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || "",
   stripeProPriceId: process.env.STRIPE_PRO_PRICE_ID || "",
-  pythonBin: process.env.PYTHON_BIN || "python"
+  adminEmails: String(process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean),
+  cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME || "",
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY || "",
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET || "",
+  pythonBin: process.env.PYTHON_BIN || "python",
+  adminEmail: process.env.ADMIN_EMAIL || "",
+  adminPassword: process.env.ADMIN_PASSWORD || "",
+  adminJwtSecret: process.env.ADMIN_JWT_SECRET || process.env.JWT_SECRET
 };
