@@ -790,7 +790,7 @@ function isSummaryComplete(data) {
 }
 
 function isAdditionalComplete(data) {
-  const hasBasic = Boolean(data.additional.linkedin.trim() || data.additional.portfolio.trim() || data.additional.certifications.trim());
+  const hasBasic = Boolean(data.additional.linkedin.trim() || data.additional.github?.trim() || data.additional.portfolio.trim() || data.additional.certifications.trim());
   const hasSections = getAdditionalSections(data.additional).some((section) => splitBullets((section.items || []).join("\n")).length);
   return hasBasic || hasSections;
 }

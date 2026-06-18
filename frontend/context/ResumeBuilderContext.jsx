@@ -26,6 +26,7 @@ const defaultState = {
   education: [
     {
       degree: "",
+      fieldOfStudy: "",
       institution: "",
       city: "",
       country: "",
@@ -43,6 +44,7 @@ const defaultState = {
   },
   additional: {
     linkedin: "",
+    github: "",
     portfolio: "",
     certifications: "",
     sections: []
@@ -149,6 +151,7 @@ export function ResumeBuilderProvider({ children }) {
             ...prev.education,
             {
               degree: "",
+              fieldOfStudy: "",
               institution: "",
               city: "",
               country: "",

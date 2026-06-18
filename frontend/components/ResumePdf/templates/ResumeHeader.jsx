@@ -10,6 +10,7 @@ export default function ResumeHeader({ header = {}, additional = {} }) {
     header.email,
     header.location,
     additional.linkedin ? cleanLinkedIn(additional.linkedin) : null,
+    additional.github || null,
     additional.portfolio || null,
   ].filter(Boolean);
 

@@ -102,11 +102,6 @@ function ReviewPanel({ parsed, onImport, onCancel, templateId }) {
       sections.push({ id: `sec_${id++}`, title: "Certifications & Licenses", items: certifications });
     }
 
-    // GitHub → "Websites & Social Links" section
-    if (github) {
-      sections.push({ id: `sec_${id++}`, title: "Websites & Social Links", items: [`GitHub: ${github}`] });
-    }
-
     const draft = {
       header: {
         fullName: header.fullName || "",
@@ -122,12 +117,13 @@ function ReviewPanel({ parsed, onImport, onCancel, templateId }) {
         : [{ jobTitle: "", employer: "", city: "", country: "", startDate: "", endDate: "", currentlyWorking: false, bullets: "" }],
       education: (parsed.education || []).length > 0
         ? parsed.education
-        : [{ degree: "", institution: "", city: "", country: "", startDate: "", endDate: "", currentlyStudying: false, details: "" }],
+        : [{ degree: "", fieldOfStudy: "", institution: "", city: "", country: "", startDate: "", endDate: "", currentlyStudying: false, details: "" }],
       skills: parsed.skills || { primarySkills: "" },
       additional: {
         linkedin,
+        github,
         portfolio,
-        certifications: certifications.join(", "),
+        certifications: "",
         sections
       }
     };

@@ -60,7 +60,7 @@ function buildFallbackResult(rawText) {
       ? [{ jobTitle: "", employer: "", city: "", country: "", startDate: "", endDate: "", currentlyWorking: false, bullets: expText }]
       : [],
     education: eduText
-      ? [{ degree: "", institution: "", city: "", country: "", startDate: "", endDate: "", currentlyStudying: false, details: eduText }]
+      ? [{ degree: "", fieldOfStudy: "", institution: "", city: "", country: "", startDate: "", endDate: "", currentlyStudying: false, details: eduText }]
       : [],
     skills: { primarySkills: skillsList },
     certifications: [],
@@ -123,6 +123,7 @@ const PARSE_PROMPT = `You are a resume parsing assistant. Extract structured dat
   "education": [
     {
       "degree": "",
+      "fieldOfStudy": "",
       "institution": "",
       "city": "",
       "country": "",
@@ -211,6 +212,7 @@ export async function parseResumeFile(file) {
       education: Array.isArray(parsed.education) && parsed.education.length
         ? parsed.education.map(e => ({
             degree: e.degree || "",
+            fieldOfStudy: e.fieldOfStudy || "",
             institution: e.institution || "",
             city: e.city || "",
             country: e.country || "",
