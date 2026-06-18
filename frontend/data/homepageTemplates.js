@@ -1,4 +1,4 @@
-export const DEFAULT_HOMEPAGE_TEMPLATE = "homepage-2";
+export const DEFAULT_HOMEPAGE_TEMPLATE = "homepage-4";
 
 export const HOMEPAGE_TEMPLATES = [
   {
