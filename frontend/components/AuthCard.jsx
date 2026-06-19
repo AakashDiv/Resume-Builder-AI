@@ -12,14 +12,14 @@ export default function AuthCard({ title, subtitle, children }) {
           width: 36, height: 36, borderRadius: 10,
           background: "linear-gradient(135deg, #22d3ee, #818cf8)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 15, fontWeight: 800, color: "#fff", fontFamily: "Sora, sans-serif"
+          fontSize: 15, fontWeight: 800, color: "#fff", fontFamily: "Inter, Manrope, sans-serif"
         }}>N</div>
-        <span style={{ fontSize: 16, fontWeight: 700, fontFamily: "Sora, sans-serif", color: "var(--t1)" }}>
+        <span style={{ fontSize: 16, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)" }}>
           NightHire<span style={{ color: "var(--cyan)" }}>.</span>ai
         </span>
       </div>
 
-      <h1 style={{ fontSize: 22, fontWeight: 800, fontFamily: "Sora, sans-serif", marginBottom: 6, color: "var(--t1)" }}>{title}</h1>
+      <h1 style={{ fontSize: 22, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", marginBottom: 6, color: "var(--t1)" }}>{title}</h1>
       <p style={{ fontSize: 13, color: "var(--t2)", marginBottom: 28 }}>{subtitle}</p>
       {children}
     </div>

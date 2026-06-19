@@ -45,7 +45,7 @@ function StepBadge({ n, done }) {
       border: `1.5px solid ${done ? "#34D399" : "var(--border2)"}`,
       display: "flex", alignItems: "center", justifyContent: "center",
       fontSize: 11, fontWeight: 700, color: done ? "#34D399" : "var(--t3)",
-      fontFamily: "Sora, sans-serif",
+      fontFamily: "Inter, Manrope, sans-serif",
     }}>
       {done ? "✓" : n}
     </div>
@@ -177,14 +177,14 @@ export default function CoverLetterPage() {
           display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap"
         }}>
           <div>
-            <p style={{ fontSize: 14, fontWeight: 700, color: "#fbbf24", fontFamily: "Sora, sans-serif", marginBottom: 4 }}>⚡ Pro Feature</p>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "#fbbf24", fontFamily: "Inter, Manrope, sans-serif", marginBottom: 4 }}>⚡ Pro Feature</p>
             <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.6 }}>AI cover letter generation is available on Pro. Upgrade to unlock personalized letters for every job.</p>
           </div>
           <Link to="/app/subscription" style={{
             display: "inline-block", textDecoration: "none",
-            background: "linear-gradient(135deg, #f97316, #ea580c)",
+            background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
             color: "#fff", borderRadius: 10, padding: "10px 20px",
-            fontSize: 13, fontWeight: 700, fontFamily: "Sora, sans-serif", flexShrink: 0
+            fontSize: 13, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif", flexShrink: 0
           }}>Upgrade to Pro →</Link>
         </div>
       )}
@@ -207,7 +207,7 @@ export default function CoverLetterPage() {
             {/* Header */}
             <div style={{ padding: "20px 20px 0" }}>
               <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: "var(--cyan)", marginBottom: 6 }}>APPLICATION ASSET</p>
-              <h3 style={{ fontSize: 18, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 4 }}>Cover Letter Studio</h3>
+              <h3 style={{ fontSize: 18, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 4 }}>Cover Letter Studio</h3>
               <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.6, marginBottom: 20 }}>
                 Generate a profile-aware cover letter from a matched job or paste any job description.
               </p>
@@ -349,13 +349,13 @@ export default function CoverLetterPage() {
             <div style={{ padding: "0 20px 20px" }}>
               <button type="submit" disabled={!canGenerate} style={{
                 width: "100%", padding: "13px", borderRadius: 11,
-                fontSize: 14, fontWeight: 800, fontFamily: "Sora, sans-serif",
+                fontSize: 14, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif",
                 cursor: canGenerate ? "pointer" : "not-allowed",
-                background: canGenerate ? "linear-gradient(135deg, #06b6d4, #0891b2)" : "var(--bg-card2)",
+                background: canGenerate ? "linear-gradient(135deg, #2563EB, #1d4ed8)" : "var(--bg-card2)",
                 border: canGenerate ? "none" : "1px solid var(--border)",
                 color: canGenerate ? "#fff" : "var(--t3)",
                 opacity: generating ? 0.75 : 1, transition: "all 0.2s",
-                boxShadow: canGenerate && !generating ? "0 4px 20px rgba(34,211,238,0.25)" : "none",
+                boxShadow: canGenerate && !generating ? "0 4px 20px rgba(37,99,235,0.28)" : "none",
               }}>
                 {generating ? "✨ Writing your letter…" : "✨ Generate Cover Letter"}
               </button>
@@ -377,7 +377,7 @@ export default function CoverLetterPage() {
             display: "flex", alignItems: "center", justifyContent: "space-between"
           }}>
             <div>
-              <h4 style={{ fontSize: 16, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
+              <h4 style={{ fontSize: 16, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
                 Generated Draft
               </h4>
               <p style={{ fontSize: 11, color: "var(--t2)" }}>
@@ -437,7 +437,7 @@ export default function CoverLetterPage() {
                     justifyContent: "center", fontSize: 22
                   }}>✨</div>
                 </div>
-                <p style={{ fontSize: 15, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif", marginBottom: 8 }}>
+                <p style={{ fontSize: 15, fontWeight: 700, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif", marginBottom: 8 }}>
                   Writing your letter
                 </p>
                 <p style={{ fontSize: 12, color: "var(--cyan)", minHeight: 18, transition: "all 0.3s" }}>{tip}</p>
@@ -449,7 +449,7 @@ export default function CoverLetterPage() {
             {!generating && !result && (
               <div style={{ padding: "48px 32px", textAlign: "center" }}>
                 <div style={{ fontSize: 40, marginBottom: 16 }}>📝</div>
-                <p style={{ fontSize: 14, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif", marginBottom: 10 }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif", marginBottom: 10 }}>
                   Your cover letter will appear here
                 </p>
                 <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.7, maxWidth: 300, margin: "0 auto 24px" }}>
@@ -510,7 +510,7 @@ export default function CoverLetterPage() {
                   <button onClick={handleCopy} style={{
                     flex: 1, padding: "10px", borderRadius: 10, fontSize: 13, fontWeight: 700,
                     cursor: "pointer", transition: "all 0.15s",
-                    background: copied ? "rgba(52,211,153,0.15)" : "linear-gradient(135deg, #06b6d4, #0891b2)",
+                    background: copied ? "rgba(52,211,153,0.15)" : "linear-gradient(135deg, #2563EB, #1d4ed8)",
                     border: copied ? "1px solid rgba(52,211,153,0.35)" : "none",
                     color: copied ? "#34D399" : "#fff",
                   }}>{copied ? "✓ Copied to clipboard!" : "Copy to Clipboard"}</button>

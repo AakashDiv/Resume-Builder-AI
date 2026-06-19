@@ -1,0 +1,819 @@
+{
+  "experience": [
+    {
+      "role": "Full Stack Developer",
+      "tags": ["fullstack", "javascript", "react", "node", "mongodb", "express"],
+      "phrases": [
+        "Architected and delivered end-to-end web applications spanning React frontend and Node.js/Express backend with MongoDB persistence.",
+        "Built RESTful APIs with authentication, rate limiting, and role-based access control used by 50,000+ monthly active users.",
+        "Implemented responsive UI components with React and Tailwind CSS, improving mobile engagement by 35%.",
+        "Designed normalized database schemas in PostgreSQL and MongoDB optimized for complex query patterns.",
+        "Integrated third-party APIs including Stripe, Twilio, and SendGrid into full-stack applications.",
+        "Led migration from monolithic architecture to microservices, reducing deployment time by 60%.",
+        "Deployed applications on AWS using EC2, S3, and CloudFront with automated CI/CD pipelines.",
+        "Implemented JWT-based authentication and OAuth 2.0 social login flows across the application stack.",
+        "Optimized SQL queries and added indexing strategies that reduced average API response time by 45%.",
+        "Mentored a team of 4 junior developers through pair programming, code reviews, and technical documentation.",
+        "Developed real-time features using WebSockets and Socket.io for chat and live notification systems.",
+        "Automated unit and integration testing using Jest and Supertest achieving 80%+ code coverage.",
+        "Managed containerized deployments using Docker and Kubernetes across staging and production environments.",
+        "Collaborated with product and design teams in agile sprints to deliver features on time and within scope.",
+        "Refactored legacy codebase to modern ES6+ standards, reducing technical debt by 40%.",
+        "Implemented server-side rendering with Next.js improving SEO performance and page load by 50%.",
+        "Built admin dashboards with analytics, reporting, and role-based access for operational teams.",
+        "Configured Redis caching layer reducing database load by 30% and improving API throughput.",
+        "Established coding standards, PR review processes, and GitFlow branching strategy across the team.",
+        "Delivered 25+ production-ready features across 3 major product releases with zero critical post-release bugs."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "tags": ["frontend", "javascript", "react", "css", "html", "ui"],
+      "phrases": [
+        "Developed pixel-perfect, responsive web interfaces from Figma and Adobe XD designs using HTML5, CSS3, and JavaScript.",
+        "Built reusable React component libraries following atomic design principles, reducing UI development time by 35%.",
+        "Integrated REST APIs and GraphQL endpoints with React Query and Axios for efficient data fetching and caching.",
+        "Implemented cross-browser compatible layouts ensuring consistent UX across Chrome, Firefox, Safari, and Edge.",
+        "Optimized Core Web Vitals achieving LCP under 2.5s and CLS score below 0.1 across key landing pages.",
+        "Collaborated with UX designers to translate wireframes into accessible, WCAG 2.1 AA compliant interfaces.",
+        "Managed global application state using Redux Toolkit and Context API for complex multi-step user flows.",
+        "Wrote component-level unit tests with Jest and React Testing Library achieving 75%+ coverage.",
+        "Implemented lazy loading, code splitting, and image optimization reducing initial bundle size by 50%.",
+        "Set up and maintained Storybook documentation for 60+ shared UI components used across product teams.",
+        "Integrated Google Analytics 4, Hotjar, and custom event tracking for user behavior analysis.",
+        "Built multi-step form flows with validation using React Hook Form and Zod schema validation.",
+        "Developed animation and micro-interaction layers using Framer Motion and CSS transitions.",
+        "Participated in daily standups, sprint planning, and retrospectives following agile development practices.",
+        "Reviewed pull requests and maintained frontend code quality through ESLint and Prettier configurations.",
+        "Implemented internationalization support enabling the application to serve users in 8 languages.",
+        "Migrated class-based React components to functional components with hooks, reducing codebase complexity.",
+        "Conducted A/B testing experiments using LaunchDarkly feature flags to optimize conversion funnels.",
+        "Built Progressive Web App features including offline support, service workers, and push notifications.",
+        "Reduced CSS bundle size by 60% by migrating from Bootstrap to utility-first Tailwind CSS framework."
+      ]
+    },
+    {
+      "role": "Backend Developer",
+      "tags": ["backend", "node", "python", "api", "database", "server"],
+      "phrases": [
+        "Designed and built scalable RESTful APIs following OpenAPI specifications, serving 100,000+ daily requests with 99.9% uptime.",
+        "Implemented microservices architecture using Docker and message queues to decouple business logic and improve system resilience.",
+        "Engineered database schemas in PostgreSQL and MySQL optimized for high read/write throughput under production load.",
+        "Built JWT and OAuth 2.0 authentication systems with refresh token rotation and multi-factor authentication support.",
+        "Developed background job processing pipelines using Bull and Redis for email queuing, report generation, and data sync.",
+        "Integrated external payment APIs including Stripe, PayPal, and Razorpay handling millions in annual transaction volume.",
+        "Wrote comprehensive API documentation using Swagger/OpenAPI enabling seamless frontend and third-party integration.",
+        "Implemented caching strategies with Redis reducing database load by 40% and improving API p95 latency by 55ms.",
+        "Set up structured logging with Winston and ELK stack enabling real-time error monitoring and alerting.",
+        "Designed and enforced role-based access control across multi-tenant SaaS applications.",
+        "Conducted performance profiling and query optimization eliminating N+1 query bottlenecks in ORM-heavy modules.",
+        "Built webhook delivery systems with retry logic, signature verification, and event logging for third-party integrations.",
+        "Participated in on-call rotations, resolved production incidents, and authored post-mortem reports.",
+        "Established automated test suites with Mocha/Jest covering unit, integration, and contract testing layers.",
+        "Refactored legacy Express monolith into modular service-oriented architecture reducing deployment risk.",
+        "Integrated SendGrid, Twilio, and Firebase Cloud Messaging for transactional email, SMS, and push notifications.",
+        "Implemented GraphQL schema and resolvers with DataLoader for efficient batched data fetching.",
+        "Developed data export pipelines generating CSV, PDF, and Excel reports from database queries on demand.",
+        "Applied rate limiting, input sanitization, and OWASP best practices to secure API endpoints against common attack vectors.",
+        "Led backend technical interviews and code reviews, maintaining team code quality and architectural standards."
+      ]
+    },
+    {
+      "role": "React Developer",
+      "tags": ["react", "javascript", "frontend", "hooks", "redux", "jsx"],
+      "phrases": [
+        "Built scalable, maintainable React applications using functional components, hooks, and modern state management patterns.",
+        "Developed custom React hooks abstracting business logic and enabling reuse across 20+ components.",
+        "Implemented complex state management using Redux Toolkit with RTK Query for server-state synchronization.",
+        "Integrated React Router for client-side navigation with protected routes, lazy loading, and dynamic imports.",
+        "Built fully typed React applications with TypeScript enforcing interface contracts and eliminating runtime errors.",
+        "Conducted thorough component testing with React Testing Library and Jest following testing best practices.",
+        "Optimized React rendering performance using useMemo, useCallback, React.memo, and virtualization techniques.",
+        "Developed reusable UI component libraries and documented components in Storybook for team-wide adoption.",
+        "Integrated React applications with REST APIs and GraphQL using Axios, Fetch, and Apollo Client.",
+        "Implemented form handling with complex validation using React Hook Form and Yup/Zod schemas.",
+        "Built responsive, accessible React UIs meeting WCAG 2.1 AA standards with keyboard navigation support.",
+        "Migrated legacy class-based components and lifecycle methods to functional components with React hooks.",
+        "Configured Webpack and Vite build pipelines with code splitting, tree shaking, and environment optimization.",
+        "Collaborated with backend developers to design API contracts and data models for seamless integration.",
+        "Introduced and enforced ESLint rules, Prettier formatting, and Husky pre-commit hooks across the codebase.",
+        "Implemented React Suspense and Error Boundaries for graceful async loading and error state handling.",
+        "Built drag-and-drop interfaces using react-dnd and @dnd-kit libraries for interactive user workflows.",
+        "Deployed React applications via Vercel, Netlify, and AWS CloudFront with optimized CI/CD pipelines.",
+        "Applied Context API for lightweight global state management avoiding Redux overhead in medium-scale apps.",
+        "Contributed to open-source React component packages and maintained internal npm package registry."
+      ]
+    },
+    {
+      "role": "Node.js Developer",
+      "tags": ["nodejs", "javascript", "express", "backend", "api", "server"],
+      "phrases": [
+        "Built high-performance Node.js REST APIs with Express.js handling 50,000+ daily requests with sub-100ms response times.",
+        "Implemented event-driven architectures using Node.js streams and EventEmitter for real-time data processing.",
+        "Developed asynchronous data pipelines with Promise chains and async/await patterns for non-blocking I/O operations.",
+        "Integrated MongoDB and PostgreSQL databases using Mongoose and Sequelize ORMs with optimized query design.",
+        "Built middleware layers for authentication, logging, request validation, and error handling in Express applications.",
+        "Implemented worker threads and cluster mode to maximize CPU utilization on multi-core Node.js servers.",
+        "Deployed Node.js applications using PM2 process management ensuring zero-downtime restarts and crash recovery.",
+        "Set up WebSocket servers using Socket.io enabling real-time bidirectional communication for 10,000+ concurrent users.",
+        "Designed modular Node.js project architecture with separation of concerns across routes, controllers, and services.",
+        "Built scheduled task automation using node-cron and Agenda for report generation, cleanup jobs, and notifications.",
+        "Implemented Redis caching and session management reducing database round-trips by 45%.",
+        "Secured Node.js APIs against SQL injection, XSS, CSRF, and rate-limit attacks using Helmet and express-rate-limit.",
+        "Wrote automated tests using Mocha, Chai, and Supertest covering critical business logic and API endpoints.",
+        "Containerized Node.js applications with Docker and deployed to Kubernetes clusters on AWS EKS.",
+        "Integrated Stripe payment APIs with webhook handling, idempotency keys, and subscription lifecycle management.",
+        "Built custom Node.js CLI tools to automate developer workflows and internal data processing tasks.",
+        "Applied TypeScript to Node.js projects enforcing strict typing and improving team code quality and IDE support.",
+        "Developed server-sent events endpoints for real-time progress tracking and live notification feeds.",
+        "Maintained Node.js package security by auditing npm dependencies, resolving vulnerabilities, and managing lockfiles.",
+        "Configured structured logging with Winston and Morgan capturing request lifecycle, error traces, and performance metrics."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "Full Stack Developer",
+      "tags": ["fullstack", "javascript", "react", "node"],
+      "skills": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "PostgreSQL",
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "REST API Design",
+        "GraphQL",
+        "Docker",
+        "AWS (EC2/S3/CloudFront)",
+        "Git & GitHub",
+        "JWT Authentication",
+        "Redis",
+        "Socket.io",
+        "Next.js",
+        "Jest & Testing Library",
+        "Agile/Scrum",
+        "CI/CD Pipelines",
+        "Microservices Architecture",
+        "Linux/Bash",
+        "Webpack/Vite"
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "tags": ["frontend", "javascript", "react", "css"],
+      "skills": [
+        "HTML5",
+        "CSS3",
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "React.js",
+        "Next.js",
+        "Tailwind CSS",
+        "SCSS/Sass",
+        "Redux Toolkit",
+        "React Query",
+        "GraphQL",
+        "Figma",
+        "Webpack/Vite",
+        "Jest",
+        "React Testing Library",
+        "Storybook",
+        "Git & GitHub",
+        "REST APIs",
+        "Framer Motion",
+        "Accessibility (WCAG)",
+        "PWA Development",
+        "i18n/l10n",
+        "ESLint & Prettier",
+        "Chrome DevTools",
+        "Performance Optimization"
+      ]
+    },
+    {
+      "role": "Backend Developer",
+      "tags": ["backend", "node", "python", "api", "database"],
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "Python (Django/FastAPI)",
+        "PostgreSQL",
+        "MongoDB",
+        "MySQL",
+        "Redis",
+        "REST API Design",
+        "GraphQL",
+        "Docker",
+        "JWT & OAuth 2.0",
+        "Microservices",
+        "Message Queues (RabbitMQ/Bull)",
+        "AWS (Lambda/RDS/SQS)",
+        "Linux/Bash",
+        "Git & GitHub",
+        "Swagger/OpenAPI",
+        "Jest/Mocha",
+        "Prisma/Sequelize",
+        "ELK Stack",
+        "WebSockets",
+        "CI/CD Pipelines",
+        "Rate Limiting & Security",
+        "TypeScript",
+        "Kubernetes"
+      ]
+    },
+    {
+      "role": "React Developer",
+      "tags": ["react", "javascript", "frontend", "hooks", "redux"],
+      "skills": [
+        "React.js",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "Redux Toolkit",
+        "RTK Query",
+        "React Query",
+        "React Router",
+        "React Hook Form",
+        "Axios",
+        "Apollo Client (GraphQL)",
+        "Tailwind CSS",
+        "Styled Components",
+        "Jest",
+        "React Testing Library",
+        "Storybook",
+        "Webpack/Vite",
+        "Next.js",
+        "Context API",
+        "Framer Motion",
+        "React DnD",
+        "HTML5",
+        "CSS3/SCSS",
+        "Git & GitHub",
+        "ESLint/Prettier",
+        "Figma (design handoff)"
+      ]
+    },
+    {
+      "role": "Node.js Developer",
+      "tags": ["nodejs", "javascript", "express", "backend", "api"],
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "MongoDB (Mongoose)",
+        "PostgreSQL (Sequelize/Prisma)",
+        "MySQL",
+        "Redis",
+        "Socket.io",
+        "REST API Design",
+        "GraphQL",
+        "Docker",
+        "AWS (EC2/Lambda/SQS)",
+        "PM2",
+        "Jest/Mocha/Chai",
+        "Supertest",
+        "JWT & OAuth 2.0",
+        "Bull (Job Queues)",
+        "Helmet.js",
+        "Winston/Morgan",
+        "Stripe API",
+        "Swagger/OpenAPI",
+        "CI/CD",
+        "Git & GitHub",
+        "Linux/Bash"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "Full Stack Developer",
+      "tags": ["fullstack", "javascript", "react", "node"],
+      "options": [
+        {
+          "title": "End-to-End Product Engineer",
+          "text": "Results-driven Full Stack Developer with proven experience designing and shipping complete web applications from database to user interface. Proficient in React, Node.js, and cloud infrastructure with a strong track record of delivering production-ready features in agile environments."
+        },
+        {
+          "title": "Scalable Systems Builder",
+          "text": "Full Stack Developer specializing in high-performance, scalable web applications using modern JavaScript technologies. Experienced in architecting microservices, optimizing database queries, and deploying cloud-native solutions that handle thousands of daily users."
+        },
+        {
+          "title": "Product-Focused Engineer",
+          "text": "Versatile Full Stack Developer with a product-first mindset, skilled in turning business requirements into clean, maintainable code. Experienced across the full development lifecycle including design, development, testing, and deployment."
+        },
+        {
+          "title": "Agile Team Contributor",
+          "text": "Full Stack Developer with hands-on experience delivering features in cross-functional agile teams. Comfortable owning tasks from API design through to UI implementation, with strong communication skills that bridge technical and non-technical stakeholders."
+        },
+        {
+          "title": "Performance & Reliability Engineer",
+          "text": "Full Stack Developer with deep expertise in performance optimization, caching strategies, and cloud deployment. Passionate about building reliable systems with high availability, thorough test coverage, and clean architectural boundaries."
+        },
+        {
+          "title": "Startup to Enterprise Experience",
+          "text": "Full Stack Developer who has built products at both startup speed and enterprise scale. Skilled in making pragmatic architectural decisions, managing technical debt, and shipping features that create measurable business value."
+        },
+        {
+          "title": "API & Integration Specialist",
+          "text": "Full Stack Developer with extensive experience integrating third-party APIs, designing RESTful services, and building secure authentication systems. Adept at connecting complex systems and delivering seamless end-to-end user experiences."
+        },
+        {
+          "title": "Mentorship & Code Quality Leader",
+          "text": "Senior Full Stack Developer committed to engineering excellence through code reviews, documentation, and mentoring. Advocates for testing, clean code principles, and sustainable development practices that keep teams moving fast."
+        },
+        {
+          "title": "Cloud-Native Application Builder",
+          "text": "Full Stack Developer proficient in designing and deploying cloud-native applications on AWS and GCP. Experienced with containerization, CI/CD automation, and infrastructure-as-code practices that ensure consistent, repeatable deployments."
+        },
+        {
+          "title": "Modern JavaScript Specialist",
+          "text": "Full Stack Developer with deep expertise in the modern JavaScript ecosystem including React, Next.js, Node.js, and TypeScript. Consistently delivers well-tested, performant applications aligned to current industry standards and best practices."
+        }
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "tags": ["frontend", "javascript", "react", "css"],
+      "options": [
+        {
+          "title": "UI Craftsperson",
+          "text": "Detail-oriented Frontend Developer skilled in translating design mockups into polished, responsive web interfaces. Proficient in React, TypeScript, and Tailwind CSS with a keen eye for visual accuracy, accessibility, and cross-browser compatibility."
+        },
+        {
+          "title": "Performance-Focused Developer",
+          "text": "Frontend Developer passionate about web performance with hands-on experience optimizing Core Web Vitals, bundle sizes, and render performance. Consistently delivers fast, smooth user experiences that meet modern performance benchmarks."
+        },
+        {
+          "title": "Component Architecture Expert",
+          "text": "Frontend Developer experienced in building scalable component systems and design libraries used across large product teams. Skilled in React, Storybook, and TypeScript with a strong focus on reusability, consistency, and developer experience."
+        },
+        {
+          "title": "User-Centric Engineer",
+          "text": "Frontend Developer who puts user experience at the center of every technical decision. Experienced in collaborating with UX designers, conducting A/B tests, and implementing data-informed UI improvements that boost engagement and retention."
+        },
+        {
+          "title": "Full React Ecosystem Developer",
+          "text": "Experienced Frontend Developer with deep expertise across the React ecosystem including Redux, React Query, React Hook Form, and React Router. Builds complex, interactive UIs with clean state management and robust test coverage."
+        },
+        {
+          "title": "Accessibility & Standards Advocate",
+          "text": "Frontend Developer committed to building inclusive web experiences that meet WCAG 2.1 AA accessibility standards. Experienced in semantic HTML, ARIA implementation, and keyboard navigation across complex interactive applications."
+        },
+        {
+          "title": "Agile Frontend Contributor",
+          "text": "Frontend Developer with proven experience delivering high-quality UI in fast-paced agile environments. Strong collaborator who partners effectively with designers, product managers, and backend developers to ship features on time."
+        },
+        {
+          "title": "Modern CSS & Animation Specialist",
+          "text": "Frontend Developer with expertise in modern CSS architecture, Tailwind CSS, and animation libraries including Framer Motion. Creates visually engaging interfaces that combine aesthetic quality with technical performance."
+        },
+        {
+          "title": "TypeScript-First Developer",
+          "text": "Frontend Developer who defaults to TypeScript for all projects, enforcing type safety, reducing runtime errors, and enabling confident refactoring. Experienced in setting up strict TypeScript configurations for large-scale React applications."
+        },
+        {
+          "title": "Cross-Platform Web Engineer",
+          "text": "Frontend Developer experienced in building Progressive Web Apps and cross-browser compatible interfaces optimized for desktop, tablet, and mobile users. Skilled in responsive design, service workers, and mobile-first development."
+        }
+      ]
+    },
+    {
+      "role": "Backend Developer",
+      "tags": ["backend", "node", "python", "api", "database"],
+      "options": [
+        {
+          "title": "API & Systems Architect",
+          "text": "Experienced Backend Developer skilled in designing and building robust RESTful APIs and microservices that power scalable web applications. Proficient in Node.js, PostgreSQL, and cloud deployment with a focus on security, performance, and reliability."
+        },
+        {
+          "title": "Database & Performance Specialist",
+          "text": "Backend Developer with deep expertise in relational and document databases, query optimization, and caching strategies. Consistently delivers APIs with high throughput and low latency through careful schema design and indexing."
+        },
+        {
+          "title": "Microservices Engineer",
+          "text": "Backend Developer experienced in decomposing monolithic applications into independent, deployable microservices. Skilled in event-driven architecture, message queues, and Docker-based deployment pipelines that improve team autonomy and release velocity."
+        },
+        {
+          "title": "Security-Conscious Developer",
+          "text": "Backend Developer who prioritizes security at every layer of the application stack. Experienced in implementing OAuth 2.0, JWT authentication, input validation, and OWASP best practices to protect APIs and user data."
+        },
+        {
+          "title": "Cloud Infrastructure Developer",
+          "text": "Backend Developer proficient in designing and deploying cloud-native services on AWS and GCP. Experienced with serverless functions, managed databases, infrastructure-as-code, and automated CI/CD pipelines."
+        },
+        {
+          "title": "Integration & Workflow Specialist",
+          "text": "Backend Developer with extensive experience integrating payment gateways, email services, and third-party APIs into production applications. Builds reliable webhook systems, background job processors, and async workflows."
+        },
+        {
+          "title": "Reliability & Observability Engineer",
+          "text": "Backend Developer committed to system reliability through structured logging, proactive monitoring, automated alerting, and thorough incident response. Maintains high availability SLAs in complex distributed environments."
+        },
+        {
+          "title": "Multi-Language Backend Developer",
+          "text": "Backend Developer fluent in both Node.js and Python (Django/FastAPI), able to select the right tool for each problem domain. Delivers clean, maintainable backend code with strong separation of concerns and test coverage."
+        },
+        {
+          "title": "Data Pipeline Builder",
+          "text": "Backend Developer experienced in designing ETL pipelines, data export services, and reporting systems that transform raw data into actionable outputs for business stakeholders and operational teams."
+        },
+        {
+          "title": "Team Technical Leader",
+          "text": "Senior Backend Developer who combines hands-on engineering with team leadership — conducting code reviews, mentoring junior developers, and establishing architectural patterns that keep codebases maintainable at scale."
+        }
+      ]
+    },
+    {
+      "role": "React Developer",
+      "tags": ["react", "javascript", "frontend", "hooks", "redux"],
+      "options": [
+        {
+          "title": "React Specialist",
+          "text": "Dedicated React Developer with deep expertise in building interactive, high-performance web applications using modern React patterns. Proficient in hooks, Redux Toolkit, React Query, and TypeScript with a strong focus on component reuse and code quality."
+        },
+        {
+          "title": "State Management Expert",
+          "text": "React Developer with extensive experience managing complex application state using Redux Toolkit, RTK Query, and React Query. Delivers predictable, debuggable state architectures that scale with growing feature requirements."
+        },
+        {
+          "title": "Component Library Builder",
+          "text": "React Developer specialized in building scalable component libraries and design systems documented in Storybook. Creates reusable, accessible React components that accelerate development velocity across product teams."
+        },
+        {
+          "title": "Performance Optimization Specialist",
+          "text": "React Developer with a strong focus on rendering performance, bundle optimization, and Core Web Vitals. Applies memoization, code splitting, and virtualization to deliver fast, smooth user experiences at scale."
+        },
+        {
+          "title": "TypeScript React Developer",
+          "text": "React Developer who builds fully typed applications with TypeScript, enforcing strict interface contracts and eliminating entire classes of runtime errors. Experienced in type-safe API integrations and reusable generic components."
+        },
+        {
+          "title": "Full Ecosystem React Developer",
+          "text": "Experienced React Developer comfortable across the full React ecosystem — from routing with React Router to forms with React Hook Form to animations with Framer Motion. Delivers complete, production-grade frontend applications."
+        },
+        {
+          "title": "Test-Driven React Developer",
+          "text": "React Developer who writes tests first, building confidence through unit, integration, and visual regression testing with Jest, React Testing Library, and Storybook. Maintains high coverage standards on all critical user flows."
+        },
+        {
+          "title": "Agile React Contributor",
+          "text": "React Developer experienced in delivering high-quality UI in cross-functional agile teams. Collaborates closely with designers, product managers, and backend developers to ship features that meet both business and technical goals."
+        },
+        {
+          "title": "React Migration Specialist",
+          "text": "React Developer experienced in migrating legacy frontend codebases from jQuery, AngularJS, or class-based React to modern functional React with hooks. Delivers migrations with zero functional regression and measurable performance gains."
+        },
+        {
+          "title": "Next.js & SSR Specialist",
+          "text": "React Developer with strong experience in server-side rendering and static site generation using Next.js. Builds SEO-optimized, fast-loading React applications with hybrid rendering strategies tailored to content and user needs."
+        }
+      ]
+    },
+    {
+      "role": "Node.js Developer",
+      "tags": ["nodejs", "javascript", "express", "backend", "api"],
+      "options": [
+        {
+          "title": "Node.js API Specialist",
+          "text": "Experienced Node.js Developer skilled in building high-performance REST APIs and real-time server applications. Proficient in Express.js, MongoDB, PostgreSQL, and Redis with a strong track record of delivering reliable, scalable backend systems."
+        },
+        {
+          "title": "Real-Time Systems Developer",
+          "text": "Node.js Developer with deep expertise in WebSocket and event-driven architectures. Builds real-time features including live chat, collaborative tools, and streaming data pipelines using Node.js and Socket.io."
+        },
+        {
+          "title": "Async & Event-Driven Expert",
+          "text": "Node.js Developer specialized in asynchronous programming, non-blocking I/O, and event-driven architecture. Delivers high-throughput backend systems that maximize Node.js runtime efficiency under heavy concurrent load."
+        },
+        {
+          "title": "Full-Stack Node.js Engineer",
+          "text": "Node.js Developer with experience spanning backend API development and deployment infrastructure. Proficient in containerization with Docker, process management with PM2, and cloud deployment on AWS."
+        },
+        {
+          "title": "Microservices Developer",
+          "text": "Node.js Developer experienced in designing and deploying microservices using Docker, message queues, and API gateways. Builds independently deployable services with clear boundaries, shared contracts, and automated testing."
+        },
+        {
+          "title": "Database & Caching Specialist",
+          "text": "Node.js Developer with strong expertise in database design, query optimization, and caching with Redis. Builds backend systems that handle high read/write throughput while maintaining data consistency and integrity."
+        },
+        {
+          "title": "Security-First API Developer",
+          "text": "Node.js Developer who applies security best practices from day one — JWT authentication, OAuth 2.0, input validation, rate limiting, and OWASP compliance. Delivers APIs that pass security reviews and penetration tests."
+        },
+        {
+          "title": "TypeScript Node.js Developer",
+          "text": "Node.js Developer who uses TypeScript as the default for all server-side code, enforcing type safety, improving maintainability, and catching errors at compile time rather than in production."
+        },
+        {
+          "title": "Payment & Integration Specialist",
+          "text": "Node.js Developer with hands-on experience integrating payment gateways (Stripe, PayPal, Razorpay), email services (SendGrid, Mailgun), and third-party APIs into production-grade Node.js backends."
+        },
+        {
+          "title": "Team Contributor & Mentor",
+          "text": "Node.js Developer who combines technical excellence with strong collaboration skills. Conducts code reviews, mentors junior developers, writes clear API documentation, and contributes to engineering standards across the team."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "Full Stack Developer",
+      "tags": ["fullstack", "javascript", "react", "node"],
+      "items": [
+        "Reduced API response time by 45% through query optimization and Redis caching layer implementation.",
+        "Delivered a full-stack SaaS platform from concept to launch in 3 months with a 2-person team.",
+        "Improved application uptime from 97.5% to 99.9% by implementing health checks and auto-scaling policies.",
+        "Cut infrastructure costs by 30% by migrating from dedicated servers to containerized cloud deployment.",
+        "Increased code coverage from 22% to 83% by introducing automated testing practices across frontend and backend.",
+        "Shipped 30+ features across 4 product releases with a 98% on-time delivery rate.",
+        "Reduced build time by 55% by optimizing Webpack configuration and implementing code bundle splitting.",
+        "Onboarded and mentored 3 junior developers who became independent contributors within 2 months.",
+        "Implemented SSR with Next.js improving Google PageSpeed score from 62 to 94.",
+        "Integrated payment gateway handling $200K+ in monthly transactions with zero downtime incidents.",
+        "Reduced database query execution time by 60% through indexing and query restructuring.",
+        "Built a real-time notification system handling 10,000+ concurrent WebSocket connections.",
+        "Migrated a 5-year-old legacy codebase to React and Node.js stack, reducing bug rate by 40%.",
+        "Deployed automated CI/CD pipeline reducing manual deployment effort by 8 hours per week.",
+        "Designed role-based access control system supporting 5 user tiers across a multi-tenant SaaS platform."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "tags": ["frontend", "javascript", "react", "css"],
+      "items": [
+        "Improved Lighthouse performance score from 58 to 97 through targeted frontend optimizations.",
+        "Reduced page load time by 45% by implementing lazy loading, code splitting, and CDN caching.",
+        "Built a component library of 60+ reusable React components adopted by 3 product teams.",
+        "Increased mobile conversion rate by 22% after redesigning checkout flow for smaller viewports.",
+        "Cut CSS bundle from 280KB to 95KB by refactoring to Tailwind CSS utility classes.",
+        "Achieved 100% accessibility score on core user flows by implementing ARIA labels and keyboard navigation.",
+        "Delivered 40+ UI features across 5 product releases with 99% design fidelity.",
+        "Reduced front-end bug rate by 35% by introducing snapshot testing and E2E Cypress test coverage.",
+        "Shipped an i18n framework supporting 8 languages with zero regression in English content.",
+        "Reduced time-to-interactive from 6.2s to 2.1s by deferring non-critical scripts and assets.",
+        "Onboarded 2 junior frontend developers through structured mentoring and code review cycles.",
+        "Built a reusable form library handling 15+ complex multi-step flows used across the platform.",
+        "Improved SEO rankings by 30% through semantic HTML refactoring and metadata optimization.",
+        "Implemented real-time UI updates using WebSockets reducing perceived latency for end users.",
+        "Completed a full migration from Create React App to Vite, cutting build time by 70%."
+      ]
+    },
+    {
+      "role": "Backend Developer",
+      "tags": ["backend", "node", "python", "api", "database"],
+      "items": [
+        "Reduced API average response time from 380ms to 85ms through caching and query optimization.",
+        "Designed a microservices architecture that scaled to handle a 500% traffic spike during product launch.",
+        "Cut server infrastructure costs by 35% by migrating to serverless AWS Lambda functions for async workloads.",
+        "Achieved 99.97% API uptime over 12 months through proactive monitoring, alerting, and redundancy.",
+        "Eliminated critical SQL injection vulnerabilities across 120+ API endpoints through input sanitization refactor.",
+        "Delivered a multi-tenant billing engine processing $1.2M in monthly recurring revenue with zero data leaks.",
+        "Reduced background job failure rate from 12% to 0.3% by implementing retry logic and dead-letter queues.",
+        "Built a webhook delivery system handling 2M+ events per month with 99.8% delivery success rate.",
+        "Decreased database query execution time by 65% through indexing and ORM query restructuring.",
+        "Automated data backup and recovery procedures reducing RTO from 4 hours to 20 minutes.",
+        "Shipped a GraphQL API replacing 40 REST endpoints, reducing client-side data over-fetching by 70%.",
+        "Implemented rate limiting preventing 100% of detected brute-force attacks during penetration testing.",
+        "Scaled a Node.js service to handle 50,000 concurrent WebSocket connections with sub-100ms latency.",
+        "Wrote backend test suite from scratch reaching 85% code coverage and catching 3 critical bugs pre-release.",
+        "Reduced deployment downtime from 15 minutes to zero by implementing blue-green deployment strategy."
+      ]
+    },
+    {
+      "role": "React Developer",
+      "tags": ["react", "javascript", "frontend", "hooks", "redux"],
+      "items": [
+        "Reduced React application re-render count by 70% using memoization and component architecture refactoring.",
+        "Migrated 150+ class components to React hooks, cutting codebase size by 25%.",
+        "Built a custom hooks library of 30+ reusable hooks adopted across 4 product squads.",
+        "Decreased initial bundle size from 1.8MB to 450KB through code splitting and dynamic imports.",
+        "Improved React app Lighthouse performance score from 61 to 96 through targeted optimizations.",
+        "Delivered a full React redesign of a legacy jQuery frontend in 6 weeks with zero functional regressions.",
+        "Reduced form validation bug reports by 80% after adopting React Hook Form and Zod schema validation.",
+        "Shipped accessible UI meeting WCAG 2.1 AA for a government-facing portal serving 200,000+ users.",
+        "Built a component library of 80+ Storybook-documented components reducing design-to-code time by 40%.",
+        "Achieved 90% test coverage on React components using React Testing Library and Jest.",
+        "Cut CI build time from 14 minutes to 4 minutes by parallelizing test runs and optimizing Webpack config.",
+        "Implemented SSR with Next.js improving SEO organic traffic by 45% over 3 months.",
+        "Developed a real-time React dashboard updating live data every 5 seconds without page refresh.",
+        "Resolved 200+ legacy bugs during a 4-week code quality sprint, reducing production error rate by 55%.",
+        "Created an internal React project starter template adopted by all new frontend projects in the organization."
+      ]
+    },
+    {
+      "role": "Node.js Developer",
+      "tags": ["nodejs", "javascript", "express", "backend", "api"],
+      "items": [
+        "Reduced Node.js API average response time by 60% through async refactoring and Redis caching.",
+        "Scaled a Node.js WebSocket server to handle 25,000 concurrent connections with sub-50ms message latency.",
+        "Cut npm dependency vulnerabilities from 47 to 0 through targeted package audits and upgrades.",
+        "Delivered a Node.js microservice architecture supporting 3x traffic growth without infrastructure changes.",
+        "Automated 6 manual data processing jobs with Node.js cron scripts saving 12 hours per week.",
+        "Achieved 99.9% API uptime over 18 months using PM2 cluster mode with automated restart policies.",
+        "Built a Stripe subscription engine processing $800K+ annual recurring revenue with zero billing errors.",
+        "Reduced background job processing failures from 8% to 0.4% by implementing Bull retry queues.",
+        "Improved API security score from C to A+ on OWASP ZAP scan after targeted security hardening.",
+        "Shipped a GraphQL API replacing 35 REST routes, cutting client data over-fetching by 65%.",
+        "Reduced server memory usage by 40% by optimizing Node.js stream handling for large file uploads.",
+        "Wrote Node.js test suite with 82% coverage catching 5 critical regressions before production release.",
+        "Containerized a 6-service Node.js application reducing environment parity issues across dev/staging/prod.",
+        "Built a real-time leaderboard using Node.js and Redis Sorted Sets updating rankings in under 10ms.",
+        "Developed an internal CLI tool that automated deployment workflows saving the team 3 hours per release."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "Full Stack Developer",
+      "tags": ["fullstack", "javascript", "react", "node"],
+      "items": [
+        "Developed a multi-tenant SaaS platform with subscription billing, role management, and usage analytics.",
+        "Built a full-stack e-commerce application with cart, checkout, Stripe payments, and admin product management.",
+        "Created a real-time collaborative document editor with WebSocket sync and version history.",
+        "Designed and deployed a job board platform with resume upload, applicant tracking, and employer dashboards.",
+        "Built a food delivery application with live order tracking, driver location updates, and push notifications.",
+        "Developed a healthcare appointment booking system with availability management and email reminders.",
+        "Constructed a social media platform with post feeds, user following, likes, comments, and image uploads.",
+        "Created a property management portal with listing search, booking calendar, and landlord dashboards.",
+        "Built an inventory management system with barcode scanning, stock alerts, and supplier management.",
+        "Developed a learning management system with video lessons, quizzes, and progress tracking.",
+        "Created a personal finance tracker with budget categories, expense charts, and CSV export functionality.",
+        "Built a customer support ticketing system with priority routing, SLA tracking, and agent assignment.",
+        "Developed a blog CMS with markdown editor, category management, SEO metadata, and image CDN.",
+        "Created an analytics dashboard aggregating data from Google Analytics, Facebook Ads, and Stripe APIs.",
+        "Built a multi-channel notification service integrating email (SendGrid), SMS (Twilio), and push (Firebase)."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "tags": ["frontend", "javascript", "react", "css"],
+      "items": [
+        "Built an interactive portfolio builder with drag-and-drop section reordering and live PDF preview.",
+        "Developed a real-time stock market dashboard with chart visualizations using Recharts and WebSocket data.",
+        "Created a multi-step onboarding wizard with form validation, progress saving, and email verification.",
+        "Designed and implemented a component design system used across 3 product teams in Storybook.",
+        "Built a responsive e-commerce storefront with product filtering, cart management, and Stripe checkout.",
+        "Developed a content management dashboard with rich text editor, media upload, and SEO metadata fields.",
+        "Created a social feed UI with infinite scroll, post reactions, and real-time comment updates.",
+        "Built a data visualization dashboard with customizable charts, date filters, and CSV export.",
+        "Developed a PWA for a ride-booking app with offline mode, push notifications, and geolocation.",
+        "Created an admin panel with sortable data tables, bulk actions, and export functionality.",
+        "Built a multi-language landing page system with CMS-driven content and SEO-optimized routing.",
+        "Developed an interactive quiz platform with timed questions, scoring logic, and leaderboard display.",
+        "Created a video streaming interface with custom player controls, chapter navigation, and quality selection.",
+        "Built a calendar scheduling UI with drag-to-create events, conflict detection, and timezone support.",
+        "Developed a theme customization tool allowing users to preview and apply brand color palettes in real time."
+      ]
+    },
+    {
+      "role": "Backend Developer",
+      "tags": ["backend", "node", "python", "api", "database"],
+      "items": [
+        "Built a multi-tenant SaaS backend with subscription management, usage metering, and Stripe billing integration.",
+        "Developed a RESTful API for a ride-sharing platform handling real-time driver matching and fare calculation.",
+        "Created an authentication microservice supporting JWT, OAuth2 (Google/GitHub), and 2FA via TOTP.",
+        "Built a webhook management system with configurable events, signature signing, and delivery retry logic.",
+        "Developed a bulk email sending service with template rendering, bounce handling, and unsubscribe management.",
+        "Created a file processing pipeline converting user-uploaded documents to PDF, thumbnails, and extracted text.",
+        "Built a GraphQL API gateway aggregating data from multiple microservices with batched resolver optimization.",
+        "Developed a real-time notification service using Redis Pub/Sub and WebSockets for user activity alerts.",
+        "Created a reporting engine generating scheduled PDF and Excel reports from parameterized SQL queries.",
+        "Built a background job scheduler with cron-based triggers, priority queues, and admin monitoring dashboard.",
+        "Developed a log aggregation service parsing application logs and surfacing anomalies via Slack alerts.",
+        "Created a REST API for a healthcare platform with HIPAA-compliant data handling and audit trail logging.",
+        "Built an inventory sync service integrating with Shopify, WooCommerce, and custom ERP systems via APIs.",
+        "Developed a content delivery API with CDN integration, caching headers, and signed URL generation.",
+        "Created a fraud detection microservice analyzing transaction patterns and flagging anomalies in real time."
+      ]
+    },
+    {
+      "role": "React Developer",
+      "tags": ["react", "javascript", "frontend", "hooks", "redux"],
+      "items": [
+        "Built a resume builder SaaS with drag-and-drop section management, live PDF preview, and template switching.",
+        "Developed a React-based e-commerce frontend with product search, filtering, cart, and Stripe checkout.",
+        "Created an interactive data dashboard with Recharts visualizations, date pickers, and export functionality.",
+        "Built a multi-step user onboarding flow with progress persistence, validation, and API integration.",
+        "Developed a Kanban board application with drag-and-drop cards, column management, and real-time sync.",
+        "Created a social media feed UI with infinite scroll, optimistic updates, and like/comment interactions.",
+        "Built a cross-platform component library with web and mobile adaptation using React principles.",
+        "Developed a React admin panel with sortable tables, role-based views, and batch operation support.",
+        "Created a video course platform UI with progress tracking, chapter navigation, and quiz integration.",
+        "Built a real-time chat interface using React and WebSockets with typing indicators and read receipts.",
+        "Developed a property listing platform with map integration, advanced filters, and saved search alerts.",
+        "Created a React calendar application with recurring events, drag-to-reschedule, and multi-view modes.",
+        "Built a React-powered survey builder with conditional logic, question branching, and response analytics.",
+        "Developed a financial tracker UI with budget categories, spending charts, and monthly comparison views.",
+        "Created a React component playground allowing developers to test and preview shared UI components."
+      ]
+    },
+    {
+      "role": "Node.js Developer",
+      "tags": ["nodejs", "javascript", "express", "backend", "api"],
+      "items": [
+        "Built a Node.js REST API backend for a job board platform with search, pagination, and employer dashboards.",
+        "Developed a real-time collaboration server using Socket.io for a whiteboard application with multi-user sync.",
+        "Created a multi-tenant API with schema isolation, usage metering, and Stripe billing per tenant.",
+        "Built a Node.js email automation service with templating, scheduling, and bounce/unsubscribe management.",
+        "Developed a file upload and processing API integrating AWS S3 and Sharp for image resizing and CDN delivery.",
+        "Created a Node.js microservice for PDF generation from HTML templates using Puppeteer.",
+        "Built an event-driven order processing system using Node.js with RabbitMQ for async workflow orchestration.",
+        "Developed a Node.js CLI tool for scaffolding new microservices with boilerplate routes, tests, and Docker config.",
+        "Created a real-time sports score API using Node.js and SSE pushing live updates to 5,000+ concurrent clients.",
+        "Built a Node.js proxy server with request transformation, caching, and rate limiting for a partner API.",
+        "Developed a cron-based report generation service producing nightly PDF and Excel reports delivered via email.",
+        "Created a Node.js webhook aggregator normalizing payloads from Stripe, GitHub, and Shopify into a unified format.",
+        "Built a session-based authentication service with Redis session store, device tracking, and session revocation.",
+        "Developed a Node.js data migration script ETL-processing 10M+ records from MySQL to PostgreSQL.",
+        "Created an audit logging microservice capturing all API mutations with user attribution and timestamp indexing."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "Full Stack Developer",
+      "tags": ["fullstack", "javascript", "react", "node"],
+      "items": [
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "MongoDB Certified Developer Associate",
+        "Meta Front-End Developer Professional Certificate (Coursera)",
+        "Node.js Application Developer Certification (OpenJS Foundation)",
+        "Google Cloud Associate Cloud Engineer",
+        "Microsoft Certified: Azure Developer Associate",
+        "Docker Certified Associate (DCA)",
+        "Certified Kubernetes Application Developer (CKAD)",
+        "Full-Stack Web Development with React Specialization (Coursera – The Hong Kong University)",
+        "JavaScript Algorithms and Data Structures Certification (freeCodeCamp)"
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "tags": ["frontend", "javascript", "react", "css"],
+      "items": [
+        "Meta Front-End Developer Professional Certificate (Coursera)",
+        "JavaScript Algorithms and Data Structures Certification (freeCodeCamp)",
+        "React – The Complete Guide Certification (Udemy – Academind)",
+        "CSS for JavaScript Developers (Josh Comeau)",
+        "Google UX Design Professional Certificate (Coursera)",
+        "Responsive Web Design Certification (freeCodeCamp)",
+        "TypeScript Fundamentals (Frontend Masters)",
+        "Testing JavaScript with Jest (TestingJavaScript.com – Kent C. Dodds)",
+        "Web Performance Fundamentals (Frontend Masters)",
+        "Accessibility in JavaScript Applications (Frontend Masters)"
+      ]
+    },
+    {
+      "role": "Backend Developer",
+      "tags": ["backend", "node", "python", "api", "database"],
+      "items": [
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Node.js Application Developer Certification (OpenJS Foundation)",
+        "MongoDB Certified Developer Associate",
+        "Google Cloud Professional Cloud Developer",
+        "Certified Kubernetes Application Developer (CKAD)",
+        "Docker Certified Associate (DCA)",
+        "PostgreSQL Professional Certification (PostgreSQL Association)",
+        "Microservices with Node JS and React (Udemy – Stephen Grider)",
+        "Security in APIs: OAuth 2.0, JWT, and OpenID Connect (Pluralsight)",
+        "REST API Design – Best Practices (Udemy)"
+      ]
+    },
+    {
+      "role": "React Developer",
+      "tags": ["react", "javascript", "frontend", "hooks", "redux"],
+      "items": [
+        "Meta Front-End Developer Professional Certificate (Coursera)",
+        "React – The Complete Guide (Udemy – Maximilian Schwarzmüller)",
+        "TypeScript for React Developers (Frontend Masters)",
+        "JavaScript Algorithms and Data Structures (freeCodeCamp)",
+        "Testing React with Jest and React Testing Library (Udemy)",
+        "Epic React by Kent C. Dodds (epicreact.dev)",
+        "Advanced React Patterns (Frontend Masters)",
+        "Next.js & React – The Complete Guide (Udemy)",
+        "Redux Fundamentals (Redux Official Learning Portal)",
+        "React Performance (Frontend Masters)"
+      ]
+    },
+    {
+      "role": "Node.js Developer",
+      "tags": ["nodejs", "javascript", "express", "backend", "api"],
+      "items": [
+        "Node.js Application Developer Certification (OpenJS Foundation)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "MongoDB Certified Developer Associate",
+        "Node.js, Express, MongoDB & More: The Complete Bootcamp (Udemy – Jonas Schmedtmann)",
+        "Microservices with Node JS and React (Udemy – Stephen Grider)",
+        "Docker and Kubernetes: The Complete Guide (Udemy)",
+        "TypeScript: The Complete Developer's Guide (Udemy)",
+        "Testing Node.js Applications (Pluralsight)",
+        "Security in Node.js Applications (Pluralsight)",
+        "Building APIs with Node.js and Express (freeCodeCamp)"
+      ]
+    }
+  ]
+}

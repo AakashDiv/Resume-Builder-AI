@@ -32,3 +32,19 @@ export async function generateCoverLetter(payload) {
   const { data } = await api.post("/resume/cover-letter", payload);
   return data;
 }
+
+export async function fetchResumeSuggestions(params = {}) {
+  const { data } = await api.get("/resume/suggestions", { params });
+  return data;
+}
+
+export async function parseResumeUpload(file) {
+  const formData = new FormData();
+  formData.append("resumeFile", file);
+
+  const { data } = await api.post("/resume/parse", formData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
+
+  return data;
+}

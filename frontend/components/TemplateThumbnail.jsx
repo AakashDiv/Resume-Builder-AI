@@ -1,90 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import DesignableResumePreview from "./ResumePdf/common/DesignableResumePreview.jsx";
-import { resumeEngineTemplates } from "./resume-engine/templates/templateRegistry.js";
+import {
+  A4_HEIGHT_PX,
+  A4_WIDTH_PX,
+  getTemplatePreviewDesignSettings,
+  templatePreviewSampleData
+} from "../utils/templatePreviewDefaults.js";
 
-const A4_WIDTH_PX = 794;
-
-const SAMPLE_DATA = {
-  header: {
-    fullName: "Alexandra Johnson",
-    headline: "Senior Software Engineer",
-    email: "alex.johnson@email.com",
-    phone: "+1 (555) 234-5678",
-    location: "San Francisco, CA",
-    photo: ""
-  },
-  summary: {
-    text: "Results-driven software engineer with 6+ years building scalable web applications. Passionate about clean code, performance optimization, and mentoring engineers to deliver impactful products."
-  },
-  experience: [
-    {
-      jobTitle: "Senior Software Engineer",
-      employer: "TechCorp Inc.",
-      city: "San Francisco",
-      country: "CA",
-      startDate: "Jan 2021",
-      endDate: "",
-      currentlyWorking: true,
-      bullets: "Led migration of monolithic app to microservices, reducing latency by 40%.\nManaged and mentored a team of 5 engineers across 3 product squads.\nDelivered 12 major features on schedule with 99.8% uptime SLA."
-    },
-    {
-      jobTitle: "Software Engineer",
-      employer: "Startup Hub",
-      city: "New York",
-      country: "NY",
-      startDate: "Jun 2018",
-      endDate: "Dec 2020",
-      currentlyWorking: false,
-      bullets: "Built REST APIs serving 500K+ daily active users.\nReduced page load time by 35% through code splitting and lazy loading.\nImplemented CI/CD pipeline using GitHub Actions and Docker."
-    },
-    {
-      jobTitle: "Junior Developer",
-      employer: "Digital Agency Co.",
-      city: "Austin",
-      country: "TX",
-      startDate: "Jul 2017",
-      endDate: "May 2018",
-      currentlyWorking: false,
-      bullets: "Developed client-facing landing pages and marketing sites.\nCollaborated with designers to implement responsive layouts."
-    }
-  ],
-  education: [
-    {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "University of California, Berkeley",
-      fieldOfStudy: "Computer Science",
-      city: "Berkeley",
-      country: "CA",
-      startDate: "Sep 2013",
-      endDate: "May 2017",
-      currentlyStudying: false,
-      details: "Dean's List · GPA 3.8 · Capstone: Distributed Task Scheduler"
-    }
-  ],
-  skills: {
-    primarySkills: "React, TypeScript, Node.js, Python, PostgreSQL, Redis, Docker, AWS, Git, REST APIs"
-  },
-  additional: {
-    linkedin: "linkedin.com/in/alexjohnson",
-    portfolio: "alexjohnson.dev",
-    certifications: "",
-    languages: "",
-    sections: [
-      {
-        id: "certifications_licenses",
-        title: "Certifications & Licenses",
-        items: ["AWS Certified Solutions Architect – Associate", "Google Cloud Professional Developer"]
-      },
-      {
-        id: "languages",
-        title: "Languages",
-        items: ["English (Native)", "Spanish (Conversational)"]
-      }
-    ]
-  }
-};
-
-export default function TemplateThumbnail({ template, className = "h-full w-full" }) {
+export default function TemplateThumbnail({
+  template,
+  className = "h-full w-full",
+  fit = "contain",
+  renderSource = "auto",
+  previewMode = "thumbnail"
+}) {
   const wrapperRef = useRef(null);
   const [scale, setScale] = useState(0.202);
   const thumbnailImage = template?.thumbnailImage;
@@ -95,63 +24,68 @@ export default function TemplateThumbnail({ template, className = "h-full w-full
 
     const update = () => {
       const w = node.clientWidth;
-      if (w > 0) setScale(w / A4_WIDTH_PX);
+      const h = node.clientHeight;
+      if (w > 0 && h > 0) {
+        const nextScale =
+          fit === "cover"
+            ? Math.max(w / A4_WIDTH_PX, h / A4_HEIGHT_PX)
+            : fit === "width"
+              ? w / A4_WIDTH_PX
+              : Math.min(w / A4_WIDTH_PX, h / A4_HEIGHT_PX);
+        setScale(Math.max(0.05, nextScale));
+      }
     };
 
     update();
     const observer = new ResizeObserver(update);
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [fit]);
 
-  const templateId = String(template?.id || "");
-  const engineTemplate = resumeEngineTemplates[templateId] || resumeEngineTemplates["sharp-classic"];
-  const designSettings = {
-    accentColor: engineTemplate.colors.accent,
-    headerBgColor: engineTemplate.colors.headerBg,
-    mainBgColor: engineTemplate.colors.surface,
-    primaryTextColor: engineTemplate.colors.text,
-    mutedTextColor: engineTemplate.colors.muted,
-    inverseTextColor: engineTemplate.colors.inverse,
-    fontStyle: "inter",
-    fontSize: 11,
-    headingSize: 34,
-    sectionSpacing: 18,
-    paragraphSpacing: 8,
-    lineSpacing: 1.45
-  };
+  const designSettings = getTemplatePreviewDesignSettings(template);
+  const shouldUseThumbnailImage = renderSource !== "live" && thumbnailImage;
 
   return (
     <div
       ref={wrapperRef}
-      className={`overflow-hidden rounded-sm border border-slate-200 bg-white shadow-md ${className}`}
+      className={`grid place-items-center overflow-hidden rounded-sm border border-slate-200 bg-white shadow-md ${className}`}
     >
-      {thumbnailImage ? (
+      {shouldUseThumbnailImage ? (
         <img
           src={thumbnailImage}
           alt={`${template.name} preview`}
-          className="h-full w-full object-contain"
+          className={`h-full w-full ${fit === "cover" ? "object-cover object-top" : "object-contain"}`}
           draggable="false"
         />
       ) : (
-      <div
-        style={{
-          transformOrigin: "top left",
-          transform: `scale(${scale})`,
-          width: "210mm",
-          minHeight: "297mm",
-          background: "#ffffff",
-          pointerEvents: "none",
-          userSelect: "none"
-        }}
-      >
-        <DesignableResumePreview
-          selectedTemplate={template}
-          resumeData={SAMPLE_DATA}
-          designSettings={designSettings}
-          mode="thumbnail"
-        />
-      </div>
+        <div
+          style={{
+            width: `${A4_WIDTH_PX * scale}px`,
+            height: `${A4_HEIGHT_PX * scale}px`,
+            alignSelf: fit === "cover" || fit === "width" ? "start" : "center",
+            overflow: "hidden",
+            background: "#ffffff"
+          }}
+        >
+          <div
+            style={{
+              transformOrigin: "top left",
+              transform: `scale(${scale})`,
+              width: `${A4_WIDTH_PX}px`,
+              minHeight: `${A4_HEIGHT_PX}px`,
+              background: "#ffffff",
+              pointerEvents: "none",
+              userSelect: "none"
+            }}
+          >
+            <DesignableResumePreview
+              selectedTemplate={template}
+              resumeData={templatePreviewSampleData}
+              designSettings={designSettings}
+              mode={previewMode}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

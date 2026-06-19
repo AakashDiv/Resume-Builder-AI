@@ -2,7 +2,7 @@ import multer from "multer";
 
 export default function errorHandler(err, _req, res, _next) {
   if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
-    return res.status(400).json({ message: "File too large. Maximum size is 2MB." });
+    return res.status(400).json({ message: "File too large. Please upload a smaller file." });
   }
 
   const statusCode = err.statusCode || 500;

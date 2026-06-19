@@ -1,11 +1,22 @@
 import { body } from "express-validator";
 import { Router } from "express";
-import { generateCoverLetter, generateResume, improveResume, scoreResume, tailorResume } from "../controllers/resume.controller.js";
+import { generateCoverLetter, generateResume, getResumeSuggestions, improveResume, parseResume, scoreResume, tailorResume } from "../controllers/resume.controller.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import requireProPlan from "../middleware/requireProPlan.js";
 import uploadResume from "../middleware/uploadResume.js";
+import uploadResumeParser from "../middleware/uploadResumeParser.js";
 
 const router = Router();
+
+router.get("/suggestions", getResumeSuggestions);
+
+// Resume upload & structured parse — auth optional (saves profile when logged in)
+router.post("/parse", (req, res, next) => {
+  authMiddleware(req, res, (err) => {
+    if (err) req.user = null;
+    next();
+  });
+}, uploadResumeParser.single("resumeFile"), parseResume);
 
 router.post(
   "/generate",

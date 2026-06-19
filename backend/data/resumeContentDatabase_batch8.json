@@ -1,0 +1,611 @@
+{
+  "experience": [
+    {
+      "role": "UX Designer",
+      "tags": ["ux design", "user experience", "figma", "user research", "usability testing", "wireframing", "prototyping"],
+      "phrases": [
+        "Led end-to-end UX design process from discovery and user research through wireframing, prototyping, and usability testing.",
+        "Conducted user interviews, contextual inquiries, and surveys with 50+ participants uncovering key pain points that shaped product strategy.",
+        "Designed and facilitated usability testing sessions identifying critical friction points that reduced task completion failure rate by 45%.",
+        "Created information architecture, user flows, and sitemaps for complex multi-module enterprise applications.",
+        "Built low-fidelity wireframes and high-fidelity prototypes in Figma for rapid concept validation with stakeholders and users.",
+        "Applied Jobs-to-be-Done and design thinking frameworks to reframe business problems into human-centered design opportunities.",
+        "Collaborated with product managers to translate business requirements into user-centered design solutions aligned with strategic goals.",
+        "Delivered UX research reports with synthesis, affinity mapping, and prioritized recommendations influencing 6-month product roadmaps.",
+        "Designed accessibility-compliant interfaces meeting WCAG 2.1 AA standards ensuring the product was usable by all users.",
+        "Established UX metrics framework tracking task success rate, time-on-task, and error rates across core product flows.",
+        "Ran card sorting and tree testing sessions to validate and optimize navigation architecture for information-dense web applications.",
+        "Presented design concepts and research findings to C-suite stakeholders securing alignment and investment in UX initiatives.",
+        "Collaborated with UI designers and frontend engineers to ensure research-driven experience decisions were accurately implemented.",
+        "Managed multiple design workstreams simultaneously across agile sprints maintaining quality while meeting sprint delivery targets.",
+        "Conducted competitive UX benchmarking analyzing 10 competitor products to identify differentiation opportunities and best practices.",
+        "Designed onboarding experiences reducing new user drop-off by 38% through progressive disclosure and contextual guidance.",
+        "Built journey maps and service blueprints visualizing cross-channel user experiences enabling alignment across business teams.",
+        "Contributed to design system governance ensuring interaction patterns, micro-copy, and accessibility standards were consistently applied.",
+        "Ran participatory design workshops with users and stakeholders co-creating solutions that balanced user needs with technical constraints.",
+        "Mentored junior UX designers through design critique, research planning guidance, and career development coaching."
+      ]
+    },
+    {
+      "role": "UI/UX Designer",
+      "tags": ["ui ux", "user interface", "user experience", "figma", "prototyping", "research", "visual design", "design systems"],
+      "phrases": [
+        "Owned the full UI/UX design process from user research and wireframing through visual design and developer handoff.",
+        "Designed and validated user flows, wireframes, and high-fidelity prototypes in Figma for web and mobile applications.",
+        "Conducted user interviews, usability testing, and heuristic evaluations to inform design decisions with real user evidence.",
+        "Built and maintained product design systems with components, tokens, and documentation adopted across engineering and design teams.",
+        "Translated business requirements and user research insights into intuitive interface designs that balanced aesthetics with usability.",
+        "Collaborated closely with frontend developers ensuring pixel-accurate implementation through detailed specs and ongoing design QA.",
+        "Designed responsive interfaces optimized for desktop, tablet, and mobile ensuring consistent UX across all screen sizes.",
+        "Led end-to-end redesign projects modernizing legacy product interfaces resulting in measurable improvements in user satisfaction and retention.",
+        "Applied data analytics and heatmap analysis using Hotjar and Mixpanel to identify UX issues and validate design hypotheses.",
+        "Created interaction design specifications including animations, transitions, and micro-interactions enhancing perceived product quality.",
+        "Produced design concepts for A/B tests collaborating with product analysts to measure conversion and engagement impact.",
+        "Designed complex data visualization dashboards making dense analytics information legible and actionable for end users.",
+        "Established design critique sessions and peer review processes elevating team design quality and consistency.",
+        "Facilitated stakeholder workshops and design reviews presenting concepts clearly to non-design audiences for timely decision-making.",
+        "Delivered end-to-end mobile app designs from concept through App Store submission maintaining brand consistency throughout.",
+        "Managed Figma organization across multiple products maintaining shared libraries, naming conventions, and version control.",
+        "Contributed to agile product teams participating in sprint planning, backlog grooming, and retrospectives as the embedded design voice.",
+        "Designed zero-state, error, empty, and loading screens ensuring complete and polished interface state coverage.",
+        "Conducted competitor analysis and UX benchmarking identifying design opportunities that differentiated the product in the market.",
+        "Grew NPS from 32 to 61 through systematic UX improvements prioritized from user research and analytics data."
+      ]
+    },
+    {
+      "role": "Product Manager",
+      "tags": ["product management", "product roadmap", "agile", "stakeholder management", "user stories", "strategy", "kpi"],
+      "phrases": [
+        "Defined and owned the product roadmap aligning engineering, design, and business stakeholders around a shared vision and delivery plan.",
+        "Gathered, prioritized, and translated customer needs and market insights into clearly defined user stories and product requirements.",
+        "Led cross-functional agile teams of 8-15 engineers, designers, and QA through sprint planning, grooming, and retrospectives.",
+        "Launched 3 major product features driving 30% revenue growth and earning 4.8-star average user reviews on the App Store.",
+        "Defined and tracked product KPIs including activation rate, retention, NPS, and feature adoption ensuring alignment with business goals.",
+        "Conducted user interviews, surveys, and usability tests gathering qualitative insights to validate assumptions and guide prioritization.",
+        "Built and presented quarterly product roadmaps and business reviews to C-suite executives and board stakeholders.",
+        "Managed product backlog with 200+ stories maintaining prioritization based on ROI, customer impact, and strategic alignment.",
+        "Collaborated with sales and customer success teams to gather market feedback and incorporate high-value customer requirements.",
+        "Defined go-to-market strategy for new product launches coordinating marketing, sales enablement, and support readiness.",
+        "Reduced average feature delivery cycle from 12 weeks to 6 weeks by streamlining requirements process and reducing rework.",
+        "Conducted competitive analysis across 8 competitor products identifying positioning gaps and feature opportunities for the roadmap.",
+        "Partnered with data analysts to define success metrics, monitor adoption dashboards, and run post-launch retrospectives.",
+        "Managed trade-off decisions between scope, time, and quality communicating clearly to stakeholders with data-driven reasoning.",
+        "Built business cases for new product investments including market sizing, cost estimates, and projected ROI.",
+        "Introduced continuous discovery practices including weekly user interviews reducing post-launch feature miss rate by 50%.",
+        "Coordinated dependencies across 3 product teams ensuring smooth releases without cross-team blockers or missed milestones.",
+        "Wrote detailed PRDs, feature briefs, and technical requirements ensuring engineering teams had unambiguous specifications to build against.",
+        "Championed voice-of-customer in all product decisions reducing churn attributable to product gaps by 20%.",
+        "Grew product from 0 to 50,000 monthly active users within 18 months through iterative discovery, delivery, and optimization."
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "tags": ["project management", "pmp", "agile", "scrum", "stakeholder management", "delivery", "risk management", "prince2"],
+      "phrases": [
+        "Managed end-to-end delivery of 15+ projects ranging from $200K to $5M budget with on-time and on-budget delivery record.",
+        "Led agile and waterfall project delivery across software development, infrastructure, and digital transformation programs.",
+        "Defined project scope, deliverables, milestones, and success criteria working collaboratively with sponsors and stakeholders.",
+        "Facilitated daily standups, sprint planning, retrospectives, and steering committee meetings across distributed cross-functional teams.",
+        "Managed project risks, issues, and dependencies maintaining RAID logs and escalating critical blockers with recommended mitigations.",
+        "Built and maintained detailed project plans in MS Project, Jira, and Smartsheet tracking progress against baseline schedules.",
+        "Managed project budgets up to $5M tracking actuals against forecasts and proactively addressing cost variances.",
+        "Coordinated vendor and third-party delivery teams managing contracts, SLAs, and performance against agreed milestones.",
+        "Produced executive project status reports, dashboards, and presentations keeping senior leadership informed and engaged.",
+        "Led project kick-off workshops establishing governance, communication plans, and team working agreements.",
+        "Managed stakeholder engagement across business, IT, and external partner teams ensuring alignment throughout delivery.",
+        "Reduced project delivery delays by 40% by implementing structured dependency mapping and weekly cross-team sync rituals.",
+        "Delivered ERP implementation project for 500-user organization on time and 8% under budget through disciplined scope management.",
+        "Managed resource allocation across 5 concurrent workstreams balancing capacity constraints and shifting business priorities.",
+        "Facilitated change management activities including impact assessments, training plans, and communications for system go-lives.",
+        "Conducted post-project reviews and lessons-learned sessions capturing insights to improve delivery practices for future projects.",
+        "Managed scope change control process evaluating 50+ change requests against budget, timeline, and strategic impact.",
+        "Built high-performing project teams by fostering psychological safety, clear ownership, and recognition of contributions.",
+        "Implemented PMO governance standards including templates, reporting cadences, and quality gates adopted across the department.",
+        "Achieved 95% on-time milestone delivery rate across an 18-month portfolio of 8 concurrent technology projects."
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "tags": ["technical support", "helpdesk", "it support", "troubleshooting", "customer support", "sla", "ticketing", "networking"],
+      "phrases": [
+        "Provided Tier 1, 2, and 3 technical support for enterprise software products resolving 50+ tickets daily with 96% customer satisfaction rating.",
+        "Diagnosed and resolved complex technical issues across Windows, macOS, Linux environments, and SaaS application platforms.",
+        "Managed support tickets through Jira Service Management and Zendesk maintaining SLA compliance rate of 98% across all priority tiers.",
+        "Collaborated with engineering and product teams to escalate, reproduce, and resolve critical customer-facing software bugs.",
+        "Authored 100+ knowledge base articles and troubleshooting guides reducing repeat ticket volume by 35%.",
+        "Onboarded and trained enterprise customers on product features conducting live sessions for groups of up to 30 users.",
+        "Performed root cause analysis on recurring technical incidents and presented findings to engineering teams for permanent fixes.",
+        "Managed customer escalations professionally maintaining clear communication and delivering timely resolutions to high-priority accounts.",
+        "Supported network infrastructure issues including DNS, DHCP, VPN, and firewall configuration for enterprise customers.",
+        "Implemented monitoring alerts using PagerDuty and OpsGenie enabling proactive detection of customer-impacting issues.",
+        "Reduced average ticket resolution time from 48 hours to 6 hours by redesigning triage workflows and escalation processes.",
+        "Configured and troubleshot SSO integrations (SAML, OAuth) for enterprise customers integrating the product with identity providers.",
+        "Maintained customer environment documentation including network diagrams, configuration records, and known issue trackers.",
+        "Provided API integration support helping developer customers debug REST API calls, authentication flows, and webhook configurations.",
+        "Conducted weekly support review meetings with product and engineering teams communicating top customer pain points and trends.",
+        "Supported data migration projects validating data integrity and assisting customers through complex import and export workflows.",
+        "Achieved Top Performer award for 3 consecutive quarters based on CSAT score, ticket throughput, and knowledge contribution.",
+        "Troubleshot and resolved Active Directory, Azure AD, and LDAP integration issues for enterprise identity management customers.",
+        "Built internal support tooling using Python scripts automating repetitive diagnostic and log analysis tasks saving 5 hours per week.",
+        "Collaborated with the QA team to reproduce reported bugs in test environments enabling faster engineering triage and resolution."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "UX Designer",
+      "tags": ["ux design", "user experience", "figma", "user research", "usability testing", "wireframing"],
+      "skills": [
+        "User Research (Interviews, Surveys)",
+        "Usability Testing",
+        "Figma",
+        "Wireframing & Prototyping",
+        "Information Architecture",
+        "User Journey Mapping",
+        "Design Thinking",
+        "Card Sorting & Tree Testing",
+        "Affinity Mapping",
+        "Interaction Design",
+        "Accessibility (WCAG 2.1)",
+        "Heuristic Evaluation",
+        "Adobe XD",
+        "Miro / FigJam",
+        "UX Writing & Microcopy",
+        "Stakeholder Facilitation",
+        "Agile / Sprint Design",
+        "Hotjar / FullStory (Analytics)"
+      ]
+    },
+    {
+      "role": "UI/UX Designer",
+      "tags": ["ui ux", "user interface", "user experience", "figma", "prototyping", "visual design"],
+      "skills": [
+        "Figma",
+        "User Research & Usability Testing",
+        "Wireframing & Prototyping",
+        "Visual & UI Design",
+        "Design Systems & Component Libraries",
+        "Responsive & Mobile Design",
+        "Interaction Design",
+        "User Journey Mapping",
+        "Accessibility (WCAG 2.1)",
+        "Adobe XD / Photoshop",
+        "Design Tokens & Variables",
+        "Hotjar / Mixpanel / Analytics",
+        "Developer Handoff (Zeplin)",
+        "Agile / Sprint Delivery",
+        "Typography & Color Theory",
+        "Stakeholder Presentations",
+        "A/B Testing Collaboration"
+      ]
+    },
+    {
+      "role": "Product Manager",
+      "tags": ["product management", "product roadmap", "agile", "stakeholder management", "kpi"],
+      "skills": [
+        "Product Roadmap Planning",
+        "User Story Writing",
+        "Agile / Scrum / SAFe",
+        "Stakeholder Management",
+        "Jira & Confluence",
+        "Data Analysis & KPI Tracking",
+        "User Interviews & Discovery",
+        "Competitive Analysis",
+        "Go-to-Market Strategy",
+        "Backlog Prioritization (RICE, MoSCoW)",
+        "A/B Testing & Experimentation",
+        "Product Requirements (PRD)",
+        "OKR Framework",
+        "SQL (Basic Queries)",
+        "Figma (Wireframes & Review)",
+        "Business Case Development",
+        "Cross-functional Team Leadership",
+        "Product Analytics (Mixpanel, Amplitude)"
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "tags": ["project management", "pmp", "agile", "scrum", "delivery", "risk management"],
+      "skills": [
+        "Project Planning & Scheduling",
+        "Agile / Scrum / Waterfall",
+        "Risk & Issue Management",
+        "Stakeholder Management",
+        "Budget Management",
+        "MS Project / Smartsheet / Jira",
+        "PRINCE2 / PMP Methodology",
+        "Change Management",
+        "Resource Planning",
+        "Vendor Management",
+        "RAID Log Management",
+        "Executive Reporting & Dashboards",
+        "Workshop Facilitation",
+        "Scope & Change Control",
+        "MS PowerPoint & Excel",
+        "Confluence & Documentation",
+        "PMO Governance"
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "tags": ["technical support", "helpdesk", "it support", "troubleshooting", "sla", "ticketing"],
+      "skills": [
+        "Tier 1 / 2 / 3 Technical Support",
+        "Jira Service Management / Zendesk",
+        "Windows / macOS / Linux",
+        "Network Troubleshooting (DNS, DHCP, VPN)",
+        "SaaS Application Support",
+        "API Debugging & REST APIs",
+        "SSO / SAML / OAuth Integration",
+        "Active Directory & Azure AD",
+        "SQL & Database Queries",
+        "Python Scripting (Automation)",
+        "Incident & Escalation Management",
+        "Knowledge Base Authoring",
+        "SLA Management",
+        "Customer Onboarding & Training",
+        "PagerDuty / OpsGenie",
+        "Root Cause Analysis",
+        "Confluence & Documentation"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "UX Designer",
+      "tags": ["ux design", "user experience", "figma", "user research", "usability testing"],
+      "options": [
+        {
+          "title": "Experienced UX Designer",
+          "text": "UX Designer with 5+ years of experience leading end-to-end design processes from user research through prototype delivery. Skilled in Figma, usability testing, and design thinking with a track record of translating complex user needs into intuitive experiences that drive measurable improvements in engagement and satisfaction."
+        },
+        {
+          "title": "Research-Led UX Designer",
+          "text": "UX Designer with a strong research foundation conducting user interviews, usability tests, and analytics analysis to build evidence-based design decisions. Delivered research programs that directly shaped product roadmaps and reduced user drop-off by 38% across key onboarding flows."
+        },
+        {
+          "title": "UX Designer – Enterprise & SaaS Products",
+          "text": "UX Designer specializing in complex enterprise and SaaS product design. Expert at simplifying information-dense interfaces, designing scalable interaction patterns, and facilitating cross-functional alignment workshops that turn ambiguous problems into clear, user-validated design directions."
+        },
+        {
+          "title": "Junior UX Designer",
+          "text": "Motivated Junior UX Designer with hands-on experience in user research, wireframing, and Figma prototyping. Familiar with usability testing, design thinking workshops, and agile sprint delivery. Passionate about advocating for users and designing experiences that are both useful and delightful."
+        }
+      ]
+    },
+    {
+      "role": "UI/UX Designer",
+      "tags": ["ui ux", "user interface", "user experience", "figma", "visual design"],
+      "options": [
+        {
+          "title": "Experienced UI/UX Designer",
+          "text": "UI/UX Designer with 4+ years of experience owning the full design process from user research to production-ready visual design. Expert in Figma with a strong command of design systems, interaction design, and usability testing delivering products that users love and businesses trust."
+        },
+        {
+          "title": "Product UI/UX Designer",
+          "text": "Product-focused UI/UX Designer with experience across web, mobile, and SaaS products. Combines strong research instincts with polished visual design skills to deliver interfaces that are both beautiful and easy to use. Grew product NPS from 32 to 61 through systematic UX improvements."
+        },
+        {
+          "title": "UI/UX Designer – Design Systems Specialist",
+          "text": "UI/UX Designer specializing in design systems and component-based design. Built and maintained comprehensive Figma design systems adopted by multiple product teams reducing inconsistency and accelerating design-to-development velocity by 40%."
+        },
+        {
+          "title": "Junior UI/UX Designer",
+          "text": "Creative and detail-oriented Junior UI/UX Designer with practical experience in Figma, user research, and responsive design. Comfortable working across the full design process from wireframes to final handoff. Eager to grow skills in design systems and advanced interaction design."
+        }
+      ]
+    },
+    {
+      "role": "Product Manager",
+      "tags": ["product management", "product roadmap", "agile", "stakeholder management"],
+      "options": [
+        {
+          "title": "Experienced Product Manager",
+          "text": "Product Manager with 5+ years of experience leading cross-functional teams to discover, define, and deliver products users love. Skilled in roadmap planning, user research, data analysis, and stakeholder management with a track record of launching features that drive revenue growth and measurable user engagement."
+        },
+        {
+          "title": "Data-Driven Product Manager",
+          "text": "Product Manager with a strong analytics mindset using data, experimentation, and continuous user discovery to drive product decisions. Defined KPI frameworks, ran A/B tests, and prioritized backlogs based on impact evidence — reducing feature miss rate by 50% and accelerating delivery cycle by 45%."
+        },
+        {
+          "title": "Growth-Focused Product Manager",
+          "text": "Product Manager specializing in growth, activation, and retention. Built and iterated on onboarding flows, feature adoption campaigns, and referral mechanics growing product from 0 to 50,000 MAU within 18 months through disciplined discovery and rapid experimentation."
+        },
+        {
+          "title": "Junior Product Manager",
+          "text": "Enthusiastic Junior PM with experience writing user stories, managing Jira backlogs, conducting user interviews, and supporting agile sprint ceremonies. Strong analytical and communication skills with a passion for building products that solve real user problems and deliver clear business value."
+        }
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "tags": ["project management", "pmp", "agile", "scrum", "delivery"],
+      "options": [
+        {
+          "title": "Experienced Project Manager",
+          "text": "PMP-certified Project Manager with 6+ years of experience delivering complex technology and digital transformation projects on time and within budget. Skilled in agile, waterfall, and hybrid delivery with a proven ability to manage stakeholders, risks, and cross-functional teams across diverse industries."
+        },
+        {
+          "title": "Agile Delivery Manager",
+          "text": "Agile Project Manager with deep scrum expertise leading high-performing software delivery teams. Experienced in managing multi-team programs, resolving cross-team dependencies, and coaching teams on agile best practices. Achieved 95% on-time milestone delivery rate across an 18-month project portfolio."
+        },
+        {
+          "title": "IT & Digital Transformation PM",
+          "text": "Project Manager specializing in IT infrastructure, ERP, and digital transformation delivery. Managed budgets up to $5M delivering enterprise system implementations for 500+ user organizations. Expert at managing vendor relationships, change management, and executive stakeholder communication."
+        },
+        {
+          "title": "Junior Project Manager",
+          "text": "Organised and proactive Junior Project Manager with experience supporting agile delivery teams, managing Jira boards, writing status reports, and coordinating stakeholder meetings. Familiar with PRINCE2 and Scrum frameworks. Eager to grow toward independent program delivery responsibility."
+        }
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "tags": ["technical support", "helpdesk", "it support", "troubleshooting", "sla"],
+      "options": [
+        {
+          "title": "Experienced Technical Support Engineer",
+          "text": "Technical Support Engineer with 4+ years of experience providing Tier 1-3 support for enterprise SaaS and IT environments. Skilled in troubleshooting complex software, network, and integration issues with a consistent 96%+ CSAT score and a passion for turning difficult technical problems into clear customer resolutions."
+        },
+        {
+          "title": "Senior Support Engineer – SaaS Products",
+          "text": "Senior Technical Support Engineer specializing in enterprise SaaS platform support. Expert in API debugging, SSO integration troubleshooting, and customer escalation management. Reduced average ticket resolution time from 48 hours to 6 hours and authored 100+ knowledge base articles reducing repeat tickets by 35%."
+        },
+        {
+          "title": "Support Engineer – Cloud & Integrations",
+          "text": "Technical Support Engineer with expertise in cloud platform support, REST API troubleshooting, and enterprise identity management (Azure AD, SAML, OAuth). Comfortable handling Tier 3 escalations and collaborating with engineering teams to drive permanent product fixes for recurring customer issues."
+        },
+        {
+          "title": "Junior Technical Support Engineer",
+          "text": "Eager Junior Support Engineer with hands-on experience in Zendesk ticket management, Windows and macOS troubleshooting, and customer onboarding. Quick learner with strong communication skills and a customer-first mindset committed to resolving issues efficiently and contributing to knowledge base documentation."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "UX Designer",
+      "tags": ["ux design", "user experience", "figma", "user research", "usability testing"],
+      "items": [
+        "Reduced new user drop-off by 38% through research-driven redesign of the onboarding experience.",
+        "Improved task completion rate from 61% to 89% after redesigning core navigation based on card sorting findings.",
+        "Delivered UX research program informing 6-month product roadmap that contributed to 25% increase in user retention.",
+        "Reduced usability testing cycle from 3 weeks to 5 days by building a reusable testing template and participant panel.",
+        "Led UX redesign of enterprise dashboard increasing daily active usage by 42% within 3 months of launch.",
+        "Built UX metrics framework adopted across 3 product teams providing consistent benchmarks for design quality evaluation.",
+        "Facilitated design sprint workshop resolving 4-month stakeholder alignment impasse and unblocking product delivery.",
+        "Reduced support tickets related to navigation confusion by 50% after implementing IA improvements from tree testing study.",
+        "Achieved WCAG 2.1 AA accessibility compliance across all 60+ screens through systematic audit and redesign.",
+        "Delivered end-to-end UX research report presenting findings to C-suite that secured $300K investment in UX capability."
+      ]
+    },
+    {
+      "role": "UI/UX Designer",
+      "tags": ["ui ux", "figma", "visual design", "design systems", "usability testing"],
+      "items": [
+        "Grew product NPS from 32 to 61 through systematic UX improvements prioritized from user research and analytics.",
+        "Built 200-component design system reducing design inconsistency by 90% and developer rework by 40%.",
+        "Redesigned mobile app UI resulting in App Store rating improvement from 3.2 to 4.6 stars within 2 months.",
+        "Increased landing page conversion rate by 22% through data-informed visual hierarchy and CTA redesign.",
+        "Delivered complete product redesign for Series B startup within 8-week timeline ahead of investor demo.",
+        "Reduced design-to-development cycle by 40% by introducing Figma auto-layout components and design tokens.",
+        "Improved user onboarding completion rate by 45% through progressive disclosure and guided flow redesign.",
+        "Reduced developer clarification requests by 65% by introducing interaction specs and comprehensive redline documentation.",
+        "Designed accessible UI achieving WCAG 2.1 AA compliance across 80+ screens of enterprise web application.",
+        "Won internal design award for best product redesign based on user satisfaction improvement and visual quality."
+      ]
+    },
+    {
+      "role": "Product Manager",
+      "tags": ["product management", "product roadmap", "agile", "kpi"],
+      "items": [
+        "Launched 3 major product features contributing to 30% year-over-year revenue growth within 12 months.",
+        "Grew product from 0 to 50,000 monthly active users within 18 months through iterative discovery and rapid delivery.",
+        "Reduced feature delivery cycle from 12 weeks to 6 weeks by streamlining requirements and reducing development rework.",
+        "Reduced post-launch feature miss rate by 50% by introducing continuous discovery practices and weekly user interviews.",
+        "Achieved 4.8-star average App Store rating after leading redesign of core product flows based on user research.",
+        "Reduced churn attributable to product gaps by 20% through structured voice-of-customer program and rapid iteration.",
+        "Secured $2M product investment by presenting compelling roadmap and market opportunity analysis to executive board.",
+        "Improved sprint velocity by 35% by introducing structured refinement sessions and clear acceptance criteria standards.",
+        "Built and shipped API platform adopted by 200+ enterprise integration partners within 6 months of launch.",
+        "Increased user activation rate from 34% to 67% through redesigned onboarding experience informed by user research."
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "tags": ["project management", "pmp", "agile", "delivery", "risk management"],
+      "items": [
+        "Delivered $5M ERP implementation on time and 8% under budget managing 15-person cross-functional team.",
+        "Achieved 95% on-time milestone delivery rate across portfolio of 8 concurrent technology projects over 18 months.",
+        "Reduced project delivery delays by 40% by implementing structured dependency mapping and weekly cross-team syncs.",
+        "Delivered digital transformation program saving $500K annually in operational costs through process automation.",
+        "Managed scope change control process evaluating 50+ change requests with zero uncontrolled scope creep incidents.",
+        "Reduced project rework by 35% by introducing structured requirements sign-off process and change control gates.",
+        "Led migration project completing transition of 500 users to new platform with zero unplanned business disruption.",
+        "Completed data centre relocation project 2 weeks ahead of schedule through rigorous dependency and risk management.",
+        "Saved $180K in vendor costs by renegotiating 3 supplier contracts during project delivery through structured review.",
+        "Established PMO governance framework adopted across 12 projects reducing reporting inconsistency and executive escalations."
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "tags": ["technical support", "helpdesk", "it support", "troubleshooting", "sla"],
+      "items": [
+        "Maintained 96% CSAT score across 5,000+ support interactions over a 12-month performance period.",
+        "Reduced average ticket resolution time from 48 hours to 6 hours by redesigning triage and escalation workflows.",
+        "Authored 100+ knowledge base articles reducing repeat ticket volume by 35% within 6 months of publication.",
+        "Achieved 98% SLA compliance rate across all priority tiers over a consecutive 12-month period.",
+        "Resolved critical enterprise customer escalation within 4 hours preventing $200K contract cancellation.",
+        "Reduced Tier 2 escalation rate by 40% by expanding Tier 1 team troubleshooting capabilities through training.",
+        "Built Python automation scripts saving 5 hours per week in repetitive diagnostic and log parsing tasks.",
+        "Onboarded 30 enterprise customers with zero negative CSAT feedback through structured onboarding training programme.",
+        "Identified recurring product bug affecting 200+ customers and escalated to engineering resulting in same-week hotfix.",
+        "Won Top Support Engineer award for 3 consecutive quarters based on CSAT, ticket throughput, and knowledge contribution."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "UX Designer",
+      "tags": ["ux design", "user experience", "figma", "user research"],
+      "items": [
+        "Onboarding Redesign: Led end-to-end UX redesign of user onboarding reducing drop-off by 38% and time-to-activation by 60%.",
+        "Navigation IA Overhaul: Ran card sorting and tree testing study with 40 users redesigning navigation that improved findability by 55%.",
+        "Enterprise Dashboard UX: Redesigned data-heavy analytics dashboard increasing daily active usage by 42% post-launch.",
+        "UX Research Program: Established quarterly user interview program with 50+ participants feeding directly into product roadmap.",
+        "Design Sprint Facilitation: Facilitated 5-day design sprint resolving 4-month stakeholder alignment blocker for core product feature.",
+        "Journey Map & Service Blueprint: Built end-to-end customer journey map across 6 touchpoints aligning 4 business teams.",
+        "Accessibility Audit: Conducted WCAG 2.1 AA UX audit on 60+ screens identifying 45 issues resolved before public launch.",
+        "UX Metrics Framework: Defined and implemented task success rate and time-on-task tracking across 8 core product flows.",
+        "Usability Testing Programme: Built reusable usability test template and participant panel reducing testing cycle from 3 weeks to 5 days.",
+        "Competitive UX Benchmarking: Delivered 10-competitor UX analysis report informing 3 major differentiation decisions in the product roadmap."
+      ]
+    },
+    {
+      "role": "UI/UX Designer",
+      "tags": ["ui ux", "figma", "visual design", "design systems"],
+      "items": [
+        "Full Product Redesign: Led end-to-end UI/UX redesign growing NPS from 32 to 61 and App Store rating from 3.2 to 4.6.",
+        "Design System v2.0: Built 200-component Figma design system with tokens, dark mode, and accessibility annotations.",
+        "Mobile App Design: Designed complete iOS and Android app from research through production-ready Figma handoff files.",
+        "SaaS Dashboard: Designed complex analytics dashboard making dense data legible and actionable for non-technical users.",
+        "E-Commerce Redesign: Redesigned product listing, PDP, and checkout flows increasing conversion rate by 22%.",
+        "Onboarding Flow: Redesigned multi-step onboarding reducing user drop-off by 45% through progressive disclosure design.",
+        "A/B Test Design Variants: Produced 8 design variants for conversion A/B tests contributing to 15% improvement in signup rate.",
+        "Brand Identity & UI Kit: Designed complete visual identity and UI component kit for B2B SaaS startup Series A launch.",
+        "Developer Handoff System: Established Figma auto-layout component library and Zeplin workflow reducing clarifications by 65%.",
+        "Accessibility Redesign: Audited and redesigned 80+ screens achieving full WCAG 2.1 AA compliance before enterprise launch."
+      ]
+    },
+    {
+      "role": "Product Manager",
+      "tags": ["product management", "product roadmap", "agile", "kpi"],
+      "items": [
+        "0-to-1 Product Launch: Took new product from concept to 50,000 MAU in 18 months through discovery, build, and growth loops.",
+        "API Platform: Built and shipped developer API platform adopted by 200+ integration partners within 6 months of launch.",
+        "Onboarding Optimisation: Redesigned onboarding flow improving activation rate from 34% to 67% using research and experimentation.",
+        "Growth Experimentation Programme: Set up A/B testing infrastructure running 10 concurrent experiments improving key metrics.",
+        "Enterprise Feature Suite: Defined and delivered 5-feature enterprise tier enabling $2M ARR expansion within 12 months.",
+        "Roadmap Planning Process: Introduced quarterly roadmap planning with OKR alignment adopted across 3 product teams.",
+        "Continuous Discovery Programme: Established weekly user interview cadence feeding insights directly into sprint-level prioritization.",
+        "Churn Reduction Initiative: Led cross-functional churn task force defining and shipping 4 features that reduced churn by 20%.",
+        "Competitive Analysis Framework: Built competitor tracking system monitoring 8 rivals with monthly feature gap reports.",
+        "Data Dashboard: Defined and built product analytics dashboard in Mixpanel tracking 12 KPIs used in weekly leadership reviews."
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "tags": ["project management", "pmp", "agile", "delivery"],
+      "items": [
+        "ERP Implementation: Delivered $5M SAP ERP rollout for 500-user organisation on time and 8% under budget.",
+        "Digital Transformation Programme: Managed 18-month transformation programme delivering $500K annual operational cost savings.",
+        "Data Centre Migration: Led full data centre relocation completing 2 weeks ahead of schedule with zero unplanned downtime.",
+        "Agile Adoption Programme: Led agile transformation for 3 delivery teams improving sprint velocity by 35% in 6 months.",
+        "Cloud Migration Project: Managed AWS cloud migration for 20 applications coordinating 3 vendors and 2 internal teams.",
+        "PMO Setup: Established project management office governance framework adopted across 12 concurrent projects.",
+        "CRM Rollout: Delivered Salesforce CRM implementation for 200-seat sales team on time with 95% user adoption at launch.",
+        "Vendor Management Programme: Managed 5 technology vendors across concurrent projects achieving 98% SLA compliance rate.",
+        "Change Management Initiative: Led change management workstream for ERP go-live onboarding 500 users with minimal disruption.",
+        "Risk Management Framework: Built enterprise RAID log and risk reporting process reducing unmitigated project risks by 60%."
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "tags": ["technical support", "helpdesk", "it support", "troubleshooting"],
+      "items": [
+        "Knowledge Base Programme: Authored 100+ troubleshooting articles reducing repeat ticket volume by 35% within 6 months.",
+        "Triage Process Redesign: Redesigned ticket triage and escalation workflow reducing average resolution time from 48h to 6h.",
+        "Enterprise Onboarding Programme: Built structured onboarding training for enterprise customers achieving 100% positive CSAT.",
+        "Support Automation Tools: Built Python scripts automating log analysis and diagnostic checks saving 5 hours per week.",
+        "Escalation Resolution: Resolved critical enterprise escalation within 4 hours preventing potential $200K contract cancellation.",
+        "SSO Integration Support: Developed internal SSO troubleshooting guide reducing integration support tickets by 50%.",
+        "Monitoring & Alerting Setup: Implemented PagerDuty alerting for 20 critical customer-impacting system events enabling proactive support.",
+        "Bug Reporting Pipeline: Built structured bug reporting template enabling engineering to reproduce and fix 30% more issues per sprint.",
+        "Tier 1 Training Programme: Trained 5 new support agents on product, tooling, and escalation reducing their ramp time from 8 to 3 weeks.",
+        "API Support Documentation: Authored comprehensive REST API troubleshooting guide reducing developer support tickets by 40%."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "UX Designer",
+      "tags": ["ux design", "user experience", "figma", "user research"],
+      "items": [
+        "Google UX Design Professional Certificate – Coursera",
+        "Nielsen Norman Group UX Certification (UX Master Certificate)",
+        "Interaction Design Foundation: UX Research – Certification",
+        "Interaction Design Foundation: Become a UX Designer from Scratch",
+        "Certified Usability Analyst (CUA) – Human Factors International",
+        "Figma Advanced Design – Certification",
+        "Design Thinking Certificate – IDEO U",
+        "Accessibility for UX Designers – WCAG 2.1 Certification",
+        "Information Architecture Certificate – Interaction Design Foundation",
+        "Service Design Certification – Interaction Design Foundation"
+      ]
+    },
+    {
+      "role": "UI/UX Designer",
+      "tags": ["ui ux", "figma", "visual design", "design systems"],
+      "items": [
+        "Google UX Design Professional Certificate – Coursera",
+        "Figma UI Design Advanced – Certification",
+        "Nielsen Norman Group UX Certification",
+        "Adobe Certified Professional – Photoshop / XD",
+        "Interaction Design Foundation: UI Design Patterns for Successful Software",
+        "Designlab UX Academy Certificate",
+        "Accessibility for Designers – WCAG 2.1 Course",
+        "Motion Design with After Effects – Certification",
+        "Coursera Graphic Design Specialization – CalArts",
+        "HubSpot Content Design Certification"
+      ]
+    },
+    {
+      "role": "Product Manager",
+      "tags": ["product management", "product roadmap", "agile"],
+      "items": [
+        "Certified Scrum Product Owner (CSPO) – Scrum Alliance",
+        "Professional Scrum Product Owner (PSPO) – Scrum.org",
+        "Product Management Certificate – Product School",
+        "Pragmatic Institute Certified: Product Management",
+        "PMI Agile Certified Practitioner (PMI-ACP)",
+        "Google Project Management Professional Certificate",
+        "AIPMM Certified Product Manager (CPM)",
+        "Reforge Product Strategy & Roadmap Programme",
+        "IBM Product Manager Professional Certificate – Coursera",
+        "Kellogg Executive Education: Product Strategy Certification"
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "tags": ["project management", "pmp", "agile", "prince2"],
+      "items": [
+        "Project Management Professional (PMP) – PMI",
+        "PRINCE2 Practitioner",
+        "Certified Scrum Master (CSM) – Scrum Alliance",
+        "PMI Agile Certified Practitioner (PMI-ACP)",
+        "PRINCE2 Agile Practitioner",
+        "Lean Six Sigma Green Belt",
+        "Managing Successful Programmes (MSP) Practitioner",
+        "Google Project Management Professional Certificate",
+        "Certified Associate in Project Management (CAPM) – PMI",
+        "SAFe Agilist (SA) – Scaled Agile"
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "tags": ["technical support", "helpdesk", "it support", "troubleshooting"],
+      "items": [
+        "CompTIA A+ Certification",
+        "CompTIA Network+",
+        "CompTIA Security+",
+        "ITIL 4 Foundation Certificate",
+        "Microsoft Certified: Azure Fundamentals (AZ-900)",
+        "Zendesk Support Administrator Certification",
+        "Jira Service Management Fundamentals – Atlassian",
+        "AWS Certified Cloud Practitioner",
+        "HDI Customer Service Representative (HDI-CSR)",
+        "Google IT Support Professional Certificate – Coursera"
+      ]
+    }
+  ]
+}

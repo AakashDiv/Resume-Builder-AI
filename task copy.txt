@@ -1,0 +1,243 @@
+You are a Senior Marketing Resume Writer, ATS Optimization Specialist, Hiring Manager, Career Coach, and Resume Content Architect with 20+ years of experience creating resume content for Resume.io, Enhancv, Zety, Rezi, Kickresume, and Novoresume.
+
+Generate a complete Marketing & Digital Marketing Resume Content Database in valid JSON format.
+
+The data will be used in a Resume Builder SaaS platform as pre-written content suggestions based on the user's selected job role.
+
+IMPORTANT:
+
+* Return ONLY valid JSON.
+* No explanations.
+* No markdown.
+* No comments.
+* No placeholders.
+* No lorem ipsum.
+* No duplicate content.
+* Content must be ATS-friendly.
+* Content must sound realistic and professional.
+* Content should reflect real-world marketing responsibilities.
+* Content should be suitable for USA, UK, Canada, Australia, UAE, and India job markets.
+
+---
+
+JSON STRUCTURE
+
+{
+"experience": [],
+"skills": [],
+"summaries": [],
+"achievements": [],
+"projects": [],
+"certifications": []
+}
+
+---
+
+GENERATE FOR EACH ROLE
+
+1. experience
+
+{
+"role": "Digital Marketing Executive",
+"tags": [],
+"phrases": []
+}
+
+Generate:
+
+* 20 professional experience statements
+* Action-oriented language
+* ATS-friendly wording
+* Real marketing responsibilities
+
+---
+
+2. skills
+
+{
+"role": "Digital Marketing Executive",
+"tags": [],
+"skills": []
+}
+
+Generate:
+
+* 25 relevant skills
+* Mix of technical skills
+* Marketing tools
+* Soft skills
+* Analytics skills
+
+---
+
+3. summaries
+
+{
+"role": "Digital Marketing Executive",
+"tags": [],
+"options": []
+}
+
+Generate:
+
+* 10 professional summary options
+
+Each summary:
+
+* 2-4 lines
+* ATS-friendly
+* Recruiter-focused
+* Unique
+* Modern
+
+---
+
+4. achievements
+
+{
+"role": "Digital Marketing Executive",
+"tags": [],
+"items": []
+}
+
+Generate:
+
+* 15 measurable achievement statements
+
+Examples:
+
+* Increased organic traffic by 65% through SEO initiatives.
+* Improved email open rates by 28%.
+* Reduced cost-per-acquisition by 30%.
+
+Use realistic marketing metrics.
+
+---
+
+5. projects
+
+{
+"role": "Digital Marketing Executive",
+"tags": [],
+"items": []
+}
+
+Generate:
+
+* 15 realistic project descriptions
+
+Examples:
+
+* Managed SEO optimization for an e-commerce website.
+* Executed lead generation campaigns using Meta Ads.
+* Developed a content marketing strategy for SaaS growth.
+
+---
+
+6. certifications
+
+{
+"role": "Digital Marketing Executive",
+"tags": [],
+"items": []
+}
+
+Generate:
+
+* 10 realistic certifications
+
+Examples:
+
+* Google Ads Certification
+* Google Analytics Certification
+* HubSpot Content Marketing Certification
+
+---
+
+ROLES TO COVER
+
+Digital Marketing Executive
+
+Digital Marketing Manager
+
+SEO Executive
+
+SEO Specialist
+
+SEO Manager
+
+PPC Specialist
+
+Google Ads Specialist
+
+Meta Ads Specialist
+
+Social Media Executive
+
+Social Media Manager
+
+Content Writer
+
+Copywriter
+
+Email Marketing Specialist
+
+Performance Marketing Manager
+
+Growth Marketer
+
+Brand Manager
+
+Marketing Coordinator
+
+Marketing Analyst
+
+Affiliate Marketing Specialist
+
+Content Marketing Manager
+
+---
+
+CONTENT RULES
+
+Every role must include:
+
+* Unique summaries
+* Unique skills
+* Unique experience statements
+* Unique achievements
+* Unique projects
+* Unique certifications
+
+Avoid generic phrases.
+
+Avoid repetitive wording.
+
+Use modern marketing terminology including:
+
+* SEO
+* SEM
+* PPC
+* Google Ads
+* Meta Ads
+* LinkedIn Ads
+* Analytics
+* Conversion Rate Optimization
+* A/B Testing
+* Email Automation
+* Lead Generation
+* Marketing Funnels
+* Attribution Models
+* Customer Acquisition
+* Retargeting
+* Growth Marketing
+
+---
+
+OUTPUT QUALITY
+
+Content should feel like it was written by a professional marketing recruiter and resume writer.
+
+The final JSON should be production-ready and directly importable into a resume builder database.
+
+Return ONLY JSON.

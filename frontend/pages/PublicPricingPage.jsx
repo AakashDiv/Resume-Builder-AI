@@ -53,8 +53,8 @@ export default function PublicPricingPage() {
           background: "radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)",
           pointerEvents: "none"
         }} />
-        <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", color: "var(--cyan)", fontFamily: "Sora, sans-serif", marginBottom: 16 }}>PRICING</p>
-        <h1 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 800, fontFamily: "Sora, sans-serif", letterSpacing: "-0.02em", marginBottom: 16 }}>
+        <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", color: "var(--cyan)", fontFamily: "Inter, Manrope, sans-serif", marginBottom: 16 }}>PRICING</p>
+        <h1 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", letterSpacing: "-0.02em", marginBottom: 16 }}>
           Simple, <span className="text-gradient">honest pricing</span>
         </h1>
         <p style={{ fontSize: 16, color: "var(--t2)", maxWidth: 480, margin: "0 auto" }}>
@@ -74,7 +74,7 @@ export default function PublicPricingPage() {
             <div style={{ marginBottom: 24 }}>
               <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: "var(--t3)", marginBottom: 12 }}>FREE</p>
               <div style={{ display: "flex", alignItems: "flex-end", gap: 4, marginBottom: 8 }}>
-                <span style={{ fontSize: 48, fontWeight: 800, fontFamily: "Sora, sans-serif", lineHeight: 1 }}>₹0</span>
+                <span style={{ fontSize: 48, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", lineHeight: 1 }}>₹0</span>
                 <span style={{ fontSize: 14, color: "var(--t2)", marginBottom: 8 }}>/month</span>
               </div>
               <p style={{ fontSize: 13, color: "var(--t2)" }}>No credit card. No expiry. Always free.</p>
@@ -111,13 +111,13 @@ export default function PublicPricingPage() {
               position: "absolute", top: 20, right: 20,
               background: "linear-gradient(135deg, #22d3ee, #818cf8)",
               borderRadius: 20, padding: "4px 12px",
-              fontSize: 10, fontWeight: 700, color: "#fff", fontFamily: "Sora, sans-serif"
+              fontSize: 10, fontWeight: 700, color: "#fff", fontFamily: "Inter, Manrope, sans-serif"
             }}>MOST POPULAR</div>
 
             <div style={{ marginBottom: 24 }}>
               <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: "var(--cyan)", marginBottom: 12 }}>PRO</p>
               <div style={{ display: "flex", alignItems: "flex-end", gap: 4, marginBottom: 8 }}>
-                <span style={{ fontSize: 48, fontWeight: 800, fontFamily: "Sora, sans-serif", lineHeight: 1 }} className="text-gradient-gold">₹299</span>
+                <span style={{ fontSize: 48, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", lineHeight: 1 }} className="text-gradient-gold">₹299</span>
                 <span style={{ fontSize: 14, color: "var(--t2)", marginBottom: 8 }}>/month</span>
               </div>
               <p style={{ fontSize: 13, color: "var(--t2)" }}>Full AI suite. Cancel anytime.</p>
@@ -149,7 +149,7 @@ export default function PublicPricingPage() {
       {/* FAQ */}
       <section style={{ padding: "0 24px 80px" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 28, fontWeight: 800, fontFamily: "Sora, sans-serif", textAlign: "center", marginBottom: 40 }}>
+          <h2 style={{ fontSize: 28, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", textAlign: "center", marginBottom: 40 }}>
             Frequently asked questions
           </h2>
           {faqs.map((faq, i) => (
@@ -157,7 +157,7 @@ export default function PublicPricingPage() {
               background: "var(--bg-card)", border: "1px solid var(--border)",
               borderRadius: 14, padding: "20px 24px", marginBottom: 12
             }}>
-              <p style={{ fontSize: 14, fontWeight: 700, fontFamily: "Sora, sans-serif", marginBottom: 8 }}>{faq.q}</p>
+              <p style={{ fontSize: 14, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif", marginBottom: 8 }}>{faq.q}</p>
               <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.7 }}>{faq.a}</p>
             </div>
           ))}

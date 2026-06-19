@@ -98,6 +98,13 @@ export const resumeTemplates = [
     thumbnailImage: "/resume-thumbnails/modern-professional-4.png"
   },
   {
+    id: "modern-professional-5",
+    name: "Modern Professional 5",
+    category: "Modern",
+    accent: "#505050",
+    thumbnailImage: "/resume-thumbnails/modern-professional-5.png"
+  },
+  {
     id: "black-white-minimalist",
     name: "Black White Minimalist",
     category: "Minimalist",

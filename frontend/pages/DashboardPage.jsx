@@ -6,6 +6,7 @@ import { fetchProfile } from "../services/profileApi.js";
 import { fetchApplications } from "../services/applicationsApi.js";
 import { fetchQueueStatus, manualApply, setAutoApplyEnabled } from "../services/applyApi.js";
 import { disableScheduler, enableScheduler, fetchSchedulerStatus } from "../services/schedulerApi.js";
+import ResumeUploadCard from "../components/ResumeUploadCard.jsx";
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 function getProfileCompletion(profile) {
@@ -21,7 +22,7 @@ function getProfileCompletion(profile) {
 }
 
 function scoreColor(n) {
-  if (n >= 75) return { text: "#34D399", bg: "rgba(52,211,153,0.12)", border: "rgba(52,211,153,0.3)" };
+  if (n >= 75) return { text: "#10B981", bg: "rgba(16,185,129,0.12)", border: "rgba(16,185,129,0.3)" };
   if (n >= 50) return { text: "#fbbf24", bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.3)" };
   return   { text: "#fb923c", bg: "rgba(251,146,60,0.12)", border: "rgba(251,146,60,0.3)" };
 }
@@ -41,7 +42,7 @@ function platformColor(platform) {
   if (p.includes("naukri"))    return "#FF7555";
   if (p.includes("glassdoor")) return "#0CAA41";
   if (p.includes("indeed"))    return "#003A9B";
-  return "#22d3ee";
+  return "#2563EB";
 }
 
 function timeAgo(dateStr) {
@@ -63,9 +64,9 @@ function Toast({ toast, onClose }) {
     <div style={{
       display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12,
       padding: "12px 16px", borderRadius: 12,
-      background: isErr ? "rgba(248,113,113,0.1)" : "rgba(52,211,153,0.1)",
-      border: `1px solid ${isErr ? "rgba(248,113,113,0.3)" : "rgba(52,211,153,0.3)"}`,
-      color: isErr ? "#f87171" : "#34D399",
+      background: isErr ? "rgba(248,113,113,0.1)" : "rgba(16,185,129,0.1)",
+      border: `1px solid ${isErr ? "rgba(248,113,113,0.3)" : "rgba(16,185,129,0.3)"}`,
+      color: isErr ? "#f87171" : "#10B981",
       fontSize: 13, fontWeight: 600, marginBottom: 20,
     }}>
       <span>{isErr ? "⚠ " : "✓ "}{toast.message}</span>
@@ -96,14 +97,14 @@ function StatCard({ icon, label, value, sub, accent, proOnly, isPro }) {
 
       {locked ? (
         <div>
-          <p style={{ fontSize: 22, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t3)" }}>—</p>
+          <p style={{ fontSize: 22, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t3)" }}>—</p>
           <Link to="/app/subscription" style={{
             fontSize: 11, fontWeight: 600, color: "#fbbf24", textDecoration: "none", marginTop: 6, display: "inline-block"
           }}>⚡ Pro only</Link>
         </div>
       ) : (
         <>
-          <p style={{ fontSize: 28, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", lineHeight: 1 }}>{value}</p>
+          <p style={{ fontSize: 28, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", lineHeight: 1 }}>{value}</p>
           <p style={{ fontSize: 11, color: "var(--t3)", marginTop: 6, lineHeight: 1.5 }}>{sub}</p>
         </>
       )}
@@ -113,7 +114,7 @@ function StatCard({ icon, label, value, sub, accent, proOnly, isPro }) {
 
 function ProfileSummary({ profile, completion }) {
   const skills = (profile?.extractedProfile?.skills || []).slice(0, 8);
-  const barColor = completion >= 80 ? "#34D399" : completion >= 50 ? "#fbbf24" : "#fb923c";
+  const barColor = completion >= 80 ? "#10B981" : completion >= 50 ? "#fbbf24" : "#fb923c";
 
   return (
     <div style={{ background: "var(--bg-card2)", borderRadius: 14, padding: 16, marginTop: 16 }}>
@@ -145,7 +146,7 @@ function ProfileSummary({ profile, completion }) {
           {skills.map(s => (
             <span key={s} style={{
               fontSize: 11, padding: "3px 9px", borderRadius: 20,
-              background: "rgba(34,211,238,0.08)", border: "1px solid rgba(34,211,238,0.2)", color: "var(--cyan)"
+              background: "rgba(37,99,235,0.08)", border: "1px solid rgba(37,99,235,0.2)", color: "var(--cyan)"
             }}>{s}</span>
           ))}
         </div>
@@ -178,12 +179,12 @@ function JobCard({ item, user, applyingJobId, onApply }) {
             width: 36, height: 36, borderRadius: 9, flexShrink: 0,
             background: `${plColor}20`, border: `1px solid ${plColor}40`,
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 11, fontWeight: 800, color: plColor, fontFamily: "Sora, sans-serif"
+            fontSize: 11, fontWeight: 800, color: plColor, fontFamily: "Inter, Manrope, sans-serif"
           }}>{plIcon}</div>
 
           <div style={{ minWidth: 0 }}>
             <h4 style={{
-              fontSize: 14, fontWeight: 700, fontFamily: "Sora, sans-serif",
+              fontSize: 14, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif",
               color: "var(--t1)", marginBottom: 2, lineHeight: 1.3,
               overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"
             }}>{item.job.title}</h4>
@@ -199,7 +200,7 @@ function JobCard({ item, user, applyingJobId, onApply }) {
           background: sc.bg, border: `1px solid ${sc.border}`,
           borderRadius: 10, padding: "6px 10px", minWidth: 52
         }}>
-          <div style={{ fontSize: 16, fontWeight: 800, color: sc.text, fontFamily: "Sora, sans-serif", lineHeight: 1 }}>{item.matchScore}%</div>
+          <div style={{ fontSize: 16, fontWeight: 800, color: sc.text, fontFamily: "Inter, Manrope, sans-serif", lineHeight: 1 }}>{item.matchScore}%</div>
           <div style={{ fontSize: 9, color: sc.text, fontWeight: 600, opacity: 0.8, marginTop: 1 }}>MATCH</div>
         </div>
       </div>
@@ -228,11 +229,11 @@ function JobCard({ item, user, applyingJobId, onApply }) {
 
       {/* Skills */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
-        <div style={{ background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.15)", borderRadius: 10, padding: "8px 10px" }}>
-          <p style={{ fontSize: 9, fontWeight: 700, color: "#34D399", letterSpacing: "0.06em", marginBottom: 6 }}>✓ MATCHED</p>
+        <div style={{ background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.15)", borderRadius: 10, padding: "8px 10px" }}>
+          <p style={{ fontSize: 9, fontWeight: 700, color: "#10B981", letterSpacing: "0.06em", marginBottom: 6 }}>✓ MATCHED</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
             {item.matchedSkills?.length ? item.matchedSkills.slice(0, 4).map(s => (
-              <span key={s} style={{ fontSize: 10, padding: "2px 7px", borderRadius: 10, background: "rgba(52,211,153,0.1)", color: "#34D399" }}>{s}</span>
+              <span key={s} style={{ fontSize: 10, padding: "2px 7px", borderRadius: 10, background: "rgba(16,185,129,0.1)", color: "#10B981" }}>{s}</span>
             )) : <span style={{ fontSize: 11, color: "var(--t3)" }}>—</span>}
           </div>
         </div>
@@ -266,7 +267,7 @@ function JobCard({ item, user, applyingJobId, onApply }) {
           style={{
             flex: 1, borderRadius: 9, padding: "8px 12px",
             fontSize: 12, fontWeight: 600, cursor: isPro ? "pointer" : "not-allowed",
-            background: isPro ? "linear-gradient(135deg, #06b6d4, #0891b2)" : "var(--bg-card)",
+            background: isPro ? "linear-gradient(135deg, #2563EB, #1D4ED8)" : "var(--bg-card)",
             border: isPro ? "none" : "1px solid var(--border)",
             color: isPro ? "#fff" : "var(--t3)",
             opacity: isApplying ? 0.6 : 1, transition: "all 0.15s",
@@ -291,15 +292,15 @@ function AutomationPanel({ user, queueStatus, schedulerStatus, togglingAutoApply
           border: "1px solid rgba(251,191,36,0.2)", borderRadius: 14, padding: 20, textAlign: "center"
         }}>
           <div style={{ fontSize: 28, marginBottom: 10 }}>⚡</div>
-          <p style={{ fontSize: 14, fontWeight: 700, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 6 }}>Pro Automation</p>
+          <p style={{ fontSize: 14, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 6 }}>Pro Automation</p>
           <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.6, marginBottom: 16 }}>
             Auto-queue top matches, generate cover letters, and track every application.
           </p>
           <Link to="/app/subscription" style={{
             display: "inline-block", textDecoration: "none",
-            background: "linear-gradient(135deg, #f97316, #ea580c)",
+            background: "linear-gradient(135deg, #2563EB, #1d4ed8)",
             color: "#fff", borderRadius: 9, padding: "9px 20px",
-            fontSize: 13, fontWeight: 700, fontFamily: "Sora, sans-serif"
+            fontSize: 13, fontWeight: 700, fontFamily: "Inter, Manrope, sans-serif"
           }}>Upgrade to Pro →</Link>
         </div>
       </div>
@@ -310,20 +311,20 @@ function AutomationPanel({ user, queueStatus, schedulerStatus, togglingAutoApply
     <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
       {/* Auto-apply toggle */}
       <div style={{
-        background: autoOn ? "rgba(52,211,153,0.06)" : "var(--bg-card2)",
-        border: `1px solid ${autoOn ? "rgba(52,211,153,0.25)" : "var(--border)"}`,
+        background: autoOn ? "rgba(16,185,129,0.06)" : "var(--bg-card2)",
+        border: `1px solid ${autoOn ? "rgba(16,185,129,0.25)" : "var(--border)"}`,
         borderRadius: 14, padding: 16
       }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
           <div>
-            <p style={{ fontSize: 13, fontWeight: 700, color: "var(--t1)", fontFamily: "Sora, sans-serif" }}>Auto-Apply Queue</p>
+            <p style={{ fontSize: 13, fontWeight: 700, color: "var(--t1)", fontFamily: "Inter, Manrope, sans-serif" }}>Auto-Apply Queue</p>
             <p style={{ fontSize: 11, color: "var(--t2)", marginTop: 2 }}>Queues top matched jobs automatically</p>
           </div>
           <button onClick={onToggleAutoApply} disabled={togglingAutoApply} style={{
             padding: "6px 14px", borderRadius: 20, fontSize: 11, fontWeight: 700,
             cursor: togglingAutoApply ? "not-allowed" : "pointer",
-            background: autoOn ? "#34D399" : "var(--bg-card)",
-            border: `1px solid ${autoOn ? "#34D399" : "var(--border2)"}`,
+            background: autoOn ? "#10B981" : "var(--bg-card)",
+            border: `1px solid ${autoOn ? "#10B981" : "var(--border2)"}`,
             color: autoOn ? "#fff" : "var(--t2)",
             transition: "all 0.2s", opacity: togglingAutoApply ? 0.6 : 1,
           }}>{togglingAutoApply ? "..." : autoOn ? "ON" : "OFF"}</button>
@@ -343,8 +344,8 @@ function AutomationPanel({ user, queueStatus, schedulerStatus, togglingAutoApply
 
       {/* Scheduler toggle */}
       <div style={{
-        background: schedOn ? "rgba(34,211,238,0.05)" : "var(--bg-card2)",
-        border: `1px solid ${schedOn ? "rgba(34,211,238,0.2)" : "var(--border)"}`,
+        background: schedOn ? "rgba(37,99,235,0.05)" : "var(--bg-card2)",
+        border: `1px solid ${schedOn ? "rgba(37,99,235,0.2)" : "var(--border)"}`,
         borderRadius: 14, padding: 14,
         display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12
       }}>
@@ -355,9 +356,9 @@ function AutomationPanel({ user, queueStatus, schedulerStatus, togglingAutoApply
         <button onClick={onToggleScheduler} disabled={togglingScheduler} style={{
           padding: "7px 14px", borderRadius: 9, fontSize: 11, fontWeight: 700,
           cursor: togglingScheduler ? "not-allowed" : "pointer",
-          background: schedOn ? "rgba(248,113,113,0.15)" : "rgba(52,211,153,0.15)",
-          border: `1px solid ${schedOn ? "rgba(248,113,113,0.3)" : "rgba(52,211,153,0.3)"}`,
-          color: schedOn ? "#f87171" : "#34D399",
+          background: schedOn ? "rgba(248,113,113,0.15)" : "rgba(16,185,129,0.15)",
+          border: `1px solid ${schedOn ? "rgba(248,113,113,0.3)" : "rgba(16,185,129,0.3)"}`,
+          color: schedOn ? "#f87171" : "#10B981",
           opacity: togglingScheduler ? 0.6 : 1,
         }}>{togglingScheduler ? "..." : schedOn ? "Stop" : "Start"}</button>
       </div>
@@ -367,10 +368,10 @@ function AutomationPanel({ user, queueStatus, schedulerStatus, togglingAutoApply
 
 function AppSnapshot({ applicationSummary, isPro }) {
   const stats = [
-    { label: "Queued",    val: applicationSummary?.queued    ?? 0, color: "#22d3ee" },
-    { label: "Applied",   val: applicationSummary?.applied   ?? 0, color: "#818cf8" },
+    { label: "Queued",    val: applicationSummary?.queued    ?? 0, color: "#2563EB" },
+    { label: "Applied",   val: applicationSummary?.applied   ?? 0, color: "#2563EB" },
     { label: "Viewed",    val: applicationSummary?.viewed    ?? 0, color: "#fbbf24" },
-    { label: "Responded", val: applicationSummary?.responded ?? 0, color: "#34D399" },
+    { label: "Responded", val: applicationSummary?.responded ?? 0, color: "#10B981" },
   ];
 
   if (!isPro) {
@@ -404,7 +405,7 @@ function AppSnapshot({ applicationSummary, isPro }) {
           borderRadius: 12, padding: "12px 14px"
         }}>
           <p style={{ fontSize: 9, fontWeight: 700, color: s.color, letterSpacing: "0.06em", marginBottom: 4 }}>{s.label.toUpperCase()}</p>
-          <p style={{ fontSize: 22, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)" }}>{s.val}</p>
+          <p style={{ fontSize: 22, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)" }}>{s.val}</p>
         </div>
       ))}
     </div>
@@ -512,7 +513,7 @@ export default function DashboardPage() {
   // ── Loading skeleton ──
   if (loading) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 20, padding: "4px 0" }}>
+      <div className="dashboard26-page" style={{ display: "flex", flexDirection: "column", gap: 16, padding: "4px 0" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14 }}>
           {[1,2,3,4].map(i => <div key={i} className="shimmer" style={{ height: 100, borderRadius: 16 }} />)}
         </div>
@@ -532,7 +533,7 @@ export default function DashboardPage() {
 
   // ── Render ──
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <div className="dashboard26-page" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
       <Toast toast={toast} onClose={() => setToast(null)} />
 
@@ -544,19 +545,19 @@ export default function DashboardPage() {
       )}
 
       {/* ── Stat cards row ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+      <div className="dashboard26-stat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
         <StatCard icon="👤" label="Profile Ready" value={`${completion}%`}
-          sub="Resume · skills · role" accent="#22d3ee" isPro={isPro} />
+          sub="Resume · skills · role" accent="#2563EB" isPro={isPro} />
         <StatCard icon="🎯" label="Matched Jobs" value={matchTotal}
-          sub={isPro ? "All saved matches" : "Top 10 on free"} accent="#818cf8" isPro={isPro} />
+          sub={isPro ? "All saved matches" : "Top 10 on free"} accent="#2563EB" isPro={isPro} />
         <StatCard icon="📬" label="In Queue" value={queueStatus?.queuedCount ?? 0}
           sub="Waiting to apply" accent="#fbbf24" proOnly isPro={isPro} />
         <StatCard icon="✅" label="Applied" value={applicationSummary?.applied ?? 0}
-          sub="Tracked applications" accent="#34D399" proOnly isPro={isPro} />
+          sub="Tracked applications" accent="#10B981" proOnly isPro={isPro} />
       </div>
 
       {/* ── Main 2-col grid ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.35fr 0.65fr", gap: 20, alignItems: "start" }}>
+      <div className="dashboard26-main-grid" style={{ display: "grid", gridTemplateColumns: "1.35fr 0.65fr", gap: 16, alignItems: "start" }}>
 
         {/* ── LEFT column ── */}
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -566,7 +567,7 @@ export default function DashboardPage() {
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
               <div>
                 <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", color: "var(--cyan)", marginBottom: 6 }}>CONTROL CENTER</p>
-                <h3 style={{ fontSize: 18, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 6 }}>
+                <h3 style={{ fontSize: 18, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 6 }}>
                   Your Job-Matching Workspace
                 </h3>
                 <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.6, maxWidth: 500 }}>
@@ -577,9 +578,9 @@ export default function DashboardPage() {
                 <button onClick={handleRunMatches} disabled={refreshing || !hasProfile} style={{
                   padding: "9px 18px", borderRadius: 10, fontSize: 13, fontWeight: 700,
                   cursor: (refreshing || !hasProfile) ? "not-allowed" : "pointer",
-                  background: "linear-gradient(135deg, #06b6d4, #0891b2)",
+                  background: "linear-gradient(135deg, #2563EB, #1D4ED8)",
                   border: "none", color: "#fff", opacity: (refreshing || !hasProfile) ? 0.55 : 1,
-                  fontFamily: "Sora, sans-serif", transition: "all 0.2s"
+                  fontFamily: "Inter, Manrope, sans-serif", transition: "all 0.2s"
                 }}>
                   {refreshing ? "Refreshing..." : "⟳ Recompute Matches"}
                 </button>
@@ -620,7 +621,7 @@ export default function DashboardPage() {
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
               <div>
-                <h3 style={{ fontSize: 16, fontWeight: 800, fontFamily: "Sora, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", color: "var(--t1)", marginBottom: 2 }}>
                   Top Matches
                 </h3>
                 <p style={{ fontSize: 12, color: "var(--t2)" }}>
@@ -649,7 +650,7 @@ export default function DashboardPage() {
                 </p>
                 <Link to="/app/job-search" style={{
                   display: "inline-block", textDecoration: "none",
-                  background: "linear-gradient(135deg, #06b6d4, #0891b2)",
+                  background: "linear-gradient(135deg, #2563EB, #1D4ED8)",
                   color: "#fff", borderRadius: 9, padding: "9px 20px",
                   fontSize: 13, fontWeight: 700
                 }}>Search Jobs →</Link>
@@ -676,11 +677,11 @@ export default function DashboardPage() {
           {/* Automation */}
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif" }}>Automation</h3>
+              <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif" }}>Automation</h3>
               <span style={{
                 fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", padding: "3px 8px", borderRadius: 6,
-                background: isPro ? "rgba(34,211,238,0.1)" : "rgba(251,191,36,0.1)",
-                border: `1px solid ${isPro ? "rgba(34,211,238,0.25)" : "rgba(251,191,36,0.25)"}`,
+                background: isPro ? "rgba(37,99,235,0.1)" : "rgba(251,191,36,0.1)",
+                border: `1px solid ${isPro ? "rgba(37,99,235,0.25)" : "rgba(251,191,36,0.25)"}`,
                 color: isPro ? "var(--cyan)" : "#fbbf24"
               }}>{isPro ? "PRO" : "FREE"}</span>
             </div>
@@ -698,7 +699,7 @@ export default function DashboardPage() {
           {/* Applications snapshot */}
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
-              <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif" }}>Applications</h3>
+              <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif" }}>Applications</h3>
               <Link to="/app/applications" style={{
                 fontSize: 11, fontWeight: 600, color: "var(--cyan)", textDecoration: "none"
               }}>View all →</Link>
@@ -708,14 +709,38 @@ export default function DashboardPage() {
 
           {/* Quick links */}
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Sora, sans-serif", marginBottom: 12 }}>Quick Actions</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 800, fontFamily: "Inter, Manrope, sans-serif", marginBottom: 12 }}>Quick Actions</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <Link to="/builder" style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                padding: "10px 12px", borderRadius: 10, textDecoration: "none",
+                background: "var(--bg-card2)", border: "1px solid var(--border)",
+                fontSize: 12, fontWeight: 600, color: "var(--t1)", transition: "all 0.15s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--cyan)"; e.currentTarget.style.color = "var(--cyan)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--t1)"; }}>
+                📄 Create Resume
+              </Link>
+              <ResumeUploadCard
+                as="div"
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                  padding: "10px 12px", borderRadius: 10, cursor: "pointer",
+                  background: "var(--bg-card2)", border: "1px solid var(--border)",
+                  fontSize: 12, fontWeight: 600, color: "var(--t1)", transition: "all 0.15s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--cyan)"; e.currentTarget.style.color = "var(--cyan)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--t1)"; }}
+              >
+                ⬆ Upload Resume
+              </ResumeUploadCard>
               {[
-                { to: "/app/improve-resume", label: "✨ Improve Resume",   pro: true  },
-                { to: "/app/ats-score",      label: "📊 Check ATS Score",  pro: true  },
-                { to: "/app/tailor-resume",  label: "🎯 Tailor Resume",    pro: true  },
-                { to: "/app/cover-letter",   label: "📝 Cover Letter",     pro: true  },
-                { to: "/app/profile",        label: "👤 Edit Profile",     pro: false },
+                { to: "/templates",          label: "🎨 Browse Templates",  pro: false },
+                { to: "/app/improve-resume", label: "✨ Improve Resume",    pro: true  },
+                { to: "/app/ats-score",      label: "📊 Check ATS Score",   pro: true  },
+                { to: "/app/tailor-resume",  label: "🎯 Tailor Resume",     pro: true  },
+                { to: "/app/cover-letter",   label: "📝 Cover Letter",      pro: true  },
+                { to: "/app/profile",        label: "👤 Edit Profile",      pro: false },
               ].map(item => (
                 <Link key={item.to} to={item.to} style={{
                   display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -740,3 +765,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

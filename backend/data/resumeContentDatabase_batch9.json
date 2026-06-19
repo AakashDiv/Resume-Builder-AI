@@ -1,0 +1,134 @@
+{
+  "experience": [
+    {
+      "role": "System Administrator",
+      "tags": ["sysadmin", "windows server", "linux", "active directory", "networking", "vmware", "powershell", "it infrastructure"],
+      "phrases": [
+        "Managed and maintained Windows Server (2016/2019/2022) and Linux (RHEL, Ubuntu) environments supporting 2,000+ end users across multiple sites.",
+        "Administered Active Directory including user provisioning, group policy management, OU structure, and domain trust configurations.",
+        "Managed VMware vSphere and Hyper-V virtualisation infrastructure hosting 150+ virtual machines with 99.95% uptime.",
+        "Automated routine administrative tasks using PowerShell and Bash scripts reducing manual workload by 12 hours per week.",
+        "Implemented and maintained backup and disaster recovery solutions using Veeam ensuring RPO of 15 minutes and RTO of 2 hours.",
+        "Managed Microsoft 365 and Azure AD tenants including Exchange Online, Teams, SharePoint, and Intune device management.",
+        "Performed capacity planning, performance tuning, and resource optimisation across server and storage infrastructure.",
+        "Configured and maintained network services including DNS, DHCP, NTP, and RADIUS across enterprise environments.",
+        "Led OS patching and vulnerability remediation programmes maintaining 98% patch compliance across all managed endpoints.",
+        "Managed storage infrastructure including SAN, NAS, and cloud storage solutions with automated tiering and lifecycle policies.",
+        "Implemented monitoring and alerting using Nagios, Zabbix, and Prometheus enabling proactive detection of infrastructure issues.",
+        "Administered enterprise backup systems performing regular restore tests and documenting DR procedures for audit compliance.",
+        "Managed SSL certificate lifecycle across 50+ servers and applications preventing certificate expiry incidents.",
+        "Deployed and managed enterprise endpoint management using SCCM and Intune for software deployment and compliance.",
+        "Configured and maintained WSUS and patch management infrastructure ensuring timely remediation of critical vulnerabilities.",
+        "Collaborated with security teams to harden server configurations following CIS benchmarks and internal security standards.",
+        "Managed print servers, file servers, and shared storage ensuring reliable access for business-critical shared resources.",
+        "Supported infrastructure migration projects including physical-to-virtual (P2V) migrations and data centre consolidations.",
+        "Provided Level 2 and Level 3 escalation support for infrastructure incidents ensuring rapid resolution with minimal business impact.",
+        "Documented infrastructure configurations, runbooks, and operational procedures maintaining an accurate and current CMDB."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "System Administrator",
+      "tags": ["sysadmin", "windows server", "linux", "active directory", "networking", "vmware", "powershell"],
+      "skills": [
+        "Windows Server (2016/2019/2022)",
+        "Linux Administration (RHEL, Ubuntu, CentOS)",
+        "Active Directory & Group Policy",
+        "VMware vSphere & ESXi",
+        "Microsoft Hyper-V",
+        "Microsoft 365 & Azure AD",
+        "PowerShell Scripting",
+        "Bash Scripting",
+        "DNS, DHCP, NTP, RADIUS",
+        "Backup & DR (Veeam, Acronis)",
+        "SCCM & Intune (Endpoint Management)",
+        "Network Troubleshooting (TCP/IP, VPN)",
+        "Storage Management (SAN, NAS)",
+        "Monitoring (Nagios, Zabbix, Prometheus)",
+        "Patch Management (WSUS, SCCM)",
+        "Virtualisation & P2V Migration",
+        "ITIL Service Management",
+        "Security Hardening (CIS Benchmarks)"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "System Administrator",
+      "tags": ["sysadmin", "windows server", "linux", "active directory", "vmware", "powershell"],
+      "options": [
+        {
+          "title": "Experienced System Administrator",
+          "text": "System Administrator with 5+ years of experience managing Windows Server, Linux, and VMware environments for enterprise organisations. Skilled in Active Directory, Microsoft 365, PowerShell automation, and backup/DR with a track record of maintaining 99.95%+ infrastructure uptime and delivering reliable, secure IT operations."
+        },
+        {
+          "title": "Windows & Linux Sysadmin",
+          "text": "Versatile System Administrator with deep expertise across both Windows Server and Linux environments. Experienced in AD administration, virtualisation management, patch compliance, and infrastructure automation. Reduced manual operational workload by 12 hours per week through targeted PowerShell and Bash scripting."
+        },
+        {
+          "title": "Cloud-Integrated System Administrator",
+          "text": "System Administrator specialising in hybrid on-premise and cloud infrastructure. Experienced managing Azure AD, Microsoft 365, Intune, and VMware alongside traditional server infrastructure. Delivered cloud integration projects and patching programmes maintaining 98% compliance across 500+ managed endpoints."
+        },
+        {
+          "title": "Junior System Administrator",
+          "text": "Motivated Junior System Administrator with hands-on experience in Windows Server administration, Active Directory user management, and basic PowerShell scripting. Familiar with virtualisation, backup solutions, and ITIL service management principles. Eager to grow into advanced infrastructure and cloud administration responsibilities."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "System Administrator",
+      "tags": ["sysadmin", "windows server", "linux", "active directory", "vmware"],
+      "items": [
+        "Maintained 99.95% infrastructure uptime across 150+ virtual machines over an 18-month period through proactive monitoring and maintenance.",
+        "Reduced manual administrative workload by 12 hours per week by developing PowerShell automation scripts for routine tasks.",
+        "Achieved 98% patch compliance across all managed servers and endpoints within 72 hours of critical patch release.",
+        "Led P2V virtualisation project migrating 40 physical servers to VMware reducing hardware costs by $120,000 annually.",
+        "Reduced backup restore time from 6 hours to 45 minutes by redesigning Veeam backup architecture and storage layout.",
+        "Eliminated all certificate expiry incidents by implementing automated SSL monitoring and renewal alerting system.",
+        "Reduced Active Directory helpdesk tickets by 40% by implementing self-service password reset and account unlock portal.",
+        "Completed Microsoft 365 migration for 500-user organisation with zero data loss and under 2 hours total user-impacting downtime.",
+        "Reduced infrastructure monitoring alert noise by 65% through Zabbix tuning and threshold optimisation.",
+        "Achieved ISO 27001 infrastructure control compliance by implementing CIS benchmark hardening across all Windows and Linux servers."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "System Administrator",
+      "tags": ["sysadmin", "windows server", "linux", "active directory", "vmware", "powershell"],
+      "items": [
+        "VMware P2V Migration: Migrated 40 physical servers to VMware vSphere reducing hardware footprint and saving $120K annually.",
+        "Microsoft 365 Migration: Delivered Exchange to M365 migration for 500 users with zero data loss and minimal downtime.",
+        "AD Modernisation: Redesigned Active Directory OU structure, GPO architecture, and RBAC model for 2,000-user organisation.",
+        "PowerShell Automation Library: Built 30+ reusable PowerShell scripts automating user provisioning, reporting, and maintenance tasks.",
+        "Backup & DR Overhaul: Redesigned Veeam backup strategy achieving RPO of 15 minutes and verified RTO of 2 hours.",
+        "Patch Management Programme: Implemented WSUS-based patching programme achieving 98% compliance across 500+ endpoints.",
+        "Monitoring Platform Deployment: Deployed Zabbix monitoring for 200+ servers with custom dashboards and alerting workflows.",
+        "Azure AD Hybrid Join: Implemented hybrid Azure AD join for 800 devices enabling seamless SSO and Intune conditional access.",
+        "Storage Consolidation: Consolidated fragmented NAS storage to centralised SAN reducing storage management overhead by 50%.",
+        "Security Hardening Programme: Applied CIS Level 1 benchmarks across all Windows and Linux servers achieving full audit compliance."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "System Administrator",
+      "tags": ["sysadmin", "windows server", "linux", "active directory", "vmware"],
+      "items": [
+        "Microsoft Certified: Windows Server Hybrid Administrator Associate (AZ-800/801)",
+        "Microsoft Certified: Azure Administrator Associate (AZ-104)",
+        "Red Hat Certified System Administrator (RHCSA)",
+        "VMware Certified Professional – Data Center Virtualization (VCP-DCV)",
+        "CompTIA Server+",
+        "CompTIA Linux+",
+        "CompTIA Network+",
+        "ITIL 4 Foundation Certificate",
+        "Microsoft 365 Certified: Administrator Expert (MS-102)",
+        "Linux Foundation Certified System Administrator (LFCS)"
+      ]
+    }
+  ]
+}

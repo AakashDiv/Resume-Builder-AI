@@ -1,0 +1,819 @@
+{
+  "experience": [
+    {
+      "role": "Mobile App Developer",
+      "tags": ["mobile", "android", "ios", "app", "cross-platform"],
+      "phrases": [
+        "Designed and developed native and cross-platform mobile applications for iOS and Android from concept to App Store and Play Store deployment.",
+        "Built intuitive mobile user interfaces following Material Design and Apple Human Interface Guidelines for platform-consistent experiences.",
+        "Integrated RESTful APIs and GraphQL endpoints into mobile applications with robust error handling and offline data sync.",
+        "Implemented push notification systems using Firebase Cloud Messaging and Apple Push Notification Service across iOS and Android.",
+        "Applied mobile app performance profiling and optimization techniques to reduce battery consumption and improve frame rates.",
+        "Implemented secure local data storage using SQLite, Room, Core Data, and encrypted shared preferences.",
+        "Developed deep linking and universal link handling enabling seamless navigation from external sources into the app.",
+        "Integrated third-party SDKs including Firebase Analytics, Crashlytics, and Stripe payment libraries into mobile applications.",
+        "Built offline-first mobile applications with data synchronization strategies using local databases and background sync.",
+        "Submitted and managed applications on the Apple App Store and Google Play Store including metadata, screenshots, and release management.",
+        "Implemented mobile authentication flows including biometric Face ID, Touch ID, Fingerprint, OAuth2, and JWT token management.",
+        "Conducted device and OS version testing ensuring compatibility across wide ranges of screen sizes and Android and iOS versions.",
+        "Collaborated with backend engineers to define mobile-friendly API contracts optimized for bandwidth and latency constraints.",
+        "Applied mobile accessibility standards including WCAG, TalkBack, and VoiceOver to deliver inclusive app experiences.",
+        "Managed mobile app release pipelines using Fastlane, Bitrise, and GitHub Actions for automated build, test, and deployment.",
+        "Integrated in-app purchase and subscription management using Google Play Billing and Apple StoreKit frameworks.",
+        "Monitored app performance and crash reports using Firebase Crashlytics and Sentry, resolving issues proactively.",
+        "Led mobile code reviews enforcing platform-specific best practices, architecture patterns, and performance guidelines.",
+        "Built responsive mobile layouts adapting to multiple screen sizes, orientations, and accessibility text size settings.",
+        "Delivered iterative mobile feature releases aligned with product roadmap through close collaboration with design and backend teams."
+      ]
+    },
+    {
+      "role": "Android Developer",
+      "tags": ["android", "kotlin", "java", "mobile", "gradle", "jetpack"],
+      "phrases": [
+        "Built production Android applications in Kotlin following MVVM architecture with ViewModel, LiveData, and Repository patterns.",
+        "Developed modern Android UIs using Jetpack Compose with composable functions, state hoisting, and Material 3 design.",
+        "Implemented Android navigation using Jetpack Navigation Component with deep links, safe args, and bottom navigation.",
+        "Designed and optimized Room Database schemas with DAO interfaces, TypeConverters, and coroutine-aware queries.",
+        "Integrated Retrofit and OkHttp for efficient API communication with interceptors for logging, authentication, and error handling.",
+        "Implemented background processing using WorkManager for guaranteed task execution and deferred background work.",
+        "Applied Kotlin Coroutines and Flow for asynchronous data streams and reactive UI state management.",
+        "Managed dependency injection using Hilt and Dagger 2 for modular, testable Android application architecture.",
+        "Integrated Firebase suite including Crashlytics, Remote Config, Analytics, and Cloud Messaging in Android applications.",
+        "Implemented Android in-app purchases and subscriptions using Google Play Billing Library 5+.",
+        "Applied Android security best practices including encrypted shared preferences, certificate pinning, and ProGuard obfuscation.",
+        "Wrote unit tests with JUnit, Mockito, and instrumented tests with Espresso achieving 80%+ test coverage.",
+        "Published Android applications to Google Play Store with staged rollouts, A/B testing, and Play Asset Delivery.",
+        "Optimized Android app performance using Android Profiler identifying and resolving memory leaks, jank, and ANRs.",
+        "Implemented Paging 3 library for efficient paginated data loading from network and local database sources.",
+        "Built accessible Android applications following Material accessibility guidelines with TalkBack and content description support.",
+        "Configured CI/CD pipelines using GitHub Actions and Bitrise for automated builds, tests, and Play Store deployment.",
+        "Implemented multi-module Android architecture reducing build times and improving code separation across feature teams.",
+        "Migrated existing Android Views-based UIs to Jetpack Compose with gradual interoperability migration strategy.",
+        "Collaborated with backend, design, and product teams in agile sprints to deliver Android features on schedule."
+      ]
+    },
+    {
+      "role": "iOS Developer",
+      "tags": ["ios", "swift", "xcode", "mobile", "swiftui", "apple"],
+      "phrases": [
+        "Built production iOS applications using Swift with MVVM and Clean Architecture patterns following Apple Human Interface Guidelines.",
+        "Developed modern iOS UIs with SwiftUI utilizing declarative syntax, state management, and SwiftUI animation APIs.",
+        "Built and maintained UIKit-based iOS applications with AutoLayout, Interface Builder, and programmatic UI development.",
+        "Integrated URLSession and Alamofire for REST API communication with robust error handling and retry logic.",
+        "Implemented Core Data and SwiftData for local persistent storage with CloudKit sync for cross-device access.",
+        "Applied Combine framework and async/await for reactive data streams and asynchronous operation management.",
+        "Integrated Apple Sign-In, Face ID, and Touch ID authentication into iOS applications following Apple security guidelines.",
+        "Managed dependencies using Swift Package Manager and CocoaPods for modular iOS project structure.",
+        "Implemented push notifications using APNs and Firebase Cloud Messaging for reliable iOS notification delivery.",
+        "Published iOS applications to the App Store through Xcode Organizer with TestFlight beta distribution and staged rollouts.",
+        "Built in-app purchases and subscription management using StoreKit 2 and RevenueCat SDK.",
+        "Optimized iOS application performance using Instruments — Time Profiler, Leaks, and Allocations tools.",
+        "Developed iOS widgets using WidgetKit and App Extensions extending app functionality to the iOS home screen.",
+        "Implemented Universal Links, Custom URL Schemes, and Handoff for seamless cross-device user experiences.",
+        "Built accessible iOS applications meeting WCAG 2.1 and Apple Accessibility guidelines with VoiceOver support.",
+        "Configured Fastlane for automated iOS build signing, TestFlight distribution, and App Store submission.",
+        "Migrated UIKit-based screens to SwiftUI incrementally using UIHostingController interoperability.",
+        "Integrated AVFoundation for camera, audio, and video capture functionality in iOS applications.",
+        "Implemented CoreLocation, CoreMotion, and HealthKit for sensor-driven iOS application features.",
+        "Collaborated with backend and design teams in agile sprints to deliver polished iOS features on schedule."
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "tags": ["flutter", "dart", "mobile", "crossplatform", "android", "ios"],
+      "phrases": [
+        "Built cross-platform mobile applications using Flutter and Dart targeting iOS and Android from a single codebase.",
+        "Developed responsive Flutter UIs using Widgets, Custom Painters, and animation APIs for smooth 60fps user experiences.",
+        "Implemented state management in Flutter using BLoC, Riverpod, and Provider patterns for scalable app architectures.",
+        "Integrated REST APIs and GraphQL endpoints into Flutter apps using Dio and the http package with interceptors.",
+        "Built Flutter applications with offline support using Hive, Isar, and sqflite local database solutions.",
+        "Applied Clean Architecture and feature-first folder structures to organize large Flutter codebases across teams.",
+        "Implemented push notifications in Flutter using Firebase Cloud Messaging and flutter_local_notifications package.",
+        "Configured Flutter build flavors for development, staging, and production environments with environment-specific configuration.",
+        "Developed Flutter packages and plugins bridging Dart with native iOS Swift and Android Kotlin functionality.",
+        "Published Flutter applications to both Google Play Store and Apple App Store through automated CI/CD pipelines.",
+        "Integrated Firebase suite including Authentication, Firestore, Storage, Crashlytics, and Analytics into Flutter apps.",
+        "Implemented deep linking and dynamic links in Flutter using Firebase Dynamic Links and app_links package.",
+        "Applied Flutter testing with unit tests, widget tests, and integration tests achieving 80%+ coverage.",
+        "Optimized Flutter app performance through widget rebuild reduction, const constructors, and RepaintBoundary usage.",
+        "Developed custom Flutter animations using AnimationController, Tween, and Hero transitions for delightful UX.",
+        "Built accessible Flutter apps using Semantics widgets and platform-specific accessibility guidelines.",
+        "Used Shorebird code push for OTA updates without full App Store or Play Store resubmission cycles.",
+        "Collaborated with design teams translating Figma designs into pixel-accurate Flutter widget implementations.",
+        "Managed Flutter state with GetX for lightweight apps and Riverpod for complex dependency-injected architectures.",
+        "Led code reviews and established Flutter coding standards and architecture patterns for cross-functional mobile teams."
+      ]
+    },
+    {
+      "role": "React Native Developer",
+      "tags": ["reactnative", "react", "mobile", "javascript", "typescript", "crossplatform"],
+      "phrases": [
+        "Built cross-platform React Native applications for iOS and Android using JavaScript and TypeScript.",
+        "Developed reusable React Native components and custom hooks enabling consistent UI patterns across iOS and Android.",
+        "Implemented state management in React Native using Redux Toolkit, Zustand, and React Context for scalable architectures.",
+        "Integrated REST APIs and GraphQL into React Native applications using Axios, Fetch, and Apollo Client.",
+        "Applied React Navigation for complex mobile navigation patterns including stack, tab, drawer, and deep link handling.",
+        "Integrated native device features via React Native modules including camera, location, biometrics, and push notifications.",
+        "Implemented push notifications using Firebase Cloud Messaging and the React Native Push Notification library.",
+        "Built offline-capable React Native apps using AsyncStorage, MMKV, and SQLite for local data persistence.",
+        "Applied React Native performance optimizations including FlatList virtualization, React.memo, and InteractionManager.",
+        "Configured React Native build environments for iOS and Android with build flavor support for multiple environments.",
+        "Published React Native apps to both App Store and Google Play Store through Fastlane and CI/CD pipelines.",
+        "Developed native modules bridging JavaScript with platform-specific iOS Swift and Android Kotlin functionality.",
+        "Integrated Stripe, Razorpay, and Apple and Google Pay SDKs into React Native apps for mobile payment processing.",
+        "Used React Native CLI and Expo including migration experience from Expo managed to bare workflow.",
+        "Wrote unit tests with Jest, React Native Testing Library, and E2E tests with Detox for quality assurance.",
+        "Integrated analytics, crash reporting, and performance monitoring via Firebase and Sentry in production apps.",
+        "Applied accessibility best practices including accessible props, screen reader support, and keyboard navigation.",
+        "Optimized React Native bundle size and JavaScript thread performance for smooth 60fps mobile experiences.",
+        "Collaborated with backend developers to design mobile-optimized API contracts and GraphQL schemas.",
+        "Mentored junior React Native developers on architecture, performance, and platform-specific best practices."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "role": "Mobile App Developer",
+      "tags": ["mobile", "android", "ios", "app", "cross-platform"],
+      "skills": [
+        "iOS (Swift/Objective-C)",
+        "Android (Kotlin/Java)",
+        "Flutter",
+        "React Native",
+        "Xcode",
+        "Android Studio",
+        "RESTful API Integration",
+        "Firebase (FCM/Crashlytics/Analytics)",
+        "SQLite/Room/Core Data",
+        "Git & GitHub",
+        "Push Notifications",
+        "Biometric Authentication",
+        "App Store/Play Store Deployment",
+        "Fastlane",
+        "CI/CD Pipelines",
+        "Material Design",
+        "Apple HIG Guidelines",
+        "In-App Purchases",
+        "Offline-First Architecture",
+        "Mobile Performance Optimization",
+        "GraphQL",
+        "Agile/Scrum",
+        "Deep Linking",
+        "Third-Party SDK Integration",
+        "Accessibility (TalkBack/VoiceOver)"
+      ]
+    },
+    {
+      "role": "Android Developer",
+      "tags": ["android", "kotlin", "java", "mobile", "gradle", "jetpack"],
+      "skills": [
+        "Kotlin",
+        "Java",
+        "Android SDK",
+        "Jetpack Compose",
+        "MVVM Architecture",
+        "Hilt/Dagger2",
+        "Retrofit/OkHttp",
+        "Room Database",
+        "Kotlin Coroutines & Flow",
+        "Jetpack Navigation",
+        "WorkManager",
+        "Firebase (FCM/Crashlytics/Analytics)",
+        "Google Play Billing",
+        "Espresso Testing",
+        "JUnit & Mockito",
+        "Android Profiler",
+        "Git & GitHub",
+        "Gradle",
+        "CI/CD (GitHub Actions/Bitrise)",
+        "Google Play Store",
+        "Paging 3",
+        "Glide/Coil",
+        "REST APIs",
+        "Material Design 3",
+        "ProGuard/R8"
+      ]
+    },
+    {
+      "role": "iOS Developer",
+      "tags": ["ios", "swift", "xcode", "mobile", "swiftui", "apple"],
+      "skills": [
+        "Swift",
+        "SwiftUI",
+        "UIKit",
+        "Xcode",
+        "Combine",
+        "async/await",
+        "Core Data",
+        "SwiftData",
+        "URLSession/Alamofire",
+        "StoreKit 2",
+        "APNs/Firebase FCM",
+        "Apple Sign-In/Face ID",
+        "WidgetKit",
+        "AVFoundation",
+        "CoreLocation",
+        "HealthKit",
+        "CocoaPods/SPM",
+        "TestFlight/App Store Connect",
+        "Fastlane",
+        "Instruments (Profiling)",
+        "Git & GitHub",
+        "CI/CD (Xcode Cloud/Bitrise)",
+        "Accessibility (VoiceOver/WCAG)",
+        "CoreMotion",
+        "Design Patterns (MVVM/Clean)"
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "tags": ["flutter", "dart", "mobile", "crossplatform", "android", "ios"],
+      "skills": [
+        "Flutter",
+        "Dart",
+        "BLoC/Cubit",
+        "Riverpod",
+        "Provider",
+        "GetX",
+        "Firebase (Firestore/Auth/Crashlytics)",
+        "Hive/Isar/sqflite",
+        "Dio/http",
+        "REST API Integration",
+        "GraphQL",
+        "App Store/Play Store Deployment",
+        "CI/CD (Codemagic/Bitrise)",
+        "Flutter Testing (unit/widget/integration)",
+        "Custom Animations",
+        "Flutter Flavors",
+        "Deep Linking",
+        "Platform Channels (native bridging)",
+        "Figma",
+        "Git & GitHub",
+        "Fastlane",
+        "FCM Push Notifications",
+        "Clean Architecture",
+        "Material 3 & Cupertino Design",
+        "Accessibility (Semantics)"
+      ]
+    },
+    {
+      "role": "React Native Developer",
+      "tags": ["reactnative", "react", "mobile", "javascript", "typescript"],
+      "skills": [
+        "React Native",
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "Redux Toolkit",
+        "Zustand",
+        "React Navigation",
+        "Expo",
+        "Axios/Fetch",
+        "Apollo Client",
+        "AsyncStorage/MMKV",
+        "SQLite",
+        "Firebase (FCM/Crashlytics/Analytics)",
+        "Stripe/Razorpay",
+        "Fastlane",
+        "Jest",
+        "React Native Testing Library",
+        "Detox",
+        "Xcode",
+        "Android Studio/Gradle",
+        "Native Modules (Swift/Kotlin bridging)",
+        "Push Notifications",
+        "Git & GitHub",
+        "CI/CD (Bitrise/GitHub Actions)",
+        "App Store/Play Store Deployment",
+        "Flipper (Debugging)"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "role": "Mobile App Developer",
+      "tags": ["mobile", "android", "ios", "app", "cross-platform"],
+      "options": [
+        {
+          "title": "Versatile Mobile App Developer",
+          "text": "Experienced Mobile App Developer with expertise in building native and cross-platform applications for iOS and Android. Delivers intuitive, performant mobile experiences that meet platform standards and user expectations from design to App Store deployment."
+        },
+        {
+          "title": "Cross-Platform Mobile Specialist",
+          "text": "Mobile App Developer specialized in cross-platform development using Flutter and React Native. Builds single-codebase applications that deliver near-native performance and platform-consistent UX across iOS and Android simultaneously."
+        },
+        {
+          "title": "iOS & Android Dual-Platform Developer",
+          "text": "Mobile App Developer with hands-on experience in both native iOS (Swift) and Android (Kotlin) development. Delivers platform-optimized applications that leverage each OS's native capabilities for superior performance and user experience."
+        },
+        {
+          "title": "Mobile Performance Engineer",
+          "text": "Mobile App Developer focused on application performance, battery efficiency, and frame rate optimization. Consistently delivers smooth, responsive mobile experiences that retain users and earn strong App Store and Play Store ratings."
+        },
+        {
+          "title": "API-Integrated Mobile Developer",
+          "text": "Mobile App Developer with extensive experience integrating REST APIs, WebSockets, and third-party SDKs into mobile applications. Builds reliable data-driven apps with offline support and seamless backend synchronization."
+        },
+        {
+          "title": "Mobile UI/UX Engineer",
+          "text": "Mobile App Developer who bridges design and engineering — implementing pixel-perfect interfaces aligned with Material Design and Apple HIG guidelines while maintaining smooth animations and accessible interactions."
+        },
+        {
+          "title": "Mobile Security Specialist",
+          "text": "Mobile App Developer who prioritizes application security through encrypted local storage, secure authentication flows, certificate pinning, and OWASP Mobile Top 10 compliance across every app built."
+        },
+        {
+          "title": "Startup Mobile Developer",
+          "text": "Mobile App Developer with startup experience delivering mobile MVPs quickly and iterating rapidly based on user feedback. Comfortable owning the full mobile stack from architecture decisions to App Store submission."
+        },
+        {
+          "title": "Agile Mobile Developer",
+          "text": "Mobile App Developer with proven experience delivering mobile features in agile cross-functional teams. Strong collaborator who works effectively with backend engineers, UI designers, and product managers."
+        },
+        {
+          "title": "Mobile Release & DevOps Engineer",
+          "text": "Mobile App Developer proficient in mobile CI/CD pipelines using Fastlane and Bitrise. Automates build, test, and deployment workflows enabling fast, reliable app releases across iOS and Android simultaneously."
+        }
+      ]
+    },
+    {
+      "role": "Android Developer",
+      "tags": ["android", "kotlin", "java", "mobile", "gradle", "jetpack"],
+      "options": [
+        {
+          "title": "Native Android Developer",
+          "text": "Experienced Android Developer with deep expertise in Kotlin and the Jetpack ecosystem. Builds production-grade Android applications following MVVM architecture, Jetpack Compose, and modern Android development best practices."
+        },
+        {
+          "title": "Jetpack Compose Specialist",
+          "text": "Android Developer specialized in modern declarative UI development with Jetpack Compose. Builds responsive, animated, and accessible Android UIs with clean state management and composable architecture."
+        },
+        {
+          "title": "Android Architecture Expert",
+          "text": "Android Developer with deep expertise in scalable application architecture including MVVM, Clean Architecture, and multi-module project structures. Delivers maintainable codebases that scale with growing teams and feature sets."
+        },
+        {
+          "title": "Kotlin-First Android Developer",
+          "text": "Android Developer who leverages the full power of Kotlin — coroutines, Flow, extension functions, and sealed classes — to write concise, safe, and expressive Android code with high test confidence."
+        },
+        {
+          "title": "Android Performance Engineer",
+          "text": "Android Developer focused on application performance, memory management, and battery optimization. Uses Android Profiler and systematic debugging to eliminate jank, memory leaks, and ANRs from production applications."
+        },
+        {
+          "title": "Play Store Release Specialist",
+          "text": "Android Developer experienced in the full Google Play Store release lifecycle including staged rollouts, A/B testing, Play Console management, and Play Asset Delivery optimization."
+        },
+        {
+          "title": "Firebase Android Developer",
+          "text": "Android Developer proficient in integrating the full Firebase ecosystem including FCM push notifications, Crashlytics, Remote Config, and Realtime Database for data-driven Android applications."
+        },
+        {
+          "title": "Test-Driven Android Developer",
+          "text": "Android Developer who writes tests first — unit tests with JUnit and Mockito, and UI tests with Espresso — ensuring Android applications behave correctly before and after every production release."
+        },
+        {
+          "title": "Senior Android Engineer",
+          "text": "Senior Android Developer with experience leading architecture decisions, mentoring junior developers, and driving engineering standards across mobile teams. Combines deep technical expertise with strong product collaboration skills."
+        },
+        {
+          "title": "Agile Android Developer",
+          "text": "Android Developer with proven experience delivering features in agile mobile teams. Strong communicator who works effectively with designers, backend engineers, and product owners to ship great Android experiences on time."
+        }
+      ]
+    },
+    {
+      "role": "iOS Developer",
+      "tags": ["ios", "swift", "xcode", "mobile", "swiftui", "apple"],
+      "options": [
+        {
+          "title": "Native iOS Developer",
+          "text": "Experienced iOS Developer with deep expertise in Swift, SwiftUI, and the Apple ecosystem. Builds polished, performant iOS applications that follow Apple Human Interface Guidelines and deliver exceptional user experiences."
+        },
+        {
+          "title": "SwiftUI Specialist",
+          "text": "iOS Developer specialized in modern declarative UI development with SwiftUI. Builds beautiful, animated, and accessible iOS interfaces with clean state management using Combine and the Observation framework."
+        },
+        {
+          "title": "Swift & UIKit Expert",
+          "text": "iOS Developer with comprehensive UIKit expertise and a strong command of Swift's modern concurrency model. Delivers robust iOS applications with clean architecture, thorough test coverage, and smooth user experiences."
+        },
+        {
+          "title": "iOS Architecture Specialist",
+          "text": "iOS Developer with deep expertise in MVVM, Clean Architecture, and modular iOS project structures. Delivers maintainable codebases that scale with growing feature sets and engineering teams over time."
+        },
+        {
+          "title": "App Store Product Developer",
+          "text": "iOS Developer with end-to-end App Store experience — from Xcode development through TestFlight testing, App Store review, and post-launch monitoring. Consistently ships high-quality apps that earn strong user ratings."
+        },
+        {
+          "title": "iOS Performance Engineer",
+          "text": "iOS Developer focused on application performance using Instruments profiling. Systematically eliminates memory leaks, CPU spikes, and rendering bottlenecks to deliver smooth 60fps iOS experiences."
+        },
+        {
+          "title": "Apple Ecosystem Developer",
+          "text": "iOS Developer who builds cohesive experiences across the Apple ecosystem including iPhone, iPad, Apple Watch, and macOS using Swift, SwiftUI, WidgetKit, and WatchKit."
+        },
+        {
+          "title": "StoreKit & Monetization Specialist",
+          "text": "iOS Developer with hands-on StoreKit 2 and RevenueCat expertise. Implements in-app purchases and subscription flows that convert users and maximize mobile revenue with zero billing errors."
+        },
+        {
+          "title": "Test-Driven iOS Developer",
+          "text": "iOS Developer who writes comprehensive XCTest unit and UI test suites. Maintains high test coverage and uses TestFlight beta cycles to validate features rigorously before App Store submission."
+        },
+        {
+          "title": "Agile iOS Developer",
+          "text": "iOS Developer with proven experience delivering iOS features in agile cross-functional teams. Works closely with designers, backend engineers, and product owners to ship great iOS products on time and within scope."
+        }
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "tags": ["flutter", "dart", "mobile", "crossplatform", "android", "ios"],
+      "options": [
+        {
+          "title": "Flutter Specialist",
+          "text": "Experienced Flutter Developer with deep expertise in Dart, BLoC/Riverpod state management, and Firebase integration. Builds production-ready cross-platform mobile applications that deliver near-native performance on both iOS and Android."
+        },
+        {
+          "title": "Cross-Platform Mobile Expert",
+          "text": "Flutter Developer specialized in delivering single-codebase applications for iOS and Android with platform-consistent UX and optimal performance. Reduces development time and cost without compromising application quality."
+        },
+        {
+          "title": "BLoC & State Management Expert",
+          "text": "Flutter Developer with deep expertise in scalable state management using BLoC, Cubit, and Riverpod. Designs predictable, testable architectures for complex Flutter applications with clean separation of concerns."
+        },
+        {
+          "title": "Flutter UI/UX Engineer",
+          "text": "Flutter Developer who bridges design and engineering — implementing pixel-perfect UI from Figma designs with smooth animations, custom painters, and platform-adaptive layouts."
+        },
+        {
+          "title": "Firebase Flutter Developer",
+          "text": "Flutter Developer proficient in the full Firebase ecosystem including Firestore, Authentication, Storage, Crashlytics, and Cloud Functions. Builds real-time, backend-connected Flutter applications rapidly and reliably."
+        },
+        {
+          "title": "Flutter Clean Architecture Developer",
+          "text": "Flutter Developer who applies Clean Architecture and SOLID principles to build maintainable, testable Flutter codebases. Designs feature-modular project structures that scale with team size and feature growth."
+        },
+        {
+          "title": "Flutter Performance Engineer",
+          "text": "Flutter Developer focused on rendering performance, rebuild optimization, and memory efficiency. Delivers Flutter apps that maintain 60fps on low-end devices with minimal battery impact."
+        },
+        {
+          "title": "Flutter Package Developer",
+          "text": "Flutter Developer with experience building and publishing custom Flutter packages and platform channel plugins. Extends Flutter's capabilities with native iOS and Android integrations when needed."
+        },
+        {
+          "title": "Agile Flutter Developer",
+          "text": "Flutter Developer with proven experience delivering mobile features in agile cross-functional teams. Collaborates closely with designers, backend engineers, and product managers to ship great Flutter apps on schedule."
+        },
+        {
+          "title": "Startup Flutter Developer",
+          "text": "Flutter Developer with startup experience rapidly building and iterating cross-platform MVPs. Comfortable making pragmatic technology decisions and delivering shippable products within tight timelines."
+        }
+      ]
+    },
+    {
+      "role": "React Native Developer",
+      "tags": ["reactnative", "react", "mobile", "javascript", "typescript"],
+      "options": [
+        {
+          "title": "React Native Specialist",
+          "text": "Experienced React Native Developer with deep expertise in building cross-platform mobile applications using JavaScript and TypeScript. Delivers production-ready iOS and Android apps with consistent UX, robust state management, and reliable performance."
+        },
+        {
+          "title": "Full React Ecosystem Mobile Developer",
+          "text": "React Native Developer who leverages React, Redux Toolkit, and React Navigation to build complete mobile products. Comfortable sharing patterns between web React and mobile React Native for unified JavaScript teams."
+        },
+        {
+          "title": "Performance-Focused React Native Developer",
+          "text": "React Native Developer focused on JavaScript thread optimization, FlatList performance, and bundle size reduction. Consistently delivers smooth 60fps mobile experiences across iOS and Android devices."
+        },
+        {
+          "title": "Cross-Platform Mobile Expert",
+          "text": "React Native Developer specialized in delivering single-codebase applications for iOS and Android. Balances cross-platform efficiency with platform-specific customization for native-quality user experiences."
+        },
+        {
+          "title": "Firebase & API-Connected Developer",
+          "text": "React Native Developer proficient in connecting mobile apps to Firebase, REST APIs, and GraphQL backends. Builds reliable, real-time mobile experiences with offline support and seamless backend synchronization."
+        },
+        {
+          "title": "Native Module Bridge Developer",
+          "text": "React Native Developer with experience writing native modules in Swift and Kotlin to bridge JavaScript with platform-specific device capabilities beyond the standard React Native API surface."
+        },
+        {
+          "title": "Expo & Managed Workflow Developer",
+          "text": "React Native Developer with extensive Expo experience in both managed and bare workflows. Rapidly builds and iterates mobile MVPs with Expo's tooling while maintaining flexibility for native customizations."
+        },
+        {
+          "title": "React Native Testing Specialist",
+          "text": "React Native Developer who writes comprehensive test suites with Jest, React Native Testing Library, and Detox. Delivers mobile applications with high automated test coverage and verified E2E user journeys."
+        },
+        {
+          "title": "Startup React Native Developer",
+          "text": "React Native Developer with startup experience delivering cross-platform MVPs quickly and iterating based on user feedback. Comfortable owning mobile features end-to-end from architecture through App Store submission."
+        },
+        {
+          "title": "Agile React Native Contributor",
+          "text": "React Native Developer with proven experience shipping mobile features in cross-functional agile teams. Collaborates effectively with backend engineers, designers, and product owners to deliver great mobile products."
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "role": "Mobile App Developer",
+      "tags": ["mobile", "android", "ios", "app", "cross-platform"],
+      "items": [
+        "Delivered a cross-platform mobile app from zero to 50,000 downloads within 3 months of App Store and Play Store launch.",
+        "Reduced app crash rate from 3.2% to 0.1% by fixing memory leaks and adding comprehensive Crashlytics monitoring.",
+        "Improved app store rating from 3.1 to 4.7 stars through performance improvements and UX refinements.",
+        "Cut app cold start time from 4.5s to 1.2s by optimizing startup sequence and deferring non-critical initialization.",
+        "Implemented offline-first architecture enabling the app to function fully without network connectivity.",
+        "Reduced mobile app binary size by 40% through asset optimization and code stripping.",
+        "Achieved 99.5% push notification delivery success rate across iOS and Android user base.",
+        "Built a biometric authentication flow increasing user login speed by 65% and reducing support tickets by 30%.",
+        "Automated the release pipeline using Fastlane saving 4 hours per release cycle across iOS and Android.",
+        "Delivered 20+ app features across 6 mobile sprints with a 96% on-time delivery rate.",
+        "Integrated in-app subscription system generating $50K+ monthly recurring mobile revenue.",
+        "Reduced API data usage by 45% through response caching and delta sync implementation.",
+        "Achieved App Store feature by Apple after a comprehensive UI/UX and performance overhaul.",
+        "Resolved 100+ device-specific UI bugs across 30+ Android device sizes and 5 iOS versions.",
+        "Mentored 2 junior mobile developers who shipped their first independent production features within 6 weeks."
+      ]
+    },
+    {
+      "role": "Android Developer",
+      "tags": ["android", "kotlin", "java", "mobile", "gradle", "jetpack"],
+      "items": [
+        "Reduced Android app crash rate from 4.1% to 0.08% through systematic Crashlytics monitoring and bug resolution.",
+        "Improved Android app startup time by 60% by optimizing App Startup library initialization and deferring non-critical tasks.",
+        "Migrated a 70,000-line View-based UI to Jetpack Compose in 10 weeks with zero functional regressions.",
+        "Achieved 4.8-star average Google Play Store rating after a comprehensive UX and performance overhaul.",
+        "Reduced Android APK size from 45MB to 18MB through resource optimization and App Bundle migration.",
+        "Implemented a multi-module architecture reducing incremental build times by 55%.",
+        "Delivered an Android app reaching 200,000+ downloads within 6 months of Play Store launch.",
+        "Built an offline-first Android architecture enabling full app functionality without network connectivity.",
+        "Increased test coverage from 15% to 82% using JUnit, Mockito, and Espresso across 3 Android modules.",
+        "Integrated Google Play Billing generating $80K+ monthly in-app subscription revenue.",
+        "Automated Android release pipeline using Bitrise saving 5 hours per release cycle.",
+        "Resolved a critical memory leak causing OOM crashes on low-end Android devices used by 30% of users.",
+        "Implemented Paging 3 library reducing RecyclerView memory usage by 50% on large dataset screens.",
+        "Delivered 25+ Android features across 7 sprints with a 97% on-time delivery rate.",
+        "Established Android architecture standards and code review guidelines adopted across a 5-person Android team."
+      ]
+    },
+    {
+      "role": "iOS Developer",
+      "tags": ["ios", "swift", "xcode", "mobile", "swiftui", "apple"],
+      "items": [
+        "Delivered an iOS app reaching 100,000+ downloads within 2 months of App Store launch.",
+        "Reduced iOS app crash rate from 2.8% to 0.05% through systematic Instruments profiling and Crashlytics monitoring.",
+        "Improved iOS app startup time by 55% by optimizing launch sequence and deferring non-critical initialization.",
+        "Achieved 4.9-star App Store rating after a major SwiftUI redesign and performance overhaul.",
+        "Migrated a large UIKit application to SwiftUI incrementally with zero functional regressions over 12 weeks.",
+        "Implemented StoreKit 2 subscription engine generating $120K+ monthly recurring in-app revenue.",
+        "Reduced iOS app binary size from 180MB to 62MB through asset catalog optimization and Swift code size reduction.",
+        "Built an offline-first Core Data sync architecture handling 500K+ records across 10,000+ user devices.",
+        "Increased iOS test coverage from 12% to 80% using XCTest across models, view models, and UI tests.",
+        "Automated Fastlane pipeline reducing App Store submission time from 3 hours to 20 minutes.",
+        "Delivered 20+ iOS features across 6 sprints with a 98% on-time delivery rate.",
+        "Implemented an iOS WidgetKit home screen widget adopted by 40% of the app's active user base.",
+        "Resolved a critical Core Data migration bug affecting 15% of users during a major version rollout.",
+        "Built an Apple Watch companion app increasing daily active user engagement by 25%.",
+        "Established iOS architecture guidelines and Swift style guide adopted by a 4-person iOS engineering team."
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "tags": ["flutter", "dart", "mobile", "crossplatform", "android", "ios"],
+      "items": [
+        "Delivered a Flutter app targeting iOS and Android simultaneously, reducing development cost by 40% vs. building two native apps.",
+        "Achieved 4.7-star rating across both App Store and Play Store after a Flutter UI and performance overhaul.",
+        "Reduced Flutter app bundle size by 35% through asset optimization and deferred component loading.",
+        "Implemented BLoC architecture eliminating 60% of state-related bugs across a 50,000-line Flutter codebase.",
+        "Migrated a native Android app to Flutter in 12 weeks, delivering iOS support simultaneously with zero regressions.",
+        "Built an offline-first Flutter architecture handling full app functionality during network outages for field service users.",
+        "Achieved 85% Flutter test coverage using unit, widget, and integration tests within 8 weeks.",
+        "Reduced Flutter app frame drop rate from 15% to under 1% through RepaintBoundary and const widget optimization.",
+        "Shipped a Flutter app from concept to App Store and Play Store launch in 10 weeks with a 2-person team.",
+        "Integrated Firebase Crashlytics reducing unresolved crash backlog from 120 issues to zero in 4 weeks.",
+        "Built a Flutter package published on pub.dev with 500+ likes and used by 200+ external projects.",
+        "Automated Flutter CI/CD using Codemagic saving 6 hours per release cycle across iOS and Android.",
+        "Delivered 30+ Flutter features across 8 sprints with a 95% on-time delivery rate.",
+        "Implemented Riverpod state management replacing Provider and eliminating 40% of rebuild-related performance issues.",
+        "Built a Flutter design system with 45+ custom widgets adopted across 3 internal mobile products."
+      ]
+    },
+    {
+      "role": "React Native Developer",
+      "tags": ["reactnative", "react", "mobile", "javascript", "typescript"],
+      "items": [
+        "Delivered a React Native app to both App Store and Play Store from zero in 8 weeks serving 20,000+ early users.",
+        "Reduced JavaScript bundle size by 45% through tree shaking, lazy loading, and Hermes engine enablement.",
+        "Improved React Native app frame rate from 45fps to 60fps by moving heavy computations off the JS thread.",
+        "Achieved 4.6-star average rating across App Store and Play Store after a React Native performance sprint.",
+        "Built a shared React and React Native component library reducing mobile and web UI development time by 30%.",
+        "Migrated an Expo managed workflow app to bare workflow enabling custom native modules without ejection downsides.",
+        "Reduced app cold start time by 50% through Hermes bytecode optimization and deferred splash screen logic.",
+        "Implemented offline-first architecture enabling full app functionality during network outages for 15,000+ field users.",
+        "Automated iOS and Android release pipeline using Fastlane and GitHub Actions saving 5 hours per release cycle.",
+        "Achieved 80% test coverage across React Native components and business logic using Jest and RTL.",
+        "Integrated Stripe mobile SDK processing $100K+ monthly in-app transactions with zero payment failures.",
+        "Delivered 25+ React Native features across 7 sprints with a 96% on-time delivery rate.",
+        "Built a React Native native module for custom Bluetooth device pairing used in an enterprise IoT product.",
+        "Resolved a React Native upgrade from 0.68 to 0.72 including 40+ dependency migrations without regressions.",
+        "Reduced Detox E2E test execution time by 60% through parallelization and selective test suite targeting."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "role": "Mobile App Developer",
+      "tags": ["mobile", "android", "ios", "app", "cross-platform"],
+      "items": [
+        "Built a cross-platform fitness tracking app with workout logging, GPS route tracking, and health data sync.",
+        "Developed a native iOS food delivery app with real-time order tracking, driver location, and push notifications.",
+        "Created an Android e-commerce app with product browsing, cart management, and Stripe payment integration.",
+        "Built a cross-platform social networking app with user feeds, messaging, media upload, and push notifications.",
+        "Developed a native Android banking app with biometric login, fund transfers, and transaction history.",
+        "Created a cross-platform event management app with QR code ticketing and real-time attendee check-in.",
+        "Built an iOS real estate app with property search, virtual tour integration, and agent contact functionality.",
+        "Developed an Android LMS app with video lessons, quiz engine, and offline content download support.",
+        "Created a cross-platform healthcare app with appointment booking, prescription reminders, and telemedicine features.",
+        "Built a native iOS news reader app with personalized feed, bookmarks, and offline article caching.",
+        "Developed an Android field service app with GPS tracking, job management, and offline form submission.",
+        "Created a cross-platform loyalty rewards app with QR code scanning, points tracking, and tier management.",
+        "Built an iOS restaurant app with menu browsing, order placement, and Apple Pay integration.",
+        "Developed a cross-platform travel app with itinerary management, flight search, and offline map support.",
+        "Created an Android inventory management app with barcode scanning, stock tracking, and report generation."
+      ]
+    },
+    {
+      "role": "Android Developer",
+      "tags": ["android", "kotlin", "java", "mobile", "gradle", "jetpack"],
+      "items": [
+        "Built a native Android social media app in Kotlin with Jetpack Compose, MVVM, and real-time Firebase sync.",
+        "Developed an Android e-commerce app with product catalog, cart, Room offline storage, and Stripe payments.",
+        "Created an Android fitness tracking app with GPS workout routes, health stats, and Wear OS companion support.",
+        "Built an Android fintech app with biometric login, bank transfer functionality, and transaction analytics.",
+        "Developed an Android food delivery app with live driver tracking, push notifications, and Google Maps integration.",
+        "Created an Android LMS app with video streaming, quiz engine, offline content download, and certificates.",
+        "Built an Android news app with personalized feed, bookmarks, and offline article caching using Room.",
+        "Developed an Android inventory management app with barcode scanning, stock alerts, and CSV report export.",
+        "Created an Android real estate app with property listings, map search, virtual tour, and agent contact features.",
+        "Built an Android healthcare app with appointment booking, prescription reminders, and patient record management.",
+        "Developed an Android ride-hailing app with driver matching, real-time location tracking, and fare calculation.",
+        "Created an Android task manager app with offline-first sync, reminders, and team collaboration features.",
+        "Built an Android POS application for retail with barcode scanning, receipt printing, and sales reporting.",
+        "Developed an Android travel app with flight search, hotel booking, itinerary management, and offline maps.",
+        "Created an Android IoT control app integrating with smart home devices via BLE and MQTT protocols."
+      ]
+    },
+    {
+      "role": "iOS Developer",
+      "tags": ["ios", "swift", "xcode", "mobile", "swiftui", "apple"],
+      "items": [
+        "Built a native iOS social networking app with SwiftUI, Combine, and Firebase real-time database integration.",
+        "Developed an iOS fitness app with HealthKit integration, workout tracking, and Apple Watch companion features.",
+        "Created an iOS e-commerce app with product catalog, Core Data cart persistence, and Apple Pay checkout.",
+        "Built an iOS fintech app with Face ID authentication, account management, and StoreKit subscription billing.",
+        "Developed an iOS food delivery app with real-time order tracking, push notifications, and Google Maps SDK.",
+        "Created an iOS news reader with personalized feed, Core Data offline caching, and share extensions.",
+        "Built an iOS education app with video player, quiz engine, and iCloud progress sync across devices.",
+        "Developed an iOS healthcare app with appointment booking, HealthKit vitals tracking, and telemedicine video calls.",
+        "Created an iOS travel app with itinerary management, offline maps, and trip sharing via AirDrop.",
+        "Built an iOS productivity app with reminders, WidgetKit home screen widgets, Siri Shortcuts, and iCloud sync.",
+        "Developed an iOS AR app using ARKit for furniture placement and interior visualization.",
+        "Created an iOS real estate app with property listings, 3D virtual tours, and mortgage calculator.",
+        "Built an iOS music app with audio playback, playlist management, and AirPlay support.",
+        "Developed an iOS restaurant app with menu browsing, table booking, and Apple Pay integration.",
+        "Created an iOS IoT control app managing smart home devices via HomeKit and custom BLE protocols."
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "tags": ["flutter", "dart", "mobile", "crossplatform", "android", "ios"],
+      "items": [
+        "Built a cross-platform Flutter e-commerce app with product catalog, cart, Stripe payments, and order tracking.",
+        "Developed a Flutter fitness app with GPS tracking, workout logging, and Firebase real-time progress sync.",
+        "Created a Flutter food delivery app with real-time order tracking, driver location, and push notifications.",
+        "Built a Flutter social networking app with post feed, follow system, real-time chat, and media uploads.",
+        "Developed a Flutter fintech app with biometric authentication, account management, and transaction history.",
+        "Created a Flutter LMS app with video lessons, quiz engine, offline download, and certificate generation.",
+        "Built a Flutter healthcare app with appointment booking, prescription tracking, and telemedicine video calls.",
+        "Developed a Flutter news app with personalized feeds, offline reading, and push notification alerts.",
+        "Created a Flutter real estate app with property listings, map integration, and virtual tour features.",
+        "Built a Flutter task management app with offline-first Hive storage, reminders, and team collaboration.",
+        "Developed a Flutter travel app with itinerary planning, hotel search, and offline destination guides.",
+        "Created a Flutter restaurant app with menu browsing, order placement, and real-time kitchen status updates.",
+        "Built a Flutter event management app with QR code ticketing, check-in scanner, and attendee analytics.",
+        "Developed a Flutter loyalty rewards app with QR scanning, points tracking, and tier upgrade notifications.",
+        "Created a Flutter custom animation showcase app demonstrating 30+ complex motion patterns used across the design system."
+      ]
+    },
+    {
+      "role": "React Native Developer",
+      "tags": ["reactnative", "react", "mobile", "javascript", "typescript"],
+      "items": [
+        "Built a React Native e-commerce app with product listings, cart, Redux state management, and Stripe checkout.",
+        "Developed a React Native social media app with post feed, messaging, media uploads, and push notifications.",
+        "Created a React Native fitness app with workout logging, GPS tracking, and Firebase progress sync.",
+        "Built a React Native food delivery app with real-time order tracking, driver location, and payment integration.",
+        "Developed a React Native fintech app with biometric login, fund transfers, and transaction history.",
+        "Created a React Native healthcare app with appointment booking, prescription reminders, and telemedicine features.",
+        "Built a React Native LMS app with video lessons, offline content download, quiz engine, and certificates.",
+        "Developed a React Native news app with personalized feeds, bookmarks, and offline reading support.",
+        "Created a React Native travel app with itinerary management, flight search, and offline map functionality.",
+        "Built a React Native loyalty rewards app with QR code scanning, points tracking, and tier management.",
+        "Developed a React Native field service app with offline job management, GPS check-in, and form submissions.",
+        "Created a React Native event management app with ticketing, QR check-in, and live attendee updates.",
+        "Built a React Native real estate app with property search, map integration, and agent contact functionality.",
+        "Developed a React Native IoT control app using native BLE modules for smart device management.",
+        "Created a React Native restaurant app with menu browsing, order placement, and table reservation features."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "role": "Mobile App Developer",
+      "tags": ["mobile", "android", "ios", "app", "cross-platform"],
+      "items": [
+        "Google Associate Android Developer Certification",
+        "Apple iOS App Development with Swift (Apple Developer Academy)",
+        "Flutter & Dart – The Complete Guide (Udemy – Maximilian Schwarzmüller)",
+        "React Native – The Practical Guide (Udemy – Maximilian Schwarzmüller)",
+        "Firebase in a Weekend: Android (Google)",
+        "Mobile App Development with React Native (Harvard CS50)",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Fastlane – Automate iOS and Android Releases (Udemy)",
+        "Mobile App Security Fundamentals (SANS Institute)",
+        "UI/UX Design for Mobile Applications (Coursera – Google)"
+      ]
+    },
+    {
+      "role": "Android Developer",
+      "tags": ["android", "kotlin", "java", "mobile", "gradle", "jetpack"],
+      "items": [
+        "Google Associate Android Developer Certification",
+        "Android Development with Kotlin (Google/Udacity)",
+        "Jetpack Compose for Android Developers (Google Codelabs)",
+        "Android App Development Masterclass (Udemy – Tim Buchalka)",
+        "Kotlin for Android: Beginner to Advanced (Udemy)",
+        "Firebase in a Weekend: Android (Google)",
+        "Android Testing with JUnit, Mockito & Espresso (Udemy)",
+        "Advanced Android with Kotlin (Google/Udacity)",
+        "Google Play Store Optimization (Udemy)",
+        "AWS Certified Developer – Associate (Amazon Web Services)"
+      ]
+    },
+    {
+      "role": "iOS Developer",
+      "tags": ["ios", "swift", "xcode", "mobile", "swiftui", "apple"],
+      "items": [
+        "Apple Certified iOS Developer (Apple Developer Academy)",
+        "iOS & Swift – The Complete iOS App Development Bootcamp (Udemy – Angela Yu)",
+        "SwiftUI Masterclass – iOS App Development (Udemy)",
+        "iOS App Development with Swift Specialization (Coursera – University of Toronto)",
+        "Combine: Asynchronous Programming with Swift (raywenderlich.com)",
+        "Advanced iOS Development (raywenderlich.com)",
+        "Firebase for iOS Developers (Udemy)",
+        "StoreKit 2 & In-App Purchases (raywenderlich.com)",
+        "iOS Accessibility: Building for Everyone (Apple Developer Documentation)",
+        "AWS Certified Developer – Associate (Amazon Web Services)"
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "tags": ["flutter", "dart", "mobile", "crossplatform", "android", "ios"],
+      "items": [
+        "Flutter & Dart – The Complete Guide (Udemy – Maximilian Schwarzmüller)",
+        "The Complete Flutter Development Bootcamp with Dart (Udemy – Angela Yu)",
+        "Flutter BLoC & Clean Architecture (Udemy)",
+        "Flutter & Firebase – Build a Complete App (Udemy)",
+        "Flutter Riverpod 2.0: The Complete Guide (Udemy)",
+        "Dart Programming Language Fundamentals (Udemy)",
+        "Advanced Flutter: Beyond the Basics (raywenderlich.com)",
+        "Google Associate Android Developer Certification",
+        "Firebase Certification (Google Developers)",
+        "AWS Certified Cloud Practitioner (Amazon Web Services)"
+      ]
+    },
+    {
+      "role": "React Native Developer",
+      "tags": ["reactnative", "react", "mobile", "javascript", "typescript"],
+      "items": [
+        "React Native – The Practical Guide (Udemy – Maximilian Schwarzmüller)",
+        "The Complete React Native + Hooks Course (Udemy – Stephen Grider)",
+        "Meta React Native Specialization (Coursera)",
+        "JavaScript Algorithms and Data Structures (freeCodeCamp)",
+        "TypeScript for React Native Developers (Udemy)",
+        "Firebase for React Native Developers (Udemy)",
+        "Testing React Native Apps with Jest and Detox (Udemy)",
+        "Google Associate Android Developer Certification",
+        "AWS Certified Developer – Associate (Amazon Web Services)",
+        "Expo Go: Build Cross-Platform Mobile Apps (Udemy)"
+      ]
+    }
+  ]
+}
