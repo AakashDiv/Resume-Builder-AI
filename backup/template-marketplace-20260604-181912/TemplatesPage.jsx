@@ -1,0 +1,163 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { FaArrowRight, FaEye, FaMagnifyingGlass, FaStar, FaXmark } from "react-icons/fa6";
+import { resumeTemplates } from "../data/resumeTemplates.js";
+import TemplateThumbnail from "../components/TemplateThumbnail.jsx";
+
+const categories = ["All", "ATS", "Modern", "Professional", "Creative", "Minimalist"];
+
+function isProfessionalTemplate(template) {
+  return /professional|simple|cv/i.test(`${template.id} ${template.name}`);
+}
+
+export default function TemplatesPage() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialCategory = searchParams.get("category") || "All";
+  const [active, setActive] = useState(categories.includes(initialCategory) ? initialCategory : "All");
+  const [query, setQuery] = useState("");
+  const [previewTemplate, setPreviewTemplate] = useState(null);
+
+  useEffect(() => {
+    const category = searchParams.get("category") || "All";
+    setActive(categories.includes(category) ? category : "All");
+  }, [searchParams]);
+
+  const filtered = useMemo(() => {
+    const byCategory = active === "All"
+      ? resumeTemplates
+      : active === "Professional"
+        ? resumeTemplates.filter(isProfessionalTemplate)
+        : resumeTemplates.filter((item) => item.category === active);
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return byCategory;
+    return byCategory.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(normalizedQuery));
+  }, [active, query]);
+
+  function useTemplate(template) {
+    navigate(`/builder?template=${template.id}`);
+  }
+
+  return (
+    <main className="template26-page">
+      <section className="template26-hero">
+        <div className="template26-shell template26-market-header">
+          <div>
+            <p className="template26-eyebrow">Resume Templates</p>
+            <h1>Choose a professional resume template.</h1>
+            <p>
+              Preview ATS-friendly layouts and start editing in the builder.
+            </p>
+          </div>
+          <div className="template26-count-pill">
+            <strong>{resumeTemplates.length}</strong>
+            <span>Templates</span>
+          </div>
+        </div>
+        <div className="template26-shell template26-market-controls">
+          <div className="template26-search-panel">
+            <label>
+              <span><FaMagnifyingGlass /> Search</span>
+              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search modern, ATS, creative..." />
+            </label>
+          </div>
+          <div className="template26-top-filters">
+            {categories.map((cat) => {
+              const count = cat === "All"
+                ? resumeTemplates.length
+                : cat === "Professional"
+                  ? resumeTemplates.filter(isProfessionalTemplate).length
+                  : resumeTemplates.filter((item) => item.category === cat).length;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  className={active === cat ? "is-active" : ""}
+                >
+                  {cat}
+                  <span>{count}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="template26-shell template26-library template26-library-full">
+        <div>
+          <div className="template26-results-bar">
+            <div>
+              <p>{active} templates</p>
+              <span>{filtered.length} result{filtered.length === 1 ? "" : "s"} available</span>
+            </div>
+          </div>
+
+          <div className="template26-grid">
+            {filtered.map((template) => (
+              <TemplateCard
+                key={template.id}
+                template={template}
+                onUse={() => useTemplate(template)}
+                onPreview={() => setPreviewTemplate(template)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {previewTemplate ? (
+        <div className="template26-modal" role="dialog" aria-modal="true" aria-label={`${previewTemplate.name} preview`}>
+          <div className="template26-modal-panel">
+            <div className="template26-modal-header">
+              <div>
+                <p>{previewTemplate.category}</p>
+                <h2>{previewTemplate.name}</h2>
+              </div>
+              <button type="button" onClick={() => setPreviewTemplate(null)} aria-label="Close preview">
+                <FaXmark />
+              </button>
+            </div>
+            <div className="template26-modal-body">
+              <div className="template26-modal-preview">
+                <TemplateThumbnail template={previewTemplate} />
+              </div>
+              <aside>
+                <h3>Template Details</h3>
+                <p>Editable in the resume builder with live preview, PDF export, color controls where supported, and ATS-friendly structure.</p>
+                <button type="button" onClick={() => useTemplate(previewTemplate)}>
+                  Use this template <FaArrowRight />
+                </button>
+              </aside>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </main>
+  );
+}
+
+function TemplateCard({ template, featured = false, onUse, onPreview }) {
+  return (
+    <article className={`template26-card ${featured ? "is-featured" : ""}`}>
+      <div className="template26-card-preview" style={{ "--template-accent": template.accent || "#2563EB" }}>
+        <div>
+          <TemplateThumbnail template={template} />
+        </div>
+        <div className="template26-card-actions">
+          <button type="button" onClick={onPreview}><FaEye /> Preview</button>
+          <button type="button" onClick={onUse}>Use <FaArrowRight /></button>
+        </div>
+      </div>
+      <div className="template26-card-info">
+        <div>
+          <p>{template.name}</p>
+          <span>{template.category}</span>
+        </div>
+        <div className="template26-card-footer-actions">
+          <em><FaStar /> ATS</em>
+          <button type="button" onClick={onUse}>Use Template</button>
+        </div>
+      </div>
+    </article>
+  );
+}
